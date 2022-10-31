@@ -197,9 +197,9 @@ Parameters.cIPC.DQ_Kd_1P = kmul*5e-8;%0e-7;
 Parameters.cIPC.DQ_Kp_2P = 2e-8;
 Parameters.cIPC.DQ_Ki_2P = 4e-8;
 
-om_1P = 2*pi*RotorSpeedDomain/60;
+om_1P = 2*pi*RotorSpeedDomain/60; %rad/s
 
-% Cyclic Pitch Controller Filters
+% Cyclic Pitch Controller Filters, scheduled by omega [rad/s]
 [~,IPCDQ_NF_2P] = Af_MovingNotch(2*om_1P,0.8,0.02,Control.DT);
 [~,IPCDQ_NF_4P] = Af_MovingNotch(4*om_1P,0.5,0.01,Control.DT);
 
@@ -341,8 +341,8 @@ Parameters.Control.WSE.R = 0.02;
 Parameters.Control.WSE.H = [Parameters.Turbine.G, 0 , 0];
 
 % Cp Parameterization TODO where is this .mat file
-if exist('./Cp_Param.mat','file')
-    load('./Cp_Param')
+if exist('Cp_Param.mat','file')
+    load('Cp_Param')
 else
     disp(['CONTROL Warning: ',Parameters.Turbine.String,' Cp Params. not found: EKF may give unexpected results']);
     disp('Loading default Cp Params., Disabling WSE');
