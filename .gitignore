@@ -1,0 +1,16 @@
+*.lin
+*.mdl
+*.slxc
+*.slx
+*.mlx
+simulations/
+*.sh
+WindFiles/
+weis_control_opt/
+presentation/
+paper/
+*/.zip
+.DS_STORE
+*.mat
+*.txt
+*.asv

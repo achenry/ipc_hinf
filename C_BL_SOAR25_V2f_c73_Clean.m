@@ -178,7 +178,7 @@ PitchControlParams.theta_k  = Parameters.Turbine.theta_kP*[Parameters.Turbine.Co
 PitchControlParams.Sens_0   = Parameters.Turbine.Sens_0;
 
 %First principles zero-pitch gains
-GainFactor =Parameters.Control.p_factor;% 1;
+GainFactor = Parameters.Control.p_factor;% 1;
 PitchControlParams.Kp_0 =( GainFactor*2*Parameters.Turbine.Jtot*rpm2radps(Parameters.Turbine.wr_rated)*PitchControlParams.zeta*PitchControlParams.omega_n/(Parameters.Turbine.G*-PitchControlParams.Sens_0))*5;
 PitchControlParams.Ki_0 = GainFactor*Parameters.Turbine.Jtot*rpm2radps(Parameters.Turbine.wr_rated)*PitchControlParams.omega_n^2/(Parameters.Turbine.G*-PitchControlParams.Sens_0);
 % ============================================================= %
@@ -186,20 +186,38 @@ PitchControlParams.Ki_0 = GainFactor*Parameters.Turbine.Jtot*rpm2radps(Parameter
 %% INDIVIDUAL PITCH CONTROL
 %% Cyclic Pitch Controller
 Parameters.Control.IPCDQ.Enable     = 0;
+Parameters.Control.IPC3DQ.Enable     = 0;
+Parameters.Control.IPCDQ.Excite3P     = 0;
 Parameters.Control.IPCDQ.Mode       = 1;  % 1 no IPC below rated (no power loss), 2 IPC always on, 3 M_0 dependent
 
 % IPC DQ GAINS
 kmul = 0.025;
-Parameters.cIPC.DQ_Kp_1P = kmul*40e-8;%0e-8;
-Parameters.cIPC.DQ_Ki_1P = kmul*30e-8;%16e-8;
-Parameters.cIPC.DQ_Kd_1P = kmul*5e-8;%0e-7;
+Parameters.cIPC.DQ_Kp_1P = 2.8066e-06;
+Parameters.cIPC.DQ_Ki_1P = 2.6919e-06;
+Parameters.cIPC.DQ_Kd_1P = kmul*5e-8;
+
+Parameters.cIPC.D_Kp_1P = 2.8066e-06; %kmul*40e-8;%0e-8;
+Parameters.cIPC.Q_Kp_1P = 2.6919e-06; %kmul*40e-8;%0e-8;
+Parameters.cIPC.D_Ki_1P = 2.8066e-06; %kmul*30e-8;%16e-8;
+Parameters.cIPC.Q_Ki_1P = 2.6919e-06; %kmul*30e-8;%16e-8;
+Parameters.cIPC.D_Kd_1P = kmul*5e-8;%0e-7;
+Parameters.cIPC.Q_Kd_1P = kmul*5e-8;%0e-7;
+
+Parameters.cIPC.D_Kp_3P = 6.1751e-06; %kmul*40e-8;%0e-8;
+Parameters.cIPC.Q_Kp_3P = 6.1617e-06; %kmul*40e-8;%0e-8;
+Parameters.cIPC.D_Ki_3P = 6.1751e-06; % kmul*30e-8;%16e-8;
+Parameters.cIPC.Q_Ki_3P = 6.1617e-06; %kmul*30e-8;%16e-8;
+Parameters.cIPC.D_Kd_3P = kmul*5e-8; %0e-7;
+Parameters.cIPC.Q_Kd_3P = kmul*5e-8; %0e-7;
 
 Parameters.cIPC.DQ_Kp_2P = 2e-8;
 Parameters.cIPC.DQ_Ki_2P = 4e-8;
 
+% RotorSpeedDomain = linspace(Parameters.Turbine.wr_min, 1.15*Parameters.Turbine.wr_rated, 10)
 om_1P = 2*pi*RotorSpeedDomain/60; %rad/s
 
-% Cyclic Pitch Controller Filters, scheduled by omega [rad/s]
+% Cyclic Pitch Controller Filters, scheduled by omega [rad/s] - parameter
+% input is 2/3/4/6 * Omega
 [~,IPCDQ_NF_2P] = Af_MovingNotch(2*om_1P,0.8,0.02,Control.DT);
 [~,IPCDQ_NF_4P] = Af_MovingNotch(4*om_1P,0.5,0.01,Control.DT);
 
@@ -214,6 +232,18 @@ drop = 10;
 PSM0_LPF    = Af_LPF(2*pi/1,.707,Control.DT);
 
 IPCDQ_LPF    = Af_LPF(3*om_1P(8),.707,Control.DT);
+
+RotorSpeedDomain_bp = linspace(0.98*Parameters.Turbine.wr_rated, 1.02*Parameters.Turbine.wr_rated, 10);
+om_1P_bp = 2*pi*RotorSpeedDomain_bp/60; %rad/s
+[~, bandpass_1P]  = Af_MovingNotch_bandpass(om_1P_bp,0.8,0.08,Control.DT);
+
+% om_1P_bp / (2*pi) % Hz
+[~, bandpass_3P]  = Af_MovingNotch_bandpass(3*om_1P_bp,0.8,0.08,Control.DT); 
+% 3*om_1P_bp / (2*pi) % Hz
+% QUESTION MANUEL this seems to result in selection of 2P loads?, do we need matrices for full range of omega?
+% [~, bandpass_1P]  = Af_MovingNotch_bandpass((2*pi/60) * Parameters.Turbine.wr_rated,0.8,0.08,Control.DT);
+% [~, bandpass_3P]  = Af_MovingNotch_bandpass(3*(2*pi/60)*Parameters.Turbine.wr_rated,0.8,0.08,Control.DT);
+% bode(bandpass_1P, bandpass_3P)
 
 % Cyclic Pitch Phase Lead
 % 0 deg yaw
@@ -232,11 +262,23 @@ PitchControlParams.IPCDQ_k_sat  = Parameters.Control.IPCDQ.k_sat;
 
 
 %% CPC Filters
-% Slow LPF for LPV parameter
+% Slow LPF for LPV parameter MANUEL QUESTION should this differ ie
+% omega_sloe * 3 for 3P filter? => No, just for high-freq
+% MANUEL QUESTION should phase in IPC controller differ for 3P load
+% mitigation? => 3*Phase for 3P
+% Should IPCDQ_LPF differ for 3P?
 omega_slow = 0.05;
+omega_slow2 = (2*pi*Parameters.Turbine.wr_rated/60) * 6;
 zeta_slow = 0.7;
 LPF_slow = tf([omega_slow^2],[1,2*zeta_slow*omega_slow,omega_slow^2]);
 dLPF_slow = c2d(ss(LPF_slow),Control.DT);
+LPF_slow2 = tf([omega_slow2^2],[1,2*zeta_slow*omega_slow2,omega_slow2^2]);
+dLPF_slow2 = c2d(ss(LPF_slow2),Control.DT);
+% bodemag(LPF_slow2)
+% hold on;
+% plot([2*pi*Parameters.Turbine.wr_rated/60, 2*pi*Parameters.Turbine.wr_rated/60], [-100, 20])
+% hold off;
+% 2*pi*Parameters.Turbine.wr_rated/60
 
 % MISC CYCLIC PITCH CONTROL DEPENDENCIES
 LSM0_LPF    = Af_LPF(2*pi,.707,Control.DT);
@@ -324,7 +366,7 @@ Parameters.Control.WSE.P_0          = diag([0.1,0.1,1])^2; %inital cov.
 Parameters.Control.WSE.L            = 320; %turb. length scale (m)
 
 % Turbine Parameters
-Parameters.Control.WSE.A            = pi * (cosd(Parameters.Turbine.ConeAngle) * Parameters.Turbine.R) ^2;       %rotor area m^2 (SHAFT TILT IGNORED)
+Parameters.Control.WSE.A            = pi * (cosd(Parameters.Turbine.ConeAngle) * Parameters.Turbine.R)^2;       %rotor area m^2 (SHAFT TILT IGNORED)
 Parameters.Control.WSE.rho          = Parameters.Turbine.rho;
 Parameters.Control.WSE.Rrot         = Parameters.Turbine.R;
 Parameters.Control.WSE.ConeAngle    = Parameters.Turbine.ConeAngle; % deg
