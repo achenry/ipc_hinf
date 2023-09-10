@@ -14,3 +14,6 @@ paper/
 *.mat
 *.txt
 *.asv
+ss_simulations/
+simulations/
+controller_simulations/

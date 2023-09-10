@@ -278,7 +278,7 @@ if RUN_SIMS_PAR
             K_IPC = c2d(case_list(case_idx).Controller_scaled, DT); % Note, this is the scaled controller
             sim_inputs(case_idx) = sim_inputs(case_idx).setVariable('K_IPC', K_IPC);
         elseif BASELINE_K
-            sim_inputs(case_idx) = Simulink.SimulationInput('AD_SOAR_c7_V2f_c73_BaselineStructuredController');
+            sim_inputs(case_idx) = Simulink.SimulationInput('AD_SOAR_c7_V2f_c73_StructuredControllerTest');
             K_IPC = case_list(case_idx).Controller; % Note, this is the scaled controller
             sim_inputs(case_idx) = sim_inputs(case_idx).setVariable('K_IPC', K_IPC);
         elseif ~NO_IPC
