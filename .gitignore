@@ -17,3 +17,6 @@ paper/
 ss_simulations/
 simulations/
 controller_simulations/
+postprocessing/.idea
+*.outb
+*.out
