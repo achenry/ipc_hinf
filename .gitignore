@@ -1,10 +1,7 @@
 *.lin
 *.mdl
 *.slxc
-*.slx
-*.mlx
 simulations/
-*.sh
 WindFiles/
 weis_control_opt/
 presentation/
