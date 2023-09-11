@@ -8,7 +8,6 @@ presentation/
 paper/
 */.zip
 .DS_STORE
-*.txt
 *.asv
 ss_simulations/
 simulations/
