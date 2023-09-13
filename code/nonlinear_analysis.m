@@ -263,22 +263,22 @@ if RUN_SIMS_PAR
             % SL_model_name = 'AD_SOAR_c7_V2f_c73_MIMOPIControllerTest';
             % K_IPC = c2d(tf(case_list(case_idx).Controller_scaled(:, :, ...
             % LPV_CONTROLLER_WIND_SPEEDS == NONLPV_CONTROLLER_WIND_SPEED)), DT);
-            SL_model_name = 'AD_SOAR_c7_V2f_c73_FullOrderControllerTest';
+            SL_model_name = 'AD_SOAR_c7_V2f_c73_Clean_FullOrderControllerTest';
             K_IPC = c2d(case_list(case_idx).Controller_scaled, DT);
             sim_inputs(case_idx) = Simulink.SimulationInput(SL_model_name);
             sim_inputs(case_idx) = sim_inputs(case_idx).setVariable('K_IPC', K_IPC);
         elseif OPTIMAL_K_COLLECTION || EXTREME_K_COLLECTION
             if strcmp(case_list(case_idx).Structure, 'Full-Order')
                 % SL_model_name = fullfile(simulink_model_dir, 'AD_SOAR_c7_V2f_c73_FullOrderControllerTest.slx');
-                SL_model_name = 'AD_SOAR_c7_V2f_c73_FullOrderControllerTest';
+                SL_model_name = 'AD_SOAR_c7_V2f_c73_Clean_FullOrderControllerTest';
             elseif strcmp(case_list(case_idx).Structure, 'Structured')
-                SL_model_name = 'AD_SOAR_c7_V2f_c73_StructuredControllerTest';
+                SL_model_name = 'AD_SOAR_c7_V2f_c73_Clean_StructuredControllerTest';
             end
             sim_inputs(case_idx) = Simulink.SimulationInput(SL_model_name);
             K_IPC = c2d(case_list(case_idx).Controller_scaled, DT); % Note, this is the scaled controller
             sim_inputs(case_idx) = sim_inputs(case_idx).setVariable('K_IPC', K_IPC);
         elseif BASELINE_K
-            sim_inputs(case_idx) = Simulink.SimulationInput('AD_SOAR_c7_V2f_c73_StructuredControllerTest');
+            sim_inputs(case_idx) = Simulink.SimulationInput('AD_SOAR_c7_V2f_c73_Clean_StructuredControllerTest');
             K_IPC = case_list(case_idx).Controller; % Note, this is the scaled controller
             sim_inputs(case_idx) = sim_inputs(case_idx).setVariable('K_IPC', K_IPC);
         elseif ~NO_IPC
@@ -317,16 +317,16 @@ elseif RUN_SIMS_SINGLE
     
     if STRUCT_PARAM_SWEEP
         % SL_model_name = 'AD_SOAR_c7_V2f_c73_MIMOPIControllerTest';
-         SL_model_name = 'AD_SOAR_c7_V2f_c73_FullOrderControllerTest';
+         SL_model_name = 'AD_SOAR_c7_V2f_c73_Clean_FullOrderControllerTest';
         % K_IPC = c2d(tf(case_list(case_idx).Controller_scaled(:, :, ...
         %     LPV_CONTROLLER_WIND_SPEEDS == NONLPV_CONTROLLER_WIND_SPEED)), DT);
         K_IPC = c2d(case_list(case_idx).Controller_scaled, DT);
         % K_IPC(2, 2).Numerator(2) / K_IPC(2, 2).Denominator(1) 
     elseif OPTIMAL_K_COLLECTION || EXTREME_K_COLLECTION
         if strcmp(case_list(case_idx).Structure, 'Full-Order')
-            SL_model_name = 'AD_SOAR_c7_V2f_c73_FullOrderControllerTest.slx';
+            SL_model_name = 'AD_SOAR_c7_V2f_c73_Clean_FullOrderControllerTest.slx';
         elseif strcmp(case_list(case_idx).Structure, 'Structured')
-            SL_model_name = 'AD_SOAR_c7_V2f_c73_StructuredControllerTest.slx';
+            SL_model_name = 'AD_SOAR_c7_V2f_c73_Clean_StructuredControllerTest.slx';
         end
         K_IPC = c2d(case_list(case_idx).Controller_scaled, DT); % Note, this is the scaled controller
     else
