@@ -15,3 +15,6 @@ controller_simulations/
 postprocessing/.idea
 *.outb
 *.out
+simulink_models/slprj/
+code/matfiles/*.mat
+SOAR-25-V2f_IF/linearization

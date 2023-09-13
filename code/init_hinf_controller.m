@@ -31,7 +31,8 @@ end
 % Ti = @(Plant, K) inv(eye(size(Plant)) + K*Plant) * (K*Plant); % weighted by Wu
 
 %% Load linear models, operating points, hnorms
-load(fullfile(code_dir, 'matfiles', 'Plant'));
+load(fullfile(code_dir, 'matfiles', 'Plant_red'));
+Plant = Plant_red;
 Plant.InputName = {'BldPitchD Control Input', 'BldPitchQ Control Input'};
 Plant.OutputName = {'RootMycD Output', 'RootMycQ Output'};
 all(real(pole(Plant)) < 0);
@@ -41,7 +42,7 @@ all(real(pole(Plant)) < 0);
 % normalize Plant channels: maximum IPC command/expected Mdq values, multiply input by
 % scaling to get actual u before plant; divide output by scaling to get -1,
 % 1 after plant; scaling factors are part of controller
-load(fullfile(FAST_directory, 'op_absmax', 'op_absmax'));
+load(fullfile(FAST_directory, 'op_absmax'));
 clear ip_scaling op_scaling
 for c_ws_idx = 1:length(LPV_CONTROLLER_WIND_SPEEDS)
     idx = (op_absmax.dq(:, 'Wind1VelX') == LPV_CONTROLLER_WIND_SPEEDS(c_ws_idx));
@@ -158,7 +159,7 @@ if EXTREME_K_COLLECTION
     IP_LOW_GAIN = 0.1;
     OP_LOW_GAIN = 1;
     % case_basis.WuGain = {tf(OP_LOW_GAIN * eye(2)), tf(WU_HIGH_GAIN * eye(2))}; %{100, 200, 400, 800, 1600}; % for detuning blade-pitch actuation
-    case_basis.WuGain = {tf(0 * eye(2))};
+    case_basis.WuGain = {tf(IP_LOW_GAIN * eye(2))};
     case_basis.WeGain = {...
         tf(WE_HIGH_GAIN * 0.1 * eye(2)), ...
         tf(WE_HIGH_GAIN * 0.2 * eye(2)), ...
@@ -232,7 +233,7 @@ end
 
 for c_ws_idx = 1:length(LPV_CONTROLLER_WIND_SPEEDS)
     [GenPlant_tmp, Win_tmp, Wout_tmp] ...
-        = generateGenPlant(Plant_scaled(:, :, c_ws_idx), Wu, We, Wy, W1, W2);
+        = generateGenPlant(Plant_scaled(:, :, c_ws_idx), Wu, We, W1, W2);
     GenPlant(:, :, c_ws_idx) = GenPlant_tmp;
     Win(:, :, c_ws_idx) = Win_tmp;
     Wout(:, :, c_ws_idx) = Wout_tmp;

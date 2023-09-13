@@ -1,7 +1,7 @@
 
 FAST Summary File
 
-Predictions were generated on 10-Sep-2023 at 14:13:04 using OpenFAST, compiled as a 64-bit application using single precision at commit v2.1.0-2958-g24fa8ae2-dirty
+Predictions were generated on 12-Sep-2023 at 00:19:39 using OpenFAST, compiled as a 64-bit application using single precision at commit v3.5.0-59-g900d12b5-dirty
   compiled with
     NWTC Subroutine Library
     ElastoDyn
@@ -33,12 +33,12 @@ Number of correction iterations:  0
   -------------------------------------------------
   Component          Time Step (s)    Subcycles (-)
   -----------------  ---------------  -------------
-  FAST (glue code)    1.000E-02
-  InflowWind          1.000E-02              1
-  ElastoDyn           1.000E-02              1
-  AeroDyn             1.000E-02              1
-  ServoDyn            1.000E-02              1
-  FAST output files   1.000E-02              1
+  FAST (glue code)    1.250E-02
+  InflowWind          1.250E-02              1
+  ElastoDyn           1.250E-02              1
+  AeroDyn             1.250E-02              1
+  ServoDyn            1.250E-02              1
+  FAST output files   1.250E-02              1
 
 
    Requested Channels in FAST Output File(s)  
@@ -105,40 +105,20 @@ Number of correction iterations:  0
       58  LSSGagMya             (kN-m)                ElastoDyn
       59  LSSGagMza             (kN-m)                ElastoDyn
       60  LSShftMxa             (kN-m)                ElastoDyn
-      61  HSShftTq              (kN-m)                ElastoDyn
-      62  HSSBrTq               (kN-m)                ElastoDyn
-      63  YawBrFxp              (kN)                  ElastoDyn
-      64  YawBrFyp              (kN)                  ElastoDyn
-      65  YawBrFzp              (kN)                  ElastoDyn
-      66  YawBrMxp              (kN-m)                ElastoDyn
-      67  YawBrMyp              (kN-m)                ElastoDyn
-      68  YawBrMzp              (kN-m)                ElastoDyn
-      69  TwrBsFxt              (kN)                  ElastoDyn
-      70  TwrBsFyt              (kN)                  ElastoDyn
-      71  TwrBsFzt              (kN)                  ElastoDyn
-      72  TwrBsMxt              (kN-m)                ElastoDyn
-      73  TwrBsMyt              (kN-m)                ElastoDyn
-      74  TwrBsMzt              (kN-m)                ElastoDyn
-      75  YawPzn                (deg)                 ElastoDyn
-      76  YawVzn                (deg/s)               ElastoDyn
-      77  YawAzn                (deg/s^2)             ElastoDyn
-      78  RotPwr                (kW)                  ElastoDyn
-      79  LSSTipMya             (kN-m)                ElastoDyn
-      80  LSSTipMza             (kN-m)                ElastoDyn
-      81  LSSTipMys             (kN-m)                ElastoDyn
-      82  LSSTipMzs             (kN-m)                ElastoDyn
-      83  RotTeetP              INVALID               ElastoDyn
-      84  YawBrRVyp             (deg/s)               ElastoDyn
-      85  RtAeroFxh             (N)                   AeroDyn
-      86  RtAeroFyh             (N)                   AeroDyn
-      87  RtAeroFzh             (N)                   AeroDyn
-      88  RtAeroMxh             (N-m)                 AeroDyn
-      89  RtAeroMyh             (N-m)                 AeroDyn
-      90  RtAeroMzh             (N-m)                 AeroDyn
-      91  RtAeroPwr             (W)                   AeroDyn
-      92  RtArea                (m^2)                 AeroDyn
-      93  RtSkew                (deg)                 AeroDyn
-      94  RtSpeed               (rpm)                 AeroDyn
-      95  RtTSR                 (-)                   AeroDyn
-      96  GenPwr                (kW)                  ServoDyn
-      97  GenTq                 (kN-m)                ServoDyn
+      61  YawBrFxp              (kN)                  ElastoDyn
+      62  YawBrFyp              (kN)                  ElastoDyn
+      63  YawBrFzp              (kN)                  ElastoDyn
+      64  YawBrMxp              (kN-m)                ElastoDyn
+      65  YawBrMyp              (kN-m)                ElastoDyn
+      66  YawBrMzp              (kN-m)                ElastoDyn
+      67  TwrBsFxt              (kN)                  ElastoDyn
+      68  TwrBsFyt              (kN)                  ElastoDyn
+      69  TwrBsFzt              (kN)                  ElastoDyn
+      70  TwrBsMxt              (kN-m)                ElastoDyn
+      71  TwrBsMyt              (kN-m)                ElastoDyn
+      72  TwrBsMzt              (kN-m)                ElastoDyn
+      73  RotPwr                (kW)                  ElastoDyn
+      74  RtSpeed               (rpm)                 AeroDyn
+      75  RtTSR                 (-)                   AeroDyn
+      76  GenPwr                (kW)                  ServoDyn
+      77  GenTq                 (kN-m)                ServoDyn

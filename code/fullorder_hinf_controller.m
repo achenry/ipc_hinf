@@ -109,7 +109,7 @@ if 1
 
         [GenPlant_tmp, Win_tmp, Wout_tmp] = generateGenPlant(...
             Plant_scaled(:, :, c_ws_idx), ...
-            Wu_tmp, We_tmp, Wy_tmp, W1_tmp, W2_tmp);
+            Wu_tmp, We_tmp, W1_tmp, W2_tmp);
         
         opts = hinfsynOptions('Display', 'on'); 
         [K_tmp, CL_full_tuned_tmp, gamma_tmp] = hinfsyn(GenPlant_tmp, nmeas, ncont, opts); % NOTE does not compute for pure integrator in weighting matrix
@@ -476,7 +476,8 @@ if PLOTTING
             * inv(Controllers_case_list(w_idx).Win(:, :, cc));
         GenPlant_inner.OutputName = Controllers_case_list(w_idx).GenPlant(:, :, cc).OutputName;
         GenPlant_inner.InputName = Controllers_case_list(w_idx).GenPlant(:, :, cc).InputName;
-        
+
+
         % GenPlant_inner.InputGroup.dist = 1:4;
         GenPlant_inner.InputGroup.dist = find(ismember(...
             GenPlant_inner.InputName, ...
@@ -489,8 +490,8 @@ if PLOTTING
             
         GenPlant_inner.OutputGroup.perf = find(ismember(GenPlant_inner.OutputName, ...
             {'Weighted BldPitchD Control Input', 'Weighted BldPitchQ Control Input', ...
-            'Weighted RootMycD Tracking Error', 'Weighted RootMycQ Tracking Error', ...
-            'Weighted RootMycD Output', 'Weighted RootMycQ Output'}))';
+            'Weighted RootMycD Tracking Error', 'Weighted RootMycQ Tracking Error'}))';
+            % 'Weighted RootMycD Output', 'Weighted RootMycQ Output'}))';
     
         GenPlant_inner.OutputGroup.meas = find(ismember(GenPlant_inner.OutputName, ...
             {'Measured RootMycD Tracking Error', 'Measured RootMycQ Tracking Error'}))';

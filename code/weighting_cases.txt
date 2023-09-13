@@ -1,0 +1,251 @@
+
+Case 1
+ W1 = 1 with notch  W2 = 1 ->  Wu = 0.1 We = 10
+Case 2
+ W1 = 1 with notch  W2 = 1 ->  Wu = 0.1 We = 8
+Case 3
+ W1 = 1 with notch  W2 = 1 ->  Wu = 0.1 We = 4
+Case 4
+ W1 = 1 with notch  W2 = 1 ->  Wu = 0.1 We = 2
+Case 5
+ W1 = 1 with notch  W2 = 1 ->  Wu = 0.1 We = 1
+Case 6
+ W1 = 0.8 with notch  W2 = 1 ->  Wu = 0.1 We = 10
+Case 7
+ W1 = 0.8 with notch  W2 = 1 ->  Wu = 0.1 We = 8
+Case 8
+ W1 = 0.8 with notch  W2 = 1 ->  Wu = 0.1 We = 4
+Case 9
+ W1 = 0.8 with notch  W2 = 1 ->  Wu = 0.1 We = 2
+Case 10
+ W1 = 0.8 with notch  W2 = 1 ->  Wu = 0.1 We = 1
+Case 11
+ W1 = 0.4 with notch  W2 = 1 ->  Wu = 0.1 We = 10
+Case 12
+ W1 = 0.4 with notch  W2 = 1 ->  Wu = 0.1 We = 8
+Case 13
+ W1 = 0.4 with notch  W2 = 1 ->  Wu = 0.1 We = 4
+Case 14
+ W1 = 0.4 with notch  W2 = 1 ->  Wu = 0.1 We = 2
+Case 15
+ W1 = 0.4 with notch  W2 = 1 ->  Wu = 0.1 We = 1
+Case 16
+ W1 = 0.2 with notch  W2 = 1 ->  Wu = 0.1 We = 10
+Case 17
+ W1 = 0.2 with notch  W2 = 1 ->  Wu = 0.1 We = 8
+Case 18
+ W1 = 0.2 with notch  W2 = 1 ->  Wu = 0.1 We = 4
+Case 19
+ W1 = 0.2 with notch  W2 = 1 ->  Wu = 0.1 We = 2
+Case 20
+ W1 = 0.2 with notch  W2 = 1 ->  Wu = 0.1 We = 1
+Case 21
+ W1 = 0.1 with notch  W2 = 1 ->  Wu = 0.1 We = 10
+Case 22
+ W1 = 0.1 with notch  W2 = 1 ->  Wu = 0.1 We = 8
+Case 23
+ W1 = 0.1 with notch  W2 = 1 ->  Wu = 0.1 We = 4
+Case 24
+ W1 = 0.1 with notch  W2 = 1 ->  Wu = 0.1 We = 2
+Case 25
+ W1 = 0.1 with notch  W2 = 1 ->  Wu = 0.1 We = 1
+Case 26
+ W1 = 1 with notch  W2 = 0.8 ->  Wu = 0.1 We = 10
+Case 27
+ W1 = 1 with notch  W2 = 0.8 ->  Wu = 0.1 We = 8
+Case 28
+ W1 = 1 with notch  W2 = 0.8 ->  Wu = 0.1 We = 4
+Case 29
+ W1 = 1 with notch  W2 = 0.8 ->  Wu = 0.1 We = 2
+Case 30
+ W1 = 1 with notch  W2 = 0.8 ->  Wu = 0.1 We = 1
+Case 31
+ W1 = 0.8 with notch  W2 = 0.8 ->  Wu = 0.1 We = 10
+Case 32
+ W1 = 0.8 with notch  W2 = 0.8 ->  Wu = 0.1 We = 8
+Case 33
+ W1 = 0.8 with notch  W2 = 0.8 ->  Wu = 0.1 We = 4
+Case 34
+ W1 = 0.8 with notch  W2 = 0.8 ->  Wu = 0.1 We = 2
+Case 35
+ W1 = 0.8 with notch  W2 = 0.8 ->  Wu = 0.1 We = 1
+Case 36
+ W1 = 0.4 with notch  W2 = 0.8 ->  Wu = 0.1 We = 10
+Case 37
+ W1 = 0.4 with notch  W2 = 0.8 ->  Wu = 0.1 We = 8
+Case 38
+ W1 = 0.4 with notch  W2 = 0.8 ->  Wu = 0.1 We = 4
+Case 39
+ W1 = 0.4 with notch  W2 = 0.8 ->  Wu = 0.1 We = 2
+Case 40
+ W1 = 0.4 with notch  W2 = 0.8 ->  Wu = 0.1 We = 1
+Case 41
+ W1 = 0.2 with notch  W2 = 0.8 ->  Wu = 0.1 We = 10
+Case 42
+ W1 = 0.2 with notch  W2 = 0.8 ->  Wu = 0.1 We = 8
+Case 43
+ W1 = 0.2 with notch  W2 = 0.8 ->  Wu = 0.1 We = 4
+Case 44
+ W1 = 0.2 with notch  W2 = 0.8 ->  Wu = 0.1 We = 2
+Case 45
+ W1 = 0.2 with notch  W2 = 0.8 ->  Wu = 0.1 We = 1
+Case 46
+ W1 = 0.1 with notch  W2 = 0.8 ->  Wu = 0.1 We = 10
+Case 47
+ W1 = 0.1 with notch  W2 = 0.8 ->  Wu = 0.1 We = 8
+Case 48
+ W1 = 0.1 with notch  W2 = 0.8 ->  Wu = 0.1 We = 4
+Case 49
+ W1 = 0.1 with notch  W2 = 0.8 ->  Wu = 0.1 We = 2
+Case 50
+ W1 = 0.1 with notch  W2 = 0.8 ->  Wu = 0.1 We = 1
+Case 51
+ W1 = 1 with notch  W2 = 0.4 ->  Wu = 0.1 We = 10
+Case 52
+ W1 = 1 with notch  W2 = 0.4 ->  Wu = 0.1 We = 8
+Case 53
+ W1 = 1 with notch  W2 = 0.4 ->  Wu = 0.1 We = 4
+Case 54
+ W1 = 1 with notch  W2 = 0.4 ->  Wu = 0.1 We = 2
+Case 55
+ W1 = 1 with notch  W2 = 0.4 ->  Wu = 0.1 We = 1
+Case 56
+ W1 = 0.8 with notch  W2 = 0.4 ->  Wu = 0.1 We = 10
+Case 57
+ W1 = 0.8 with notch  W2 = 0.4 ->  Wu = 0.1 We = 8
+Case 58
+ W1 = 0.8 with notch  W2 = 0.4 ->  Wu = 0.1 We = 4
+Case 59
+ W1 = 0.8 with notch  W2 = 0.4 ->  Wu = 0.1 We = 2
+Case 60
+ W1 = 0.8 with notch  W2 = 0.4 ->  Wu = 0.1 We = 1
+Case 61
+ W1 = 0.4 with notch  W2 = 0.4 ->  Wu = 0.1 We = 10
+Case 62
+ W1 = 0.4 with notch  W2 = 0.4 ->  Wu = 0.1 We = 8
+Case 63
+ W1 = 0.4 with notch  W2 = 0.4 ->  Wu = 0.1 We = 4
+Case 64
+ W1 = 0.4 with notch  W2 = 0.4 ->  Wu = 0.1 We = 2
+Case 65
+ W1 = 0.4 with notch  W2 = 0.4 ->  Wu = 0.1 We = 1
+Case 66
+ W1 = 0.2 with notch  W2 = 0.4 ->  Wu = 0.1 We = 10
+Case 67
+ W1 = 0.2 with notch  W2 = 0.4 ->  Wu = 0.1 We = 8
+Case 68
+ W1 = 0.2 with notch  W2 = 0.4 ->  Wu = 0.1 We = 4
+Case 69
+ W1 = 0.2 with notch  W2 = 0.4 ->  Wu = 0.1 We = 2
+Case 70
+ W1 = 0.2 with notch  W2 = 0.4 ->  Wu = 0.1 We = 1
+Case 71
+ W1 = 0.1 with notch  W2 = 0.4 ->  Wu = 0.1 We = 10
+Case 72
+ W1 = 0.1 with notch  W2 = 0.4 ->  Wu = 0.1 We = 8
+Case 73
+ W1 = 0.1 with notch  W2 = 0.4 ->  Wu = 0.1 We = 4
+Case 74
+ W1 = 0.1 with notch  W2 = 0.4 ->  Wu = 0.1 We = 2
+Case 75
+ W1 = 0.1 with notch  W2 = 0.4 ->  Wu = 0.1 We = 1
+Case 76
+ W1 = 1 with notch  W2 = 0.2 ->  Wu = 0.1 We = 10
+Case 77
+ W1 = 1 with notch  W2 = 0.2 ->  Wu = 0.1 We = 8
+Case 78
+ W1 = 1 with notch  W2 = 0.2 ->  Wu = 0.1 We = 4
+Case 79
+ W1 = 1 with notch  W2 = 0.2 ->  Wu = 0.1 We = 2
+Case 80
+ W1 = 1 with notch  W2 = 0.2 ->  Wu = 0.1 We = 1
+Case 81
+ W1 = 0.8 with notch  W2 = 0.2 ->  Wu = 0.1 We = 10
+Case 82
+ W1 = 0.8 with notch  W2 = 0.2 ->  Wu = 0.1 We = 8
+Case 83
+ W1 = 0.8 with notch  W2 = 0.2 ->  Wu = 0.1 We = 4
+Case 84
+ W1 = 0.8 with notch  W2 = 0.2 ->  Wu = 0.1 We = 2
+Case 85
+ W1 = 0.8 with notch  W2 = 0.2 ->  Wu = 0.1 We = 1
+Case 86
+ W1 = 0.4 with notch  W2 = 0.2 ->  Wu = 0.1 We = 10
+Case 87
+ W1 = 0.4 with notch  W2 = 0.2 ->  Wu = 0.1 We = 8
+Case 88
+ W1 = 0.4 with notch  W2 = 0.2 ->  Wu = 0.1 We = 4
+Case 89
+ W1 = 0.4 with notch  W2 = 0.2 ->  Wu = 0.1 We = 2
+Case 90
+ W1 = 0.4 with notch  W2 = 0.2 ->  Wu = 0.1 We = 1
+Case 91
+ W1 = 0.2 with notch  W2 = 0.2 ->  Wu = 0.1 We = 10
+Case 92
+ W1 = 0.2 with notch  W2 = 0.2 ->  Wu = 0.1 We = 8
+Case 93
+ W1 = 0.2 with notch  W2 = 0.2 ->  Wu = 0.1 We = 4
+Case 94
+ W1 = 0.2 with notch  W2 = 0.2 ->  Wu = 0.1 We = 2
+Case 95
+ W1 = 0.2 with notch  W2 = 0.2 ->  Wu = 0.1 We = 1
+Case 96
+ W1 = 0.1 with notch  W2 = 0.2 ->  Wu = 0.1 We = 10
+Case 97
+ W1 = 0.1 with notch  W2 = 0.2 ->  Wu = 0.1 We = 8
+Case 98
+ W1 = 0.1 with notch  W2 = 0.2 ->  Wu = 0.1 We = 4
+Case 99
+ W1 = 0.1 with notch  W2 = 0.2 ->  Wu = 0.1 We = 2
+Case 100
+ W1 = 0.1 with notch  W2 = 0.2 ->  Wu = 0.1 We = 1
+Case 101
+ W1 = 1 with notch  W2 = 0.1 ->  Wu = 0.1 We = 10
+Case 102
+ W1 = 1 with notch  W2 = 0.1 ->  Wu = 0.1 We = 8
+Case 103
+ W1 = 1 with notch  W2 = 0.1 ->  Wu = 0.1 We = 4
+Case 104
+ W1 = 1 with notch  W2 = 0.1 ->  Wu = 0.1 We = 2
+Case 105
+ W1 = 1 with notch  W2 = 0.1 ->  Wu = 0.1 We = 1
+Case 106
+ W1 = 0.8 with notch  W2 = 0.1 ->  Wu = 0.1 We = 10
+Case 107
+ W1 = 0.8 with notch  W2 = 0.1 ->  Wu = 0.1 We = 8
+Case 108
+ W1 = 0.8 with notch  W2 = 0.1 ->  Wu = 0.1 We = 4
+Case 109
+ W1 = 0.8 with notch  W2 = 0.1 ->  Wu = 0.1 We = 2
+Case 110
+ W1 = 0.8 with notch  W2 = 0.1 ->  Wu = 0.1 We = 1
+Case 111
+ W1 = 0.4 with notch  W2 = 0.1 ->  Wu = 0.1 We = 10
+Case 112
+ W1 = 0.4 with notch  W2 = 0.1 ->  Wu = 0.1 We = 8
+Case 113
+ W1 = 0.4 with notch  W2 = 0.1 ->  Wu = 0.1 We = 4
+Case 114
+ W1 = 0.4 with notch  W2 = 0.1 ->  Wu = 0.1 We = 2
+Case 115
+ W1 = 0.4 with notch  W2 = 0.1 ->  Wu = 0.1 We = 1
+Case 116
+ W1 = 0.2 with notch  W2 = 0.1 ->  Wu = 0.1 We = 10
+Case 117
+ W1 = 0.2 with notch  W2 = 0.1 ->  Wu = 0.1 We = 8
+Case 118
+ W1 = 0.2 with notch  W2 = 0.1 ->  Wu = 0.1 We = 4
+Case 119
+ W1 = 0.2 with notch  W2 = 0.1 ->  Wu = 0.1 We = 2
+Case 120
+ W1 = 0.2 with notch  W2 = 0.1 ->  Wu = 0.1 We = 1
+Case 121
+ W1 = 0.1 with notch  W2 = 0.1 ->  Wu = 0.1 We = 10
+Case 122
+ W1 = 0.1 with notch  W2 = 0.1 ->  Wu = 0.1 We = 8
+Case 123
+ W1 = 0.1 with notch  W2 = 0.1 ->  Wu = 0.1 We = 4
+Case 124
+ W1 = 0.1 with notch  W2 = 0.1 ->  Wu = 0.1 We = 2
+Case 125
+ W1 = 0.1 with notch  W2 = 0.1 ->  Wu = 0.1 We = 1

@@ -40,11 +40,9 @@ if strcmp(username, 'aoifework')
     home_dir = '/Users/aoifework/Documents';
     toolbox_dir = fullfile(home_dir, 'toolboxes');
     project_dir = fullfile(home_dir, 'Research', 'ipc_tuning');
-    plant_setup_dir = fullfile(project_dir, 'plant_setup_package');
     simulink_model_dir = fullfile(project_dir, 'simulink_models');
     fig_dir = fullfile(project_dir, 'paper', 'figs');
     
-    addpath(plant_setup_dir);
     addpath(simulink_model_dir);
     addpath(fullfile(toolbox_dir, 'turbsim-toolbox'));
     addpath(fullfile(toolbox_dir, 'matlab-toolbox'));
@@ -55,10 +53,6 @@ if strcmp(username, 'aoifework')
     addpath(fullfile(toolbox_dir, 'PMtools/'));
 
 
-    % chdir(fullfile(home_dir, 'MATLAB/LPVToolsV1.0'));
-    % addlpv;
-%     addpath(fullfile(home_dir, 'MATLAB/LPVToolsV1.0'));
-
     code_dir = fullfile(project_dir, 'code');
     chdir(code_dir);
 
@@ -67,7 +61,7 @@ if strcmp(username, 'aoifework')
     libext = '.dylib';
     
     % fast_install_dir = fullfile(home_dir, 'dev/WEIS/OpenFAST/install');
-    fast_install_dir = fullfile(home_dir, 'usflowt_src/openfast/sl_install');
+    fast_install_dir = fullfile(toolbox_dir, 'openfast/install');
     FAST_runDirectory = fullfile(project_dir, 'simulations');
 
     windfiles_dir = fullfile(project_dir, 'WindFiles');
@@ -85,7 +79,7 @@ elseif strmp(username, 'aohe7145')
     % scp -r /Users/aoifework/Documents/usflowt_src/ aohe7145@login.rc.colorado.edu:/projects/aohe7145/usflowt_src/
     home_dir = '/projects/aohe7145/';
     project_dir = fullfile(home_dir, 'projects', 'ipc_tuning');
-    fast_install_dir = fullfile(home_dir, 'usflowt_src/openfast/sl_install');
+    fast_install_dir = fullfile(home_dir, 'toolboxes/openfast_dev/install');
     simulink_model_dir = fullfile(project_dir, 'simulink_models');
     fig_dir = fullfile(project_dir, 'paper', 'figs');
     toolbox_dir = fullfile(home_dir, 'toolboxes');
@@ -119,7 +113,6 @@ elseif strmp(username, 'aohe7145')
 
 elseif strmp(username, 'manuel')
     
-    code_dir = fullfile(project_dir, 'plant_setup_package');
     chdir(code_dir);
 
     addpath(fullfile('CHANGE ME', 'PMtools')); % MANUEL: add your filepaths here
@@ -181,6 +174,7 @@ Parameters.Tower.Height  = 193.287;  % meters
 FAST_directory = fullfile(project_dir, [Parameters.Turbine.String '_IF']);
 FAST_InputFileName = fullfile(FAST_directory, [fastRunner.FAST_InputFile '.fst']);
 CpCtCqFile = fullfile(FAST_directory, 'weis_job_00_Cp_Ct_Cq.txt');
+addpath(FAST_directory);
 C_BL_SOAR25_V2f_c73_Clean;
 
 model_names = {'excGenDOF_incSecOrd', 'excGenDOF_excSecOrd'};
