@@ -1,7 +1,8 @@
 #!bin/bash
 #SBATCH --nodes=2
 #SBATCH --time=05:00:00
-#SBATCH --ntasks=100
+#SBATCH --ntasks=96
+#SBATCH --partition=amem1
 #SBATCH --job-name=nonlin_sim
 #SBATCH --output=nonlin_sim.%j.out
 
