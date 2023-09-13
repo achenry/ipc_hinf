@@ -73,7 +73,7 @@ if strcmp(username, 'aoifework')
 
     save_dir = fullfile(code_dir, 'matfiles');
 
-elseif strmp(username, 'aohe7145')
+elseif strcmp(username, 'aohe7145')
     % scp -r /Users/aoifework/Documents/Research/ipc_tuning aohe7145@login.rc.colorado.edu:/projects/aohe7145/projects/ipc_tuning
     % scp -r /Users/aoifework/Documents/toolboxes aohe7145@login.rc.colorado.edu:/projects/aohe7145/toolboxes
     % scp -r /Users/aoifework/Documents/usflowt_src/ aohe7145@login.rc.colorado.edu:/projects/aohe7145/usflowt_src/
@@ -89,7 +89,6 @@ elseif strmp(username, 'aohe7145')
     
     FAST_runDirectory = fullfile(project_dir, 'simulations');
 
-    addpath(plant_setup_dir);
     addpath(simulink_model_dir);
     addpath(fullfile(toolbox_dir, 'turbsim-toolbox'));
     addpath(fullfile(toolbox_dir, 'matlab-toolbox'));
@@ -186,9 +185,13 @@ omega_2P_rad = Parameters.Turbine.wr_rated * (2*pi/60) * 2;
 omega_3P_rad = Parameters.Turbine.wr_rated * (2*pi/60) * 3;
 
 %% OutLists
-OutList = manualOutList([fullfile(FAST_runDirectory, ...
+if ~exist(fullfile(project_dir, 'OutList.mat'))
+	OutList = manualOutList([fullfile(FAST_runDirectory, ...
             ['AD_SOAR_c7_V2f_c73_Clean', '_1']), '.SFunc.sum']);
-save(fullfile(project_dir, 'OutList.mat'), 'OutList');
+	save(fullfile(project_dir, 'OutList.mat'), 'OutList');
+else
+	load(fullfile(project_dir, 'OutList.mat'));
+end
 
 dqOutList = OutList;
 for op_label = OutList'
