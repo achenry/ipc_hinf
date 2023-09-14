@@ -1,7 +1,7 @@
 ------- InflowWind v3.01.* INPUT FILE -------------------------------------------------------------------------
 Generated with AeroElasticSE FAST driver
 ---------------------------------------------------------------------------------------------------------------
-True                   Echo        - Echo input data to <RootName>.ech (flag)
+False                  Echo        - Echo input data to <RootName>.ech (flag)
 1                      WindType    - switch for wind file type (1=steady; 2=uniform; 3=binary TurbSim FF; 4=binary Bladed-style FF; 5=HAWC format; 6=User defined; 7=native Bladed FF)
 0.0                    PropagationDir - Direction of wind propagation (meteoroligical rotation from aligned with X (positive rotates towards -Y) -- degrees)
 0                      VFlowAng       - Upflow angle (degrees) (not used for native Bladed format WindType=7)
@@ -9,14 +9,14 @@ False                  VelInterpCubic - Use cubic interpolation for velocity in 
 1                      NWindVel    - Number of points to output the wind velocity    (0 to 9)
 0.0                    WindVxiList - List of coordinates in the inertial X direction (m)
 0.0                    WindVyiList - List of coordinates in the inertial Y direction (m)
-198.9                  WindVziList - List of coordinates in the inertial Z direction (m)
+193.287                WindVziList - List of coordinates in the inertial Z direction (m)
 ================== Parameters for Steady Wind Conditions [used only for WindType = 1] =========================
 16.0                   HWindSpeed  - Horizontal windspeed                            (m/s)
-198.9                  RefHt       - Reference height for horizontal wind speed      (m)
+193.287                 RefHt       - Reference height for horizontal wind speed      (m)
 0.2                    PLexp       - Power law exponent                              (-)
 ================== Parameters for Uniform wind file   [used only for WindType = 2] ============================
 "/Users/njohnso1/Documents/Projects/SOAR/FY22/V2e_Polished/openfast_runs/wind/weis_job_NTM_U4.000000_Seed1501552846.0.bts" Filename_Uni - Filename of time series data for uniform wind field.      (-)
-198.9                  RefHt_Uni   - Reference height for horizontal wind speed                (m)
+198.9                RefHt_Uni   - Reference height for horizontal wind speed                (m)
 343.5                  RefLength   - Reference length for linear horizontal and vertical sheer (-)
 ================== Parameters for Binary TurbSim Full-Field files   [used only for WindType = 3] ==============
 "/Users/njohnso1/Documents/Projects/SOAR/FY22/V2e_Polished/openfast_runs/wind/weis_job_NTM_U4.000000_Seed1501552846.0.bts" FileName_BTS - Name of the Full field wind file to use (.bts)

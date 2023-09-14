@@ -1,7 +1,7 @@
 ------- ELASTODYN v1.03.* INPUT FILE -------------------------------------------
 Generated with AeroElasticSE FAST driver
 ---------------------- SIMULATION CONTROL --------------------------------------
-True                   Echo        - Echo input data to "<RootName>.ech" (flag)
+False                   Echo        - Echo input data to "<RootName>.ech" (flag)
 3                      Method      - Integration method: {1: RK4, 2: AB4, or 3: ABM4} (-)
 "default"                DT          Integration time step (s)
 ---------------------- DEGREES OF FREEDOM --------------------------------------
@@ -107,7 +107,7 @@ False                  Furling     - Read in additional model properties for fur
 20                     TwrNodes    - Number of tower nodes used for analysis (-)
 "SOAR_V2e_s_ElastoDyn_tower.dat" TwrFile     - Name of file containing tower properties (quoted string)
 ---------------------- OUTPUT --------------------------------------------------
-True                   SumPrint    - Print summary data to "<RootName>.sum" (flag)
+False                  SumPrint    - Print summary data to "<RootName>.sum" (flag)
 1                      OutFile     - Switch to determine where output will be placed: {1: in module output file only; 2: in glue code output file only; 3: both} (currently unused)
 True                   TabDelim    - Use tab delimiters in text tabular output file? (flag) (currently unused)
 "ES10.3E2"             OutFmt      - Format used for text tabular output (except time).  Resulting field should be 10 characters. (quoted string) (currently unused)
@@ -121,49 +121,31 @@ True                   TabDelim    - Use tab delimiters in text tabular output f
 "OoPDefl1"                  - Blade 1 out-of-plane and in-plane deflections and tip twist
 "OoPDefl2"                  - Blade 1 out-of-plane and in-plane deflections and tip twist
 "OoPDefl3"                  - Blade 1 out-of-plane and in-plane deflections and tip twist
-"TipALxb1"                  - Blade 1 Local flapwise tip acceleration (absolute)
-"TipALxb2"                  - Blade 1 Local flapwise tip acceleration (absolute)
-"TipALxb3"                  - Blade 1 Local flapwise tip acceleration (absolute)
 "IPDefl1"                   - Blade 1 out-of-plane and in-plane deflections and tip twist
 "IPDefl2"                   - Blade 1 out-of-plane and in-plane deflections and tip twist
 "IPDefl3"                   - Blade 1 out-of-plane and in-plane deflections and tip twist
 "TwstDefl1"                 - Blade 1 out-of-plane and in-plane deflections and tip twist
 "TwstDefl2"                 - Blade 1 out-of-plane and in-plane deflections and tip twist
 "TwstDefl3"                 - Blade 1 out-of-plane and in-plane deflections and tip twist
-"TipDxb1"                   - Blade 1 flapwise and edgewise tip deflections
-"TipDxb2"                   - Blade 1 flapwise and edgewise tip deflections
-"TipDxb3"                   - Blade 1 flapwise and edgewise tip deflections
 "BldPitch1"                 - Blade 1 pitch angle
 "BldPitch2"                 - Blade 1 pitch angle
 "BldPitch3"                 - Blade 1 pitch angle
 "Azimuth"                   - Blade azimuth angle
-"TwrClrnc1"                 - Blade 1 tip-to-tower clearance
-"TwrClrnc2"                 - Blade 1 tip-to-tower clearance
-"TwrClrnc3"                 - Blade 1 tip-to-tower clearance
 "RotSpeed"                  - Low-speed shaft and high-speed shaft speeds
 "GenSpeed"                  - Low-speed shaft and high-speed shaft speeds
 "TTDspFA"                   - Tower fore-aft and side-to-side displacments and top twist
 "TTDspSS"                   - Tower fore-aft and side-to-side displacments and top twist
 "TTDspTwst"                 - Tower fore-aft and side-to-side displacments and top twist
-"RootFxc1"                  - Out-of-plane shear, in-plane shear, and axial forces at the root of blade 1
-"RootFyc1"                  - Out-of-plane shear, in-plane shear, and axial forces at the root of blade 1
-"RootFzc1"                  - Out-of-plane shear, in-plane shear, and axial forces at the root of blade 1
 "RootMxc1"                  - In-plane bending, out-of-plane bending, and pitching moments at the root of blade 1
 "RootMyc1"                  - In-plane bending, out-of-plane bending, and pitching moments at the root of blade 1
 "RootMzc1"                  - In-plane bending, out-of-plane bending, and pitching moments at the root of blade 1
 "RootMxb1"                  - Edgewise bding, flapwise bending moments at root of blade 1
 "RootMyb1"                  - Edgewise bding, flapwise bending moments at root of blade 1
-"RootFxc2"                  - Out-of-plane shear, in-plane shear, and axial forces at the root of blade 1
-"RootFyc2"                  - Out-of-plane shear, in-plane shear, and axial forces at the root of blade 1
-"RootFzc2"                  - Out-of-plane shear, in-plane shear, and axial forces at the root of blade 1
 "RootMxc2"                  - In-plane bending, out-of-plane bending, and pitching moments at the root of blade 1
 "RootMyc2"                  - In-plane bending, out-of-plane bending, and pitching moments at the root of blade 1
 "RootMzc2"                  - In-plane bending, out-of-plane bending, and pitching moments at the root of blade 1
 "RootMxb2"                  - Edgewise bding, flapwise bending moments at root of blade 1
 "RootMyb2"                  - Edgewise bding, flapwise bending moments at root of blade 1
-"RootFxc3"                  - Out-of-plane shear, in-plane shear, and axial forces at the root of blade 1
-"RootFyc3"                  - Out-of-plane shear, in-plane shear, and axial forces at the root of blade 1
-"RootFzc3"                  - Out-of-plane shear, in-plane shear, and axial forces at the root of blade 1
 "RootMxc3"                  - In-plane bending, out-of-plane bending, and pitching moments at the root of blade 1
 "RootMyc3"                  - In-plane bending, out-of-plane bending, and pitching moments at the root of blade 1
 "RootMzc3"                  - In-plane bending, out-of-plane bending, and pitching moments at the root of blade 1
@@ -173,16 +155,9 @@ True                   TabDelim    - Use tab delimiters in text tabular output f
 "RotThrust"
 "LSSGagMya"                 - Rotor torque and low-speed shaft 0- and 90-bending moments at the main bearing
 "LSSGagMza"                 - Rotor torque and low-speed shaft 0- and 90-bending moments at the main bearing
-"LSShftMxa"
-"YawBrFxp"                  - Fore-aft shear, side-to-side shear, and vertical forces at the top of the tower (not rotating with nacelle yaw)
-"YawBrFyp"                  - Fore-aft shear, side-to-side shear, and vertical forces at the top of the tower (not rotating with nacelle yaw)
-"YawBrFzp"                  - Fore-aft shear, side-to-side shear, and vertical forces at the top of the tower (not rotating with nacelle yaw)
 "YawBrMxp"                  - Side-to-side bending, fore-aft bending, and yaw moments at the top of the tower (not rotating with nacelle yaw)
 "YawBrMyp"                  - Side-to-side bending, fore-aft bending, and yaw moments at the top of the tower (not rotating with nacelle yaw)
 "YawBrMzp"                  - Side-to-side bending, fore-aft bending, and yaw moments at the top of the tower (not rotating with nacelle yaw)
-"TwrBsFxt"                  - Fore-aft shear, side-to-side shear, and vertical forces at the base of the tower (mudline)
-"TwrBsFyt"                  - Fore-aft shear, side-to-side shear, and vertical forces at the base of the tower (mudline)
-"TwrBsFzt"                  - Fore-aft shear, side-to-side shear, and vertical forces at the base of the tower (mudline)
 "TwrBsMxt"                  - Side-to-side bending, fore-aft bending, and yaw moments at the base of the tower (mudline)
 "TwrBsMyt"                  - Side-to-side bending, fore-aft bending, and yaw moments at the base of the tower (mudline)
 "TwrBsMzt"                  - Side-to-side bending, fore-aft bending, and yaw moments at the base of the tower (mudline)

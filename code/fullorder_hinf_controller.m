@@ -405,26 +405,53 @@ else
     
 end
 
-if 0
-    
-    figure;
-    for w_idx = 1:(FullOrderControllers_n_cases / length(LPV_CONTROLLER_WIND_SPEEDS))
-        bodemag(Controllers_case_list(w_idx).Controller_scaled(:, :, C_WS_IDX));
-        hold on;
-        axh = findall(gcf, 'type', 'axes');
-        for a = 1:length(axh)
-            xline(axh(a), omega_1P_rad * HARMONICS);
-        end
-    end
-    hold off;
-    legend([arrayfun(@(n) ['Case ', num2str(n)], ... 
-    1:n_weighting_cases, 'UniformOutput', false) {'', '', '', ''}], ...
-    'NumColumns', 2);
-    
-    % plot robustness margins
+end
+
+%% Plot transfer functions and weighting functions for full-order controller
+PLOTTING = 1;
+% TODO plot transfer functions for single wind speed
+if PLOTTING
+
+    cc = find(full_controller_case_basis.WindSpeedIndex == find(LPV_CONTROLLER_WIND_SPEEDS == NONLPV_CONTROLLER_WIND_SPEED));
+    n_weighting_cases = (FullOrderControllers_n_cases / length(LPV_CONTROLLER_WIND_SPEEDS));
+
+    % TODO Plot singular values of KSi, Ti; So, GSo vs f for single wind speed on
+    % 2*2 plot for open-loop vs closed-loop
+    % QUESTION what meaning does the open-loop singular value have for
+    % these transfer functions
     figure;
     tcf = tiledlayout(2, 2);
-    n_weighting_cases = (FullOrderControllers_n_cases / length(LPV_CONTROLLER_WIND_SPEEDS));
+
+    for w_idx = 1:n_weighting_cases
+
+        Wu_tmp = Controllers_case_list(w_idx).WuGain * Wu;
+        We_tmp = Controllers_case_list(w_idx).WeGain * We;
+        W1_tmp = Controllers_case_list(w_idx).W1Gain * W1;
+        W2_tmp = Controllers_case_list(w_idx).W2Gain * W2;
+
+        SF = loopsens(-Plant(:, :, cc), ...
+            -Controllers_case_list(w_idx).Controller_scaled(:, :, cc));
+
+        sys_KSi = KSi(Plant(:, :, cc), ...
+              Controllers_case_list(w_idx).Controller_scaled(:, :, cc)) * W1_tmp;
+        sys_Ti = SF.Ti * W2_tmp;
+        sys_Ti2 = Ti(Plant(:, :, cc), ...
+                  Controllers_case_list(w_idx).Controller_scaled(:, :, cc)) * W2_tmp;
+        sys_So_cl = SF.So * W1_tmp;
+        sys_So_cl = So(Plant(:, :, cc), ...
+                    Controllers_case_list(w_idx).Controller_scaled(:, :, cc)) * W1_tmp;
+        sys_So_ol = Plant(:, :, cc) * W1_tmp;
+        sys_GSo = GSo(Plant(:, :, cc), ...
+                  Controllers_case_list(w_idx).Controller_scaled(:, :, cc)) * W2_tmp;
+
+        ax = nexttile(1);
+        sigmaplot(ax, sigmaplotopt);
+    end
+
+
+    % Plot robustness margins OUTPLOT
+    figure;
+    tcf = tiledlayout(2, 2);
     for w_idx = 1:n_weighting_cases
         nexttile(1);
         outputs = cell(1, length(LPV_CONTROLLER_WIND_SPEEDS));
@@ -460,23 +487,17 @@ if 0
     set(gcf, 'Position', [0 0 1500 900]);
     savefig(gcf, fullfile(fig_dir, 'fullorder_diskmargins.fig'));
     saveas(gcf, fullfile(fig_dir, 'fullorder_diskmargins.png'));
-end
-end
 
-%% Plot transfer functions and weighting functions for full-order controller
-PLOTTING = 1;
-% TODO plot all extreme controllers
-if PLOTTING
     n_weighting_cases = (FullOrderControllers_n_cases / length(full_controller_case_basis.WindSpeedIndex));
-    cc = find(full_controller_case_basis.WindSpeedIndex == find(LPV_CONTROLLER_WIND_SPEEDS == NONLPV_CONTROLLER_WIND_SPEED));
     for w_idx = 1:n_weighting_cases
         close all;
+
+        % Plot Generalized Plant transfer functions OUTPLOT
         GenPlant_inner = inv(Controllers_case_list(w_idx).Wout(:, :, cc)) ...
             * Controllers_case_list(w_idx).GenPlant(:, :, cc) ...
             * inv(Controllers_case_list(w_idx).Win(:, :, cc));
         GenPlant_inner.OutputName = Controllers_case_list(w_idx).GenPlant(:, :, cc).OutputName;
         GenPlant_inner.InputName = Controllers_case_list(w_idx).GenPlant(:, :, cc).InputName;
-
 
         % GenPlant_inner.InputGroup.dist = 1:4;
         GenPlant_inner.InputGroup.dist = find(ismember(...
@@ -525,24 +546,59 @@ if PLOTTING
         set(gcf, 'Position', [0 0 1500 900]);
         savefig(gcf, fullfile(fig_dir, ['case', num2str(w_idx), '_', 'fullorder_genplant_bodemag.fig']));
         saveas(gcf, fullfile(fig_dir, ['case', num2str(w_idx), '_', 'fullorder_genplant_bodemag.png']))
-    
+        
+        % Plot tuned controller for this weighting case OUTPLOT
         figure;
-        K_tmp = Controllers_case_list(w_idx).Controller(:, :, cc);
-        K_tmp.InputName = {'\tilde{M}_d Tracking Error', '\tilde{M}_q Tracking Error'};
-        K_tmp.OutputName = {'\tilde{\beta}_d Control Input', '\tilde{\beta}_q Control Input'};
-        bodeplot(K_tmp, bode_plot_opt);
+        bcol = copper(length(LPV_CONTROLLER_WIND_SPEEDS)); % Define the color order based on the number of models
+        % rcol = jet(length(LPV_CONTROLLER_WIND_SPEEDS));
+        % ycol = hot(length(LPV_CONTROLLER_WIND_SPEEDS)); % https://www.mathworks.com/help/matlab/colors-1.html?s_tid=CRUX_lftnav
+    
+        omega = logspace(-2, 4, 300);
+    
+        for c_ws_idx = 1:length(LPV_CONTROLLER_WIND_SPEEDS)
+            if false || LPV_CONTROLLER_WIND_SPEEDS(c_ws_idx) ~= NONLPV_CONTROLLER_WIND_SPEED
+                continue;
+            end
+            
+            K_tmp = Controllers_case_list(w_idx).Controller_scaled(:, :, c_ws_idx);
+            % K_tmp = Controllers_case_list(w_idx).Controller(:, :, cc);
+            K_tmp.InputName = {'\tilde{M}_d Tracking Error', '\tilde{M}_q Tracking Error'};
+            K_tmp.OutputName = {'\tilde{\beta}_d Control Input', '\tilde{\beta}_q Control Input'};
+
+            % Plot baseline and tuned controllers
+            bodeplot(K_tmp, omega, bode_plot_opt);
+    
+            % Find handles of all lines in the figure that have the color blue
+            blineHandle = findobj(gcf,'Type','line','-and','Color','b');
+            % rlineHandle = findobj(gcf,'Type','line','-and','Color','r');
+            % ylineHandle = findobj(gcf,'Type','line','-and','Color','y');
+    
+            % Change the color to the one you defined
+            set(blineHandle,'Color',bcol(c_ws_idx,:));
+            % set(rlineHandle,'Color',rcol(c_ws_idx,:));
+            % set(ylineHandle,'Color',ycol(c_ws_idx,:));
+            
+            hold on
+        end
+         legend([arrayfun(@(n) ['Case ', num2str(n)], ... 
+    1:n_weighting_cases, 'UniformOutput', false) {'', '', '', ''}], ...
+    'NumColumns', 2);
 
         axh = findall(gcf, 'type', 'axes');
-        xline(axh(3), omega_1P_rad * [2, 3]);
-        xline(axh(5), omega_1P_rad * [2, 3]);
-        xline(axh(7), omega_1P_rad * [2, 3]);
-        xline(axh(9), omega_1P_rad * [2, 3]);
+        xline(axh(3), omega_1P_rad * HARMONICS);
+        xline(axh(5), omega_1P_rad * HARMONICS);
+        xline(axh(7), omega_1P_rad * HARMONICS);
+        xline(axh(9), omega_1P_rad * HARMONICS);
+        set(gcf, 'Position', [0 0 1500 900]);
+        % legend('Structured Baseline', 'Structured Tuned', 'Full-Order Tuned', '', '', '', '');
+        %         title('Frequency Response of Tuned Controllers');
+        hold off;
 
         set(gcf, 'Position', [0 0 1500 900]);
         savefig(gcf, fullfile(fig_dir, ['case', num2str(w_idx), '_', 'fullorder_controller_bodemag.fig']));
         saveas(gcf, fullfile(fig_dir, ['case', num2str(w_idx), '_', 'fullorder_controller_bodemag.jpg']));
         
-        if 0
+        if 1
         Wu_tmp = Controllers_case_list(w_idx).WuGain * Wu;
         We_tmp = Controllers_case_list(w_idx).WeGain * We;
         W1_tmp = Controllers_case_list(w_idx).W1Gain * W1;
@@ -559,6 +615,7 @@ if PLOTTING
         % high phases that add to 1, or have one with large mag and the other with very small in alignment)
         % OpenLoop case: So = 1, ClosedLoop case: can shape So, ideally to 0.
         % Real So: hpf with roll-off with high-freq gain of 1.
+        % So = e/W1d1, output disturbance -> tracking error
         figure;
         sys = SF.So * W1_tmp;
         % sys.InputName = GenPlant.InputName(1:2); % output disturbance/reference
@@ -586,37 +643,39 @@ if PLOTTING
         xline(axh(7), omega_1P_rad * [2, 3]);
         xticks(axh(7), [1e-1, 1e0, 1e1, 1e2, 1e3, 1e4]);
         xline(axh(9), omega_1P_rad * [2, 3]);
-        xticks(axh(9), [1e-1, 1e0, 1e1, 1e2, 1e3, 1e4]);
-
+        xticks(axh(9), [1e-1, 1e0, 1e1, 1e2, 1e3, 1e4])
 
         set(gcf, 'Position', [0 0 1500 900]);
         legend('S_o W_1', 'W_e^{-1}\gamma');
         savefig(gcf, fullfile(fig_dir, ['case', num2str(w_idx), '_', 'fullorder_So_bodemag.fig']));
         saveas(gcf, fullfile(fig_dir, ['case', num2str(w_idx), '_', 'fullorder_So_bodemag.jpg']));
-    
-        figure;
-        % sigma(CL_full_tuned(:, :, 1, cc), ss(gamma_full_tuned(1, cc)));
-        sys = SF.To * W2_tmp; % requirements defined on output side
-        sys.InputName = GenPlant.InputName(1:2); % output disturbance/references
-        sys.OutputName = GenPlant.OutputName(5:6); % output
-        sys.InputName = {'M_d Reference', 'M_q Reference'};
-        Wy.OutputName = {'M_d Reference', 'M_q Reference'};
-        sys.OutputName = {'M_d Output', 'M_q Output'};
-        Wy.InputName = {'M_d Output', 'M_q Output'};
-        bodeplot(...
-            sys, ...
-            inv(Wy) * Controllers_case_list(w_idx).gamma(cc), w, bode_plot_opt);
-        title('Complementary Output Sensitivity Function, T_o');
-        axh = findall(gcf, 'type', 'axes');
-        for a = 1:length(axh)
-            xline(axh(a), [loopData.peaks.wGAM]);
-        end
-        set(gcf, 'Position', [0 0 1500 900]);
-        legend('T_o W_2', 'W_y^{-1}\gamma');
-        savefig(gcf, fullfile(fig_dir, ['case', num2str(w_idx), '_', 'To_full_bodemag.fig']));
-        saveas(gcf, fullfile(fig_dir, ['case', num2str(w_idx), '_', 'To_full_bodemag.png']));
+        
+        % Plot complementary output sensitivity function and its weighting matrix
+        % To = y/W2d2, input disturbance -> control input
+        % figure;
+        % % sigma(CL_full_tuned(:, :, 1, cc), ss(gamma_full_tuned(1, cc)));
+        % sys = SF.To * W2_tmp; % requirements defined on output side
+        % sys.InputName = GenPlant.InputName(1:2); % output disturbance/references
+        % sys.OutputName = GenPlant.OutputName(5:6); % output
+        % sys.InputName = {'M_d Reference', 'M_q Reference'};
+        % Wy.OutputName = {'M_d Reference', 'M_q Reference'};
+        % sys.OutputName = {'M_d Output', 'M_q Output'};
+        % Wy.InputName = {'M_d Output', 'M_q Output'};
+        % bodeplot(...
+        %     sys, ...
+        %     inv(Wy) * Controllers_case_list(w_idx).gamma(cc), w, bode_plot_opt);
+        % title('Complementary Output Sensitivity Function, T_o');
+        % axh = findall(gcf, 'type', 'axes');
+        % for a = 1:length(axh)
+        %     xline(axh(a), [loopData.peaks.wGAM]);
+        % end
+        % set(gcf, 'Position', [0 0 1500 900]);
+        % legend('T_o W_2', 'W_y^{-1}\gamma');
+        % savefig(gcf, fullfile(fig_dir, ['case', num2str(w_idx), '_', 'To_full_bodemag.fig']));
+        % saveas(gcf, fullfile(fig_dir, ['case', num2str(w_idx), '_', 'To_full_bodemag.png']));
         
         % Plot complementary input sensitivity function and its weighting matrix
+        % Ti = -u/W2d2, input disturbance -> control input
         figure;
         sys = SF.Ti * W2_tmp;
         sys.InputName = GenPlant.InputName(3:4); % control disturbance
@@ -639,6 +698,7 @@ if PLOTTING
         saveas(gcf, fullfile(fig_dir, ['case', num2str(w_idx), '_', 'Ti_full_bodemag.png']));
     
         % Plot GSo with two weighting functions
+        % GSo = -e/W2d2, input disturbance -> tracking error
         figure;
         sys = GSo(Plant(:, :, cc), ...
             Controllers_case_list(w_idx).Controller_scaled(:, :, cc)) * W2_tmp;
@@ -659,6 +719,7 @@ if PLOTTING
         saveas(gcf, fullfile(fig_dir, ['case', num2str(w_idx), '_', 'GSo_full_bodemag.png']));
 
         % Plot KS_i with two weighting functions
+        % KSi = u/W1d1, output disturbance -> control input
         figure;
         sys = KSi(Plant(:, :, cc), ...
             Controllers_case_list(w_idx).Controller_scaled(:, :, cc)) * W1_tmp;

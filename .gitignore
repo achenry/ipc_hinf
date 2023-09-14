@@ -18,3 +18,4 @@ postprocessing/.idea
 simulink_models/slprj/
 code/matfiles/*.mat
 SOAR-25-V2f_IF/linearization
+nonlin_simulations

@@ -15,7 +15,7 @@ RUN_OL_DQ = 0;
 RUN_OL_BLADE = 0;
 
 COMPUTE_FFT = 0;
-HARMONICS = 1:6;
+HARMONICS = 1:3;
 
 USE_IPC = 1;
 
@@ -28,8 +28,8 @@ if STRUCT_PARAM_SWEEP || OPTIMAL_K_COLLECTION || EXTREME_K_COLLECTION || BASELIN
     USE_IPC = 1;
 end
 
-if STRUCT_PARAM_SWEEP + OPTIMAL_K_COLLECTION + EXTREME_K_COLLECTION + BASELINE_K ~= 1
-    print('Warning: choose only one of STRUCT_PARAM_SWEEP, OPTIMAL_K_COLLECTION, EXTREME_K_COLLECTION, BASELINE_K');
+if ~(STRUCT_PARAM_SWEEP || OPTIMAL_K_COLLECTION || EXTREME_K_COLLECTION || BASELINE_K || ~USE_IPC)
+    sprintf('Warning: choose only one of STRUCT_PARAM_SWEEP, OPTIMAL_K_COLLECTION, EXTREME_K_COLLECTION, BASELINE_K');
 end
 
 % model_names = {'excGenDOF_incSecOrd', 'excGenDOF_excSecOrd'};
@@ -185,9 +185,10 @@ omega_2P_rad = Parameters.Turbine.wr_rated * (2*pi/60) * 2;
 omega_3P_rad = Parameters.Turbine.wr_rated * (2*pi/60) * 3;
 
 %% OutLists
-if ~exist(fullfile(project_dir, 'OutList.mat'))
-	OutList = manualOutList([fullfile(FAST_runDirectory, ...
-            ['AD_SOAR_c7_V2f_c73_Clean', '_1']), '.SFunc.sum']);
+if false || ~exist(fullfile(project_dir, 'OutList.mat'))
+	% OutList = manualOutList([fullfile(FAST_runDirectory, ...
+    %         ['AD_SOAR_c7_V2f_c73_Clean', '_1']), '.SFunc.sum']);
+    OutList = manualOutList(fullfile(FAST_directory, 'weis_job_00_cmdline.sum'));
 	save(fullfile(project_dir, 'OutList.mat'), 'OutList');
 else
 	load(fullfile(project_dir, 'OutList.mat'));

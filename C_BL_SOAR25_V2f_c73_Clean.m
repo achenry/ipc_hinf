@@ -192,8 +192,8 @@ Parameters.Control.IPCDQ.Mode       = 1;  % 1 no IPC below rated (no power loss)
 
 % IPC DQ GAINS
 kmul = 0.025;
-Parameters.cIPC.DQ_Kp_1P = 2.8066e-06;
-Parameters.cIPC.DQ_Ki_1P = 2.6919e-06;
+Parameters.cIPC.DQ_Kp_1P = kmul*40e-8; % 2.8066e-06;
+Parameters.cIPC.DQ_Ki_1P = kmul*30e-8; %2.6919e-06;
 Parameters.cIPC.DQ_Kd_1P = kmul*5e-8;
 
 Parameters.cIPC.D_Kp_1P = 2.8066e-06; %kmul*40e-8;%0e-8;

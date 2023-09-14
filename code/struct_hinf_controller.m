@@ -60,10 +60,10 @@ end
 %% Conduct Parameter Sweep for MIMO PI Controller
 % omega = logspace(-2, 2, 200);
 if BASELINE_K
-    Sweep.Vary.Kp_diag = -[baseline_PI.Kp];
-    Sweep.Vary.Kp_offdiag = -[baseline_PI.Kp];
-    Sweep.Vary.Ki_diag = -[baseline_PI.Ki];
-    Sweep.Vary.Ki_offdiag = -[baseline_PI.Ki];
+    Sweep.Vary.Kp_diag = -[Parameters.cIPC.DQ_Kp_1P];
+    Sweep.Vary.Kp_offdiag = -[Parameters.cIPC.DQ_Kp_1P];
+    Sweep.Vary.Ki_diag = -[Parameters.cIPC.DQ_Ki_1P];
+    Sweep.Vary.Ki_offdiag = -[Parameters.cIPC.DQ_Ki_1P];
 elseif STRUCT_PARAM_SWEEP
     % TODO robustness margin 6dB, 45deg. Evaluate robustness margins, if not
     % achieved need to tune weighting filters.
@@ -261,7 +261,9 @@ end
 
 if 1
     if BASELINE_K
-        robust_idx = PI_ParameterSweep_table.('Case No.');
+        robust_idx = PI_ParameterSweep_table.('Case No.') == PI_ParameterSweep_table.('Case No.');
+        PI_ParameterSweep_redtable = PI_ParameterSweep_table(robust_idx, :);
+        robust_idx = PI_ParameterSweep_redtable.('Case No.');
     elseif STRUCT_PARAM_SWEEP
         tol = 1e-3;
         robust_idx = (PI_ParameterSweep_table(:, "Hinf(To)").Variables <= 1+tol) ... % idx where peak To is close to 1
@@ -300,31 +302,42 @@ if 1
     
     end
     clear PI_ParameterSweep_case_list;
+
+    if height(PI_ParameterSweep_table) == 2 % only single controller case + no ipc case
+         PI_ParameterSweep.Controller(:, :, 1, 1) = PI_ParameterSweep.Controller;
+         PI_ParameterSweep.Controller_scaled(:, :, 1, 1) = PI_ParameterSweep.Controller_scaled;
+         PI_ParameterSweep.Gains(:, 1, 1) = PI_ParameterSweep.Gains;
+    end
+
     vv = 1;
     for v = robust_idx'
         PI_ParameterSweep_case_list(vv).CaseNo = v;
-        PI_ParameterSweep_case_list(vv).Controller = ss(PI_ParameterSweep.Controller(:, :, v, :));
-        PI_ParameterSweep_case_list(vv).Controller_scaled = ss(PI_ParameterSweep.Controller_scaled(:, :, v, :));
-        
-        for c_ws_idx = 1:length(LPV_CONTROLLER_WIND_SPEEDS)
-            PI_ParameterSweep_case_list(vv).Controller(:, :, c_ws_idx) ...
-                = ss(PI_ParameterSweep.Controller(:, :, v, :));
-            PI_ParameterSweep_case_list(vv).Controller_scaled(:, :, c_ws_idx) ...
-                = ss(PI_ParameterSweep.Controller_scaled(:, :, v, :));
-        end     
-        
-        PI_ParameterSweep_case_list(vv).Controller.InputName = {'Measured RootMycD Tracking Error', 'Measured RootMycQ Tracking Error'};
-        PI_ParameterSweep_case_list(vv).Controller.OutputName = {'BldPitchD Control Input', 'BldPitchQ Control Input'};
-        PI_ParameterSweep_case_list(vv).Controller.SamplingGrid = struct('u', LPV_CONTROLLER_WIND_SPEEDS);
-
-        PI_ParameterSweep_case_list(vv).Controller_scaled.InputName = {'Measured RootMycD Tracking Error', 'Measured RootMycQ Tracking Error'};
-        PI_ParameterSweep_case_list(vv).Controller_scaled.OutputName = {'BldPitchD Control Input', 'BldPitchQ Control Input'};
-        PI_ParameterSweep_case_list(vv).Controller_scaled.SamplingGrid = struct('u', LPV_CONTROLLER_WIND_SPEEDS);
+        if v ~= 0 % using ipc
+            PI_ParameterSweep_case_list(vv).Controller = ss(PI_ParameterSweep.Controller(:, :, v, :));
+            PI_ParameterSweep_case_list(vv).Controller_scaled = ss(PI_ParameterSweep.Controller_scaled(:, :, v, :));
+            
+            
+            for c_ws_idx = 1:length(LPV_CONTROLLER_WIND_SPEEDS)
+                PI_ParameterSweep_case_list(vv).Controller(:, :, c_ws_idx) ...
+                    = ss(PI_ParameterSweep.Controller(:, :, v, :));
+                PI_ParameterSweep_case_list(vv).Controller_scaled(:, :, c_ws_idx) ...
+                    = ss(PI_ParameterSweep.Controller_scaled(:, :, v, :));
+            end     
+            
+            PI_ParameterSweep_case_list(vv).Controller.InputName = {'Measured RootMycD Tracking Error', 'Measured RootMycQ Tracking Error'};
+            PI_ParameterSweep_case_list(vv).Controller.OutputName = {'BldPitchD Control Input', 'BldPitchQ Control Input'};
+            PI_ParameterSweep_case_list(vv).Controller.SamplingGrid = struct('u', LPV_CONTROLLER_WIND_SPEEDS);
     
-        PI_ParameterSweep_case_list(vv).Kp_diag = PI_ParameterSweep.Gains(1, v, :);
-        PI_ParameterSweep_case_list(vv).Kp_offdiag = PI_ParameterSweep.Gains(2, v, :);
-        PI_ParameterSweep_case_list(vv).Ki_diag = PI_ParameterSweep.Gains(3, v, :);
-        PI_ParameterSweep_case_list(vv).Ki_offdiag = PI_ParameterSweep.Gains(4, v, :);
+            PI_ParameterSweep_case_list(vv).Controller_scaled.InputName = {'Measured RootMycD Tracking Error', 'Measured RootMycQ Tracking Error'};
+            PI_ParameterSweep_case_list(vv).Controller_scaled.OutputName = {'BldPitchD Control Input', 'BldPitchQ Control Input'};
+            PI_ParameterSweep_case_list(vv).Controller_scaled.SamplingGrid = struct('u', LPV_CONTROLLER_WIND_SPEEDS);
+            
+    
+            PI_ParameterSweep_case_list(vv).Kp_diag = PI_ParameterSweep.Gains(1, v, :);
+            PI_ParameterSweep_case_list(vv).Kp_offdiag = PI_ParameterSweep.Gains(2, v, :);
+            PI_ParameterSweep_case_list(vv).Ki_diag = PI_ParameterSweep.Gains(3, v, :);
+            PI_ParameterSweep_case_list(vv).Ki_offdiag = PI_ParameterSweep.Gains(4, v, :);
+        end
     
         vv = vv + 1;
     end

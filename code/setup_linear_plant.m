@@ -28,7 +28,6 @@ else
     
     input_arr = {'Blade D pitch command', ...
             'Blade Q pitch command'};
-    plotting_idx = find(LPV_CONTROLLER_WIND_SPEEDS == NONLPV_CONTROLLER_WIND_SPEED);
     
     for ws_idx = 1:length(LPV_CONTROLLER_WIND_SPEEDS)
         linfile_prefix = ['lin_' num2str(ws_idx - 1, '%02u') '.'];
@@ -109,10 +108,7 @@ else
         short_op_arr = short_op_arr(~y_zero_idx);
     
         sys.StateName = short_state_arr';
-        sys.InputName = short_ip_arr';
-        sys.OutputName = short_op_arr';
     
-        sys = sys(short_op_arr, short_ip_arr);
 
         % control inputs u
         min_input_arr = {
@@ -124,6 +120,13 @@ else
                 'RootMycD', ...
                 'RootMycQ'
                 };
+
+        % sys = sys(short_op_arr, short_ip_arr);
+        % sys.InputName = short_ip_arr';
+        % sys.OutputName = short_op_arr';
+        sys.InputName = min_input_arr';
+        sys.OutputName = min_op_arr';
+        sys = sys(min_op_arr, min_input_arr);
         sys_red = sys(min_op_arr, min_input_arr);
         
         % remove 2nd bending modes: 
@@ -180,5 +183,13 @@ else
 end
 
 %% PLOTTING LINEAR MODELS
-% bodeplot(sys_arr(:, :, plotting_idx), sys_red_arr(:, :, plotting_idx));
-% legend('original', 'reduced');
+PLOTTING = 1;
+plotting_idx = find(LPV_CONTROLLER_WIND_SPEEDS == NONLPV_CONTROLLER_WIND_SPEED);
+
+if PLOTTING
+    figure;
+    bodeplot(sys_arr(:, :, plotting_idx), sys_red_arr(:, :, plotting_idx));
+    legend('w/ second-order bending modes', 'wo/ second-order bending modes');
+    
+
+end

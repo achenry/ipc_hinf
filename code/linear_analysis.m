@@ -16,18 +16,19 @@ if 1
     % ClosedLoop case: Ideal To = 1. Real lpf with bandwidth, low-freq gain of 1. Choose
     % weighting function to look like inverse
     % TODO remove identity controllers
-    figure;
-    bodeplot(To(Plant(:, :, C_WS_IDX), eye(2)), inv(Wy), bode_plot_opt);
-    title('Uncontrolled Complementary Output Sensitivity Function');
-    legend('T_o', 'W_y^{-1}')
-    axh = findall(gcf, 'type', 'axes');
-    
-    xline(axh(1), omega_1P_rad * HARMONICS);
-    xline(axh(3), omega_1P_rad * HARMONICS);
-    xline(axh(7), omega_1P_rad * HARMONICS);
-    xline(axh(9), omega_1P_rad * HARMONICS);
+    % figure;
+    % bodeplot(To(Plant(:, :, C_WS_IDX), eye(2)), inv(Wy), bode_plot_opt);
+    % title('Uncontrolled Complementary Output Sensitivity Function');
+    % legend('T_o', 'W_y^{-1}')
+    % axh = findall(gcf, 'type', 'axes');
+    % 
+    % xline(axh(1), omega_1P_rad * HARMONICS);
+    % xline(axh(3), omega_1P_rad * HARMONICS);
+    % xline(axh(7), omega_1P_rad * HARMONICS);
+    % xline(axh(9), omega_1P_rad * HARMONICS);
     
     % Plot complementary input sensitivity function and its weighting matrix
+    % Ti = -u/W2d2, control disturbance -> control input
     figure;
     bodeplot(Ti(Plant(:, :, C_WS_IDX), eye(2)), inv(Wu), bode_plot_opt);
     title('Uncontrolled Complementary Input Sensitivity Function');
@@ -47,6 +48,7 @@ if 1
     % high phases that add to 1, or have one with large mag and the other with very small in alignment)
     % OpenLoop case: So = 1, ClosedLoop case: can shape So, ideally to 0.
     % Real So: hpf with roll-off with high-freq gain of 1.
+    % So = e/W1d1, output disturbance -> tracking error
     figure;
     bodeplot(So(Plant(:, :, C_WS_IDX), eye(2)), inv(We), bode_plot_opt);
     title('Uncontrolled Output Sensitivity Function');

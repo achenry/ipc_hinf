@@ -128,24 +128,6 @@ W2 = tf(1 * eye(2));
 % Wdu.InputName = {'Input Disturbance, $d_u$'};
 % Wdu.OutputName = {'Weighted Input Disturbance, $W_{d_u} d_u$'};
 
-if 0
-    % Plot Weighting matrices
-    figure;
-    omega = logspace(-2, 4, 300);
-    bodemag(Wu, We, Wy, omega, bode_plot_opt);
-    % bode_plot_opt.XLim = [10^(-1), 11];
-    % setoptions(h, 'XLim', )
-    % title('Weighting Functions');
-    axh = findall(gcf, 'type', 'axes');
-    xline(axh(3), omega_1P_rad * HARMONICS);
-    xline(axh(5), omega_1P_rad * HARMONICS);
-    xline(axh(7), omega_1P_rad * HARMONICS);
-    xline(axh(9), omega_1P_rad * HARMONICS);
-    legend("W_u", "W_e", "W_y", '', '', '', '');
-    set(gcf, 'Position', [0 0 1500 900]);%get(0, 'Screensize'));
-    savefig(gcf, fullfile(fig_dir, 'weighting_funcs.fig'));
-    saveas(gcf, fullfile(fig_dir, 'weighting_funcs.png'));
-end
 
 %% Create Case Basis for different controllers
 
@@ -282,13 +264,81 @@ Notch_6P_0 = tf([1,2*omega_6P_rad*zeta/drop,(omega_6P_rad)^2],[1,2*omega_6P_rad*
 K0 = PI0 * Notch_6P_0 * Notch_3P_0;
 save(fullfile(code_dir, 'matfiles', 'K0.mat'), 'K0');
 
-if 0
+
+%% Plotting
+PLOTTING = 0;
+plotting_idx = find(LPV_CONTROLLER_WIND_SPEEDS == NONLPV_CONTROLLER_WIND_SPEED);
+
+if PLOTTING
+
+    % Plot scaled Plant OUTPLOT
     figure;
-    bodeplot(K0, bode_plot_opt);
+    bcol = copper(length(LPV_CONTROLLER_WIND_SPEEDS)); % Define the color order based on the number of models
+    % rcol = jet(length(LPV_CONTROLLER_WIND_SPEEDS));
+    % ycol = hot(length(LPV_CONTROLLER_WIND_SPEEDS)); % https://www.mathworks.com/help/matlab/colors-1.html?s_tid=CRUX_lftnav
+
+    omega = logspace(-2, 4, 300);
+    
+    for c_ws_idx = 1:length(LPV_CONTROLLER_WIND_SPEEDS)
+        if false || LPV_CONTROLLER_WIND_SPEEDS(c_ws_idx) ~= NONLPV_CONTROLLER_WIND_SPEED
+            continue;
+        end
+        % Plot baseline and tuned controllers
+        bodeplot(Plant(:, :, c_ws_idx), omega, bode_plot_opt);
+
+        % Find handles of all lines in the figure that have the color blue
+        blineHandle = findobj(gcf,'Type','line','-and','Color','b');
+        % rlineHandle = findobj(gcf,'Type','line','-and','Color','r');
+        % ylineHandle = findobj(gcf,'Type','line','-and','Color','y');
+
+        % Change the color to the one you defined
+        set(blineHandle,'Color',bcol(c_ws_idx,:));
+        % set(rlineHandle,'Color',rcol(c_ws_idx,:));
+        % set(ylineHandle,'Color',ycol(c_ws_idx,:));
+        
+        hold on
+    end
+
     axh = findall(gcf, 'type', 'axes');
-    xline(axh(5), omega_1P_rad * HARMONICS);
     xline(axh(3), omega_1P_rad * HARMONICS);
+    xline(axh(5), omega_1P_rad * HARMONICS);
     xline(axh(7), omega_1P_rad * HARMONICS);
     xline(axh(9), omega_1P_rad * HARMONICS);
-    title('Frequency Response of Baseline Controller');
+    set(gcf, 'Position', [0 0 1500 900]);
+    legend('Structured Baseline', 'Structured Tuned', 'Full-Order Tuned', '', '', '', '');
+    %         title('Frequency Response of Tuned Controllers');
+    hold off;
+
+    set(gcf, 'Position', [0 0 1500 900]);
+    savefig(gcf, fullfile(fig_dir, 'Plant_scaled.fig'));
+    saveas(gcf, fullfile(fig_dir, 'Plant_scaled.png'));
+
+    
+    % Plot Weighting matrices OUTPLOT
+    figure;
+    omega = logspace(-2, 4, 300);
+    bodemag(Wu, We, omega, bode_plot_opt);
+    % bode_plot_opt.XLim = [10^(-1), 11];
+    % setoptions(h, 'XLim', )
+    % title('Weighting Functions');
+    axh = findall(gcf, 'type', 'axes');
+    xline(axh(3), omega_1P_rad * HARMONICS);
+    xline(axh(5), omega_1P_rad * HARMONICS);
+    xline(axh(7), omega_1P_rad * HARMONICS);
+    xline(axh(9), omega_1P_rad * HARMONICS);
+    legend("W_u", "W_e", '', '', '', '');
+    set(gcf, 'Position', [0 0 1500 900]);%get(0, 'Screensize'));
+    savefig(gcf, fullfile(fig_dir, 'weighting_funcs.fig'));
+    saveas(gcf, fullfile(fig_dir, 'weighting_funcs.png'));
+    
+    % Plot baseline structured controller
+    % figure;
+    % bodeplot(K0, bode_plot_opt);
+    % axh = findall(gcf, 'type', 'axes');
+    % xline(axh(5), omega_1P_rad * HARMONICS);
+    % xline(axh(3), omega_1P_rad * HARMONICS);
+    % xline(axh(7), omega_1P_rad * HARMONICS);
+    % xline(axh(9), omega_1P_rad * HARMONICS);
+    % title('Frequency Response of Baseline Controller');
+
 end

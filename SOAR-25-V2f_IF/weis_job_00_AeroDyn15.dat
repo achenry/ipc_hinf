@@ -1,13 +1,13 @@
 ------- AERODYN v15.03.* INPUT FILE ------------------------------------------------
 Generated with AeroElasticSE FAST driver
 ======  General Options  ============================================================================
-True                   Echo        - Echo the input to "<rootname>.AD.ech"?  (flag)
+False                  Echo        - Echo the input to "<rootname>.AD.ech"?  (flag)
 "default"              DTAero      - Time interval for aerodynamic calculations {or "default"} (s)
 1                      WakeMod     - Type of wake/induction model (switch) {0=none, 1=BEMT, 2=DBEMT, 3=OLAF} [WakeMod cannot be 2 or 3 when linearizing]
 1                      AFAeroMod   - Type of blade airfoil aerodynamics model (switch) {1=steady model, 2=Beddoes-Leishman unsteady model} [AFAeroMod must be 1 when linearizing]
 0                      TwrPotent   - Type tower influence on wind based on potential flow around the tower (switch) {0=none, 1=baseline potential flow, 2=potential flow with Bak correction}
 0                      TwrShadow   - Calculate tower influence on wind based on downstream tower shadow (switch) {0=none, 1=Powles model, 2=Eames model}
-Fals                   TwrAero     - Calculate tower aerodynamic loads? (flag)
+False                  TwrAero     - Calculate tower aerodynamic loads? (flag)
 True                   FrozenWake  - Assume frozen wake during linearization? (flag) [used only when WakeMod=1 and when linearizing]
 False                  CavitCheck  - Perform cavitation check? (flag) [AFAeroMod must be 1 when CavitCheck=true]
 False                  Buoyancy           - Include buoyancy effects? (flag)
@@ -101,14 +101,12 @@ TwrElev        TwrDiam        TwrCd          TwrTI          TwrCb !TwrTI used on
  173.95831      9.46745        0.7            0.1           0.0 
  193.28701      9.0            0.7            0.1           0.0 
 ======  Outputs  ====================================================================================
-True                  SumPrint    - Generate a summary file listing input options and interpolated properties to "<rootname>.AD.sum"?  (flag)
+False                   SumPrint    - Generate a summary file listing input options and interpolated properties to "<rootname>.AD.sum"?  (flag)
 9                      NBlOuts     - Number of blade node outputs [0 - 9] (-)
 4, 7, 10, 13, 16, 18, 21, 24, 27 BlOutNd     - Blade nodes whose values will be output  (-)
 0                      NTwOuts     - Number of tower node outputs [0 - 9]  (-)
 0                      TwOutNd     - Tower nodes whose values will be output  (-)
                    OutList             - The next line(s) contains a list of output parameters.  See OutListParameters.xlsx for a listing of available output channels, (-)
-"RtSpeed"
-"RtTSR"
 END of input file (the word "END" must appear in the first 3 columns of this last OutList line)
 ====== Outputs for all blade stations (same ending as above for B1N1.... =========================== [optional section]
    1              BldNd_BladesOut     - Number of blades to output all node information at.  Up to number of blades on turbine. (-)
