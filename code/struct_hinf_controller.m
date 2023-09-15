@@ -128,11 +128,13 @@ if REPROCESS_SWEEP
         % computes the disk-based stability margins for the SISO or MIMO negative feedback loop 
         % Single-Loop from Ossman paper = loop-at-a-time
         %  loop-at-a-time stability margins in DM and multiloop margins in MM (cuts loop open at inputs OR outputs).
-        [DMi_tmp, ~] = diskmargin(SF_tmp.Li);
-        [DMo_tmp, ~] = diskmargin(SF_tmp.Lo);
+        [DMi_tmp, MMi_tmp] = diskmargin(SF_tmp.Li);
+        [DMo_tmp, MMo_tmp] = diskmargin(SF_tmp.Lo);
 
         PI_ParameterSweep(v).DMi = DMi_tmp; % GainMargin
         PI_ParameterSweep(v).DMo = DMo_tmp;
+        PI_ParameterSweep(v).MMi = MMi_tmp;
+        PI_ParameterSweep(v).MMo = MMo_tmp;
 
         % PI_ParameterSweep(v).wci = wci;
         % PI_ParameterSweep(v).wco = wco;
