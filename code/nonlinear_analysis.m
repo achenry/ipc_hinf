@@ -12,8 +12,8 @@
 clear all;
 initialize;
 
-RUN_SIMS_PAR = 1;
-RUN_SIMS_SINGLE = 0;
+RUN_SIMS_PAR = 0;
+RUN_SIMS_SINGLE = 1;
 COMPUTE_FFT = 0;
 RUN_TURSIM = 0;
 
@@ -286,7 +286,8 @@ if RUN_SIMS_PAR
             % LPV_CONTROLLER_WIND_SPEEDS == NONLPV_CONTROLLER_WIND_SPEED)), DT);
             
             SL_model_name = 'AD_SOAR_c7_V2f_c73_Clean_FullOrderControllerTest';
-            K_IPC = c2d(case_list(case_idx).Controller_scaled, DT);
+            % K_IPC = c2d(case_list(case_idx).Controller_scaled, DT);
+            K_IPC = case_list(case_idx).Controller_scaled;
             sim_inputs(case_idx) = Simulink.SimulationInput(SL_model_name);
             sim_inputs(case_idx) = sim_inputs(case_idx).setVariable('K_IPC', K_IPC);
         elseif OPTIMAL_K_COLLECTION || EXTREME_K_COLLECTION
@@ -351,7 +352,7 @@ elseif RUN_SIMS_SINGLE
              SL_model_name = 'AD_SOAR_c7_V2f_c73_Clean_FullOrderControllerTest';
             % K_IPC = c2d(tf(case_list(case_idx).Controller_scaled(:, :, ...
             %     LPV_CONTROLLER_WIND_SPEEDS == NONLPV_CONTROLLER_WIND_SPEED)), DT);
-            K_IPC = c2d(case_list(case_idx).Controller_scaled, DT);
+            K_IPC = c2d(case_list(case_idx).Controller, DT);
             % K_IPC(2, 2).Numerator(2) / K_IPC(2, 2).Denominator(1) 
         elseif OPTIMAL_K_COLLECTION || EXTREME_K_COLLECTION
             if strcmp(case_list(case_idx).Structure, 'Full-Order')
