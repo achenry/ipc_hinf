@@ -17,11 +17,11 @@ RUN_OL_BLADE = 0;
 COMPUTE_FFT = 0;
 HARMONICS = 1:3;
 
-USE_IPC = 1;
+USE_IPC = 0;
 
-STRUCT_PARAM_SWEEP = 0; % conduct nonlinear simulations for parameter sweep over MIMO PI Gains
+STRUCT_PARAM_SWEEP = 1; % conduct nonlinear simulations for parameter sweep over MIMO PI Gains
 OPTIMAL_K_COLLECTION = 0; % conduct nonlinear simulations for collection of Hinf-synthesized controllers
-EXTREME_K_COLLECTION = 1;
+EXTREME_K_COLLECTION = 0;
 BASELINE_K = 0; % conduct nonlinear simulations for baseline structured controller
 
 if STRUCT_PARAM_SWEEP || OPTIMAL_K_COLLECTION || EXTREME_K_COLLECTION || BASELINE_K
@@ -207,6 +207,16 @@ for op_label = OutList'
     end
 end
 save(fullfile(project_dir, 'dqOutList.mat'), 'dqOutList');
+
+sigma_plot_opt = sigmaoptions;
+sigma_plot_opt.Title.FontSize = 25;
+sigma_plot_opt.Title.String = '';
+sigma_plot_opt.InputLabels.FontSize = 25;
+sigma_plot_opt.OutputLabels.FontSize = 25;
+sigma_plot_opt.XLabel.FontSize = 25;
+sigma_plot_opt.YLabel.FontSize = 25;
+sigma_plot_opt.TickLabel.FontSize = 22;
+sigma_plot_opt.Grid = 'on';
 
 bode_plot_opt = bodeoptions;
 bode_plot_opt.Title.FontSize = 25;

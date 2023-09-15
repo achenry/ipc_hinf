@@ -418,7 +418,7 @@ if PLOTTING
     % TODO Plot singular values of KSi, Ti; So, GSo vs f for single wind speed on
     % 2*2 plot for open-loop vs closed-loop
     % QUESTION what meaning does the open-loop singular value have for
-    % these transfer functions
+    % these transfer functions, only defined and non-identity for So?
     figure;
     tcf = tiledlayout(2, 2);
 
@@ -445,9 +445,27 @@ if PLOTTING
                   Controllers_case_list(w_idx).Controller_scaled(:, :, cc)) * W2_tmp;
 
         ax = nexttile(1);
-        sigmaplot(ax, sigmaplotopt);
+        sigmaplot(ax, sys_KSi, sigma_plot_opt);
+        title(ax, '$KS_i$');
+
+        ax = nexttile(2);
+        sigmaplot(ax, sys_Ti, sigma_plot_opt);
+        title(ax, '$T_i$');
+
+        ax = nexttile(3);
+        sigmaplot(ax, sys_So_ol, sigma_plot_opt);
+        sigmaplot(ax, sys_So_cl, sigma_plot_opt);
+        legend('Open-Loop', 'Closed-Loop');
+        title(ax, '$S_o$');
+
+        ax = nexttile(4);
+        sigmaplot(ax, sys_GSo, sigma_plot_opt);
+        title(ax, '$GS_o$');
     end
 
+    % TODO Plot classical, disk and MIMO stability margins of designed
+    % controller over wind speeds for controller tuned at 16m/s and
+    % controller tuned for different wind speeds OUTPLOT
 
     % Plot robustness margins OUTPLOT
     figure;

@@ -314,7 +314,8 @@ if PLOTTING
     saveas(gcf, fullfile(fig_dir, 'Plant_scaled.png'));
 
     
-    % Plot Weighting matrices OUTPLOT
+    % Plot Weighting matrices OUTPLOT TODO plot range of Wu under
+    % examination
     figure;
     omega = logspace(-2, 4, 300);
     bodemag(Wu, We, omega, bode_plot_opt);

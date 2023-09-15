@@ -91,6 +91,7 @@ if REPROCESS_SWEEP
     
     
     % for each gridpoint
+    PI_ParameterSweep = repmat(struct(), size(K_grid, 1), 1 );
     parfor v = 1:size(K_grid, 1)    
         K_tmp = PI;
         % parameter sweep for PI based on diskmargin, hinfnorm of To for tracking,
@@ -109,11 +110,12 @@ if REPROCESS_SWEEP
         PI_ParameterSweep(v).Controller = K_tmp;
         K_tmp = ip_scaling(:, :, c_ws_idx) * K_tmp * inv(op_scaling(:, :, c_ws_idx));
         PI_ParameterSweep(v).Controller_scaled = K_tmp;
-        
-        SF_tmp = loopsens(-Plant(:, :, c_ws_idx), -K_tmp);
+        % QUESTION MANUEL does it make sense to sweep over unscaled
+        % controller here
+        SF_tmp = loopsens(-Plant(:, :, c_ws_idx), -PI_ParameterSweep(v).Controller);
 
         % compute wc with getGainCrossover( sys , gain )
-        % QUESTION how to compute crossover for PI controller
+        % QUESTION MANEUL how to compute crossover for PI controller
         % dci = dcgain(SF_tmp.Li);
         % dco = dcgain(SF_tmp.Lo);
         % wci = getGainCrossover(SF_tmp.Li, min(dci, [], 'all') / sqrt(2));

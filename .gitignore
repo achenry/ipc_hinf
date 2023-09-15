@@ -12,6 +12,7 @@ paper/
 *.asv
 ss_simulations/
 simulations/
+sl_outputs
 controller_simulations/
 postprocessing/.idea
 *.outb
