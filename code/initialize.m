@@ -71,7 +71,7 @@ if strcmp(username, 'aoifework')
     % FAST_SFunc location
     addpath(fullfile(fast_install_dir, 'lib'));
 
-    save_dir = fullfile(code_dir, 'matfiles');
+    mat_save_dir = fullfile(code_dir, 'matfiles');
 
 elseif strcmp(username, 'aohe7145')
     % scp -r /Users/aoifework/Documents/Research/ipc_tuning aohe7145@login.rc.colorado.edu:/projects/aohe7145/projects/ipc_tuning
@@ -84,7 +84,7 @@ elseif strcmp(username, 'aohe7145')
     fig_dir = fullfile(project_dir, 'paper', 'figs');
     toolbox_dir = fullfile(home_dir, 'toolboxes');
     code_dir = fullfile(project_dir, 'code');
-    save_dir = fullfile('/scratch/alpine/aohe7145/ipc_tuning', 'matfiles');
+    mat_save_dir = fullfile('/scratch/alpine/aohe7145/ipc_tuning', 'matfiles');
     % fast_install_dir = fullfile(home_dir, 'dev/WEIS/OpenFAST/install');
     
     FAST_runDirectory = fullfile(project_dir, 'simulations');
@@ -120,7 +120,7 @@ elseif strmp(username, 'manuel')
     addpath(fullfile('CHANGE ME', 'matlab-toolbox', 'MBC', 'Source')); % Need fx_mbc3 from this toolbox
     lin_models_dir = fullfile('CHANGE ME', 'linfiles');
 
-    save_dir = fullfile(code_dir, 'matfiles');
+    mat_save_dir = fullfile(code_dir, 'matfiles');
 end
 
 FAST_SimulinkModel_dir = simulink_model_dir;
@@ -145,8 +145,8 @@ autrun;
 
 
 
-if ~exist(save_dir, 'dir')
-    mkdir(save_dir);
+if ~exist(mat_save_dir, 'dir')
+    mkdir(mat_save_dir);
 end
 if ~exist(fig_dir, 'dir')
     mkdir(fig_dir);

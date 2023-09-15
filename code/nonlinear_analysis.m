@@ -98,11 +98,10 @@ end
 
 if STRUCT_PARAM_SWEEP || BASELINE_K
     % Load MIMO PI Parameter Sweep Gains and Controllers (in tunable Block form)
-    save_dir = fullfile(project_dir, 'code', 'matfiles');
     if STRUCT_PARAM_SWEEP
-        load(fullfile(save_dir, 'PI_ParameterSweep_case_list.mat'));
+        load(fullfile(mat_save_dir, 'PI_ParameterSweep_case_list.mat'));
     elseif BASELINE_K
-        load(fullfile(save_dir, 'PI_BaselineParameters_case_list.mat'));
+        load(fullfile(mat_save_dir, 'PI_BaselineParameters_case_list.mat'));
     end
 
     % Merge Wind and Controller Cases
@@ -125,9 +124,9 @@ if STRUCT_PARAM_SWEEP || BASELINE_K
 elseif OPTIMAL_K_COLLECTION || EXTREME_K_COLLECTION
     if OPTIMAL_K_COLLECTION
         % Load Controller Cases corresponding to scheduled full-order controllers
-        load(fullfile(save_dir, 'Optimal_Controllers_case_list.mat'));
+        load(fullfile(mat_save_dir, 'Optimal_Controllers_case_list.mat'));
     elseif EXTREME_K_COLLECTION
-        load(fullfile(save_dir, 'Extreme_Controllers_case_list.mat'));
+        load(fullfile(mat_save_dir, 'Extreme_Controllers_case_list.mat'));
     end
     % Merge Wind and Controller Cases
     case_idx = 1;
@@ -147,17 +146,17 @@ elseif OPTIMAL_K_COLLECTION || EXTREME_K_COLLECTION
     n_cases = case_idx - 1;
     case_name_list = arrayfun(@(n) ['case_', num2str(n)], 1:n_cases, 'UniformOutput', false);
     if OPTIMAL_K_COLLECTION
-        save(fullfile(save_dir, 'Optimal_Controllers_nonlinear_simulation_case_list.mat'), "case_list", '-v7.3');
+        save(fullfile(mat_save_dir, 'Optimal_Controllers_nonlinear_simulation_case_list.mat'), "case_list", '-v7.3');
     elseif EXTREME_K_COLLECTION
-        save(fullfile(save_dir, 'Extreme_Controllers_nonlinear_simulation_case_list.mat'), "case_list", '-v7.3');
+        save(fullfile(mat_save_dir, 'Extreme_Controllers_nonlinear_simulation_case_list.mat'), "case_list", '-v7.3');
     elseif BASELINE_K
-        save(fullfile(save_dir, 'Baseline_Controller_nonlinear_simulation_case_list.mat'), "case_list", '-v7.3');
+        save(fullfile(mat_save_dir, 'Baseline_Controller_nonlinear_simulation_case_list.mat'), "case_list", '-v7.3');
     end
 elseif ~USE_IPC % no ipc
     case_list = Wind_case_list;
     n_cases = Wind_n_cases;
     case_name_list = Wind_case_name_list;
-    save(fullfile(save_dir, 'noIPC_nonlinear_simulation_case_list.mat'), "case_list", '-v7.3');
+    save(fullfile(mat_save_dir, 'noIPC_nonlinear_simulation_case_list.mat'), "case_list", '-v7.3');
 
 end
 
@@ -286,8 +285,7 @@ if RUN_SIMS_PAR
             % LPV_CONTROLLER_WIND_SPEEDS == NONLPV_CONTROLLER_WIND_SPEED)), DT);
             
             SL_model_name = 'AD_SOAR_c7_V2f_c73_Clean_FullOrderControllerTest';
-            % K_IPC = c2d(case_list(case_idx).Controller_scaled, DT);
-            K_IPC = case_list(case_idx).Controller_scaled;
+            K_IPC = c2d(case_list(case_idx).Controller, DT);
             sim_inputs(case_idx) = Simulink.SimulationInput(SL_model_name);
             sim_inputs(case_idx) = sim_inputs(case_idx).setVariable('K_IPC', K_IPC);
         elseif OPTIMAL_K_COLLECTION || EXTREME_K_COLLECTION
@@ -545,9 +543,9 @@ if EXTREME_K_COLLECTION || OPTIMAL_K_COLLECTION
     % Make table comparing controllers
     if OPTIMAL_K_COLLECTION || EXTREME_K_COLLECTION
         if OPTIMAL_K_COLLECTION
-            load(fullfile(save_dir, 'Optimal_Controllers_case_table.mat'));
+            load(fullfile(mat_save_dir, 'Optimal_Controllers_case_table.mat'));
         elseif EXTREME_K_COLLECTION
-            load(fullfile(save_dir, 'Extreme_Controllers_case_table.mat'));
+            load(fullfile(mat_save_dir, 'Extreme_Controllers_case_table.mat'));
         end
     
         op = cell(length(sim_out_list.controller), 1);
@@ -596,7 +594,7 @@ if EXTREME_K_COLLECTION || OPTIMAL_K_COLLECTION
         
     
     elseif STRUCT_PARAM_SWEEP
-        load(fullfile(save_dir, 'PI_ParameterSweep_redtable.mat'));
+        load(fullfile(mat_save_dir, 'PI_ParameterSweep_redtable.mat'));
         op = cell(length(sim_out_list.controller), 1);
         [op{:}] = sim_out_list.controller.ADC;
         PI_ParameterSweep_redtable.("ADC") = [sim_out_list.noipc(1).ADC; cell2mat(op)];
@@ -739,7 +737,7 @@ for l = dqOutList'
         dq_op_arr = [dq_op_arr, l{1}];
     end
 end
-CoMPUTE_FFT = 0;
+COMPUTE_FFT = 1;
 if COMPUTE_FFT
     % for each simulation
     blade_op_indices = [];
@@ -754,12 +752,16 @@ if COMPUTE_FFT
     for c = 1:length(sim_out_list.controller)
         sprintf(['Processing Simulation ' num2str(c)]);
         % fetch time-series of list of loads of concern
-        [Channels, ChanName, ChanUnit, FileID, DescStr] = ReadFASTbinary(strrep(sim_out_list(c).FAST_InputFileName, 'fst', 'outb'), 'n');
-        op_data_blade_controller = sim_out_list.controller(c).OutData.signals.values(cut_transients/DT + 1:end, blade_op_indices);
-        op_data_cdq_controller = sim_out_list.controller(c).OutData.signals.dqValues(cut_transients/DT + 1:end, blade_op_indices);
+        % [Channels, ChanName, ChanUnit, FileID, DescStr] = ReadFASTbinary(strrep(sim_out_list(c).FAST_InputFileName, 'fst', 'outb'), 'n');
+        values = load(sim_out_list.controller(c).save_fn);
+        values = values.OutData.Data;
+        dqValues = mbcTransformOutData(values, OutList); 
+
+        op_data_blade_controller = values(cut_transients/DT + 1:end, blade_op_indices);
+        op_data_cdq_controller = dqValues(cut_transients/DT + 1:end, blade_op_indices);
         
-        op_data_blade_noipc = sim_out_list.noipc(1).OutData.signals.values(cut_transients/DT + 1:end, blade_op_indices);
-        op_data_cdq_noipc = sim_out_list.noipc(1).OutData.signals.dqValues(cut_transients/DT + 1:end, blade_op_indices);
+        op_data_blade_noipc = values(cut_transients/DT + 1:end, blade_op_indices);
+        op_data_cdq_noipc = dqValues(cut_transients/DT + 1:end, blade_op_indices);
 
         % compute fft for rotating domain corresponding to Blade 1
         fft_blade_controller(:, :, c) = fft(op_data_blade_controller, size(op_data_blade_controller, 1), 1);
@@ -809,17 +811,18 @@ omega_1P_Hz = Parameters.Turbine.wr_rated * (2*pi/60) * (1/(2*pi));
 % each load for Blade/CDQ coords
 if 0
 
-figure;
-tcf = tiledlayout('flow');
-plotSpectra(fft_blade.controller, 'psd', DT, omega_1P_Hz, HARMONICS, blade_op_arr); % QUESTION why is frequency range limited to 6p?
-plotSpectra(fft_blade.noipc, 'psd', DT, omega_1P_Hz, HARMONICS, blade_op_arr); 
-% plotSpectra(fft_blade, 'fft', DT, omega_1P_Hz, HARMONICS, blade_op_arr);
+    figure;
+    tcf = tiledlayout('flow');
+    plotSpectra(fft_blade.controller, 'psd', DT, omega_1P_Hz, HARMONICS, blade_op_arr); % QUESTION why is frequency range limited to 6p?
+    plotSpectra(fft_blade.noipc, 'psd', DT, omega_1P_Hz, HARMONICS, blade_op_arr); 
+    % plotSpectra(fft_blade, 'fft', DT, omega_1P_Hz, HARMONICS, blade_op_arr);
+    
+    figure;
+    tcf = tiledlayout('flow');
+    plotSpectra(fft_cdq.controller, 'psd', DT, omega_1P_Hz, HARMONICS, dq_op_arr);
+    plotSpectra(fft_cdq.noipc, 'psd', DT, omega_1P_Hz, HARMONICS, dq_op_arr);
+    % plotSpectra(fft_cdq, 'fft', DT, omega_1P_Hz, HARMONICS, dq_op_arr);
 
-figure;
-tcf = tiledlayout('flow');
-plotSpectra(fft_cdq.controller, 'psd', DT, omega_1P_Hz, HARMONICS, dq_op_arr);
-plotSpectra(fft_cdq.noipc, 'psd', DT, omega_1P_Hz, HARMONICS, dq_op_arr);
-% plotSpectra(fft_cdq, 'fft', DT, omega_1P_Hz, HARMONICS, dq_op_arr);
 end
 
 [~, ~, Peaks_noipc] = computeFFTPeaks(...
@@ -896,18 +899,22 @@ abs_mean_varnames = {};
 load(fullfile(fastRunner.FAST_directory, 'op_absmax'));
 
 for c = 1:length(sim_out_list)
-    [Channels, ChanName, ChanUnit, FileID, DescStr] = ReadFASTbinary(strrep(sim_out_list(c).FAST_InputFileName, 'fst', 'outb'), 'n');
-    ws = mean(getData(sim_out_list(c).OutData.signals.values, OutList, 'Wind1VelX'));
+    % [Channels, ChanName, ChanUnit, FileID, DescStr] = ReadFASTbinary(strrep(sim_out_list(c).FAST_InputFileName, 'fst', 'outb'), 'n');
+    values = load(sim_out_list.controller(c).save_fn);
+    values = values.OutData.Data;
+    dqValues = mbcTransformOutData(values, OutList); 
+    
+    ws = mean(getData(values, OutList, 'Wind1VelX'));
 
     nanvals = zeros(length(OutList_op), 1); % ismember(OutList_op, {'GenPwr'});%all(pre_dist.data == 0);
 
     if RUN_OL_DQ
-        pre_dist.data = sim_out_list(c).OutData.signals.dqNormalizedValues(...
+        pre_dist.data = dqNormalizedValues(...
             BaselineSteadyState / DT, inc_outdata_indices);
 
-        post_dist.data.d = sim_out_list(c).OutData.signals.dqNormalizedValues(...
+        post_dist.data.d = dqNormalizedValues(...
         dSteadyState / DT, inc_outdata_indices);
-        post_dist.data.q = sim_out_list(c).OutData.signals.dqNormalizedValues(...
+        post_dist.data.q = dqNormalizedValues(...
             qSteadyState / DT, inc_outdata_indices);
 
         % compute mean over all rows (time) for each column (output) before/after RampStart    
@@ -958,11 +965,15 @@ for c = 1:length(sim_out_list)
         'RowNames', OutList_op(~nanvals))];
 
     elseif RUN_OL_BLADE
-        [Channels, ChanName, ChanUnit, FileID, DescStr] = ReadFASTbinary(strrep(sim_out_list(c).FAST_InputFileName, 'fst', 'outb'), 'n');
-        pre_dist.data = sim_out_list(c).OutData.signals.normalizedValues(...
+        % [Channels, ChanName, ChanUnit, FileID, DescStr] = ReadFASTbinary(strrep(sim_out_list(c).FAST_InputFileName, 'fst', 'outb'), 'n');
+        values = load(sim_out_list.controller(c).save_fn);
+        values = values.OutData.Data;
+        dqValues = mbcTransformOutData(values, OutList); 
+        
+        pre_dist.data = normalizedValues(...
             BaselineSteadyState / DT, inc_outdata_indices);
 
-        post_dist.data = sim_out_list(c).OutData.signals.normalizedValues(...
+        post_dist.data = normalizedValues(...
         b1SteadyState / DT, inc_outdata_indices);
 
         % compute mean over all rows (time) for each column (output) before/after RampStart    

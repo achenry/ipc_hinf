@@ -244,20 +244,20 @@ if REPROCESS_SWEEP
     
     
     if BASELINE_K
-        save(fullfile(save_dir, 'PI_BaselineParameters.mat'), "PI_ParameterSweep");
-        save(fullfile(save_dir, 'PI_BaselineParameters_table.mat'), "PI_ParameterSweep_table");
+        save(fullfile(mat_save_dir, 'PI_BaselineParameters.mat'), "PI_ParameterSweep");
+        save(fullfile(mat_save_dir, 'PI_BaselineParameters_table.mat'), "PI_ParameterSweep_table");
     elseif STRUCT_PARAM_SWEEP
-        save(fullfile(save_dir, 'PI_ParameterSweep.mat'), "PI_ParameterSweep");
-        save(fullfile(save_dir, 'PI_ParameterSweep_table.mat'), "PI_ParameterSweep_table");
+        save(fullfile(mat_save_dir, 'PI_ParameterSweep.mat'), "PI_ParameterSweep");
+        save(fullfile(mat_save_dir, 'PI_ParameterSweep_table.mat'), "PI_ParameterSweep_table");
     end
 
 else
     if BASELINE_K
-        load(fullfile(save_dir, 'PI_BaselineParameters.mat'));
-        load(fullfile(save_dir, 'PI_BaselineParameters_table.mat'));
+        load(fullfile(mat_save_dir, 'PI_BaselineParameters.mat'));
+        load(fullfile(mat_save_dir, 'PI_BaselineParameters_table.mat'));
     elseif STRUCT_PARAM_SWEEP
-        load(fullfile(save_dir, 'PI_ParameterSweep.mat'));
-        load(fullfile(save_dir, 'PI_ParameterSweep_table.mat'));
+        load(fullfile(mat_save_dir, 'PI_ParameterSweep.mat'));
+        load(fullfile(mat_save_dir, 'PI_ParameterSweep_table.mat'));
     end
 end
 
@@ -347,19 +347,19 @@ if 1
     PI_ParameterSweep_redtable = [num2cell(zeros(1, size(PI_ParameterSweep_redtable, 2))); PI_ParameterSweep_redtable]; % NoIPC case
 
     if BASELINE_K
-        save(fullfile(save_dir, 'PI_BaselineParameters_case_list.mat'), "PI_ParameterSweep_case_list");
-        save(fullfile(save_dir, 'PI_BaselineParameters_redtable.mat'), "PI_ParameterSweep_redtable");
+        save(fullfile(mat_save_dir, 'PI_BaselineParameters_case_list.mat'), "PI_ParameterSweep_case_list");
+        save(fullfile(mat_save_dir, 'PI_BaselineParameters_redtable.mat'), "PI_ParameterSweep_redtable");
     elseif STRUCT_PARAM_SWEEP
-        save(fullfile(save_dir, 'PI_ParameterSweep_case_list.mat'), "PI_ParameterSweep_case_list");
-        save(fullfile(save_dir, 'PI_ParameterSweep_redtable.mat'), "PI_ParameterSweep_redtable");
+        save(fullfile(mat_save_dir, 'PI_ParameterSweep_case_list.mat'), "PI_ParameterSweep_case_list");
+        save(fullfile(mat_save_dir, 'PI_ParameterSweep_redtable.mat'), "PI_ParameterSweep_redtable");
     end
 else
     if BASELINE_K
-        load(fullfile(save_dir, 'PI_BaselineParameters_case_list.mat'));
-        load(fullfile(save_dir, 'PI_BaselineParameters_redtable.mat'));        
+        load(fullfile(mat_save_dir, 'PI_BaselineParameters_case_list.mat'));
+        load(fullfile(mat_save_dir, 'PI_BaselineParameters_redtable.mat'));        
     elseif STRUCT_PARAM_SWEEP
-        load(fullfile(save_dir, 'PI_ParameterSweep_case_list.mat'));
-        load(fullfile(save_dir, 'PI_ParameterSweep_redtable.mat'));
+        load(fullfile(mat_save_dir, 'PI_ParameterSweep_case_list.mat'));
+        load(fullfile(mat_save_dir, 'PI_ParameterSweep_redtable.mat'));
     end
 end
 
@@ -508,8 +508,8 @@ Sweep.Baseline.Ki_offdiag = Ki_offdiag.Value;
 % Sweep.Baseline.fac_2_diag = fac_2_diag.Value;
 % Sweep.Baseline.fac_2_offdiag = fac_2_offdiag.Value;
 
-approx_Kp = load(fullfile(save_dir, 'p_ctrl_range.mat'));
-approx_Ki = load(fullfile(save_dir, 'i_ctrl_range.mat'));
+approx_Kp = load(fullfile(mat_save_dir, 'p_ctrl_range.mat'));
+approx_Ki = load(fullfile(mat_save_dir, 'i_ctrl_range.mat'));
 
 Sweep.Vary.Kp_diag = linspace(1e-8, 1e-4, 10); % linspace(approx_Kp.KD_range(1), approx_Kp.KD_range(2), 5);
 Sweep.Vary.Kp_offdiag = linspace(1e-7, 1e-3, 10); % linspace(approx_Kp.KQD_range(1), approx_Kp.KQD_range(2), 5);
@@ -808,7 +808,7 @@ step0_tab.Row = {'$M_d$ Dist $\rightarrow$ $M_d$ Error', ...
 step0_tab(:, '$e_{ss}$') = table([ess0(1,1); ess0(2, 1); ess0(1, 2); ess0(2, 2)]);
 
 
-table2latex(step0_tab, fullfile(results_save_dir, 'step0.tex'));
+table2latex(step0_tab, fullfile(results_mat_save_dir, 'step0.tex'));
 
 [Y, T] = step(CL_full_tuned);
 ess_full_tuned = Y(end, [3, 4], [1, 2]);
@@ -828,7 +828,7 @@ step_full_tuned_tab.Row = {'$M_d$ Dist $\rightarrow$ $M_d$ Error', ...
                  '$M_q$ Dist $\rightarrow$ $M_d$ Error', ...
                  '$M_q$ Dist $\rightarrow$ $M_q$ Error'};
 step_full_tuned_tab(:, '$e_{ss}$') = table([ess_full_tuned(1,1); ess_full_tuned(2, 1); ess_full_tuned(1, 2); ess_full_tuned(2, 2)]);
-table2latex(step_full_tuned_tab, fullfile(results_save_dir, 'step_full_tuned_tab.tex'));
+table2latex(step_full_tuned_tab, fullfile(results_mat_save_dir, 'step_full_tuned_tab.tex'));
 
 [Y, T] = step(CL_struct_tuned);
 ess_struct_tuned = Y(end, [3, 4], [1, 2]);
@@ -848,7 +848,7 @@ step_struct_tuned_tab.Row = {'$M_d$ Dist $\rightarrow$ $M_d$ Error', ...
                  '$M_q$ Dist $\rightarrow$ $M_d$ Error', ...
                  '$M_q$ Dist $\rightarrow$ $M_q$ Error'};
 step_struct_tuned_tab(:, '$e_{ss}$') = table([ess_struct_tuned(1,1); ess_struct_tuned(2, 1); ess_struct_tuned(1, 2); ess_struct_tuned(2, 2)]);
-table2latex(step_struct_tuned_tab, fullfile(results_save_dir, 'step_struct_tuned_tab.tex'));
+table2latex(step_struct_tuned_tab, fullfile(results_mat_save_dir, 'step_struct_tuned_tab.tex'));
 
 % [DM_L0, MM_L0] = diskmargin(-L0);
 % [DM_L_full_tuned, MM_L_full_tuned] = diskmargin(-L_full_tuned);
@@ -860,7 +860,7 @@ table2latex(step_struct_tuned_tab, fullfile(results_save_dir, 'step_struct_tuned
 %     DM_L_full_tuned(1).DiskMargin, DM_L_full_tuned(2).DiskMargin], ...
 %     'VariableNames', {'RootMycD Disk Margin', 'RootMycQ Disk Margin'}, ...
 %     'RowNames', {'Baseline', 'Structured', 'Full-Order'});
-% table2latex(DM_tab, fullfile(results_save_dir, 'DM_tab.tex'));
+% table2latex(DM_tab, fullfile(results_mat_save_dir, 'DM_tab.tex'));
 
 end
 

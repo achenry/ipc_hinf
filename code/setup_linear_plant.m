@@ -176,10 +176,10 @@ else
     
     end
     
-    % save(fullfile(save_dir, 'xop_arr'), 'xop_arr');
-    % save(fullfile(save_dir, 'xop_red_arr'), 'xop_red_arr');
-    save(fullfile(save_dir, 'Plant'), 'Plant');
-    save(fullfile(save_dir, 'Plant_red'), 'Plant_red');
+    % save(fullfile(mat_save_dir, 'xop_arr'), 'xop_arr');
+    % save(fullfile(mat_save_dir, 'xop_red_arr'), 'xop_red_arr');
+    save(fullfile(mat_save_dir, 'Plant'), 'Plant');
+    save(fullfile(mat_save_dir, 'Plant_red'), 'Plant_red');
 end
 
 %% PLOTTING LINEAR MODELS
