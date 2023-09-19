@@ -1,251 +1,2593 @@
 
 Case 1
- W1 = 1 with notch  W2 = 1 ->  Wu = 0.1 We = 10
+ W1 = 1 W2 = 1 ->  Wu = 10 We = 10
 Case 2
- W1 = 1 with notch  W2 = 1 ->  Wu = 0.1 We = 8
+ W1 = 1 W2 = 1 ->  Wu = 8 We = 10
 Case 3
- W1 = 1 with notch  W2 = 1 ->  Wu = 0.1 We = 4
+ W1 = 1 W2 = 1 ->  Wu = 4 We = 10
 Case 4
- W1 = 1 with notch  W2 = 1 ->  Wu = 0.1 We = 2
+ W1 = 1 W2 = 1 ->  Wu = 2 We = 10
 Case 5
- W1 = 1 with notch  W2 = 1 ->  Wu = 0.1 We = 1
+ W1 = 1 W2 = 1 ->  Wu = 1 We = 10
 Case 6
- W1 = 0.8 with notch  W2 = 1 ->  Wu = 0.1 We = 10
+ W1 = 1 W2 = 1 ->  Wu = 0.5 We = 10
 Case 7
- W1 = 0.8 with notch  W2 = 1 ->  Wu = 0.1 We = 8
+ W1 = 1 W2 = 1 ->  Wu = 10 We = 8
 Case 8
- W1 = 0.8 with notch  W2 = 1 ->  Wu = 0.1 We = 4
+ W1 = 1 W2 = 1 ->  Wu = 8 We = 8
 Case 9
- W1 = 0.8 with notch  W2 = 1 ->  Wu = 0.1 We = 2
+ W1 = 1 W2 = 1 ->  Wu = 4 We = 8
 Case 10
- W1 = 0.8 with notch  W2 = 1 ->  Wu = 0.1 We = 1
+ W1 = 1 W2 = 1 ->  Wu = 2 We = 8
 Case 11
- W1 = 0.4 with notch  W2 = 1 ->  Wu = 0.1 We = 10
+ W1 = 1 W2 = 1 ->  Wu = 1 We = 8
 Case 12
- W1 = 0.4 with notch  W2 = 1 ->  Wu = 0.1 We = 8
+ W1 = 1 W2 = 1 ->  Wu = 0.5 We = 8
 Case 13
- W1 = 0.4 with notch  W2 = 1 ->  Wu = 0.1 We = 4
+ W1 = 1 W2 = 1 ->  Wu = 10 We = 4
 Case 14
- W1 = 0.4 with notch  W2 = 1 ->  Wu = 0.1 We = 2
+ W1 = 1 W2 = 1 ->  Wu = 8 We = 4
 Case 15
- W1 = 0.4 with notch  W2 = 1 ->  Wu = 0.1 We = 1
+ W1 = 1 W2 = 1 ->  Wu = 4 We = 4
 Case 16
- W1 = 0.2 with notch  W2 = 1 ->  Wu = 0.1 We = 10
+ W1 = 1 W2 = 1 ->  Wu = 2 We = 4
 Case 17
- W1 = 0.2 with notch  W2 = 1 ->  Wu = 0.1 We = 8
+ W1 = 1 W2 = 1 ->  Wu = 1 We = 4
 Case 18
- W1 = 0.2 with notch  W2 = 1 ->  Wu = 0.1 We = 4
+ W1 = 1 W2 = 1 ->  Wu = 0.5 We = 4
 Case 19
- W1 = 0.2 with notch  W2 = 1 ->  Wu = 0.1 We = 2
+ W1 = 1 W2 = 1 ->  Wu = 10 We = 2
 Case 20
- W1 = 0.2 with notch  W2 = 1 ->  Wu = 0.1 We = 1
+ W1 = 1 W2 = 1 ->  Wu = 8 We = 2
 Case 21
- W1 = 0.1 with notch  W2 = 1 ->  Wu = 0.1 We = 10
+ W1 = 1 W2 = 1 ->  Wu = 4 We = 2
 Case 22
- W1 = 0.1 with notch  W2 = 1 ->  Wu = 0.1 We = 8
+ W1 = 1 W2 = 1 ->  Wu = 2 We = 2
 Case 23
- W1 = 0.1 with notch  W2 = 1 ->  Wu = 0.1 We = 4
+ W1 = 1 W2 = 1 ->  Wu = 1 We = 2
 Case 24
- W1 = 0.1 with notch  W2 = 1 ->  Wu = 0.1 We = 2
+ W1 = 1 W2 = 1 ->  Wu = 0.5 We = 2
 Case 25
- W1 = 0.1 with notch  W2 = 1 ->  Wu = 0.1 We = 1
+ W1 = 1 W2 = 1 ->  Wu = 10 We = 1
 Case 26
- W1 = 1 with notch  W2 = 0.8 ->  Wu = 0.1 We = 10
+ W1 = 1 W2 = 1 ->  Wu = 8 We = 1
 Case 27
- W1 = 1 with notch  W2 = 0.8 ->  Wu = 0.1 We = 8
+ W1 = 1 W2 = 1 ->  Wu = 4 We = 1
 Case 28
- W1 = 1 with notch  W2 = 0.8 ->  Wu = 0.1 We = 4
+ W1 = 1 W2 = 1 ->  Wu = 2 We = 1
 Case 29
- W1 = 1 with notch  W2 = 0.8 ->  Wu = 0.1 We = 2
+ W1 = 1 W2 = 1 ->  Wu = 1 We = 1
 Case 30
- W1 = 1 with notch  W2 = 0.8 ->  Wu = 0.1 We = 1
+ W1 = 1 W2 = 1 ->  Wu = 0.5 We = 1
 Case 31
- W1 = 0.8 with notch  W2 = 0.8 ->  Wu = 0.1 We = 10
+ W1 = 1 W2 = 1 ->  Wu = 10 We = 0.5
 Case 32
- W1 = 0.8 with notch  W2 = 0.8 ->  Wu = 0.1 We = 8
+ W1 = 1 W2 = 1 ->  Wu = 8 We = 0.5
 Case 33
- W1 = 0.8 with notch  W2 = 0.8 ->  Wu = 0.1 We = 4
+ W1 = 1 W2 = 1 ->  Wu = 4 We = 0.5
 Case 34
- W1 = 0.8 with notch  W2 = 0.8 ->  Wu = 0.1 We = 2
+ W1 = 1 W2 = 1 ->  Wu = 2 We = 0.5
 Case 35
- W1 = 0.8 with notch  W2 = 0.8 ->  Wu = 0.1 We = 1
+ W1 = 1 W2 = 1 ->  Wu = 1 We = 0.5
 Case 36
- W1 = 0.4 with notch  W2 = 0.8 ->  Wu = 0.1 We = 10
+ W1 = 1 W2 = 1 ->  Wu = 0.5 We = 0.5
 Case 37
- W1 = 0.4 with notch  W2 = 0.8 ->  Wu = 0.1 We = 8
+ W1 = 0.8 W2 = 1 ->  Wu = 10 We = 10
 Case 38
- W1 = 0.4 with notch  W2 = 0.8 ->  Wu = 0.1 We = 4
+ W1 = 0.8 W2 = 1 ->  Wu = 8 We = 10
 Case 39
- W1 = 0.4 with notch  W2 = 0.8 ->  Wu = 0.1 We = 2
+ W1 = 0.8 W2 = 1 ->  Wu = 4 We = 10
 Case 40
- W1 = 0.4 with notch  W2 = 0.8 ->  Wu = 0.1 We = 1
+ W1 = 0.8 W2 = 1 ->  Wu = 2 We = 10
 Case 41
- W1 = 0.2 with notch  W2 = 0.8 ->  Wu = 0.1 We = 10
+ W1 = 0.8 W2 = 1 ->  Wu = 1 We = 10
 Case 42
- W1 = 0.2 with notch  W2 = 0.8 ->  Wu = 0.1 We = 8
+ W1 = 0.8 W2 = 1 ->  Wu = 0.5 We = 10
 Case 43
- W1 = 0.2 with notch  W2 = 0.8 ->  Wu = 0.1 We = 4
+ W1 = 0.8 W2 = 1 ->  Wu = 10 We = 8
 Case 44
- W1 = 0.2 with notch  W2 = 0.8 ->  Wu = 0.1 We = 2
+ W1 = 0.8 W2 = 1 ->  Wu = 8 We = 8
 Case 45
- W1 = 0.2 with notch  W2 = 0.8 ->  Wu = 0.1 We = 1
+ W1 = 0.8 W2 = 1 ->  Wu = 4 We = 8
 Case 46
- W1 = 0.1 with notch  W2 = 0.8 ->  Wu = 0.1 We = 10
+ W1 = 0.8 W2 = 1 ->  Wu = 2 We = 8
 Case 47
- W1 = 0.1 with notch  W2 = 0.8 ->  Wu = 0.1 We = 8
+ W1 = 0.8 W2 = 1 ->  Wu = 1 We = 8
 Case 48
- W1 = 0.1 with notch  W2 = 0.8 ->  Wu = 0.1 We = 4
+ W1 = 0.8 W2 = 1 ->  Wu = 0.5 We = 8
 Case 49
- W1 = 0.1 with notch  W2 = 0.8 ->  Wu = 0.1 We = 2
+ W1 = 0.8 W2 = 1 ->  Wu = 10 We = 4
 Case 50
- W1 = 0.1 with notch  W2 = 0.8 ->  Wu = 0.1 We = 1
+ W1 = 0.8 W2 = 1 ->  Wu = 8 We = 4
 Case 51
- W1 = 1 with notch  W2 = 0.4 ->  Wu = 0.1 We = 10
+ W1 = 0.8 W2 = 1 ->  Wu = 4 We = 4
 Case 52
- W1 = 1 with notch  W2 = 0.4 ->  Wu = 0.1 We = 8
+ W1 = 0.8 W2 = 1 ->  Wu = 2 We = 4
 Case 53
- W1 = 1 with notch  W2 = 0.4 ->  Wu = 0.1 We = 4
+ W1 = 0.8 W2 = 1 ->  Wu = 1 We = 4
 Case 54
- W1 = 1 with notch  W2 = 0.4 ->  Wu = 0.1 We = 2
+ W1 = 0.8 W2 = 1 ->  Wu = 0.5 We = 4
 Case 55
- W1 = 1 with notch  W2 = 0.4 ->  Wu = 0.1 We = 1
+ W1 = 0.8 W2 = 1 ->  Wu = 10 We = 2
 Case 56
- W1 = 0.8 with notch  W2 = 0.4 ->  Wu = 0.1 We = 10
+ W1 = 0.8 W2 = 1 ->  Wu = 8 We = 2
 Case 57
- W1 = 0.8 with notch  W2 = 0.4 ->  Wu = 0.1 We = 8
+ W1 = 0.8 W2 = 1 ->  Wu = 4 We = 2
 Case 58
- W1 = 0.8 with notch  W2 = 0.4 ->  Wu = 0.1 We = 4
+ W1 = 0.8 W2 = 1 ->  Wu = 2 We = 2
 Case 59
- W1 = 0.8 with notch  W2 = 0.4 ->  Wu = 0.1 We = 2
+ W1 = 0.8 W2 = 1 ->  Wu = 1 We = 2
 Case 60
- W1 = 0.8 with notch  W2 = 0.4 ->  Wu = 0.1 We = 1
+ W1 = 0.8 W2 = 1 ->  Wu = 0.5 We = 2
 Case 61
- W1 = 0.4 with notch  W2 = 0.4 ->  Wu = 0.1 We = 10
+ W1 = 0.8 W2 = 1 ->  Wu = 10 We = 1
 Case 62
- W1 = 0.4 with notch  W2 = 0.4 ->  Wu = 0.1 We = 8
+ W1 = 0.8 W2 = 1 ->  Wu = 8 We = 1
 Case 63
- W1 = 0.4 with notch  W2 = 0.4 ->  Wu = 0.1 We = 4
+ W1 = 0.8 W2 = 1 ->  Wu = 4 We = 1
 Case 64
- W1 = 0.4 with notch  W2 = 0.4 ->  Wu = 0.1 We = 2
+ W1 = 0.8 W2 = 1 ->  Wu = 2 We = 1
 Case 65
- W1 = 0.4 with notch  W2 = 0.4 ->  Wu = 0.1 We = 1
+ W1 = 0.8 W2 = 1 ->  Wu = 1 We = 1
 Case 66
- W1 = 0.2 with notch  W2 = 0.4 ->  Wu = 0.1 We = 10
+ W1 = 0.8 W2 = 1 ->  Wu = 0.5 We = 1
 Case 67
- W1 = 0.2 with notch  W2 = 0.4 ->  Wu = 0.1 We = 8
+ W1 = 0.8 W2 = 1 ->  Wu = 10 We = 0.5
 Case 68
- W1 = 0.2 with notch  W2 = 0.4 ->  Wu = 0.1 We = 4
+ W1 = 0.8 W2 = 1 ->  Wu = 8 We = 0.5
 Case 69
- W1 = 0.2 with notch  W2 = 0.4 ->  Wu = 0.1 We = 2
+ W1 = 0.8 W2 = 1 ->  Wu = 4 We = 0.5
 Case 70
- W1 = 0.2 with notch  W2 = 0.4 ->  Wu = 0.1 We = 1
+ W1 = 0.8 W2 = 1 ->  Wu = 2 We = 0.5
 Case 71
- W1 = 0.1 with notch  W2 = 0.4 ->  Wu = 0.1 We = 10
+ W1 = 0.8 W2 = 1 ->  Wu = 1 We = 0.5
 Case 72
- W1 = 0.1 with notch  W2 = 0.4 ->  Wu = 0.1 We = 8
+ W1 = 0.8 W2 = 1 ->  Wu = 0.5 We = 0.5
 Case 73
- W1 = 0.1 with notch  W2 = 0.4 ->  Wu = 0.1 We = 4
+ W1 = 0.4 W2 = 1 ->  Wu = 10 We = 10
 Case 74
- W1 = 0.1 with notch  W2 = 0.4 ->  Wu = 0.1 We = 2
+ W1 = 0.4 W2 = 1 ->  Wu = 8 We = 10
 Case 75
- W1 = 0.1 with notch  W2 = 0.4 ->  Wu = 0.1 We = 1
+ W1 = 0.4 W2 = 1 ->  Wu = 4 We = 10
 Case 76
- W1 = 1 with notch  W2 = 0.2 ->  Wu = 0.1 We = 10
+ W1 = 0.4 W2 = 1 ->  Wu = 2 We = 10
 Case 77
- W1 = 1 with notch  W2 = 0.2 ->  Wu = 0.1 We = 8
+ W1 = 0.4 W2 = 1 ->  Wu = 1 We = 10
 Case 78
- W1 = 1 with notch  W2 = 0.2 ->  Wu = 0.1 We = 4
+ W1 = 0.4 W2 = 1 ->  Wu = 0.5 We = 10
 Case 79
- W1 = 1 with notch  W2 = 0.2 ->  Wu = 0.1 We = 2
+ W1 = 0.4 W2 = 1 ->  Wu = 10 We = 8
 Case 80
- W1 = 1 with notch  W2 = 0.2 ->  Wu = 0.1 We = 1
+ W1 = 0.4 W2 = 1 ->  Wu = 8 We = 8
 Case 81
- W1 = 0.8 with notch  W2 = 0.2 ->  Wu = 0.1 We = 10
+ W1 = 0.4 W2 = 1 ->  Wu = 4 We = 8
 Case 82
- W1 = 0.8 with notch  W2 = 0.2 ->  Wu = 0.1 We = 8
+ W1 = 0.4 W2 = 1 ->  Wu = 2 We = 8
 Case 83
- W1 = 0.8 with notch  W2 = 0.2 ->  Wu = 0.1 We = 4
+ W1 = 0.4 W2 = 1 ->  Wu = 1 We = 8
 Case 84
- W1 = 0.8 with notch  W2 = 0.2 ->  Wu = 0.1 We = 2
+ W1 = 0.4 W2 = 1 ->  Wu = 0.5 We = 8
 Case 85
- W1 = 0.8 with notch  W2 = 0.2 ->  Wu = 0.1 We = 1
+ W1 = 0.4 W2 = 1 ->  Wu = 10 We = 4
 Case 86
- W1 = 0.4 with notch  W2 = 0.2 ->  Wu = 0.1 We = 10
+ W1 = 0.4 W2 = 1 ->  Wu = 8 We = 4
 Case 87
- W1 = 0.4 with notch  W2 = 0.2 ->  Wu = 0.1 We = 8
+ W1 = 0.4 W2 = 1 ->  Wu = 4 We = 4
 Case 88
- W1 = 0.4 with notch  W2 = 0.2 ->  Wu = 0.1 We = 4
+ W1 = 0.4 W2 = 1 ->  Wu = 2 We = 4
 Case 89
- W1 = 0.4 with notch  W2 = 0.2 ->  Wu = 0.1 We = 2
+ W1 = 0.4 W2 = 1 ->  Wu = 1 We = 4
 Case 90
- W1 = 0.4 with notch  W2 = 0.2 ->  Wu = 0.1 We = 1
+ W1 = 0.4 W2 = 1 ->  Wu = 0.5 We = 4
 Case 91
- W1 = 0.2 with notch  W2 = 0.2 ->  Wu = 0.1 We = 10
+ W1 = 0.4 W2 = 1 ->  Wu = 10 We = 2
 Case 92
- W1 = 0.2 with notch  W2 = 0.2 ->  Wu = 0.1 We = 8
+ W1 = 0.4 W2 = 1 ->  Wu = 8 We = 2
 Case 93
- W1 = 0.2 with notch  W2 = 0.2 ->  Wu = 0.1 We = 4
+ W1 = 0.4 W2 = 1 ->  Wu = 4 We = 2
 Case 94
- W1 = 0.2 with notch  W2 = 0.2 ->  Wu = 0.1 We = 2
+ W1 = 0.4 W2 = 1 ->  Wu = 2 We = 2
 Case 95
- W1 = 0.2 with notch  W2 = 0.2 ->  Wu = 0.1 We = 1
+ W1 = 0.4 W2 = 1 ->  Wu = 1 We = 2
 Case 96
- W1 = 0.1 with notch  W2 = 0.2 ->  Wu = 0.1 We = 10
+ W1 = 0.4 W2 = 1 ->  Wu = 0.5 We = 2
 Case 97
- W1 = 0.1 with notch  W2 = 0.2 ->  Wu = 0.1 We = 8
+ W1 = 0.4 W2 = 1 ->  Wu = 10 We = 1
 Case 98
- W1 = 0.1 with notch  W2 = 0.2 ->  Wu = 0.1 We = 4
+ W1 = 0.4 W2 = 1 ->  Wu = 8 We = 1
 Case 99
- W1 = 0.1 with notch  W2 = 0.2 ->  Wu = 0.1 We = 2
+ W1 = 0.4 W2 = 1 ->  Wu = 4 We = 1
 Case 100
- W1 = 0.1 with notch  W2 = 0.2 ->  Wu = 0.1 We = 1
+ W1 = 0.4 W2 = 1 ->  Wu = 2 We = 1
 Case 101
- W1 = 1 with notch  W2 = 0.1 ->  Wu = 0.1 We = 10
+ W1 = 0.4 W2 = 1 ->  Wu = 1 We = 1
 Case 102
- W1 = 1 with notch  W2 = 0.1 ->  Wu = 0.1 We = 8
+ W1 = 0.4 W2 = 1 ->  Wu = 0.5 We = 1
 Case 103
- W1 = 1 with notch  W2 = 0.1 ->  Wu = 0.1 We = 4
+ W1 = 0.4 W2 = 1 ->  Wu = 10 We = 0.5
 Case 104
- W1 = 1 with notch  W2 = 0.1 ->  Wu = 0.1 We = 2
+ W1 = 0.4 W2 = 1 ->  Wu = 8 We = 0.5
 Case 105
- W1 = 1 with notch  W2 = 0.1 ->  Wu = 0.1 We = 1
+ W1 = 0.4 W2 = 1 ->  Wu = 4 We = 0.5
 Case 106
- W1 = 0.8 with notch  W2 = 0.1 ->  Wu = 0.1 We = 10
+ W1 = 0.4 W2 = 1 ->  Wu = 2 We = 0.5
 Case 107
- W1 = 0.8 with notch  W2 = 0.1 ->  Wu = 0.1 We = 8
+ W1 = 0.4 W2 = 1 ->  Wu = 1 We = 0.5
 Case 108
- W1 = 0.8 with notch  W2 = 0.1 ->  Wu = 0.1 We = 4
+ W1 = 0.4 W2 = 1 ->  Wu = 0.5 We = 0.5
 Case 109
- W1 = 0.8 with notch  W2 = 0.1 ->  Wu = 0.1 We = 2
+ W1 = 0.2 W2 = 1 ->  Wu = 10 We = 10
 Case 110
- W1 = 0.8 with notch  W2 = 0.1 ->  Wu = 0.1 We = 1
+ W1 = 0.2 W2 = 1 ->  Wu = 8 We = 10
 Case 111
- W1 = 0.4 with notch  W2 = 0.1 ->  Wu = 0.1 We = 10
+ W1 = 0.2 W2 = 1 ->  Wu = 4 We = 10
 Case 112
- W1 = 0.4 with notch  W2 = 0.1 ->  Wu = 0.1 We = 8
+ W1 = 0.2 W2 = 1 ->  Wu = 2 We = 10
 Case 113
- W1 = 0.4 with notch  W2 = 0.1 ->  Wu = 0.1 We = 4
+ W1 = 0.2 W2 = 1 ->  Wu = 1 We = 10
 Case 114
- W1 = 0.4 with notch  W2 = 0.1 ->  Wu = 0.1 We = 2
+ W1 = 0.2 W2 = 1 ->  Wu = 0.5 We = 10
 Case 115
- W1 = 0.4 with notch  W2 = 0.1 ->  Wu = 0.1 We = 1
+ W1 = 0.2 W2 = 1 ->  Wu = 10 We = 8
 Case 116
- W1 = 0.2 with notch  W2 = 0.1 ->  Wu = 0.1 We = 10
+ W1 = 0.2 W2 = 1 ->  Wu = 8 We = 8
 Case 117
- W1 = 0.2 with notch  W2 = 0.1 ->  Wu = 0.1 We = 8
+ W1 = 0.2 W2 = 1 ->  Wu = 4 We = 8
 Case 118
- W1 = 0.2 with notch  W2 = 0.1 ->  Wu = 0.1 We = 4
+ W1 = 0.2 W2 = 1 ->  Wu = 2 We = 8
 Case 119
- W1 = 0.2 with notch  W2 = 0.1 ->  Wu = 0.1 We = 2
+ W1 = 0.2 W2 = 1 ->  Wu = 1 We = 8
 Case 120
- W1 = 0.2 with notch  W2 = 0.1 ->  Wu = 0.1 We = 1
+ W1 = 0.2 W2 = 1 ->  Wu = 0.5 We = 8
 Case 121
- W1 = 0.1 with notch  W2 = 0.1 ->  Wu = 0.1 We = 10
+ W1 = 0.2 W2 = 1 ->  Wu = 10 We = 4
 Case 122
- W1 = 0.1 with notch  W2 = 0.1 ->  Wu = 0.1 We = 8
+ W1 = 0.2 W2 = 1 ->  Wu = 8 We = 4
 Case 123
- W1 = 0.1 with notch  W2 = 0.1 ->  Wu = 0.1 We = 4
+ W1 = 0.2 W2 = 1 ->  Wu = 4 We = 4
 Case 124
- W1 = 0.1 with notch  W2 = 0.1 ->  Wu = 0.1 We = 2
+ W1 = 0.2 W2 = 1 ->  Wu = 2 We = 4
 Case 125
- W1 = 0.1 with notch  W2 = 0.1 ->  Wu = 0.1 We = 1
+ W1 = 0.2 W2 = 1 ->  Wu = 1 We = 4
+Case 126
+ W1 = 0.2 W2 = 1 ->  Wu = 0.5 We = 4
+Case 127
+ W1 = 0.2 W2 = 1 ->  Wu = 10 We = 2
+Case 128
+ W1 = 0.2 W2 = 1 ->  Wu = 8 We = 2
+Case 129
+ W1 = 0.2 W2 = 1 ->  Wu = 4 We = 2
+Case 130
+ W1 = 0.2 W2 = 1 ->  Wu = 2 We = 2
+Case 131
+ W1 = 0.2 W2 = 1 ->  Wu = 1 We = 2
+Case 132
+ W1 = 0.2 W2 = 1 ->  Wu = 0.5 We = 2
+Case 133
+ W1 = 0.2 W2 = 1 ->  Wu = 10 We = 1
+Case 134
+ W1 = 0.2 W2 = 1 ->  Wu = 8 We = 1
+Case 135
+ W1 = 0.2 W2 = 1 ->  Wu = 4 We = 1
+Case 136
+ W1 = 0.2 W2 = 1 ->  Wu = 2 We = 1
+Case 137
+ W1 = 0.2 W2 = 1 ->  Wu = 1 We = 1
+Case 138
+ W1 = 0.2 W2 = 1 ->  Wu = 0.5 We = 1
+Case 139
+ W1 = 0.2 W2 = 1 ->  Wu = 10 We = 0.5
+Case 140
+ W1 = 0.2 W2 = 1 ->  Wu = 8 We = 0.5
+Case 141
+ W1 = 0.2 W2 = 1 ->  Wu = 4 We = 0.5
+Case 142
+ W1 = 0.2 W2 = 1 ->  Wu = 2 We = 0.5
+Case 143
+ W1 = 0.2 W2 = 1 ->  Wu = 1 We = 0.5
+Case 144
+ W1 = 0.2 W2 = 1 ->  Wu = 0.5 We = 0.5
+Case 145
+ W1 = 0.1 W2 = 1 ->  Wu = 10 We = 10
+Case 146
+ W1 = 0.1 W2 = 1 ->  Wu = 8 We = 10
+Case 147
+ W1 = 0.1 W2 = 1 ->  Wu = 4 We = 10
+Case 148
+ W1 = 0.1 W2 = 1 ->  Wu = 2 We = 10
+Case 149
+ W1 = 0.1 W2 = 1 ->  Wu = 1 We = 10
+Case 150
+ W1 = 0.1 W2 = 1 ->  Wu = 0.5 We = 10
+Case 151
+ W1 = 0.1 W2 = 1 ->  Wu = 10 We = 8
+Case 152
+ W1 = 0.1 W2 = 1 ->  Wu = 8 We = 8
+Case 153
+ W1 = 0.1 W2 = 1 ->  Wu = 4 We = 8
+Case 154
+ W1 = 0.1 W2 = 1 ->  Wu = 2 We = 8
+Case 155
+ W1 = 0.1 W2 = 1 ->  Wu = 1 We = 8
+Case 156
+ W1 = 0.1 W2 = 1 ->  Wu = 0.5 We = 8
+Case 157
+ W1 = 0.1 W2 = 1 ->  Wu = 10 We = 4
+Case 158
+ W1 = 0.1 W2 = 1 ->  Wu = 8 We = 4
+Case 159
+ W1 = 0.1 W2 = 1 ->  Wu = 4 We = 4
+Case 160
+ W1 = 0.1 W2 = 1 ->  Wu = 2 We = 4
+Case 161
+ W1 = 0.1 W2 = 1 ->  Wu = 1 We = 4
+Case 162
+ W1 = 0.1 W2 = 1 ->  Wu = 0.5 We = 4
+Case 163
+ W1 = 0.1 W2 = 1 ->  Wu = 10 We = 2
+Case 164
+ W1 = 0.1 W2 = 1 ->  Wu = 8 We = 2
+Case 165
+ W1 = 0.1 W2 = 1 ->  Wu = 4 We = 2
+Case 166
+ W1 = 0.1 W2 = 1 ->  Wu = 2 We = 2
+Case 167
+ W1 = 0.1 W2 = 1 ->  Wu = 1 We = 2
+Case 168
+ W1 = 0.1 W2 = 1 ->  Wu = 0.5 We = 2
+Case 169
+ W1 = 0.1 W2 = 1 ->  Wu = 10 We = 1
+Case 170
+ W1 = 0.1 W2 = 1 ->  Wu = 8 We = 1
+Case 171
+ W1 = 0.1 W2 = 1 ->  Wu = 4 We = 1
+Case 172
+ W1 = 0.1 W2 = 1 ->  Wu = 2 We = 1
+Case 173
+ W1 = 0.1 W2 = 1 ->  Wu = 1 We = 1
+Case 174
+ W1 = 0.1 W2 = 1 ->  Wu = 0.5 We = 1
+Case 175
+ W1 = 0.1 W2 = 1 ->  Wu = 10 We = 0.5
+Case 176
+ W1 = 0.1 W2 = 1 ->  Wu = 8 We = 0.5
+Case 177
+ W1 = 0.1 W2 = 1 ->  Wu = 4 We = 0.5
+Case 178
+ W1 = 0.1 W2 = 1 ->  Wu = 2 We = 0.5
+Case 179
+ W1 = 0.1 W2 = 1 ->  Wu = 1 We = 0.5
+Case 180
+ W1 = 0.1 W2 = 1 ->  Wu = 0.5 We = 0.5
+Case 181
+ W1 = 0.05 W2 = 1 ->  Wu = 10 We = 10
+Case 182
+ W1 = 0.05 W2 = 1 ->  Wu = 8 We = 10
+Case 183
+ W1 = 0.05 W2 = 1 ->  Wu = 4 We = 10
+Case 184
+ W1 = 0.05 W2 = 1 ->  Wu = 2 We = 10
+Case 185
+ W1 = 0.05 W2 = 1 ->  Wu = 1 We = 10
+Case 186
+ W1 = 0.05 W2 = 1 ->  Wu = 0.5 We = 10
+Case 187
+ W1 = 0.05 W2 = 1 ->  Wu = 10 We = 8
+Case 188
+ W1 = 0.05 W2 = 1 ->  Wu = 8 We = 8
+Case 189
+ W1 = 0.05 W2 = 1 ->  Wu = 4 We = 8
+Case 190
+ W1 = 0.05 W2 = 1 ->  Wu = 2 We = 8
+Case 191
+ W1 = 0.05 W2 = 1 ->  Wu = 1 We = 8
+Case 192
+ W1 = 0.05 W2 = 1 ->  Wu = 0.5 We = 8
+Case 193
+ W1 = 0.05 W2 = 1 ->  Wu = 10 We = 4
+Case 194
+ W1 = 0.05 W2 = 1 ->  Wu = 8 We = 4
+Case 195
+ W1 = 0.05 W2 = 1 ->  Wu = 4 We = 4
+Case 196
+ W1 = 0.05 W2 = 1 ->  Wu = 2 We = 4
+Case 197
+ W1 = 0.05 W2 = 1 ->  Wu = 1 We = 4
+Case 198
+ W1 = 0.05 W2 = 1 ->  Wu = 0.5 We = 4
+Case 199
+ W1 = 0.05 W2 = 1 ->  Wu = 10 We = 2
+Case 200
+ W1 = 0.05 W2 = 1 ->  Wu = 8 We = 2
+Case 201
+ W1 = 0.05 W2 = 1 ->  Wu = 4 We = 2
+Case 202
+ W1 = 0.05 W2 = 1 ->  Wu = 2 We = 2
+Case 203
+ W1 = 0.05 W2 = 1 ->  Wu = 1 We = 2
+Case 204
+ W1 = 0.05 W2 = 1 ->  Wu = 0.5 We = 2
+Case 205
+ W1 = 0.05 W2 = 1 ->  Wu = 10 We = 1
+Case 206
+ W1 = 0.05 W2 = 1 ->  Wu = 8 We = 1
+Case 207
+ W1 = 0.05 W2 = 1 ->  Wu = 4 We = 1
+Case 208
+ W1 = 0.05 W2 = 1 ->  Wu = 2 We = 1
+Case 209
+ W1 = 0.05 W2 = 1 ->  Wu = 1 We = 1
+Case 210
+ W1 = 0.05 W2 = 1 ->  Wu = 0.5 We = 1
+Case 211
+ W1 = 0.05 W2 = 1 ->  Wu = 10 We = 0.5
+Case 212
+ W1 = 0.05 W2 = 1 ->  Wu = 8 We = 0.5
+Case 213
+ W1 = 0.05 W2 = 1 ->  Wu = 4 We = 0.5
+Case 214
+ W1 = 0.05 W2 = 1 ->  Wu = 2 We = 0.5
+Case 215
+ W1 = 0.05 W2 = 1 ->  Wu = 1 We = 0.5
+Case 216
+ W1 = 0.05 W2 = 1 ->  Wu = 0.5 We = 0.5
+Case 217
+ W1 = 1 W2 = 0.8 ->  Wu = 10 We = 10
+Case 218
+ W1 = 1 W2 = 0.8 ->  Wu = 8 We = 10
+Case 219
+ W1 = 1 W2 = 0.8 ->  Wu = 4 We = 10
+Case 220
+ W1 = 1 W2 = 0.8 ->  Wu = 2 We = 10
+Case 221
+ W1 = 1 W2 = 0.8 ->  Wu = 1 We = 10
+Case 222
+ W1 = 1 W2 = 0.8 ->  Wu = 0.5 We = 10
+Case 223
+ W1 = 1 W2 = 0.8 ->  Wu = 10 We = 8
+Case 224
+ W1 = 1 W2 = 0.8 ->  Wu = 8 We = 8
+Case 225
+ W1 = 1 W2 = 0.8 ->  Wu = 4 We = 8
+Case 226
+ W1 = 1 W2 = 0.8 ->  Wu = 2 We = 8
+Case 227
+ W1 = 1 W2 = 0.8 ->  Wu = 1 We = 8
+Case 228
+ W1 = 1 W2 = 0.8 ->  Wu = 0.5 We = 8
+Case 229
+ W1 = 1 W2 = 0.8 ->  Wu = 10 We = 4
+Case 230
+ W1 = 1 W2 = 0.8 ->  Wu = 8 We = 4
+Case 231
+ W1 = 1 W2 = 0.8 ->  Wu = 4 We = 4
+Case 232
+ W1 = 1 W2 = 0.8 ->  Wu = 2 We = 4
+Case 233
+ W1 = 1 W2 = 0.8 ->  Wu = 1 We = 4
+Case 234
+ W1 = 1 W2 = 0.8 ->  Wu = 0.5 We = 4
+Case 235
+ W1 = 1 W2 = 0.8 ->  Wu = 10 We = 2
+Case 236
+ W1 = 1 W2 = 0.8 ->  Wu = 8 We = 2
+Case 237
+ W1 = 1 W2 = 0.8 ->  Wu = 4 We = 2
+Case 238
+ W1 = 1 W2 = 0.8 ->  Wu = 2 We = 2
+Case 239
+ W1 = 1 W2 = 0.8 ->  Wu = 1 We = 2
+Case 240
+ W1 = 1 W2 = 0.8 ->  Wu = 0.5 We = 2
+Case 241
+ W1 = 1 W2 = 0.8 ->  Wu = 10 We = 1
+Case 242
+ W1 = 1 W2 = 0.8 ->  Wu = 8 We = 1
+Case 243
+ W1 = 1 W2 = 0.8 ->  Wu = 4 We = 1
+Case 244
+ W1 = 1 W2 = 0.8 ->  Wu = 2 We = 1
+Case 245
+ W1 = 1 W2 = 0.8 ->  Wu = 1 We = 1
+Case 246
+ W1 = 1 W2 = 0.8 ->  Wu = 0.5 We = 1
+Case 247
+ W1 = 1 W2 = 0.8 ->  Wu = 10 We = 0.5
+Case 248
+ W1 = 1 W2 = 0.8 ->  Wu = 8 We = 0.5
+Case 249
+ W1 = 1 W2 = 0.8 ->  Wu = 4 We = 0.5
+Case 250
+ W1 = 1 W2 = 0.8 ->  Wu = 2 We = 0.5
+Case 251
+ W1 = 1 W2 = 0.8 ->  Wu = 1 We = 0.5
+Case 252
+ W1 = 1 W2 = 0.8 ->  Wu = 0.5 We = 0.5
+Case 253
+ W1 = 0.8 W2 = 0.8 ->  Wu = 10 We = 10
+Case 254
+ W1 = 0.8 W2 = 0.8 ->  Wu = 8 We = 10
+Case 255
+ W1 = 0.8 W2 = 0.8 ->  Wu = 4 We = 10
+Case 256
+ W1 = 0.8 W2 = 0.8 ->  Wu = 2 We = 10
+Case 257
+ W1 = 0.8 W2 = 0.8 ->  Wu = 1 We = 10
+Case 258
+ W1 = 0.8 W2 = 0.8 ->  Wu = 0.5 We = 10
+Case 259
+ W1 = 0.8 W2 = 0.8 ->  Wu = 10 We = 8
+Case 260
+ W1 = 0.8 W2 = 0.8 ->  Wu = 8 We = 8
+Case 261
+ W1 = 0.8 W2 = 0.8 ->  Wu = 4 We = 8
+Case 262
+ W1 = 0.8 W2 = 0.8 ->  Wu = 2 We = 8
+Case 263
+ W1 = 0.8 W2 = 0.8 ->  Wu = 1 We = 8
+Case 264
+ W1 = 0.8 W2 = 0.8 ->  Wu = 0.5 We = 8
+Case 265
+ W1 = 0.8 W2 = 0.8 ->  Wu = 10 We = 4
+Case 266
+ W1 = 0.8 W2 = 0.8 ->  Wu = 8 We = 4
+Case 267
+ W1 = 0.8 W2 = 0.8 ->  Wu = 4 We = 4
+Case 268
+ W1 = 0.8 W2 = 0.8 ->  Wu = 2 We = 4
+Case 269
+ W1 = 0.8 W2 = 0.8 ->  Wu = 1 We = 4
+Case 270
+ W1 = 0.8 W2 = 0.8 ->  Wu = 0.5 We = 4
+Case 271
+ W1 = 0.8 W2 = 0.8 ->  Wu = 10 We = 2
+Case 272
+ W1 = 0.8 W2 = 0.8 ->  Wu = 8 We = 2
+Case 273
+ W1 = 0.8 W2 = 0.8 ->  Wu = 4 We = 2
+Case 274
+ W1 = 0.8 W2 = 0.8 ->  Wu = 2 We = 2
+Case 275
+ W1 = 0.8 W2 = 0.8 ->  Wu = 1 We = 2
+Case 276
+ W1 = 0.8 W2 = 0.8 ->  Wu = 0.5 We = 2
+Case 277
+ W1 = 0.8 W2 = 0.8 ->  Wu = 10 We = 1
+Case 278
+ W1 = 0.8 W2 = 0.8 ->  Wu = 8 We = 1
+Case 279
+ W1 = 0.8 W2 = 0.8 ->  Wu = 4 We = 1
+Case 280
+ W1 = 0.8 W2 = 0.8 ->  Wu = 2 We = 1
+Case 281
+ W1 = 0.8 W2 = 0.8 ->  Wu = 1 We = 1
+Case 282
+ W1 = 0.8 W2 = 0.8 ->  Wu = 0.5 We = 1
+Case 283
+ W1 = 0.8 W2 = 0.8 ->  Wu = 10 We = 0.5
+Case 284
+ W1 = 0.8 W2 = 0.8 ->  Wu = 8 We = 0.5
+Case 285
+ W1 = 0.8 W2 = 0.8 ->  Wu = 4 We = 0.5
+Case 286
+ W1 = 0.8 W2 = 0.8 ->  Wu = 2 We = 0.5
+Case 287
+ W1 = 0.8 W2 = 0.8 ->  Wu = 1 We = 0.5
+Case 288
+ W1 = 0.8 W2 = 0.8 ->  Wu = 0.5 We = 0.5
+Case 289
+ W1 = 0.4 W2 = 0.8 ->  Wu = 10 We = 10
+Case 290
+ W1 = 0.4 W2 = 0.8 ->  Wu = 8 We = 10
+Case 291
+ W1 = 0.4 W2 = 0.8 ->  Wu = 4 We = 10
+Case 292
+ W1 = 0.4 W2 = 0.8 ->  Wu = 2 We = 10
+Case 293
+ W1 = 0.4 W2 = 0.8 ->  Wu = 1 We = 10
+Case 294
+ W1 = 0.4 W2 = 0.8 ->  Wu = 0.5 We = 10
+Case 295
+ W1 = 0.4 W2 = 0.8 ->  Wu = 10 We = 8
+Case 296
+ W1 = 0.4 W2 = 0.8 ->  Wu = 8 We = 8
+Case 297
+ W1 = 0.4 W2 = 0.8 ->  Wu = 4 We = 8
+Case 298
+ W1 = 0.4 W2 = 0.8 ->  Wu = 2 We = 8
+Case 299
+ W1 = 0.4 W2 = 0.8 ->  Wu = 1 We = 8
+Case 300
+ W1 = 0.4 W2 = 0.8 ->  Wu = 0.5 We = 8
+Case 301
+ W1 = 0.4 W2 = 0.8 ->  Wu = 10 We = 4
+Case 302
+ W1 = 0.4 W2 = 0.8 ->  Wu = 8 We = 4
+Case 303
+ W1 = 0.4 W2 = 0.8 ->  Wu = 4 We = 4
+Case 304
+ W1 = 0.4 W2 = 0.8 ->  Wu = 2 We = 4
+Case 305
+ W1 = 0.4 W2 = 0.8 ->  Wu = 1 We = 4
+Case 306
+ W1 = 0.4 W2 = 0.8 ->  Wu = 0.5 We = 4
+Case 307
+ W1 = 0.4 W2 = 0.8 ->  Wu = 10 We = 2
+Case 308
+ W1 = 0.4 W2 = 0.8 ->  Wu = 8 We = 2
+Case 309
+ W1 = 0.4 W2 = 0.8 ->  Wu = 4 We = 2
+Case 310
+ W1 = 0.4 W2 = 0.8 ->  Wu = 2 We = 2
+Case 311
+ W1 = 0.4 W2 = 0.8 ->  Wu = 1 We = 2
+Case 312
+ W1 = 0.4 W2 = 0.8 ->  Wu = 0.5 We = 2
+Case 313
+ W1 = 0.4 W2 = 0.8 ->  Wu = 10 We = 1
+Case 314
+ W1 = 0.4 W2 = 0.8 ->  Wu = 8 We = 1
+Case 315
+ W1 = 0.4 W2 = 0.8 ->  Wu = 4 We = 1
+Case 316
+ W1 = 0.4 W2 = 0.8 ->  Wu = 2 We = 1
+Case 317
+ W1 = 0.4 W2 = 0.8 ->  Wu = 1 We = 1
+Case 318
+ W1 = 0.4 W2 = 0.8 ->  Wu = 0.5 We = 1
+Case 319
+ W1 = 0.4 W2 = 0.8 ->  Wu = 10 We = 0.5
+Case 320
+ W1 = 0.4 W2 = 0.8 ->  Wu = 8 We = 0.5
+Case 321
+ W1 = 0.4 W2 = 0.8 ->  Wu = 4 We = 0.5
+Case 322
+ W1 = 0.4 W2 = 0.8 ->  Wu = 2 We = 0.5
+Case 323
+ W1 = 0.4 W2 = 0.8 ->  Wu = 1 We = 0.5
+Case 324
+ W1 = 0.4 W2 = 0.8 ->  Wu = 0.5 We = 0.5
+Case 325
+ W1 = 0.2 W2 = 0.8 ->  Wu = 10 We = 10
+Case 326
+ W1 = 0.2 W2 = 0.8 ->  Wu = 8 We = 10
+Case 327
+ W1 = 0.2 W2 = 0.8 ->  Wu = 4 We = 10
+Case 328
+ W1 = 0.2 W2 = 0.8 ->  Wu = 2 We = 10
+Case 329
+ W1 = 0.2 W2 = 0.8 ->  Wu = 1 We = 10
+Case 330
+ W1 = 0.2 W2 = 0.8 ->  Wu = 0.5 We = 10
+Case 331
+ W1 = 0.2 W2 = 0.8 ->  Wu = 10 We = 8
+Case 332
+ W1 = 0.2 W2 = 0.8 ->  Wu = 8 We = 8
+Case 333
+ W1 = 0.2 W2 = 0.8 ->  Wu = 4 We = 8
+Case 334
+ W1 = 0.2 W2 = 0.8 ->  Wu = 2 We = 8
+Case 335
+ W1 = 0.2 W2 = 0.8 ->  Wu = 1 We = 8
+Case 336
+ W1 = 0.2 W2 = 0.8 ->  Wu = 0.5 We = 8
+Case 337
+ W1 = 0.2 W2 = 0.8 ->  Wu = 10 We = 4
+Case 338
+ W1 = 0.2 W2 = 0.8 ->  Wu = 8 We = 4
+Case 339
+ W1 = 0.2 W2 = 0.8 ->  Wu = 4 We = 4
+Case 340
+ W1 = 0.2 W2 = 0.8 ->  Wu = 2 We = 4
+Case 341
+ W1 = 0.2 W2 = 0.8 ->  Wu = 1 We = 4
+Case 342
+ W1 = 0.2 W2 = 0.8 ->  Wu = 0.5 We = 4
+Case 343
+ W1 = 0.2 W2 = 0.8 ->  Wu = 10 We = 2
+Case 344
+ W1 = 0.2 W2 = 0.8 ->  Wu = 8 We = 2
+Case 345
+ W1 = 0.2 W2 = 0.8 ->  Wu = 4 We = 2
+Case 346
+ W1 = 0.2 W2 = 0.8 ->  Wu = 2 We = 2
+Case 347
+ W1 = 0.2 W2 = 0.8 ->  Wu = 1 We = 2
+Case 348
+ W1 = 0.2 W2 = 0.8 ->  Wu = 0.5 We = 2
+Case 349
+ W1 = 0.2 W2 = 0.8 ->  Wu = 10 We = 1
+Case 350
+ W1 = 0.2 W2 = 0.8 ->  Wu = 8 We = 1
+Case 351
+ W1 = 0.2 W2 = 0.8 ->  Wu = 4 We = 1
+Case 352
+ W1 = 0.2 W2 = 0.8 ->  Wu = 2 We = 1
+Case 353
+ W1 = 0.2 W2 = 0.8 ->  Wu = 1 We = 1
+Case 354
+ W1 = 0.2 W2 = 0.8 ->  Wu = 0.5 We = 1
+Case 355
+ W1 = 0.2 W2 = 0.8 ->  Wu = 10 We = 0.5
+Case 356
+ W1 = 0.2 W2 = 0.8 ->  Wu = 8 We = 0.5
+Case 357
+ W1 = 0.2 W2 = 0.8 ->  Wu = 4 We = 0.5
+Case 358
+ W1 = 0.2 W2 = 0.8 ->  Wu = 2 We = 0.5
+Case 359
+ W1 = 0.2 W2 = 0.8 ->  Wu = 1 We = 0.5
+Case 360
+ W1 = 0.2 W2 = 0.8 ->  Wu = 0.5 We = 0.5
+Case 361
+ W1 = 0.1 W2 = 0.8 ->  Wu = 10 We = 10
+Case 362
+ W1 = 0.1 W2 = 0.8 ->  Wu = 8 We = 10
+Case 363
+ W1 = 0.1 W2 = 0.8 ->  Wu = 4 We = 10
+Case 364
+ W1 = 0.1 W2 = 0.8 ->  Wu = 2 We = 10
+Case 365
+ W1 = 0.1 W2 = 0.8 ->  Wu = 1 We = 10
+Case 366
+ W1 = 0.1 W2 = 0.8 ->  Wu = 0.5 We = 10
+Case 367
+ W1 = 0.1 W2 = 0.8 ->  Wu = 10 We = 8
+Case 368
+ W1 = 0.1 W2 = 0.8 ->  Wu = 8 We = 8
+Case 369
+ W1 = 0.1 W2 = 0.8 ->  Wu = 4 We = 8
+Case 370
+ W1 = 0.1 W2 = 0.8 ->  Wu = 2 We = 8
+Case 371
+ W1 = 0.1 W2 = 0.8 ->  Wu = 1 We = 8
+Case 372
+ W1 = 0.1 W2 = 0.8 ->  Wu = 0.5 We = 8
+Case 373
+ W1 = 0.1 W2 = 0.8 ->  Wu = 10 We = 4
+Case 374
+ W1 = 0.1 W2 = 0.8 ->  Wu = 8 We = 4
+Case 375
+ W1 = 0.1 W2 = 0.8 ->  Wu = 4 We = 4
+Case 376
+ W1 = 0.1 W2 = 0.8 ->  Wu = 2 We = 4
+Case 377
+ W1 = 0.1 W2 = 0.8 ->  Wu = 1 We = 4
+Case 378
+ W1 = 0.1 W2 = 0.8 ->  Wu = 0.5 We = 4
+Case 379
+ W1 = 0.1 W2 = 0.8 ->  Wu = 10 We = 2
+Case 380
+ W1 = 0.1 W2 = 0.8 ->  Wu = 8 We = 2
+Case 381
+ W1 = 0.1 W2 = 0.8 ->  Wu = 4 We = 2
+Case 382
+ W1 = 0.1 W2 = 0.8 ->  Wu = 2 We = 2
+Case 383
+ W1 = 0.1 W2 = 0.8 ->  Wu = 1 We = 2
+Case 384
+ W1 = 0.1 W2 = 0.8 ->  Wu = 0.5 We = 2
+Case 385
+ W1 = 0.1 W2 = 0.8 ->  Wu = 10 We = 1
+Case 386
+ W1 = 0.1 W2 = 0.8 ->  Wu = 8 We = 1
+Case 387
+ W1 = 0.1 W2 = 0.8 ->  Wu = 4 We = 1
+Case 388
+ W1 = 0.1 W2 = 0.8 ->  Wu = 2 We = 1
+Case 389
+ W1 = 0.1 W2 = 0.8 ->  Wu = 1 We = 1
+Case 390
+ W1 = 0.1 W2 = 0.8 ->  Wu = 0.5 We = 1
+Case 391
+ W1 = 0.1 W2 = 0.8 ->  Wu = 10 We = 0.5
+Case 392
+ W1 = 0.1 W2 = 0.8 ->  Wu = 8 We = 0.5
+Case 393
+ W1 = 0.1 W2 = 0.8 ->  Wu = 4 We = 0.5
+Case 394
+ W1 = 0.1 W2 = 0.8 ->  Wu = 2 We = 0.5
+Case 395
+ W1 = 0.1 W2 = 0.8 ->  Wu = 1 We = 0.5
+Case 396
+ W1 = 0.1 W2 = 0.8 ->  Wu = 0.5 We = 0.5
+Case 397
+ W1 = 0.05 W2 = 0.8 ->  Wu = 10 We = 10
+Case 398
+ W1 = 0.05 W2 = 0.8 ->  Wu = 8 We = 10
+Case 399
+ W1 = 0.05 W2 = 0.8 ->  Wu = 4 We = 10
+Case 400
+ W1 = 0.05 W2 = 0.8 ->  Wu = 2 We = 10
+Case 401
+ W1 = 0.05 W2 = 0.8 ->  Wu = 1 We = 10
+Case 402
+ W1 = 0.05 W2 = 0.8 ->  Wu = 0.5 We = 10
+Case 403
+ W1 = 0.05 W2 = 0.8 ->  Wu = 10 We = 8
+Case 404
+ W1 = 0.05 W2 = 0.8 ->  Wu = 8 We = 8
+Case 405
+ W1 = 0.05 W2 = 0.8 ->  Wu = 4 We = 8
+Case 406
+ W1 = 0.05 W2 = 0.8 ->  Wu = 2 We = 8
+Case 407
+ W1 = 0.05 W2 = 0.8 ->  Wu = 1 We = 8
+Case 408
+ W1 = 0.05 W2 = 0.8 ->  Wu = 0.5 We = 8
+Case 409
+ W1 = 0.05 W2 = 0.8 ->  Wu = 10 We = 4
+Case 410
+ W1 = 0.05 W2 = 0.8 ->  Wu = 8 We = 4
+Case 411
+ W1 = 0.05 W2 = 0.8 ->  Wu = 4 We = 4
+Case 412
+ W1 = 0.05 W2 = 0.8 ->  Wu = 2 We = 4
+Case 413
+ W1 = 0.05 W2 = 0.8 ->  Wu = 1 We = 4
+Case 414
+ W1 = 0.05 W2 = 0.8 ->  Wu = 0.5 We = 4
+Case 415
+ W1 = 0.05 W2 = 0.8 ->  Wu = 10 We = 2
+Case 416
+ W1 = 0.05 W2 = 0.8 ->  Wu = 8 We = 2
+Case 417
+ W1 = 0.05 W2 = 0.8 ->  Wu = 4 We = 2
+Case 418
+ W1 = 0.05 W2 = 0.8 ->  Wu = 2 We = 2
+Case 419
+ W1 = 0.05 W2 = 0.8 ->  Wu = 1 We = 2
+Case 420
+ W1 = 0.05 W2 = 0.8 ->  Wu = 0.5 We = 2
+Case 421
+ W1 = 0.05 W2 = 0.8 ->  Wu = 10 We = 1
+Case 422
+ W1 = 0.05 W2 = 0.8 ->  Wu = 8 We = 1
+Case 423
+ W1 = 0.05 W2 = 0.8 ->  Wu = 4 We = 1
+Case 424
+ W1 = 0.05 W2 = 0.8 ->  Wu = 2 We = 1
+Case 425
+ W1 = 0.05 W2 = 0.8 ->  Wu = 1 We = 1
+Case 426
+ W1 = 0.05 W2 = 0.8 ->  Wu = 0.5 We = 1
+Case 427
+ W1 = 0.05 W2 = 0.8 ->  Wu = 10 We = 0.5
+Case 428
+ W1 = 0.05 W2 = 0.8 ->  Wu = 8 We = 0.5
+Case 429
+ W1 = 0.05 W2 = 0.8 ->  Wu = 4 We = 0.5
+Case 430
+ W1 = 0.05 W2 = 0.8 ->  Wu = 2 We = 0.5
+Case 431
+ W1 = 0.05 W2 = 0.8 ->  Wu = 1 We = 0.5
+Case 432
+ W1 = 0.05 W2 = 0.8 ->  Wu = 0.5 We = 0.5
+Case 433
+ W1 = 1 W2 = 0.4 ->  Wu = 10 We = 10
+Case 434
+ W1 = 1 W2 = 0.4 ->  Wu = 8 We = 10
+Case 435
+ W1 = 1 W2 = 0.4 ->  Wu = 4 We = 10
+Case 436
+ W1 = 1 W2 = 0.4 ->  Wu = 2 We = 10
+Case 437
+ W1 = 1 W2 = 0.4 ->  Wu = 1 We = 10
+Case 438
+ W1 = 1 W2 = 0.4 ->  Wu = 0.5 We = 10
+Case 439
+ W1 = 1 W2 = 0.4 ->  Wu = 10 We = 8
+Case 440
+ W1 = 1 W2 = 0.4 ->  Wu = 8 We = 8
+Case 441
+ W1 = 1 W2 = 0.4 ->  Wu = 4 We = 8
+Case 442
+ W1 = 1 W2 = 0.4 ->  Wu = 2 We = 8
+Case 443
+ W1 = 1 W2 = 0.4 ->  Wu = 1 We = 8
+Case 444
+ W1 = 1 W2 = 0.4 ->  Wu = 0.5 We = 8
+Case 445
+ W1 = 1 W2 = 0.4 ->  Wu = 10 We = 4
+Case 446
+ W1 = 1 W2 = 0.4 ->  Wu = 8 We = 4
+Case 447
+ W1 = 1 W2 = 0.4 ->  Wu = 4 We = 4
+Case 448
+ W1 = 1 W2 = 0.4 ->  Wu = 2 We = 4
+Case 449
+ W1 = 1 W2 = 0.4 ->  Wu = 1 We = 4
+Case 450
+ W1 = 1 W2 = 0.4 ->  Wu = 0.5 We = 4
+Case 451
+ W1 = 1 W2 = 0.4 ->  Wu = 10 We = 2
+Case 452
+ W1 = 1 W2 = 0.4 ->  Wu = 8 We = 2
+Case 453
+ W1 = 1 W2 = 0.4 ->  Wu = 4 We = 2
+Case 454
+ W1 = 1 W2 = 0.4 ->  Wu = 2 We = 2
+Case 455
+ W1 = 1 W2 = 0.4 ->  Wu = 1 We = 2
+Case 456
+ W1 = 1 W2 = 0.4 ->  Wu = 0.5 We = 2
+Case 457
+ W1 = 1 W2 = 0.4 ->  Wu = 10 We = 1
+Case 458
+ W1 = 1 W2 = 0.4 ->  Wu = 8 We = 1
+Case 459
+ W1 = 1 W2 = 0.4 ->  Wu = 4 We = 1
+Case 460
+ W1 = 1 W2 = 0.4 ->  Wu = 2 We = 1
+Case 461
+ W1 = 1 W2 = 0.4 ->  Wu = 1 We = 1
+Case 462
+ W1 = 1 W2 = 0.4 ->  Wu = 0.5 We = 1
+Case 463
+ W1 = 1 W2 = 0.4 ->  Wu = 10 We = 0.5
+Case 464
+ W1 = 1 W2 = 0.4 ->  Wu = 8 We = 0.5
+Case 465
+ W1 = 1 W2 = 0.4 ->  Wu = 4 We = 0.5
+Case 466
+ W1 = 1 W2 = 0.4 ->  Wu = 2 We = 0.5
+Case 467
+ W1 = 1 W2 = 0.4 ->  Wu = 1 We = 0.5
+Case 468
+ W1 = 1 W2 = 0.4 ->  Wu = 0.5 We = 0.5
+Case 469
+ W1 = 0.8 W2 = 0.4 ->  Wu = 10 We = 10
+Case 470
+ W1 = 0.8 W2 = 0.4 ->  Wu = 8 We = 10
+Case 471
+ W1 = 0.8 W2 = 0.4 ->  Wu = 4 We = 10
+Case 472
+ W1 = 0.8 W2 = 0.4 ->  Wu = 2 We = 10
+Case 473
+ W1 = 0.8 W2 = 0.4 ->  Wu = 1 We = 10
+Case 474
+ W1 = 0.8 W2 = 0.4 ->  Wu = 0.5 We = 10
+Case 475
+ W1 = 0.8 W2 = 0.4 ->  Wu = 10 We = 8
+Case 476
+ W1 = 0.8 W2 = 0.4 ->  Wu = 8 We = 8
+Case 477
+ W1 = 0.8 W2 = 0.4 ->  Wu = 4 We = 8
+Case 478
+ W1 = 0.8 W2 = 0.4 ->  Wu = 2 We = 8
+Case 479
+ W1 = 0.8 W2 = 0.4 ->  Wu = 1 We = 8
+Case 480
+ W1 = 0.8 W2 = 0.4 ->  Wu = 0.5 We = 8
+Case 481
+ W1 = 0.8 W2 = 0.4 ->  Wu = 10 We = 4
+Case 482
+ W1 = 0.8 W2 = 0.4 ->  Wu = 8 We = 4
+Case 483
+ W1 = 0.8 W2 = 0.4 ->  Wu = 4 We = 4
+Case 484
+ W1 = 0.8 W2 = 0.4 ->  Wu = 2 We = 4
+Case 485
+ W1 = 0.8 W2 = 0.4 ->  Wu = 1 We = 4
+Case 486
+ W1 = 0.8 W2 = 0.4 ->  Wu = 0.5 We = 4
+Case 487
+ W1 = 0.8 W2 = 0.4 ->  Wu = 10 We = 2
+Case 488
+ W1 = 0.8 W2 = 0.4 ->  Wu = 8 We = 2
+Case 489
+ W1 = 0.8 W2 = 0.4 ->  Wu = 4 We = 2
+Case 490
+ W1 = 0.8 W2 = 0.4 ->  Wu = 2 We = 2
+Case 491
+ W1 = 0.8 W2 = 0.4 ->  Wu = 1 We = 2
+Case 492
+ W1 = 0.8 W2 = 0.4 ->  Wu = 0.5 We = 2
+Case 493
+ W1 = 0.8 W2 = 0.4 ->  Wu = 10 We = 1
+Case 494
+ W1 = 0.8 W2 = 0.4 ->  Wu = 8 We = 1
+Case 495
+ W1 = 0.8 W2 = 0.4 ->  Wu = 4 We = 1
+Case 496
+ W1 = 0.8 W2 = 0.4 ->  Wu = 2 We = 1
+Case 497
+ W1 = 0.8 W2 = 0.4 ->  Wu = 1 We = 1
+Case 498
+ W1 = 0.8 W2 = 0.4 ->  Wu = 0.5 We = 1
+Case 499
+ W1 = 0.8 W2 = 0.4 ->  Wu = 10 We = 0.5
+Case 500
+ W1 = 0.8 W2 = 0.4 ->  Wu = 8 We = 0.5
+Case 501
+ W1 = 0.8 W2 = 0.4 ->  Wu = 4 We = 0.5
+Case 502
+ W1 = 0.8 W2 = 0.4 ->  Wu = 2 We = 0.5
+Case 503
+ W1 = 0.8 W2 = 0.4 ->  Wu = 1 We = 0.5
+Case 504
+ W1 = 0.8 W2 = 0.4 ->  Wu = 0.5 We = 0.5
+Case 505
+ W1 = 0.4 W2 = 0.4 ->  Wu = 10 We = 10
+Case 506
+ W1 = 0.4 W2 = 0.4 ->  Wu = 8 We = 10
+Case 507
+ W1 = 0.4 W2 = 0.4 ->  Wu = 4 We = 10
+Case 508
+ W1 = 0.4 W2 = 0.4 ->  Wu = 2 We = 10
+Case 509
+ W1 = 0.4 W2 = 0.4 ->  Wu = 1 We = 10
+Case 510
+ W1 = 0.4 W2 = 0.4 ->  Wu = 0.5 We = 10
+Case 511
+ W1 = 0.4 W2 = 0.4 ->  Wu = 10 We = 8
+Case 512
+ W1 = 0.4 W2 = 0.4 ->  Wu = 8 We = 8
+Case 513
+ W1 = 0.4 W2 = 0.4 ->  Wu = 4 We = 8
+Case 514
+ W1 = 0.4 W2 = 0.4 ->  Wu = 2 We = 8
+Case 515
+ W1 = 0.4 W2 = 0.4 ->  Wu = 1 We = 8
+Case 516
+ W1 = 0.4 W2 = 0.4 ->  Wu = 0.5 We = 8
+Case 517
+ W1 = 0.4 W2 = 0.4 ->  Wu = 10 We = 4
+Case 518
+ W1 = 0.4 W2 = 0.4 ->  Wu = 8 We = 4
+Case 519
+ W1 = 0.4 W2 = 0.4 ->  Wu = 4 We = 4
+Case 520
+ W1 = 0.4 W2 = 0.4 ->  Wu = 2 We = 4
+Case 521
+ W1 = 0.4 W2 = 0.4 ->  Wu = 1 We = 4
+Case 522
+ W1 = 0.4 W2 = 0.4 ->  Wu = 0.5 We = 4
+Case 523
+ W1 = 0.4 W2 = 0.4 ->  Wu = 10 We = 2
+Case 524
+ W1 = 0.4 W2 = 0.4 ->  Wu = 8 We = 2
+Case 525
+ W1 = 0.4 W2 = 0.4 ->  Wu = 4 We = 2
+Case 526
+ W1 = 0.4 W2 = 0.4 ->  Wu = 2 We = 2
+Case 527
+ W1 = 0.4 W2 = 0.4 ->  Wu = 1 We = 2
+Case 528
+ W1 = 0.4 W2 = 0.4 ->  Wu = 0.5 We = 2
+Case 529
+ W1 = 0.4 W2 = 0.4 ->  Wu = 10 We = 1
+Case 530
+ W1 = 0.4 W2 = 0.4 ->  Wu = 8 We = 1
+Case 531
+ W1 = 0.4 W2 = 0.4 ->  Wu = 4 We = 1
+Case 532
+ W1 = 0.4 W2 = 0.4 ->  Wu = 2 We = 1
+Case 533
+ W1 = 0.4 W2 = 0.4 ->  Wu = 1 We = 1
+Case 534
+ W1 = 0.4 W2 = 0.4 ->  Wu = 0.5 We = 1
+Case 535
+ W1 = 0.4 W2 = 0.4 ->  Wu = 10 We = 0.5
+Case 536
+ W1 = 0.4 W2 = 0.4 ->  Wu = 8 We = 0.5
+Case 537
+ W1 = 0.4 W2 = 0.4 ->  Wu = 4 We = 0.5
+Case 538
+ W1 = 0.4 W2 = 0.4 ->  Wu = 2 We = 0.5
+Case 539
+ W1 = 0.4 W2 = 0.4 ->  Wu = 1 We = 0.5
+Case 540
+ W1 = 0.4 W2 = 0.4 ->  Wu = 0.5 We = 0.5
+Case 541
+ W1 = 0.2 W2 = 0.4 ->  Wu = 10 We = 10
+Case 542
+ W1 = 0.2 W2 = 0.4 ->  Wu = 8 We = 10
+Case 543
+ W1 = 0.2 W2 = 0.4 ->  Wu = 4 We = 10
+Case 544
+ W1 = 0.2 W2 = 0.4 ->  Wu = 2 We = 10
+Case 545
+ W1 = 0.2 W2 = 0.4 ->  Wu = 1 We = 10
+Case 546
+ W1 = 0.2 W2 = 0.4 ->  Wu = 0.5 We = 10
+Case 547
+ W1 = 0.2 W2 = 0.4 ->  Wu = 10 We = 8
+Case 548
+ W1 = 0.2 W2 = 0.4 ->  Wu = 8 We = 8
+Case 549
+ W1 = 0.2 W2 = 0.4 ->  Wu = 4 We = 8
+Case 550
+ W1 = 0.2 W2 = 0.4 ->  Wu = 2 We = 8
+Case 551
+ W1 = 0.2 W2 = 0.4 ->  Wu = 1 We = 8
+Case 552
+ W1 = 0.2 W2 = 0.4 ->  Wu = 0.5 We = 8
+Case 553
+ W1 = 0.2 W2 = 0.4 ->  Wu = 10 We = 4
+Case 554
+ W1 = 0.2 W2 = 0.4 ->  Wu = 8 We = 4
+Case 555
+ W1 = 0.2 W2 = 0.4 ->  Wu = 4 We = 4
+Case 556
+ W1 = 0.2 W2 = 0.4 ->  Wu = 2 We = 4
+Case 557
+ W1 = 0.2 W2 = 0.4 ->  Wu = 1 We = 4
+Case 558
+ W1 = 0.2 W2 = 0.4 ->  Wu = 0.5 We = 4
+Case 559
+ W1 = 0.2 W2 = 0.4 ->  Wu = 10 We = 2
+Case 560
+ W1 = 0.2 W2 = 0.4 ->  Wu = 8 We = 2
+Case 561
+ W1 = 0.2 W2 = 0.4 ->  Wu = 4 We = 2
+Case 562
+ W1 = 0.2 W2 = 0.4 ->  Wu = 2 We = 2
+Case 563
+ W1 = 0.2 W2 = 0.4 ->  Wu = 1 We = 2
+Case 564
+ W1 = 0.2 W2 = 0.4 ->  Wu = 0.5 We = 2
+Case 565
+ W1 = 0.2 W2 = 0.4 ->  Wu = 10 We = 1
+Case 566
+ W1 = 0.2 W2 = 0.4 ->  Wu = 8 We = 1
+Case 567
+ W1 = 0.2 W2 = 0.4 ->  Wu = 4 We = 1
+Case 568
+ W1 = 0.2 W2 = 0.4 ->  Wu = 2 We = 1
+Case 569
+ W1 = 0.2 W2 = 0.4 ->  Wu = 1 We = 1
+Case 570
+ W1 = 0.2 W2 = 0.4 ->  Wu = 0.5 We = 1
+Case 571
+ W1 = 0.2 W2 = 0.4 ->  Wu = 10 We = 0.5
+Case 572
+ W1 = 0.2 W2 = 0.4 ->  Wu = 8 We = 0.5
+Case 573
+ W1 = 0.2 W2 = 0.4 ->  Wu = 4 We = 0.5
+Case 574
+ W1 = 0.2 W2 = 0.4 ->  Wu = 2 We = 0.5
+Case 575
+ W1 = 0.2 W2 = 0.4 ->  Wu = 1 We = 0.5
+Case 576
+ W1 = 0.2 W2 = 0.4 ->  Wu = 0.5 We = 0.5
+Case 577
+ W1 = 0.1 W2 = 0.4 ->  Wu = 10 We = 10
+Case 578
+ W1 = 0.1 W2 = 0.4 ->  Wu = 8 We = 10
+Case 579
+ W1 = 0.1 W2 = 0.4 ->  Wu = 4 We = 10
+Case 580
+ W1 = 0.1 W2 = 0.4 ->  Wu = 2 We = 10
+Case 581
+ W1 = 0.1 W2 = 0.4 ->  Wu = 1 We = 10
+Case 582
+ W1 = 0.1 W2 = 0.4 ->  Wu = 0.5 We = 10
+Case 583
+ W1 = 0.1 W2 = 0.4 ->  Wu = 10 We = 8
+Case 584
+ W1 = 0.1 W2 = 0.4 ->  Wu = 8 We = 8
+Case 585
+ W1 = 0.1 W2 = 0.4 ->  Wu = 4 We = 8
+Case 586
+ W1 = 0.1 W2 = 0.4 ->  Wu = 2 We = 8
+Case 587
+ W1 = 0.1 W2 = 0.4 ->  Wu = 1 We = 8
+Case 588
+ W1 = 0.1 W2 = 0.4 ->  Wu = 0.5 We = 8
+Case 589
+ W1 = 0.1 W2 = 0.4 ->  Wu = 10 We = 4
+Case 590
+ W1 = 0.1 W2 = 0.4 ->  Wu = 8 We = 4
+Case 591
+ W1 = 0.1 W2 = 0.4 ->  Wu = 4 We = 4
+Case 592
+ W1 = 0.1 W2 = 0.4 ->  Wu = 2 We = 4
+Case 593
+ W1 = 0.1 W2 = 0.4 ->  Wu = 1 We = 4
+Case 594
+ W1 = 0.1 W2 = 0.4 ->  Wu = 0.5 We = 4
+Case 595
+ W1 = 0.1 W2 = 0.4 ->  Wu = 10 We = 2
+Case 596
+ W1 = 0.1 W2 = 0.4 ->  Wu = 8 We = 2
+Case 597
+ W1 = 0.1 W2 = 0.4 ->  Wu = 4 We = 2
+Case 598
+ W1 = 0.1 W2 = 0.4 ->  Wu = 2 We = 2
+Case 599
+ W1 = 0.1 W2 = 0.4 ->  Wu = 1 We = 2
+Case 600
+ W1 = 0.1 W2 = 0.4 ->  Wu = 0.5 We = 2
+Case 601
+ W1 = 0.1 W2 = 0.4 ->  Wu = 10 We = 1
+Case 602
+ W1 = 0.1 W2 = 0.4 ->  Wu = 8 We = 1
+Case 603
+ W1 = 0.1 W2 = 0.4 ->  Wu = 4 We = 1
+Case 604
+ W1 = 0.1 W2 = 0.4 ->  Wu = 2 We = 1
+Case 605
+ W1 = 0.1 W2 = 0.4 ->  Wu = 1 We = 1
+Case 606
+ W1 = 0.1 W2 = 0.4 ->  Wu = 0.5 We = 1
+Case 607
+ W1 = 0.1 W2 = 0.4 ->  Wu = 10 We = 0.5
+Case 608
+ W1 = 0.1 W2 = 0.4 ->  Wu = 8 We = 0.5
+Case 609
+ W1 = 0.1 W2 = 0.4 ->  Wu = 4 We = 0.5
+Case 610
+ W1 = 0.1 W2 = 0.4 ->  Wu = 2 We = 0.5
+Case 611
+ W1 = 0.1 W2 = 0.4 ->  Wu = 1 We = 0.5
+Case 612
+ W1 = 0.1 W2 = 0.4 ->  Wu = 0.5 We = 0.5
+Case 613
+ W1 = 0.05 W2 = 0.4 ->  Wu = 10 We = 10
+Case 614
+ W1 = 0.05 W2 = 0.4 ->  Wu = 8 We = 10
+Case 615
+ W1 = 0.05 W2 = 0.4 ->  Wu = 4 We = 10
+Case 616
+ W1 = 0.05 W2 = 0.4 ->  Wu = 2 We = 10
+Case 617
+ W1 = 0.05 W2 = 0.4 ->  Wu = 1 We = 10
+Case 618
+ W1 = 0.05 W2 = 0.4 ->  Wu = 0.5 We = 10
+Case 619
+ W1 = 0.05 W2 = 0.4 ->  Wu = 10 We = 8
+Case 620
+ W1 = 0.05 W2 = 0.4 ->  Wu = 8 We = 8
+Case 621
+ W1 = 0.05 W2 = 0.4 ->  Wu = 4 We = 8
+Case 622
+ W1 = 0.05 W2 = 0.4 ->  Wu = 2 We = 8
+Case 623
+ W1 = 0.05 W2 = 0.4 ->  Wu = 1 We = 8
+Case 624
+ W1 = 0.05 W2 = 0.4 ->  Wu = 0.5 We = 8
+Case 625
+ W1 = 0.05 W2 = 0.4 ->  Wu = 10 We = 4
+Case 626
+ W1 = 0.05 W2 = 0.4 ->  Wu = 8 We = 4
+Case 627
+ W1 = 0.05 W2 = 0.4 ->  Wu = 4 We = 4
+Case 628
+ W1 = 0.05 W2 = 0.4 ->  Wu = 2 We = 4
+Case 629
+ W1 = 0.05 W2 = 0.4 ->  Wu = 1 We = 4
+Case 630
+ W1 = 0.05 W2 = 0.4 ->  Wu = 0.5 We = 4
+Case 631
+ W1 = 0.05 W2 = 0.4 ->  Wu = 10 We = 2
+Case 632
+ W1 = 0.05 W2 = 0.4 ->  Wu = 8 We = 2
+Case 633
+ W1 = 0.05 W2 = 0.4 ->  Wu = 4 We = 2
+Case 634
+ W1 = 0.05 W2 = 0.4 ->  Wu = 2 We = 2
+Case 635
+ W1 = 0.05 W2 = 0.4 ->  Wu = 1 We = 2
+Case 636
+ W1 = 0.05 W2 = 0.4 ->  Wu = 0.5 We = 2
+Case 637
+ W1 = 0.05 W2 = 0.4 ->  Wu = 10 We = 1
+Case 638
+ W1 = 0.05 W2 = 0.4 ->  Wu = 8 We = 1
+Case 639
+ W1 = 0.05 W2 = 0.4 ->  Wu = 4 We = 1
+Case 640
+ W1 = 0.05 W2 = 0.4 ->  Wu = 2 We = 1
+Case 641
+ W1 = 0.05 W2 = 0.4 ->  Wu = 1 We = 1
+Case 642
+ W1 = 0.05 W2 = 0.4 ->  Wu = 0.5 We = 1
+Case 643
+ W1 = 0.05 W2 = 0.4 ->  Wu = 10 We = 0.5
+Case 644
+ W1 = 0.05 W2 = 0.4 ->  Wu = 8 We = 0.5
+Case 645
+ W1 = 0.05 W2 = 0.4 ->  Wu = 4 We = 0.5
+Case 646
+ W1 = 0.05 W2 = 0.4 ->  Wu = 2 We = 0.5
+Case 647
+ W1 = 0.05 W2 = 0.4 ->  Wu = 1 We = 0.5
+Case 648
+ W1 = 0.05 W2 = 0.4 ->  Wu = 0.5 We = 0.5
+Case 649
+ W1 = 1 W2 = 0.2 ->  Wu = 10 We = 10
+Case 650
+ W1 = 1 W2 = 0.2 ->  Wu = 8 We = 10
+Case 651
+ W1 = 1 W2 = 0.2 ->  Wu = 4 We = 10
+Case 652
+ W1 = 1 W2 = 0.2 ->  Wu = 2 We = 10
+Case 653
+ W1 = 1 W2 = 0.2 ->  Wu = 1 We = 10
+Case 654
+ W1 = 1 W2 = 0.2 ->  Wu = 0.5 We = 10
+Case 655
+ W1 = 1 W2 = 0.2 ->  Wu = 10 We = 8
+Case 656
+ W1 = 1 W2 = 0.2 ->  Wu = 8 We = 8
+Case 657
+ W1 = 1 W2 = 0.2 ->  Wu = 4 We = 8
+Case 658
+ W1 = 1 W2 = 0.2 ->  Wu = 2 We = 8
+Case 659
+ W1 = 1 W2 = 0.2 ->  Wu = 1 We = 8
+Case 660
+ W1 = 1 W2 = 0.2 ->  Wu = 0.5 We = 8
+Case 661
+ W1 = 1 W2 = 0.2 ->  Wu = 10 We = 4
+Case 662
+ W1 = 1 W2 = 0.2 ->  Wu = 8 We = 4
+Case 663
+ W1 = 1 W2 = 0.2 ->  Wu = 4 We = 4
+Case 664
+ W1 = 1 W2 = 0.2 ->  Wu = 2 We = 4
+Case 665
+ W1 = 1 W2 = 0.2 ->  Wu = 1 We = 4
+Case 666
+ W1 = 1 W2 = 0.2 ->  Wu = 0.5 We = 4
+Case 667
+ W1 = 1 W2 = 0.2 ->  Wu = 10 We = 2
+Case 668
+ W1 = 1 W2 = 0.2 ->  Wu = 8 We = 2
+Case 669
+ W1 = 1 W2 = 0.2 ->  Wu = 4 We = 2
+Case 670
+ W1 = 1 W2 = 0.2 ->  Wu = 2 We = 2
+Case 671
+ W1 = 1 W2 = 0.2 ->  Wu = 1 We = 2
+Case 672
+ W1 = 1 W2 = 0.2 ->  Wu = 0.5 We = 2
+Case 673
+ W1 = 1 W2 = 0.2 ->  Wu = 10 We = 1
+Case 674
+ W1 = 1 W2 = 0.2 ->  Wu = 8 We = 1
+Case 675
+ W1 = 1 W2 = 0.2 ->  Wu = 4 We = 1
+Case 676
+ W1 = 1 W2 = 0.2 ->  Wu = 2 We = 1
+Case 677
+ W1 = 1 W2 = 0.2 ->  Wu = 1 We = 1
+Case 678
+ W1 = 1 W2 = 0.2 ->  Wu = 0.5 We = 1
+Case 679
+ W1 = 1 W2 = 0.2 ->  Wu = 10 We = 0.5
+Case 680
+ W1 = 1 W2 = 0.2 ->  Wu = 8 We = 0.5
+Case 681
+ W1 = 1 W2 = 0.2 ->  Wu = 4 We = 0.5
+Case 682
+ W1 = 1 W2 = 0.2 ->  Wu = 2 We = 0.5
+Case 683
+ W1 = 1 W2 = 0.2 ->  Wu = 1 We = 0.5
+Case 684
+ W1 = 1 W2 = 0.2 ->  Wu = 0.5 We = 0.5
+Case 685
+ W1 = 0.8 W2 = 0.2 ->  Wu = 10 We = 10
+Case 686
+ W1 = 0.8 W2 = 0.2 ->  Wu = 8 We = 10
+Case 687
+ W1 = 0.8 W2 = 0.2 ->  Wu = 4 We = 10
+Case 688
+ W1 = 0.8 W2 = 0.2 ->  Wu = 2 We = 10
+Case 689
+ W1 = 0.8 W2 = 0.2 ->  Wu = 1 We = 10
+Case 690
+ W1 = 0.8 W2 = 0.2 ->  Wu = 0.5 We = 10
+Case 691
+ W1 = 0.8 W2 = 0.2 ->  Wu = 10 We = 8
+Case 692
+ W1 = 0.8 W2 = 0.2 ->  Wu = 8 We = 8
+Case 693
+ W1 = 0.8 W2 = 0.2 ->  Wu = 4 We = 8
+Case 694
+ W1 = 0.8 W2 = 0.2 ->  Wu = 2 We = 8
+Case 695
+ W1 = 0.8 W2 = 0.2 ->  Wu = 1 We = 8
+Case 696
+ W1 = 0.8 W2 = 0.2 ->  Wu = 0.5 We = 8
+Case 697
+ W1 = 0.8 W2 = 0.2 ->  Wu = 10 We = 4
+Case 698
+ W1 = 0.8 W2 = 0.2 ->  Wu = 8 We = 4
+Case 699
+ W1 = 0.8 W2 = 0.2 ->  Wu = 4 We = 4
+Case 700
+ W1 = 0.8 W2 = 0.2 ->  Wu = 2 We = 4
+Case 701
+ W1 = 0.8 W2 = 0.2 ->  Wu = 1 We = 4
+Case 702
+ W1 = 0.8 W2 = 0.2 ->  Wu = 0.5 We = 4
+Case 703
+ W1 = 0.8 W2 = 0.2 ->  Wu = 10 We = 2
+Case 704
+ W1 = 0.8 W2 = 0.2 ->  Wu = 8 We = 2
+Case 705
+ W1 = 0.8 W2 = 0.2 ->  Wu = 4 We = 2
+Case 706
+ W1 = 0.8 W2 = 0.2 ->  Wu = 2 We = 2
+Case 707
+ W1 = 0.8 W2 = 0.2 ->  Wu = 1 We = 2
+Case 708
+ W1 = 0.8 W2 = 0.2 ->  Wu = 0.5 We = 2
+Case 709
+ W1 = 0.8 W2 = 0.2 ->  Wu = 10 We = 1
+Case 710
+ W1 = 0.8 W2 = 0.2 ->  Wu = 8 We = 1
+Case 711
+ W1 = 0.8 W2 = 0.2 ->  Wu = 4 We = 1
+Case 712
+ W1 = 0.8 W2 = 0.2 ->  Wu = 2 We = 1
+Case 713
+ W1 = 0.8 W2 = 0.2 ->  Wu = 1 We = 1
+Case 714
+ W1 = 0.8 W2 = 0.2 ->  Wu = 0.5 We = 1
+Case 715
+ W1 = 0.8 W2 = 0.2 ->  Wu = 10 We = 0.5
+Case 716
+ W1 = 0.8 W2 = 0.2 ->  Wu = 8 We = 0.5
+Case 717
+ W1 = 0.8 W2 = 0.2 ->  Wu = 4 We = 0.5
+Case 718
+ W1 = 0.8 W2 = 0.2 ->  Wu = 2 We = 0.5
+Case 719
+ W1 = 0.8 W2 = 0.2 ->  Wu = 1 We = 0.5
+Case 720
+ W1 = 0.8 W2 = 0.2 ->  Wu = 0.5 We = 0.5
+Case 721
+ W1 = 0.4 W2 = 0.2 ->  Wu = 10 We = 10
+Case 722
+ W1 = 0.4 W2 = 0.2 ->  Wu = 8 We = 10
+Case 723
+ W1 = 0.4 W2 = 0.2 ->  Wu = 4 We = 10
+Case 724
+ W1 = 0.4 W2 = 0.2 ->  Wu = 2 We = 10
+Case 725
+ W1 = 0.4 W2 = 0.2 ->  Wu = 1 We = 10
+Case 726
+ W1 = 0.4 W2 = 0.2 ->  Wu = 0.5 We = 10
+Case 727
+ W1 = 0.4 W2 = 0.2 ->  Wu = 10 We = 8
+Case 728
+ W1 = 0.4 W2 = 0.2 ->  Wu = 8 We = 8
+Case 729
+ W1 = 0.4 W2 = 0.2 ->  Wu = 4 We = 8
+Case 730
+ W1 = 0.4 W2 = 0.2 ->  Wu = 2 We = 8
+Case 731
+ W1 = 0.4 W2 = 0.2 ->  Wu = 1 We = 8
+Case 732
+ W1 = 0.4 W2 = 0.2 ->  Wu = 0.5 We = 8
+Case 733
+ W1 = 0.4 W2 = 0.2 ->  Wu = 10 We = 4
+Case 734
+ W1 = 0.4 W2 = 0.2 ->  Wu = 8 We = 4
+Case 735
+ W1 = 0.4 W2 = 0.2 ->  Wu = 4 We = 4
+Case 736
+ W1 = 0.4 W2 = 0.2 ->  Wu = 2 We = 4
+Case 737
+ W1 = 0.4 W2 = 0.2 ->  Wu = 1 We = 4
+Case 738
+ W1 = 0.4 W2 = 0.2 ->  Wu = 0.5 We = 4
+Case 739
+ W1 = 0.4 W2 = 0.2 ->  Wu = 10 We = 2
+Case 740
+ W1 = 0.4 W2 = 0.2 ->  Wu = 8 We = 2
+Case 741
+ W1 = 0.4 W2 = 0.2 ->  Wu = 4 We = 2
+Case 742
+ W1 = 0.4 W2 = 0.2 ->  Wu = 2 We = 2
+Case 743
+ W1 = 0.4 W2 = 0.2 ->  Wu = 1 We = 2
+Case 744
+ W1 = 0.4 W2 = 0.2 ->  Wu = 0.5 We = 2
+Case 745
+ W1 = 0.4 W2 = 0.2 ->  Wu = 10 We = 1
+Case 746
+ W1 = 0.4 W2 = 0.2 ->  Wu = 8 We = 1
+Case 747
+ W1 = 0.4 W2 = 0.2 ->  Wu = 4 We = 1
+Case 748
+ W1 = 0.4 W2 = 0.2 ->  Wu = 2 We = 1
+Case 749
+ W1 = 0.4 W2 = 0.2 ->  Wu = 1 We = 1
+Case 750
+ W1 = 0.4 W2 = 0.2 ->  Wu = 0.5 We = 1
+Case 751
+ W1 = 0.4 W2 = 0.2 ->  Wu = 10 We = 0.5
+Case 752
+ W1 = 0.4 W2 = 0.2 ->  Wu = 8 We = 0.5
+Case 753
+ W1 = 0.4 W2 = 0.2 ->  Wu = 4 We = 0.5
+Case 754
+ W1 = 0.4 W2 = 0.2 ->  Wu = 2 We = 0.5
+Case 755
+ W1 = 0.4 W2 = 0.2 ->  Wu = 1 We = 0.5
+Case 756
+ W1 = 0.4 W2 = 0.2 ->  Wu = 0.5 We = 0.5
+Case 757
+ W1 = 0.2 W2 = 0.2 ->  Wu = 10 We = 10
+Case 758
+ W1 = 0.2 W2 = 0.2 ->  Wu = 8 We = 10
+Case 759
+ W1 = 0.2 W2 = 0.2 ->  Wu = 4 We = 10
+Case 760
+ W1 = 0.2 W2 = 0.2 ->  Wu = 2 We = 10
+Case 761
+ W1 = 0.2 W2 = 0.2 ->  Wu = 1 We = 10
+Case 762
+ W1 = 0.2 W2 = 0.2 ->  Wu = 0.5 We = 10
+Case 763
+ W1 = 0.2 W2 = 0.2 ->  Wu = 10 We = 8
+Case 764
+ W1 = 0.2 W2 = 0.2 ->  Wu = 8 We = 8
+Case 765
+ W1 = 0.2 W2 = 0.2 ->  Wu = 4 We = 8
+Case 766
+ W1 = 0.2 W2 = 0.2 ->  Wu = 2 We = 8
+Case 767
+ W1 = 0.2 W2 = 0.2 ->  Wu = 1 We = 8
+Case 768
+ W1 = 0.2 W2 = 0.2 ->  Wu = 0.5 We = 8
+Case 769
+ W1 = 0.2 W2 = 0.2 ->  Wu = 10 We = 4
+Case 770
+ W1 = 0.2 W2 = 0.2 ->  Wu = 8 We = 4
+Case 771
+ W1 = 0.2 W2 = 0.2 ->  Wu = 4 We = 4
+Case 772
+ W1 = 0.2 W2 = 0.2 ->  Wu = 2 We = 4
+Case 773
+ W1 = 0.2 W2 = 0.2 ->  Wu = 1 We = 4
+Case 774
+ W1 = 0.2 W2 = 0.2 ->  Wu = 0.5 We = 4
+Case 775
+ W1 = 0.2 W2 = 0.2 ->  Wu = 10 We = 2
+Case 776
+ W1 = 0.2 W2 = 0.2 ->  Wu = 8 We = 2
+Case 777
+ W1 = 0.2 W2 = 0.2 ->  Wu = 4 We = 2
+Case 778
+ W1 = 0.2 W2 = 0.2 ->  Wu = 2 We = 2
+Case 779
+ W1 = 0.2 W2 = 0.2 ->  Wu = 1 We = 2
+Case 780
+ W1 = 0.2 W2 = 0.2 ->  Wu = 0.5 We = 2
+Case 781
+ W1 = 0.2 W2 = 0.2 ->  Wu = 10 We = 1
+Case 782
+ W1 = 0.2 W2 = 0.2 ->  Wu = 8 We = 1
+Case 783
+ W1 = 0.2 W2 = 0.2 ->  Wu = 4 We = 1
+Case 784
+ W1 = 0.2 W2 = 0.2 ->  Wu = 2 We = 1
+Case 785
+ W1 = 0.2 W2 = 0.2 ->  Wu = 1 We = 1
+Case 786
+ W1 = 0.2 W2 = 0.2 ->  Wu = 0.5 We = 1
+Case 787
+ W1 = 0.2 W2 = 0.2 ->  Wu = 10 We = 0.5
+Case 788
+ W1 = 0.2 W2 = 0.2 ->  Wu = 8 We = 0.5
+Case 789
+ W1 = 0.2 W2 = 0.2 ->  Wu = 4 We = 0.5
+Case 790
+ W1 = 0.2 W2 = 0.2 ->  Wu = 2 We = 0.5
+Case 791
+ W1 = 0.2 W2 = 0.2 ->  Wu = 1 We = 0.5
+Case 792
+ W1 = 0.2 W2 = 0.2 ->  Wu = 0.5 We = 0.5
+Case 793
+ W1 = 0.1 W2 = 0.2 ->  Wu = 10 We = 10
+Case 794
+ W1 = 0.1 W2 = 0.2 ->  Wu = 8 We = 10
+Case 795
+ W1 = 0.1 W2 = 0.2 ->  Wu = 4 We = 10
+Case 796
+ W1 = 0.1 W2 = 0.2 ->  Wu = 2 We = 10
+Case 797
+ W1 = 0.1 W2 = 0.2 ->  Wu = 1 We = 10
+Case 798
+ W1 = 0.1 W2 = 0.2 ->  Wu = 0.5 We = 10
+Case 799
+ W1 = 0.1 W2 = 0.2 ->  Wu = 10 We = 8
+Case 800
+ W1 = 0.1 W2 = 0.2 ->  Wu = 8 We = 8
+Case 801
+ W1 = 0.1 W2 = 0.2 ->  Wu = 4 We = 8
+Case 802
+ W1 = 0.1 W2 = 0.2 ->  Wu = 2 We = 8
+Case 803
+ W1 = 0.1 W2 = 0.2 ->  Wu = 1 We = 8
+Case 804
+ W1 = 0.1 W2 = 0.2 ->  Wu = 0.5 We = 8
+Case 805
+ W1 = 0.1 W2 = 0.2 ->  Wu = 10 We = 4
+Case 806
+ W1 = 0.1 W2 = 0.2 ->  Wu = 8 We = 4
+Case 807
+ W1 = 0.1 W2 = 0.2 ->  Wu = 4 We = 4
+Case 808
+ W1 = 0.1 W2 = 0.2 ->  Wu = 2 We = 4
+Case 809
+ W1 = 0.1 W2 = 0.2 ->  Wu = 1 We = 4
+Case 810
+ W1 = 0.1 W2 = 0.2 ->  Wu = 0.5 We = 4
+Case 811
+ W1 = 0.1 W2 = 0.2 ->  Wu = 10 We = 2
+Case 812
+ W1 = 0.1 W2 = 0.2 ->  Wu = 8 We = 2
+Case 813
+ W1 = 0.1 W2 = 0.2 ->  Wu = 4 We = 2
+Case 814
+ W1 = 0.1 W2 = 0.2 ->  Wu = 2 We = 2
+Case 815
+ W1 = 0.1 W2 = 0.2 ->  Wu = 1 We = 2
+Case 816
+ W1 = 0.1 W2 = 0.2 ->  Wu = 0.5 We = 2
+Case 817
+ W1 = 0.1 W2 = 0.2 ->  Wu = 10 We = 1
+Case 818
+ W1 = 0.1 W2 = 0.2 ->  Wu = 8 We = 1
+Case 819
+ W1 = 0.1 W2 = 0.2 ->  Wu = 4 We = 1
+Case 820
+ W1 = 0.1 W2 = 0.2 ->  Wu = 2 We = 1
+Case 821
+ W1 = 0.1 W2 = 0.2 ->  Wu = 1 We = 1
+Case 822
+ W1 = 0.1 W2 = 0.2 ->  Wu = 0.5 We = 1
+Case 823
+ W1 = 0.1 W2 = 0.2 ->  Wu = 10 We = 0.5
+Case 824
+ W1 = 0.1 W2 = 0.2 ->  Wu = 8 We = 0.5
+Case 825
+ W1 = 0.1 W2 = 0.2 ->  Wu = 4 We = 0.5
+Case 826
+ W1 = 0.1 W2 = 0.2 ->  Wu = 2 We = 0.5
+Case 827
+ W1 = 0.1 W2 = 0.2 ->  Wu = 1 We = 0.5
+Case 828
+ W1 = 0.1 W2 = 0.2 ->  Wu = 0.5 We = 0.5
+Case 829
+ W1 = 0.05 W2 = 0.2 ->  Wu = 10 We = 10
+Case 830
+ W1 = 0.05 W2 = 0.2 ->  Wu = 8 We = 10
+Case 831
+ W1 = 0.05 W2 = 0.2 ->  Wu = 4 We = 10
+Case 832
+ W1 = 0.05 W2 = 0.2 ->  Wu = 2 We = 10
+Case 833
+ W1 = 0.05 W2 = 0.2 ->  Wu = 1 We = 10
+Case 834
+ W1 = 0.05 W2 = 0.2 ->  Wu = 0.5 We = 10
+Case 835
+ W1 = 0.05 W2 = 0.2 ->  Wu = 10 We = 8
+Case 836
+ W1 = 0.05 W2 = 0.2 ->  Wu = 8 We = 8
+Case 837
+ W1 = 0.05 W2 = 0.2 ->  Wu = 4 We = 8
+Case 838
+ W1 = 0.05 W2 = 0.2 ->  Wu = 2 We = 8
+Case 839
+ W1 = 0.05 W2 = 0.2 ->  Wu = 1 We = 8
+Case 840
+ W1 = 0.05 W2 = 0.2 ->  Wu = 0.5 We = 8
+Case 841
+ W1 = 0.05 W2 = 0.2 ->  Wu = 10 We = 4
+Case 842
+ W1 = 0.05 W2 = 0.2 ->  Wu = 8 We = 4
+Case 843
+ W1 = 0.05 W2 = 0.2 ->  Wu = 4 We = 4
+Case 844
+ W1 = 0.05 W2 = 0.2 ->  Wu = 2 We = 4
+Case 845
+ W1 = 0.05 W2 = 0.2 ->  Wu = 1 We = 4
+Case 846
+ W1 = 0.05 W2 = 0.2 ->  Wu = 0.5 We = 4
+Case 847
+ W1 = 0.05 W2 = 0.2 ->  Wu = 10 We = 2
+Case 848
+ W1 = 0.05 W2 = 0.2 ->  Wu = 8 We = 2
+Case 849
+ W1 = 0.05 W2 = 0.2 ->  Wu = 4 We = 2
+Case 850
+ W1 = 0.05 W2 = 0.2 ->  Wu = 2 We = 2
+Case 851
+ W1 = 0.05 W2 = 0.2 ->  Wu = 1 We = 2
+Case 852
+ W1 = 0.05 W2 = 0.2 ->  Wu = 0.5 We = 2
+Case 853
+ W1 = 0.05 W2 = 0.2 ->  Wu = 10 We = 1
+Case 854
+ W1 = 0.05 W2 = 0.2 ->  Wu = 8 We = 1
+Case 855
+ W1 = 0.05 W2 = 0.2 ->  Wu = 4 We = 1
+Case 856
+ W1 = 0.05 W2 = 0.2 ->  Wu = 2 We = 1
+Case 857
+ W1 = 0.05 W2 = 0.2 ->  Wu = 1 We = 1
+Case 858
+ W1 = 0.05 W2 = 0.2 ->  Wu = 0.5 We = 1
+Case 859
+ W1 = 0.05 W2 = 0.2 ->  Wu = 10 We = 0.5
+Case 860
+ W1 = 0.05 W2 = 0.2 ->  Wu = 8 We = 0.5
+Case 861
+ W1 = 0.05 W2 = 0.2 ->  Wu = 4 We = 0.5
+Case 862
+ W1 = 0.05 W2 = 0.2 ->  Wu = 2 We = 0.5
+Case 863
+ W1 = 0.05 W2 = 0.2 ->  Wu = 1 We = 0.5
+Case 864
+ W1 = 0.05 W2 = 0.2 ->  Wu = 0.5 We = 0.5
+Case 865
+ W1 = 1 W2 = 0.1 ->  Wu = 10 We = 10
+Case 866
+ W1 = 1 W2 = 0.1 ->  Wu = 8 We = 10
+Case 867
+ W1 = 1 W2 = 0.1 ->  Wu = 4 We = 10
+Case 868
+ W1 = 1 W2 = 0.1 ->  Wu = 2 We = 10
+Case 869
+ W1 = 1 W2 = 0.1 ->  Wu = 1 We = 10
+Case 870
+ W1 = 1 W2 = 0.1 ->  Wu = 0.5 We = 10
+Case 871
+ W1 = 1 W2 = 0.1 ->  Wu = 10 We = 8
+Case 872
+ W1 = 1 W2 = 0.1 ->  Wu = 8 We = 8
+Case 873
+ W1 = 1 W2 = 0.1 ->  Wu = 4 We = 8
+Case 874
+ W1 = 1 W2 = 0.1 ->  Wu = 2 We = 8
+Case 875
+ W1 = 1 W2 = 0.1 ->  Wu = 1 We = 8
+Case 876
+ W1 = 1 W2 = 0.1 ->  Wu = 0.5 We = 8
+Case 877
+ W1 = 1 W2 = 0.1 ->  Wu = 10 We = 4
+Case 878
+ W1 = 1 W2 = 0.1 ->  Wu = 8 We = 4
+Case 879
+ W1 = 1 W2 = 0.1 ->  Wu = 4 We = 4
+Case 880
+ W1 = 1 W2 = 0.1 ->  Wu = 2 We = 4
+Case 881
+ W1 = 1 W2 = 0.1 ->  Wu = 1 We = 4
+Case 882
+ W1 = 1 W2 = 0.1 ->  Wu = 0.5 We = 4
+Case 883
+ W1 = 1 W2 = 0.1 ->  Wu = 10 We = 2
+Case 884
+ W1 = 1 W2 = 0.1 ->  Wu = 8 We = 2
+Case 885
+ W1 = 1 W2 = 0.1 ->  Wu = 4 We = 2
+Case 886
+ W1 = 1 W2 = 0.1 ->  Wu = 2 We = 2
+Case 887
+ W1 = 1 W2 = 0.1 ->  Wu = 1 We = 2
+Case 888
+ W1 = 1 W2 = 0.1 ->  Wu = 0.5 We = 2
+Case 889
+ W1 = 1 W2 = 0.1 ->  Wu = 10 We = 1
+Case 890
+ W1 = 1 W2 = 0.1 ->  Wu = 8 We = 1
+Case 891
+ W1 = 1 W2 = 0.1 ->  Wu = 4 We = 1
+Case 892
+ W1 = 1 W2 = 0.1 ->  Wu = 2 We = 1
+Case 893
+ W1 = 1 W2 = 0.1 ->  Wu = 1 We = 1
+Case 894
+ W1 = 1 W2 = 0.1 ->  Wu = 0.5 We = 1
+Case 895
+ W1 = 1 W2 = 0.1 ->  Wu = 10 We = 0.5
+Case 896
+ W1 = 1 W2 = 0.1 ->  Wu = 8 We = 0.5
+Case 897
+ W1 = 1 W2 = 0.1 ->  Wu = 4 We = 0.5
+Case 898
+ W1 = 1 W2 = 0.1 ->  Wu = 2 We = 0.5
+Case 899
+ W1 = 1 W2 = 0.1 ->  Wu = 1 We = 0.5
+Case 900
+ W1 = 1 W2 = 0.1 ->  Wu = 0.5 We = 0.5
+Case 901
+ W1 = 0.8 W2 = 0.1 ->  Wu = 10 We = 10
+Case 902
+ W1 = 0.8 W2 = 0.1 ->  Wu = 8 We = 10
+Case 903
+ W1 = 0.8 W2 = 0.1 ->  Wu = 4 We = 10
+Case 904
+ W1 = 0.8 W2 = 0.1 ->  Wu = 2 We = 10
+Case 905
+ W1 = 0.8 W2 = 0.1 ->  Wu = 1 We = 10
+Case 906
+ W1 = 0.8 W2 = 0.1 ->  Wu = 0.5 We = 10
+Case 907
+ W1 = 0.8 W2 = 0.1 ->  Wu = 10 We = 8
+Case 908
+ W1 = 0.8 W2 = 0.1 ->  Wu = 8 We = 8
+Case 909
+ W1 = 0.8 W2 = 0.1 ->  Wu = 4 We = 8
+Case 910
+ W1 = 0.8 W2 = 0.1 ->  Wu = 2 We = 8
+Case 911
+ W1 = 0.8 W2 = 0.1 ->  Wu = 1 We = 8
+Case 912
+ W1 = 0.8 W2 = 0.1 ->  Wu = 0.5 We = 8
+Case 913
+ W1 = 0.8 W2 = 0.1 ->  Wu = 10 We = 4
+Case 914
+ W1 = 0.8 W2 = 0.1 ->  Wu = 8 We = 4
+Case 915
+ W1 = 0.8 W2 = 0.1 ->  Wu = 4 We = 4
+Case 916
+ W1 = 0.8 W2 = 0.1 ->  Wu = 2 We = 4
+Case 917
+ W1 = 0.8 W2 = 0.1 ->  Wu = 1 We = 4
+Case 918
+ W1 = 0.8 W2 = 0.1 ->  Wu = 0.5 We = 4
+Case 919
+ W1 = 0.8 W2 = 0.1 ->  Wu = 10 We = 2
+Case 920
+ W1 = 0.8 W2 = 0.1 ->  Wu = 8 We = 2
+Case 921
+ W1 = 0.8 W2 = 0.1 ->  Wu = 4 We = 2
+Case 922
+ W1 = 0.8 W2 = 0.1 ->  Wu = 2 We = 2
+Case 923
+ W1 = 0.8 W2 = 0.1 ->  Wu = 1 We = 2
+Case 924
+ W1 = 0.8 W2 = 0.1 ->  Wu = 0.5 We = 2
+Case 925
+ W1 = 0.8 W2 = 0.1 ->  Wu = 10 We = 1
+Case 926
+ W1 = 0.8 W2 = 0.1 ->  Wu = 8 We = 1
+Case 927
+ W1 = 0.8 W2 = 0.1 ->  Wu = 4 We = 1
+Case 928
+ W1 = 0.8 W2 = 0.1 ->  Wu = 2 We = 1
+Case 929
+ W1 = 0.8 W2 = 0.1 ->  Wu = 1 We = 1
+Case 930
+ W1 = 0.8 W2 = 0.1 ->  Wu = 0.5 We = 1
+Case 931
+ W1 = 0.8 W2 = 0.1 ->  Wu = 10 We = 0.5
+Case 932
+ W1 = 0.8 W2 = 0.1 ->  Wu = 8 We = 0.5
+Case 933
+ W1 = 0.8 W2 = 0.1 ->  Wu = 4 We = 0.5
+Case 934
+ W1 = 0.8 W2 = 0.1 ->  Wu = 2 We = 0.5
+Case 935
+ W1 = 0.8 W2 = 0.1 ->  Wu = 1 We = 0.5
+Case 936
+ W1 = 0.8 W2 = 0.1 ->  Wu = 0.5 We = 0.5
+Case 937
+ W1 = 0.4 W2 = 0.1 ->  Wu = 10 We = 10
+Case 938
+ W1 = 0.4 W2 = 0.1 ->  Wu = 8 We = 10
+Case 939
+ W1 = 0.4 W2 = 0.1 ->  Wu = 4 We = 10
+Case 940
+ W1 = 0.4 W2 = 0.1 ->  Wu = 2 We = 10
+Case 941
+ W1 = 0.4 W2 = 0.1 ->  Wu = 1 We = 10
+Case 942
+ W1 = 0.4 W2 = 0.1 ->  Wu = 0.5 We = 10
+Case 943
+ W1 = 0.4 W2 = 0.1 ->  Wu = 10 We = 8
+Case 944
+ W1 = 0.4 W2 = 0.1 ->  Wu = 8 We = 8
+Case 945
+ W1 = 0.4 W2 = 0.1 ->  Wu = 4 We = 8
+Case 946
+ W1 = 0.4 W2 = 0.1 ->  Wu = 2 We = 8
+Case 947
+ W1 = 0.4 W2 = 0.1 ->  Wu = 1 We = 8
+Case 948
+ W1 = 0.4 W2 = 0.1 ->  Wu = 0.5 We = 8
+Case 949
+ W1 = 0.4 W2 = 0.1 ->  Wu = 10 We = 4
+Case 950
+ W1 = 0.4 W2 = 0.1 ->  Wu = 8 We = 4
+Case 951
+ W1 = 0.4 W2 = 0.1 ->  Wu = 4 We = 4
+Case 952
+ W1 = 0.4 W2 = 0.1 ->  Wu = 2 We = 4
+Case 953
+ W1 = 0.4 W2 = 0.1 ->  Wu = 1 We = 4
+Case 954
+ W1 = 0.4 W2 = 0.1 ->  Wu = 0.5 We = 4
+Case 955
+ W1 = 0.4 W2 = 0.1 ->  Wu = 10 We = 2
+Case 956
+ W1 = 0.4 W2 = 0.1 ->  Wu = 8 We = 2
+Case 957
+ W1 = 0.4 W2 = 0.1 ->  Wu = 4 We = 2
+Case 958
+ W1 = 0.4 W2 = 0.1 ->  Wu = 2 We = 2
+Case 959
+ W1 = 0.4 W2 = 0.1 ->  Wu = 1 We = 2
+Case 960
+ W1 = 0.4 W2 = 0.1 ->  Wu = 0.5 We = 2
+Case 961
+ W1 = 0.4 W2 = 0.1 ->  Wu = 10 We = 1
+Case 962
+ W1 = 0.4 W2 = 0.1 ->  Wu = 8 We = 1
+Case 963
+ W1 = 0.4 W2 = 0.1 ->  Wu = 4 We = 1
+Case 964
+ W1 = 0.4 W2 = 0.1 ->  Wu = 2 We = 1
+Case 965
+ W1 = 0.4 W2 = 0.1 ->  Wu = 1 We = 1
+Case 966
+ W1 = 0.4 W2 = 0.1 ->  Wu = 0.5 We = 1
+Case 967
+ W1 = 0.4 W2 = 0.1 ->  Wu = 10 We = 0.5
+Case 968
+ W1 = 0.4 W2 = 0.1 ->  Wu = 8 We = 0.5
+Case 969
+ W1 = 0.4 W2 = 0.1 ->  Wu = 4 We = 0.5
+Case 970
+ W1 = 0.4 W2 = 0.1 ->  Wu = 2 We = 0.5
+Case 971
+ W1 = 0.4 W2 = 0.1 ->  Wu = 1 We = 0.5
+Case 972
+ W1 = 0.4 W2 = 0.1 ->  Wu = 0.5 We = 0.5
+Case 973
+ W1 = 0.2 W2 = 0.1 ->  Wu = 10 We = 10
+Case 974
+ W1 = 0.2 W2 = 0.1 ->  Wu = 8 We = 10
+Case 975
+ W1 = 0.2 W2 = 0.1 ->  Wu = 4 We = 10
+Case 976
+ W1 = 0.2 W2 = 0.1 ->  Wu = 2 We = 10
+Case 977
+ W1 = 0.2 W2 = 0.1 ->  Wu = 1 We = 10
+Case 978
+ W1 = 0.2 W2 = 0.1 ->  Wu = 0.5 We = 10
+Case 979
+ W1 = 0.2 W2 = 0.1 ->  Wu = 10 We = 8
+Case 980
+ W1 = 0.2 W2 = 0.1 ->  Wu = 8 We = 8
+Case 981
+ W1 = 0.2 W2 = 0.1 ->  Wu = 4 We = 8
+Case 982
+ W1 = 0.2 W2 = 0.1 ->  Wu = 2 We = 8
+Case 983
+ W1 = 0.2 W2 = 0.1 ->  Wu = 1 We = 8
+Case 984
+ W1 = 0.2 W2 = 0.1 ->  Wu = 0.5 We = 8
+Case 985
+ W1 = 0.2 W2 = 0.1 ->  Wu = 10 We = 4
+Case 986
+ W1 = 0.2 W2 = 0.1 ->  Wu = 8 We = 4
+Case 987
+ W1 = 0.2 W2 = 0.1 ->  Wu = 4 We = 4
+Case 988
+ W1 = 0.2 W2 = 0.1 ->  Wu = 2 We = 4
+Case 989
+ W1 = 0.2 W2 = 0.1 ->  Wu = 1 We = 4
+Case 990
+ W1 = 0.2 W2 = 0.1 ->  Wu = 0.5 We = 4
+Case 991
+ W1 = 0.2 W2 = 0.1 ->  Wu = 10 We = 2
+Case 992
+ W1 = 0.2 W2 = 0.1 ->  Wu = 8 We = 2
+Case 993
+ W1 = 0.2 W2 = 0.1 ->  Wu = 4 We = 2
+Case 994
+ W1 = 0.2 W2 = 0.1 ->  Wu = 2 We = 2
+Case 995
+ W1 = 0.2 W2 = 0.1 ->  Wu = 1 We = 2
+Case 996
+ W1 = 0.2 W2 = 0.1 ->  Wu = 0.5 We = 2
+Case 997
+ W1 = 0.2 W2 = 0.1 ->  Wu = 10 We = 1
+Case 998
+ W1 = 0.2 W2 = 0.1 ->  Wu = 8 We = 1
+Case 999
+ W1 = 0.2 W2 = 0.1 ->  Wu = 4 We = 1
+Case 1000
+ W1 = 0.2 W2 = 0.1 ->  Wu = 2 We = 1
+Case 1001
+ W1 = 0.2 W2 = 0.1 ->  Wu = 1 We = 1
+Case 1002
+ W1 = 0.2 W2 = 0.1 ->  Wu = 0.5 We = 1
+Case 1003
+ W1 = 0.2 W2 = 0.1 ->  Wu = 10 We = 0.5
+Case 1004
+ W1 = 0.2 W2 = 0.1 ->  Wu = 8 We = 0.5
+Case 1005
+ W1 = 0.2 W2 = 0.1 ->  Wu = 4 We = 0.5
+Case 1006
+ W1 = 0.2 W2 = 0.1 ->  Wu = 2 We = 0.5
+Case 1007
+ W1 = 0.2 W2 = 0.1 ->  Wu = 1 We = 0.5
+Case 1008
+ W1 = 0.2 W2 = 0.1 ->  Wu = 0.5 We = 0.5
+Case 1009
+ W1 = 0.1 W2 = 0.1 ->  Wu = 10 We = 10
+Case 1010
+ W1 = 0.1 W2 = 0.1 ->  Wu = 8 We = 10
+Case 1011
+ W1 = 0.1 W2 = 0.1 ->  Wu = 4 We = 10
+Case 1012
+ W1 = 0.1 W2 = 0.1 ->  Wu = 2 We = 10
+Case 1013
+ W1 = 0.1 W2 = 0.1 ->  Wu = 1 We = 10
+Case 1014
+ W1 = 0.1 W2 = 0.1 ->  Wu = 0.5 We = 10
+Case 1015
+ W1 = 0.1 W2 = 0.1 ->  Wu = 10 We = 8
+Case 1016
+ W1 = 0.1 W2 = 0.1 ->  Wu = 8 We = 8
+Case 1017
+ W1 = 0.1 W2 = 0.1 ->  Wu = 4 We = 8
+Case 1018
+ W1 = 0.1 W2 = 0.1 ->  Wu = 2 We = 8
+Case 1019
+ W1 = 0.1 W2 = 0.1 ->  Wu = 1 We = 8
+Case 1020
+ W1 = 0.1 W2 = 0.1 ->  Wu = 0.5 We = 8
+Case 1021
+ W1 = 0.1 W2 = 0.1 ->  Wu = 10 We = 4
+Case 1022
+ W1 = 0.1 W2 = 0.1 ->  Wu = 8 We = 4
+Case 1023
+ W1 = 0.1 W2 = 0.1 ->  Wu = 4 We = 4
+Case 1024
+ W1 = 0.1 W2 = 0.1 ->  Wu = 2 We = 4
+Case 1025
+ W1 = 0.1 W2 = 0.1 ->  Wu = 1 We = 4
+Case 1026
+ W1 = 0.1 W2 = 0.1 ->  Wu = 0.5 We = 4
+Case 1027
+ W1 = 0.1 W2 = 0.1 ->  Wu = 10 We = 2
+Case 1028
+ W1 = 0.1 W2 = 0.1 ->  Wu = 8 We = 2
+Case 1029
+ W1 = 0.1 W2 = 0.1 ->  Wu = 4 We = 2
+Case 1030
+ W1 = 0.1 W2 = 0.1 ->  Wu = 2 We = 2
+Case 1031
+ W1 = 0.1 W2 = 0.1 ->  Wu = 1 We = 2
+Case 1032
+ W1 = 0.1 W2 = 0.1 ->  Wu = 0.5 We = 2
+Case 1033
+ W1 = 0.1 W2 = 0.1 ->  Wu = 10 We = 1
+Case 1034
+ W1 = 0.1 W2 = 0.1 ->  Wu = 8 We = 1
+Case 1035
+ W1 = 0.1 W2 = 0.1 ->  Wu = 4 We = 1
+Case 1036
+ W1 = 0.1 W2 = 0.1 ->  Wu = 2 We = 1
+Case 1037
+ W1 = 0.1 W2 = 0.1 ->  Wu = 1 We = 1
+Case 1038
+ W1 = 0.1 W2 = 0.1 ->  Wu = 0.5 We = 1
+Case 1039
+ W1 = 0.1 W2 = 0.1 ->  Wu = 10 We = 0.5
+Case 1040
+ W1 = 0.1 W2 = 0.1 ->  Wu = 8 We = 0.5
+Case 1041
+ W1 = 0.1 W2 = 0.1 ->  Wu = 4 We = 0.5
+Case 1042
+ W1 = 0.1 W2 = 0.1 ->  Wu = 2 We = 0.5
+Case 1043
+ W1 = 0.1 W2 = 0.1 ->  Wu = 1 We = 0.5
+Case 1044
+ W1 = 0.1 W2 = 0.1 ->  Wu = 0.5 We = 0.5
+Case 1045
+ W1 = 0.05 W2 = 0.1 ->  Wu = 10 We = 10
+Case 1046
+ W1 = 0.05 W2 = 0.1 ->  Wu = 8 We = 10
+Case 1047
+ W1 = 0.05 W2 = 0.1 ->  Wu = 4 We = 10
+Case 1048
+ W1 = 0.05 W2 = 0.1 ->  Wu = 2 We = 10
+Case 1049
+ W1 = 0.05 W2 = 0.1 ->  Wu = 1 We = 10
+Case 1050
+ W1 = 0.05 W2 = 0.1 ->  Wu = 0.5 We = 10
+Case 1051
+ W1 = 0.05 W2 = 0.1 ->  Wu = 10 We = 8
+Case 1052
+ W1 = 0.05 W2 = 0.1 ->  Wu = 8 We = 8
+Case 1053
+ W1 = 0.05 W2 = 0.1 ->  Wu = 4 We = 8
+Case 1054
+ W1 = 0.05 W2 = 0.1 ->  Wu = 2 We = 8
+Case 1055
+ W1 = 0.05 W2 = 0.1 ->  Wu = 1 We = 8
+Case 1056
+ W1 = 0.05 W2 = 0.1 ->  Wu = 0.5 We = 8
+Case 1057
+ W1 = 0.05 W2 = 0.1 ->  Wu = 10 We = 4
+Case 1058
+ W1 = 0.05 W2 = 0.1 ->  Wu = 8 We = 4
+Case 1059
+ W1 = 0.05 W2 = 0.1 ->  Wu = 4 We = 4
+Case 1060
+ W1 = 0.05 W2 = 0.1 ->  Wu = 2 We = 4
+Case 1061
+ W1 = 0.05 W2 = 0.1 ->  Wu = 1 We = 4
+Case 1062
+ W1 = 0.05 W2 = 0.1 ->  Wu = 0.5 We = 4
+Case 1063
+ W1 = 0.05 W2 = 0.1 ->  Wu = 10 We = 2
+Case 1064
+ W1 = 0.05 W2 = 0.1 ->  Wu = 8 We = 2
+Case 1065
+ W1 = 0.05 W2 = 0.1 ->  Wu = 4 We = 2
+Case 1066
+ W1 = 0.05 W2 = 0.1 ->  Wu = 2 We = 2
+Case 1067
+ W1 = 0.05 W2 = 0.1 ->  Wu = 1 We = 2
+Case 1068
+ W1 = 0.05 W2 = 0.1 ->  Wu = 0.5 We = 2
+Case 1069
+ W1 = 0.05 W2 = 0.1 ->  Wu = 10 We = 1
+Case 1070
+ W1 = 0.05 W2 = 0.1 ->  Wu = 8 We = 1
+Case 1071
+ W1 = 0.05 W2 = 0.1 ->  Wu = 4 We = 1
+Case 1072
+ W1 = 0.05 W2 = 0.1 ->  Wu = 2 We = 1
+Case 1073
+ W1 = 0.05 W2 = 0.1 ->  Wu = 1 We = 1
+Case 1074
+ W1 = 0.05 W2 = 0.1 ->  Wu = 0.5 We = 1
+Case 1075
+ W1 = 0.05 W2 = 0.1 ->  Wu = 10 We = 0.5
+Case 1076
+ W1 = 0.05 W2 = 0.1 ->  Wu = 8 We = 0.5
+Case 1077
+ W1 = 0.05 W2 = 0.1 ->  Wu = 4 We = 0.5
+Case 1078
+ W1 = 0.05 W2 = 0.1 ->  Wu = 2 We = 0.5
+Case 1079
+ W1 = 0.05 W2 = 0.1 ->  Wu = 1 We = 0.5
+Case 1080
+ W1 = 0.05 W2 = 0.1 ->  Wu = 0.5 We = 0.5
+Case 1081
+ W1 = 1 W2 = 0.05 ->  Wu = 10 We = 10
+Case 1082
+ W1 = 1 W2 = 0.05 ->  Wu = 8 We = 10
+Case 1083
+ W1 = 1 W2 = 0.05 ->  Wu = 4 We = 10
+Case 1084
+ W1 = 1 W2 = 0.05 ->  Wu = 2 We = 10
+Case 1085
+ W1 = 1 W2 = 0.05 ->  Wu = 1 We = 10
+Case 1086
+ W1 = 1 W2 = 0.05 ->  Wu = 0.5 We = 10
+Case 1087
+ W1 = 1 W2 = 0.05 ->  Wu = 10 We = 8
+Case 1088
+ W1 = 1 W2 = 0.05 ->  Wu = 8 We = 8
+Case 1089
+ W1 = 1 W2 = 0.05 ->  Wu = 4 We = 8
+Case 1090
+ W1 = 1 W2 = 0.05 ->  Wu = 2 We = 8
+Case 1091
+ W1 = 1 W2 = 0.05 ->  Wu = 1 We = 8
+Case 1092
+ W1 = 1 W2 = 0.05 ->  Wu = 0.5 We = 8
+Case 1093
+ W1 = 1 W2 = 0.05 ->  Wu = 10 We = 4
+Case 1094
+ W1 = 1 W2 = 0.05 ->  Wu = 8 We = 4
+Case 1095
+ W1 = 1 W2 = 0.05 ->  Wu = 4 We = 4
+Case 1096
+ W1 = 1 W2 = 0.05 ->  Wu = 2 We = 4
+Case 1097
+ W1 = 1 W2 = 0.05 ->  Wu = 1 We = 4
+Case 1098
+ W1 = 1 W2 = 0.05 ->  Wu = 0.5 We = 4
+Case 1099
+ W1 = 1 W2 = 0.05 ->  Wu = 10 We = 2
+Case 1100
+ W1 = 1 W2 = 0.05 ->  Wu = 8 We = 2
+Case 1101
+ W1 = 1 W2 = 0.05 ->  Wu = 4 We = 2
+Case 1102
+ W1 = 1 W2 = 0.05 ->  Wu = 2 We = 2
+Case 1103
+ W1 = 1 W2 = 0.05 ->  Wu = 1 We = 2
+Case 1104
+ W1 = 1 W2 = 0.05 ->  Wu = 0.5 We = 2
+Case 1105
+ W1 = 1 W2 = 0.05 ->  Wu = 10 We = 1
+Case 1106
+ W1 = 1 W2 = 0.05 ->  Wu = 8 We = 1
+Case 1107
+ W1 = 1 W2 = 0.05 ->  Wu = 4 We = 1
+Case 1108
+ W1 = 1 W2 = 0.05 ->  Wu = 2 We = 1
+Case 1109
+ W1 = 1 W2 = 0.05 ->  Wu = 1 We = 1
+Case 1110
+ W1 = 1 W2 = 0.05 ->  Wu = 0.5 We = 1
+Case 1111
+ W1 = 1 W2 = 0.05 ->  Wu = 10 We = 0.5
+Case 1112
+ W1 = 1 W2 = 0.05 ->  Wu = 8 We = 0.5
+Case 1113
+ W1 = 1 W2 = 0.05 ->  Wu = 4 We = 0.5
+Case 1114
+ W1 = 1 W2 = 0.05 ->  Wu = 2 We = 0.5
+Case 1115
+ W1 = 1 W2 = 0.05 ->  Wu = 1 We = 0.5
+Case 1116
+ W1 = 1 W2 = 0.05 ->  Wu = 0.5 We = 0.5
+Case 1117
+ W1 = 0.8 W2 = 0.05 ->  Wu = 10 We = 10
+Case 1118
+ W1 = 0.8 W2 = 0.05 ->  Wu = 8 We = 10
+Case 1119
+ W1 = 0.8 W2 = 0.05 ->  Wu = 4 We = 10
+Case 1120
+ W1 = 0.8 W2 = 0.05 ->  Wu = 2 We = 10
+Case 1121
+ W1 = 0.8 W2 = 0.05 ->  Wu = 1 We = 10
+Case 1122
+ W1 = 0.8 W2 = 0.05 ->  Wu = 0.5 We = 10
+Case 1123
+ W1 = 0.8 W2 = 0.05 ->  Wu = 10 We = 8
+Case 1124
+ W1 = 0.8 W2 = 0.05 ->  Wu = 8 We = 8
+Case 1125
+ W1 = 0.8 W2 = 0.05 ->  Wu = 4 We = 8
+Case 1126
+ W1 = 0.8 W2 = 0.05 ->  Wu = 2 We = 8
+Case 1127
+ W1 = 0.8 W2 = 0.05 ->  Wu = 1 We = 8
+Case 1128
+ W1 = 0.8 W2 = 0.05 ->  Wu = 0.5 We = 8
+Case 1129
+ W1 = 0.8 W2 = 0.05 ->  Wu = 10 We = 4
+Case 1130
+ W1 = 0.8 W2 = 0.05 ->  Wu = 8 We = 4
+Case 1131
+ W1 = 0.8 W2 = 0.05 ->  Wu = 4 We = 4
+Case 1132
+ W1 = 0.8 W2 = 0.05 ->  Wu = 2 We = 4
+Case 1133
+ W1 = 0.8 W2 = 0.05 ->  Wu = 1 We = 4
+Case 1134
+ W1 = 0.8 W2 = 0.05 ->  Wu = 0.5 We = 4
+Case 1135
+ W1 = 0.8 W2 = 0.05 ->  Wu = 10 We = 2
+Case 1136
+ W1 = 0.8 W2 = 0.05 ->  Wu = 8 We = 2
+Case 1137
+ W1 = 0.8 W2 = 0.05 ->  Wu = 4 We = 2
+Case 1138
+ W1 = 0.8 W2 = 0.05 ->  Wu = 2 We = 2
+Case 1139
+ W1 = 0.8 W2 = 0.05 ->  Wu = 1 We = 2
+Case 1140
+ W1 = 0.8 W2 = 0.05 ->  Wu = 0.5 We = 2
+Case 1141
+ W1 = 0.8 W2 = 0.05 ->  Wu = 10 We = 1
+Case 1142
+ W1 = 0.8 W2 = 0.05 ->  Wu = 8 We = 1
+Case 1143
+ W1 = 0.8 W2 = 0.05 ->  Wu = 4 We = 1
+Case 1144
+ W1 = 0.8 W2 = 0.05 ->  Wu = 2 We = 1
+Case 1145
+ W1 = 0.8 W2 = 0.05 ->  Wu = 1 We = 1
+Case 1146
+ W1 = 0.8 W2 = 0.05 ->  Wu = 0.5 We = 1
+Case 1147
+ W1 = 0.8 W2 = 0.05 ->  Wu = 10 We = 0.5
+Case 1148
+ W1 = 0.8 W2 = 0.05 ->  Wu = 8 We = 0.5
+Case 1149
+ W1 = 0.8 W2 = 0.05 ->  Wu = 4 We = 0.5
+Case 1150
+ W1 = 0.8 W2 = 0.05 ->  Wu = 2 We = 0.5
+Case 1151
+ W1 = 0.8 W2 = 0.05 ->  Wu = 1 We = 0.5
+Case 1152
+ W1 = 0.8 W2 = 0.05 ->  Wu = 0.5 We = 0.5
+Case 1153
+ W1 = 0.4 W2 = 0.05 ->  Wu = 10 We = 10
+Case 1154
+ W1 = 0.4 W2 = 0.05 ->  Wu = 8 We = 10
+Case 1155
+ W1 = 0.4 W2 = 0.05 ->  Wu = 4 We = 10
+Case 1156
+ W1 = 0.4 W2 = 0.05 ->  Wu = 2 We = 10
+Case 1157
+ W1 = 0.4 W2 = 0.05 ->  Wu = 1 We = 10
+Case 1158
+ W1 = 0.4 W2 = 0.05 ->  Wu = 0.5 We = 10
+Case 1159
+ W1 = 0.4 W2 = 0.05 ->  Wu = 10 We = 8
+Case 1160
+ W1 = 0.4 W2 = 0.05 ->  Wu = 8 We = 8
+Case 1161
+ W1 = 0.4 W2 = 0.05 ->  Wu = 4 We = 8
+Case 1162
+ W1 = 0.4 W2 = 0.05 ->  Wu = 2 We = 8
+Case 1163
+ W1 = 0.4 W2 = 0.05 ->  Wu = 1 We = 8
+Case 1164
+ W1 = 0.4 W2 = 0.05 ->  Wu = 0.5 We = 8
+Case 1165
+ W1 = 0.4 W2 = 0.05 ->  Wu = 10 We = 4
+Case 1166
+ W1 = 0.4 W2 = 0.05 ->  Wu = 8 We = 4
+Case 1167
+ W1 = 0.4 W2 = 0.05 ->  Wu = 4 We = 4
+Case 1168
+ W1 = 0.4 W2 = 0.05 ->  Wu = 2 We = 4
+Case 1169
+ W1 = 0.4 W2 = 0.05 ->  Wu = 1 We = 4
+Case 1170
+ W1 = 0.4 W2 = 0.05 ->  Wu = 0.5 We = 4
+Case 1171
+ W1 = 0.4 W2 = 0.05 ->  Wu = 10 We = 2
+Case 1172
+ W1 = 0.4 W2 = 0.05 ->  Wu = 8 We = 2
+Case 1173
+ W1 = 0.4 W2 = 0.05 ->  Wu = 4 We = 2
+Case 1174
+ W1 = 0.4 W2 = 0.05 ->  Wu = 2 We = 2
+Case 1175
+ W1 = 0.4 W2 = 0.05 ->  Wu = 1 We = 2
+Case 1176
+ W1 = 0.4 W2 = 0.05 ->  Wu = 0.5 We = 2
+Case 1177
+ W1 = 0.4 W2 = 0.05 ->  Wu = 10 We = 1
+Case 1178
+ W1 = 0.4 W2 = 0.05 ->  Wu = 8 We = 1
+Case 1179
+ W1 = 0.4 W2 = 0.05 ->  Wu = 4 We = 1
+Case 1180
+ W1 = 0.4 W2 = 0.05 ->  Wu = 2 We = 1
+Case 1181
+ W1 = 0.4 W2 = 0.05 ->  Wu = 1 We = 1
+Case 1182
+ W1 = 0.4 W2 = 0.05 ->  Wu = 0.5 We = 1
+Case 1183
+ W1 = 0.4 W2 = 0.05 ->  Wu = 10 We = 0.5
+Case 1184
+ W1 = 0.4 W2 = 0.05 ->  Wu = 8 We = 0.5
+Case 1185
+ W1 = 0.4 W2 = 0.05 ->  Wu = 4 We = 0.5
+Case 1186
+ W1 = 0.4 W2 = 0.05 ->  Wu = 2 We = 0.5
+Case 1187
+ W1 = 0.4 W2 = 0.05 ->  Wu = 1 We = 0.5
+Case 1188
+ W1 = 0.4 W2 = 0.05 ->  Wu = 0.5 We = 0.5
+Case 1189
+ W1 = 0.2 W2 = 0.05 ->  Wu = 10 We = 10
+Case 1190
+ W1 = 0.2 W2 = 0.05 ->  Wu = 8 We = 10
+Case 1191
+ W1 = 0.2 W2 = 0.05 ->  Wu = 4 We = 10
+Case 1192
+ W1 = 0.2 W2 = 0.05 ->  Wu = 2 We = 10
+Case 1193
+ W1 = 0.2 W2 = 0.05 ->  Wu = 1 We = 10
+Case 1194
+ W1 = 0.2 W2 = 0.05 ->  Wu = 0.5 We = 10
+Case 1195
+ W1 = 0.2 W2 = 0.05 ->  Wu = 10 We = 8
+Case 1196
+ W1 = 0.2 W2 = 0.05 ->  Wu = 8 We = 8
+Case 1197
+ W1 = 0.2 W2 = 0.05 ->  Wu = 4 We = 8
+Case 1198
+ W1 = 0.2 W2 = 0.05 ->  Wu = 2 We = 8
+Case 1199
+ W1 = 0.2 W2 = 0.05 ->  Wu = 1 We = 8
+Case 1200
+ W1 = 0.2 W2 = 0.05 ->  Wu = 0.5 We = 8
+Case 1201
+ W1 = 0.2 W2 = 0.05 ->  Wu = 10 We = 4
+Case 1202
+ W1 = 0.2 W2 = 0.05 ->  Wu = 8 We = 4
+Case 1203
+ W1 = 0.2 W2 = 0.05 ->  Wu = 4 We = 4
+Case 1204
+ W1 = 0.2 W2 = 0.05 ->  Wu = 2 We = 4
+Case 1205
+ W1 = 0.2 W2 = 0.05 ->  Wu = 1 We = 4
+Case 1206
+ W1 = 0.2 W2 = 0.05 ->  Wu = 0.5 We = 4
+Case 1207
+ W1 = 0.2 W2 = 0.05 ->  Wu = 10 We = 2
+Case 1208
+ W1 = 0.2 W2 = 0.05 ->  Wu = 8 We = 2
+Case 1209
+ W1 = 0.2 W2 = 0.05 ->  Wu = 4 We = 2
+Case 1210
+ W1 = 0.2 W2 = 0.05 ->  Wu = 2 We = 2
+Case 1211
+ W1 = 0.2 W2 = 0.05 ->  Wu = 1 We = 2
+Case 1212
+ W1 = 0.2 W2 = 0.05 ->  Wu = 0.5 We = 2
+Case 1213
+ W1 = 0.2 W2 = 0.05 ->  Wu = 10 We = 1
+Case 1214
+ W1 = 0.2 W2 = 0.05 ->  Wu = 8 We = 1
+Case 1215
+ W1 = 0.2 W2 = 0.05 ->  Wu = 4 We = 1
+Case 1216
+ W1 = 0.2 W2 = 0.05 ->  Wu = 2 We = 1
+Case 1217
+ W1 = 0.2 W2 = 0.05 ->  Wu = 1 We = 1
+Case 1218
+ W1 = 0.2 W2 = 0.05 ->  Wu = 0.5 We = 1
+Case 1219
+ W1 = 0.2 W2 = 0.05 ->  Wu = 10 We = 0.5
+Case 1220
+ W1 = 0.2 W2 = 0.05 ->  Wu = 8 We = 0.5
+Case 1221
+ W1 = 0.2 W2 = 0.05 ->  Wu = 4 We = 0.5
+Case 1222
+ W1 = 0.2 W2 = 0.05 ->  Wu = 2 We = 0.5
+Case 1223
+ W1 = 0.2 W2 = 0.05 ->  Wu = 1 We = 0.5
+Case 1224
+ W1 = 0.2 W2 = 0.05 ->  Wu = 0.5 We = 0.5
+Case 1225
+ W1 = 0.1 W2 = 0.05 ->  Wu = 10 We = 10
+Case 1226
+ W1 = 0.1 W2 = 0.05 ->  Wu = 8 We = 10
+Case 1227
+ W1 = 0.1 W2 = 0.05 ->  Wu = 4 We = 10
+Case 1228
+ W1 = 0.1 W2 = 0.05 ->  Wu = 2 We = 10
+Case 1229
+ W1 = 0.1 W2 = 0.05 ->  Wu = 1 We = 10
+Case 1230
+ W1 = 0.1 W2 = 0.05 ->  Wu = 0.5 We = 10
+Case 1231
+ W1 = 0.1 W2 = 0.05 ->  Wu = 10 We = 8
+Case 1232
+ W1 = 0.1 W2 = 0.05 ->  Wu = 8 We = 8
+Case 1233
+ W1 = 0.1 W2 = 0.05 ->  Wu = 4 We = 8
+Case 1234
+ W1 = 0.1 W2 = 0.05 ->  Wu = 2 We = 8
+Case 1235
+ W1 = 0.1 W2 = 0.05 ->  Wu = 1 We = 8
+Case 1236
+ W1 = 0.1 W2 = 0.05 ->  Wu = 0.5 We = 8
+Case 1237
+ W1 = 0.1 W2 = 0.05 ->  Wu = 10 We = 4
+Case 1238
+ W1 = 0.1 W2 = 0.05 ->  Wu = 8 We = 4
+Case 1239
+ W1 = 0.1 W2 = 0.05 ->  Wu = 4 We = 4
+Case 1240
+ W1 = 0.1 W2 = 0.05 ->  Wu = 2 We = 4
+Case 1241
+ W1 = 0.1 W2 = 0.05 ->  Wu = 1 We = 4
+Case 1242
+ W1 = 0.1 W2 = 0.05 ->  Wu = 0.5 We = 4
+Case 1243
+ W1 = 0.1 W2 = 0.05 ->  Wu = 10 We = 2
+Case 1244
+ W1 = 0.1 W2 = 0.05 ->  Wu = 8 We = 2
+Case 1245
+ W1 = 0.1 W2 = 0.05 ->  Wu = 4 We = 2
+Case 1246
+ W1 = 0.1 W2 = 0.05 ->  Wu = 2 We = 2
+Case 1247
+ W1 = 0.1 W2 = 0.05 ->  Wu = 1 We = 2
+Case 1248
+ W1 = 0.1 W2 = 0.05 ->  Wu = 0.5 We = 2
+Case 1249
+ W1 = 0.1 W2 = 0.05 ->  Wu = 10 We = 1
+Case 1250
+ W1 = 0.1 W2 = 0.05 ->  Wu = 8 We = 1
+Case 1251
+ W1 = 0.1 W2 = 0.05 ->  Wu = 4 We = 1
+Case 1252
+ W1 = 0.1 W2 = 0.05 ->  Wu = 2 We = 1
+Case 1253
+ W1 = 0.1 W2 = 0.05 ->  Wu = 1 We = 1
+Case 1254
+ W1 = 0.1 W2 = 0.05 ->  Wu = 0.5 We = 1
+Case 1255
+ W1 = 0.1 W2 = 0.05 ->  Wu = 10 We = 0.5
+Case 1256
+ W1 = 0.1 W2 = 0.05 ->  Wu = 8 We = 0.5
+Case 1257
+ W1 = 0.1 W2 = 0.05 ->  Wu = 4 We = 0.5
+Case 1258
+ W1 = 0.1 W2 = 0.05 ->  Wu = 2 We = 0.5
+Case 1259
+ W1 = 0.1 W2 = 0.05 ->  Wu = 1 We = 0.5
+Case 1260
+ W1 = 0.1 W2 = 0.05 ->  Wu = 0.5 We = 0.5
+Case 1261
+ W1 = 0.05 W2 = 0.05 ->  Wu = 10 We = 10
+Case 1262
+ W1 = 0.05 W2 = 0.05 ->  Wu = 8 We = 10
+Case 1263
+ W1 = 0.05 W2 = 0.05 ->  Wu = 4 We = 10
+Case 1264
+ W1 = 0.05 W2 = 0.05 ->  Wu = 2 We = 10
+Case 1265
+ W1 = 0.05 W2 = 0.05 ->  Wu = 1 We = 10
+Case 1266
+ W1 = 0.05 W2 = 0.05 ->  Wu = 0.5 We = 10
+Case 1267
+ W1 = 0.05 W2 = 0.05 ->  Wu = 10 We = 8
+Case 1268
+ W1 = 0.05 W2 = 0.05 ->  Wu = 8 We = 8
+Case 1269
+ W1 = 0.05 W2 = 0.05 ->  Wu = 4 We = 8
+Case 1270
+ W1 = 0.05 W2 = 0.05 ->  Wu = 2 We = 8
+Case 1271
+ W1 = 0.05 W2 = 0.05 ->  Wu = 1 We = 8
+Case 1272
+ W1 = 0.05 W2 = 0.05 ->  Wu = 0.5 We = 8
+Case 1273
+ W1 = 0.05 W2 = 0.05 ->  Wu = 10 We = 4
+Case 1274
+ W1 = 0.05 W2 = 0.05 ->  Wu = 8 We = 4
+Case 1275
+ W1 = 0.05 W2 = 0.05 ->  Wu = 4 We = 4
+Case 1276
+ W1 = 0.05 W2 = 0.05 ->  Wu = 2 We = 4
+Case 1277
+ W1 = 0.05 W2 = 0.05 ->  Wu = 1 We = 4
+Case 1278
+ W1 = 0.05 W2 = 0.05 ->  Wu = 0.5 We = 4
+Case 1279
+ W1 = 0.05 W2 = 0.05 ->  Wu = 10 We = 2
+Case 1280
+ W1 = 0.05 W2 = 0.05 ->  Wu = 8 We = 2
+Case 1281
+ W1 = 0.05 W2 = 0.05 ->  Wu = 4 We = 2
+Case 1282
+ W1 = 0.05 W2 = 0.05 ->  Wu = 2 We = 2
+Case 1283
+ W1 = 0.05 W2 = 0.05 ->  Wu = 1 We = 2
+Case 1284
+ W1 = 0.05 W2 = 0.05 ->  Wu = 0.5 We = 2
+Case 1285
+ W1 = 0.05 W2 = 0.05 ->  Wu = 10 We = 1
+Case 1286
+ W1 = 0.05 W2 = 0.05 ->  Wu = 8 We = 1
+Case 1287
+ W1 = 0.05 W2 = 0.05 ->  Wu = 4 We = 1
+Case 1288
+ W1 = 0.05 W2 = 0.05 ->  Wu = 2 We = 1
+Case 1289
+ W1 = 0.05 W2 = 0.05 ->  Wu = 1 We = 1
+Case 1290
+ W1 = 0.05 W2 = 0.05 ->  Wu = 0.5 We = 1
+Case 1291
+ W1 = 0.05 W2 = 0.05 ->  Wu = 10 We = 0.5
+Case 1292
+ W1 = 0.05 W2 = 0.05 ->  Wu = 8 We = 0.5
+Case 1293
+ W1 = 0.05 W2 = 0.05 ->  Wu = 4 We = 0.5
+Case 1294
+ W1 = 0.05 W2 = 0.05 ->  Wu = 2 We = 0.5
+Case 1295
+ W1 = 0.05 W2 = 0.05 ->  Wu = 1 We = 0.5
+Case 1296
+ W1 = 0.05 W2 = 0.05 ->  Wu = 0.5 We = 0.5

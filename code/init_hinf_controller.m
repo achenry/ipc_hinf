@@ -33,8 +33,8 @@ end
 %% Load linear models, operating points, hnorms
 load(fullfile(code_dir, 'matfiles', 'Plant_red'));
 Plant = Plant_red;
-Plant.InputName = {'BldPitchD Control Input', 'BldPitchQ Control Input'};
-Plant.OutputName = {'RootMycD Output', 'RootMycQ Output'};
+Plant.InputName = {'\beta_d Control Input', '\beta_q Control Input'};
+Plant.OutputName = {'M_d Output', 'M_q Output'};
 all(real(pole(Plant)) < 0);
 
 %% Normalization for inputs and outputs
@@ -42,12 +42,16 @@ all(real(pole(Plant)) < 0);
 % normalize Plant channels: maximum IPC command/expected Mdq values, multiply input by
 % scaling to get actual u before plant; divide output by scaling to get -1,
 % 1 after plant; scaling factors are part of controller
-load(fullfile(FAST_directory, 'op_absmax'));
+load(fullfile(FAST_directory, 'op_absmax.mat'));
+% load(fullfile(FAST_directory, 'ss_vals.mat'));
 clear ip_scaling op_scaling
 for c_ws_idx = 1:length(LPV_CONTROLLER_WIND_SPEEDS)
     idx = (op_absmax.dq(:, 'Wind1VelX') == LPV_CONTROLLER_WIND_SPEEDS(c_ws_idx));
-    ip_scaling(:, :, c_ws_idx) = diag(deg2rad(op_absmax.dq(idx.Variables, {'BldPitchC', 'BldPitchC'}).Variables) * 0.2);
-    op_scaling(:, :, c_ws_idx) = diag(op_absmax.dq(idx.Variables, {'RootMycC', 'RootMycC'}).Variables * 0.2);
+    ip_scaling(:, :, c_ws_idx) = diag(deg2rad(op_absmax.dq(idx.Variables, {'BldPitchC', 'BldPitchC'}).Variables));
+    op_scaling(:, :, c_ws_idx) = diag(op_absmax.dq(idx.Variables, {'RootMycC', 'RootMycC'}).Variables);
+    
+    % ip_scaling_2(:, :, c_ws_idx) = diag(deg2rad(ss_vals.dq(idx.Variables, {'BldPitchC', 'BldPitchC'}).Variables) * 0.2);
+    % op_scaling_2(:, :, c_ws_idx) = diag(ss_vals.dq(idx.Variables, {'RootMycC', 'RootMycC'}).Variables * 0.2);
 
     Plant_scaled(:, :, c_ws_idx) = inv(op_scaling(:, :, c_ws_idx)) * Plant(:, :, c_ws_idx) * ip_scaling(:, :, c_ws_idx);
 end
@@ -73,15 +77,15 @@ s = tf('s');
 % omega_sat = 1e3 * omega_bk;
 % hpf = (s + omega_bk) / (s + omega_sat);
 % Wu = 500 * eye(2) * hpf;
-eps_u = 1e-1; % desired disturbance attenuation at really high frequencies
+eps_u = 1e-2; % desired disturbance attenuation at really high frequencies
 M_u = 10; % desired bound on Hinf norm of input sensitivity function at really low frequencies
-w1_u = omega_1P_rad * 4; % first breakpoint frequency
+w1_u = 2 * omega_3P_rad; % first breakpoint frequency
 omega_u = M_u * w1_u; % 2.5e-3; % controller bw in the high-freq range
-hpf = (1 / eps_u) * (s + omega_u/M_u) / (s + (omega_u / eps_u));
-Wu = 1 * hpf * eye(2);
+hpf = (1 / eps_u) * (s + omega_u / M_u) / (s + (omega_u / eps_u));
+Wu = 1 * hpf * eye(2); % bodemag(Wu);
 % Wu = 500 * tf([1 3.464], [1 3464]) * eye(2); % Ossman's values
-Wu.InputName = {'BldPitchD Control Input', 'BldPitchQ Control Input'};
-Wu.OutputName = {'Weighted BldPitchD Control Input', 'Weighted BldPitchQ Control Input'};
+Wu.InputName = {'\beta_d Control Input', '\beta_q Control Input'};
+Wu.OutputName = {'Weighted \beta_d Control Input', 'Weighted \beta_q Control Input'};
 % bodemag(Wu)
 % Wy=Weighting on To, GSo 0dB at low frequency, low at
 % high-frequency => hpf with low-frequency gain below 0dB 
@@ -91,18 +95,18 @@ eps_y = 1e-1; % desired disturbance attenuation at really high frequencies
 M_y = 2; % desired bound on Hinf norm of input sensitivity function at really low frequencies, ideally 1
 w1_y = omega_1P_rad * 0.1; % first breakpoint frequency
 omega_y = M_y * w1_y; % 2.5e-3; % controller bw in the high-freq range
-hpf = (1 / eps_y) * (s + omega_y/M_y) / (s + (omega_y / eps_y));
-Wy = 1 * eye(2) * hpf * 0;
+hpf_y = (1 / eps_y) * (s + omega_y/M_y) / (s + (omega_y / eps_y));
+Wy = 1 * eye(2) * hpf_y * 0;
 % Wy = 0.1 * tf([1 3], [1 0.03]) * tf([1 (0.49/sqrt(24))*omega_3P_rad omega_3P_rad^2], [1 (6.93/sqrt(24))*omega_3P_rad omega_3P_rad^2]) * eye(2); % Ossman's values
-Wy.InputName = {'RootMycD Output', 'RootMycQ Output'}; 
-Wy.OutputName = {'Weighted RootMycD Output', 'Weighted RootMycQ Output'};
+Wy.InputName = {'M_d Output', 'M_q Output'}; 
+Wy.OutputName = {'Weighted M_d Output', 'Weighted M_q Output'};
 
 % We = Weighting on So, GSo. 0dB at high frequency, low at
 % low-frequency => lpf with high-frequency gain below 0dB that saturates
 eps_e = 1e-1; % desired disturbance attenuation at really low frequencies
-w1_e = omega_3P_rad; % * 1e-1; % first breakpoint frequency
+w1_e = omega_1P_rad * 1e-1; % first breakpoint frequency
 omega_e = (1 / eps_e) * w1_e; % 0.07*pi; % desired CL bw
-M_e = 2; % desired bound on Hinf norm of output sensitivity function at really high frequencies, ideally 1
+M_e = 10; % desired bound on Hinf norm of output sensitivity function at really high frequencies, ideally 1
 lpf_e = (1 / M_e) * (s + M_e*omega_e) / (s + eps_e*omega_e);
 
 % design notch weighting filter as per Ossman to limit singular
@@ -116,11 +120,11 @@ notch = notch_3P_diag * eye(2);
 
 We = 1 * eye(2) * lpf_e; % * notch;
 % We = 0.1 * tf([1 3], [1 0.03]) * tf([1 (0.49/sqrt(24))*omega_3P_rad omega_3P_rad^2], [1 (6.93/sqrt(24))*omega_3P_rad omega_3P_rad^2]) * eye(2); % Ossman's values
-We.InputName = {'Measured RootMycD Tracking Error', 'Measured RootMycQ Tracking Error'}; 
-We.OutputName = {'Weighted RootMycD Tracking Error', 'Weighted RootMycQ Tracking Error'}; 
+We.InputName = {'Measured M_d Tracking Error', 'Measured M_q Tracking Error'}; 
+We.OutputName = {'Weighted M_d Tracking Error', 'Weighted M_q Tracking Error'}; 
 
 % Weighting on reference
-W1 = tf(1 * eye(2));
+W1 = notch; %tf(1 * eye(2));
 
 % Weighting on control input disturbance
 % apply proportional filter to penalize disturbances on inputs, outputs
@@ -134,27 +138,38 @@ W2 = tf(1 * eye(2));
 if EXTREME_K_COLLECTION
     case_basis.Scheduling = {'No'}; %, 'No'};
     case_basis.Structure = {'Full-Order'}; %, 'Structured'};
+    case_basis.Reference = {[0, 0]};
+    case_basis.Saturation = {[1, 1]};
 
     IP_HIGH_GAIN = 1;
-    WU_HIGH_GAIN = 100;
+    WU_HIGH_GAIN = 10;
     WE_HIGH_GAIN = 10;
-    IP_LOW_GAIN = 0.1;
-    OP_LOW_GAIN = 1;
+    IP_LOW_GAIN = 10;
+    OP_LOW_GAIN = 10;
     % case_basis.WuGain = {tf(OP_LOW_GAIN * eye(2)), tf(WU_HIGH_GAIN * eye(2))}; %{100, 200, 400, 800, 1600}; % for detuning blade-pitch actuation
-    case_basis.WuGain = {tf(IP_LOW_GAIN * eye(2))};
+    case_basis.WuGain = {...
+        tf(WU_HIGH_GAIN * 0.05 * eye(2)), ...
+        tf(WU_HIGH_GAIN * 0.1 * eye(2)), ...
+        tf(WU_HIGH_GAIN * 0.2 * eye(2)), ...
+        tf(WU_HIGH_GAIN * 0.4 * eye(2)), ...
+        tf(WU_HIGH_GAIN * 0.8 * eye(2)), ...
+        tf(WU_HIGH_GAIN * eye(2))};
     case_basis.WeGain = {...
+        tf(WE_HIGH_GAIN * 0.05 * eye(2)), ...
         tf(WE_HIGH_GAIN * 0.1 * eye(2)), ...
         tf(WE_HIGH_GAIN * 0.2 * eye(2)), ...
         tf(WE_HIGH_GAIN * 0.4 * eye(2)), ...
         tf(WE_HIGH_GAIN * 0.8 * eye(2)), ...
         tf(WE_HIGH_GAIN * eye(2))};
     case_basis.W1Gain = {...
-        tf(IP_HIGH_GAIN * 0.1 * eye(2) * notch), ...
-        tf(IP_HIGH_GAIN * 0.2 * eye(2) * notch), ...
-        tf(IP_HIGH_GAIN * 0.4 * eye(2) * notch), ...
-        tf(IP_HIGH_GAIN * 0.8 * eye(2) * notch), ...
-        tf(IP_HIGH_GAIN * eye(2) * notch)};
+        tf(IP_HIGH_GAIN * 0.05 * eye(2)), ...
+        tf(IP_HIGH_GAIN * 0.1 * eye(2)), ...
+        tf(IP_HIGH_GAIN * 0.2 * eye(2)), ...
+        tf(IP_HIGH_GAIN * 0.4 * eye(2)), ...
+        tf(IP_HIGH_GAIN * 0.8 * eye(2)), ...
+        tf(IP_HIGH_GAIN * eye(2))};
     case_basis.W2Gain = {...
+        tf(IP_HIGH_GAIN * 0.05 * eye(2)), ...
         tf(IP_HIGH_GAIN * 0.1 * eye(2)), ...
         tf(IP_HIGH_GAIN * 0.2 * eye(2)), ...
         tf(IP_HIGH_GAIN * 0.4 * eye(2)), ...
@@ -195,6 +210,28 @@ elseif OPTIMAL_K_COLLECTION
     case_basis.Scheduling = {'No'}; %, 'No'};
     case_basis.Structure = {'Full-Order'}; %, 'Structured'};
 
+    if VARY_REFERENCE
+        case_basis.Reference = {};
+        for ref = VARY_REFERENCE_BASIS
+            % TODO choose reference to be percentage of linearization value
+            case_basis.Reference{end + 1} = ones(2, 1) * ref * op_absmax.dq(idx.Variables, {'RootMycD', 'RootMycQ'}).Variables;
+            mbcTransformOutData(values, OutList)
+            case_basis.Reference{end + 1} = ones(2, 1) * ref * ss_vals.dq(idx.Variables, {'RootMycD', 'RootMycQ'}).Variables;
+        end
+    else
+        case_basis.Reference = {[0, 0]};
+    end
+
+    if VARY_SATURATION
+        case_basis.Saturation = {};
+        for sat = VARY_SATURATION_BASIS
+            % TODO choose saturation to be percentage of linearization value
+            case_basis.Saturation{end + 1} = ones(2, 1) * sat * op_absmax.dq(idx.Variables, {'BldPitch1D', 'BldPitch1Q'}).Variables;
+        end
+    else
+        case_basis.Reference = {[0, 0]};
+    end
+
     % case_basis.WuGain = {tf(10 * eye(2)), tf(100 * eye(2))}; %{100, 200, 400, 800, 1600}; % for detuning blade-pitch actuation
     % case_basis.WeGain = {tf(1 * eye(2)), tf(10 * eye(2))};
     % case_basis.W1Gain = {0.1 * notch, 1 * notch};
@@ -226,9 +263,9 @@ end
 % GenPlant_lpv = pss(GenPlant, lpv_domain);
 % GenPlant_lpv.Parameter.u.RateBounds = [-2, 2]; % QUESTION what is realistic here ?
 
-ref_idx = [strmatch('RootMycD Reference', GenPlant(:, :, C_WS_IDX).InputName), strmatch('RootMycQ Reference', GenPlant(:, :, C_WS_IDX).InputName)];
-ctrl_input_idx = [strmatch('BldPitchD Control Input', GenPlant(:, :, C_WS_IDX).InputName), strmatch('BldPitchQ Control Input', GenPlant(:, :, C_WS_IDX).InputName)];
-tracking_error_idx = [strmatch('Measured RootMycD Tracking Error', GenPlant(:, :, C_WS_IDX).OutputName), strmatch('Measured RootMycQ Tracking Error', GenPlant(:, :, C_WS_IDX).OutputName)];
+ref_idx = [strmatch('M_d Reference', GenPlant(:, :, C_WS_IDX).InputName), strmatch('M_q Reference', GenPlant(:, :, C_WS_IDX).InputName)];
+ctrl_input_idx = [strmatch('\beta_d Control Input', GenPlant(:, :, C_WS_IDX).InputName), strmatch('\beta_q Control Input', GenPlant(:, :, C_WS_IDX).InputName)];
+tracking_error_idx = [strmatch('Measured M_d Tracking Error', GenPlant(:, :, C_WS_IDX).OutputName), strmatch('Measured M_q Tracking Error', GenPlant(:, :, C_WS_IDX).OutputName)];
 
 if 0
     % Plot all OL transfer functions for generalized plant
@@ -269,7 +306,7 @@ save(fullfile(code_dir, 'matfiles', 'K0.mat'), 'K0');
 PLOTTING = 0;
 plotting_idx = find(LPV_CONTROLLER_WIND_SPEEDS == NONLPV_CONTROLLER_WIND_SPEED);
 
-if PLOTTING
+ if PLOTTING
 
     % Plot scaled Plant OUTPLOT
     figure;
@@ -318,7 +355,7 @@ if PLOTTING
     % examination
     figure;
     omega = logspace(-2, 4, 300);
-    bodemag(Wu, We, omega, bode_plot_opt);
+    bodemag(W1, W2, Wu, We, omega, bode_plot_opt);
     % bode_plot_opt.XLim = [10^(-1), 11];
     % setoptions(h, 'XLim', )
     % title('Weighting Functions');
@@ -327,7 +364,7 @@ if PLOTTING
     xline(axh(5), omega_1P_rad * HARMONICS);
     xline(axh(7), omega_1P_rad * HARMONICS);
     xline(axh(9), omega_1P_rad * HARMONICS);
-    legend("W_u", "W_e", '', '', '', '');
+    legend("W_1", "W_2", "W_u", "W_e", '', '', '', '');
     set(gcf, 'Position', [0 0 1500 900]);%get(0, 'Screensize'));
     savefig(gcf, fullfile(fig_dir, 'weighting_funcs.fig'));
     saveas(gcf, fullfile(fig_dir, 'weighting_funcs.png'));

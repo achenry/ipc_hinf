@@ -59,11 +59,11 @@ end
 
 %% Conduct Parameter Sweep for MIMO PI Controller
 % omega = logspace(-2, 2, 200);
-if BASELINE_K
-    Sweep.Vary.Kp_diag = -[Parameters.cIPC.DQ_Kp_1P];
-    Sweep.Vary.Kp_offdiag = -[Parameters.cIPC.DQ_Kp_1P];
-    Sweep.Vary.Ki_diag = -[Parameters.cIPC.DQ_Ki_1P];
-    Sweep.Vary.Ki_offdiag = -[Parameters.cIPC.DQ_Ki_1P];
+if BASELINE_K % QUESTION does it need to be negative??
+    Sweep.Vary.Kp_diag = [Parameters.cIPC.DQ_Kp_1P];
+    Sweep.Vary.Kp_offdiag = [Parameters.cIPC.DQ_Kp_1P];
+    Sweep.Vary.Ki_diag = [Parameters.cIPC.DQ_Ki_1P];
+    Sweep.Vary.Ki_offdiag = [Parameters.cIPC.DQ_Ki_1P];
 elseif STRUCT_PARAM_SWEEP
     % TODO robustness margin 6dB, 45deg. Evaluate robustness margins, if not
     % achieved need to tune weighting filters.
@@ -73,10 +73,10 @@ elseif STRUCT_PARAM_SWEEP
     % want to know robustness of baseline controller (PI), wc of L,
     % how do freq-domain specs translate to time-domain
     
-    Sweep.Vary.Kp_diag = -logspace(-3, 4, 8); % linspace(approx_Kp.KD_range(1), approx_Kp.KD_range(2), 5);
-    Sweep.Vary.Kp_offdiag = -logspace(-3, 4, 8); %logspace(-9, 0, 10); % linspace(approx_Kp.KQD_range(1), approx_Kp.KQD_range(2), 5);
-    Sweep.Vary.Ki_diag = -logspace(-3, 4, 8); % linspace(approx_Ki.KD_range(1), approx_Ki.KD_range(2), 5);
-    Sweep.Vary.Ki_offdiag = -logspace(-3, 4, 8); %logspace(-9, 0, 10); % linspace(approx_Ki.KDQ_range(1), approx_Ki.KDQ_range(2), 5);
+    Sweep.Vary.Kp_diag = logspace(-3, 4, 8); % linspace(approx_Kp.KD_range(1), approx_Kp.KD_range(2), 5);
+    Sweep.Vary.Kp_offdiag = logspace(-3, 4, 8); %logspace(-9, 0, 10); % linspace(approx_Kp.KQD_range(1), approx_Kp.KQD_range(2), 5);
+    Sweep.Vary.Ki_diag = logspace(-3, 4, 8); % linspace(approx_Ki.KD_range(1), approx_Ki.KD_range(2), 5);
+    Sweep.Vary.Ki_offdiag = logspace(-3, 4, 8); %logspace(-9, 0, 10); % linspace(approx_Ki.KDQ_range(1), approx_Ki.KDQ_range(2), 5);
 end
 
 REPROCESS_SWEEP = 1;
@@ -112,6 +112,7 @@ if REPROCESS_SWEEP
         PI_ParameterSweep(v).Controller_scaled = K_tmp;
         % QUESTION MANUEL does it make sense to sweep over unscaled
         % controller here
+        % QUESTION what signs to use for controller/plant
         SF_tmp = loopsens(-Plant(:, :, c_ws_idx), -PI_ParameterSweep(v).Controller);
 
         % compute wc with getGainCrossover( sys , gain )
@@ -130,11 +131,13 @@ if REPROCESS_SWEEP
         %  loop-at-a-time stability margins in DM and multiloop margins in MM (cuts loop open at inputs OR outputs).
         [DMi_tmp, MMi_tmp] = diskmargin(SF_tmp.Li);
         [DMo_tmp, MMo_tmp] = diskmargin(SF_tmp.Lo);
+        MMIO_tmp = diskmargin(Plant(:, :, c_ws_idx), PI_ParameterSweep(v).Controller);
 
         PI_ParameterSweep(v).DMi = DMi_tmp; % GainMargin
         PI_ParameterSweep(v).DMo = DMo_tmp;
         PI_ParameterSweep(v).MMi = MMi_tmp;
         PI_ParameterSweep(v).MMo = MMo_tmp;
+        % PI_ParameterSweep(v).MMIO = MMIO_tmp;
 
         % PI_ParameterSweep(v).wci = wci;
         % PI_ParameterSweep(v).wco = wco;

@@ -12,10 +12,12 @@
 clear all;
 initialize;
 
-RUN_SIMS_PAR = 0;
-RUN_SIMS_SINGLE = 1;
+RUN_SIMS_PAR = 1;
+RUN_SIMS_SINGLE = 0;
 COMPUTE_FFT = 0;
 RUN_TURSIM = 0;
+
+RootMyc_ref = [0, 0];
 
 %% Generate Turbsim Files
 if RUN_TURSIM
@@ -62,7 +64,7 @@ Parameters.Control.IPCDQ.Enable = USE_IPC;
 % Generate Turbsim Cases
 
 % ux_mean = 11.4;
-class = '18'; % 18% turbulence
+class = 'A'; % class A
 n_seeds = 1;
 uxs = [16];
 
@@ -295,7 +297,10 @@ if RUN_SIMS_PAR
             elseif strcmp(case_list(case_idx).Structure, 'Structured')
                 SL_model_name = 'AD_SOAR_c7_V2f_c73_Clean_StructuredControllerTest';
             end
-            
+            % QUESTION MANUEL shouldn't be need to negate controller, isn't
+            % SL model a positive feedback system? But negated controller
+            % results in poorer performance. Does it need to be converted
+            % to DT?
             sim_inputs(case_idx) = Simulink.SimulationInput(SL_model_name);
             K_IPC = c2d(case_list(case_idx).Controller_scaled, DT); % Note, this is the scaled controller
             sim_inputs(case_idx) = sim_inputs(case_idx).setVariable('K_IPC', K_IPC);
@@ -311,7 +316,7 @@ if RUN_SIMS_PAR
         end
         
         [filepath, name, ext] = fileparts(strrep(case_list(case_idx).FAST_InputFileName, '.fst', ''));
-        save_fn = fullfile(project_dir, 'sl_outputs', [name, '_', sim_type]);
+        save_fn = fullfile(sl_save_dir, [name, '_', sim_type]);
         case_list(case_idx).save_fn = save_fn;
         sim_inputs(case_idx) = setBlockParameter(sim_inputs(case_idx), ...
             [SL_model_name, '/To File'], 'Filename', save_fn);
@@ -319,6 +324,8 @@ if RUN_SIMS_PAR
         sim_inputs(case_idx) = sim_inputs(case_idx).setVariable('TMax', TMax);
         sim_inputs(case_idx) = sim_inputs(case_idx).setVariable('DT', Simulation.DT);
         sim_inputs(case_idx) = sim_inputs(case_idx).setVariable('HWindSpeed', case_list(case_idx).InflowWind.HWindSpeed);
+        sim_inputs(case_idx) = sim_inputs(case_idx).setVariable('RootMyc_ref', case_list(case_idx).Reference);
+        
     end
 
     %% Run simulations in multiple parallel threads
@@ -342,6 +349,7 @@ elseif RUN_SIMS_SINGLE
             [case_name_list{case_idx}, '.fst']);
         DT = Simulation.DT;
         HWindSpeed = case_list(case_idx).InflowWind.HWindSpeed;
+        RootMyc_ref = case_list(case_idx).Reference;
 
         % save_fn = strrep(FAST_InputFileName, '.fst', '');
         
@@ -358,6 +366,9 @@ elseif RUN_SIMS_SINGLE
             elseif strcmp(case_list(case_idx).Structure, 'Structured')
                 SL_model_name = 'AD_SOAR_c7_V2f_c73_Clean_StructuredControllerTest';
             end
+            % QUESTION MANUEL does it make sense to implement negative of
+            % tuned controller which assumed negative feedback since SL
+            % simulation assumes positive feedback?
             K_IPC = c2d(case_list(case_idx).Controller_scaled, DT); % Note, this is the scaled controller
         else
             SL_model_name = 'AD_SOAR_c7_V2f_c73_Clean';
@@ -365,7 +376,7 @@ elseif RUN_SIMS_SINGLE
         open_system(fullfile(FAST_SimulinkModel_dir, SL_model_name))
         
         [filepath, name, ext] = fileparts(strrep(FAST_InputFileName, '.fst', ''));
-        save_fn = fullfile(project_dir, 'sl_outputs', [name, '_', sim_type]);
+        save_fn = fullfile(sl_save_dir, [name, '_', sim_type]);
         set_param([SL_model_name, '/To File'], 'Filename', save_fn);
 
         sim(fullfile(FAST_SimulinkModel_dir, ...
@@ -398,16 +409,9 @@ end
 
 %% Save/Load Simulation Data
 
-if ~exist(fullfile(project_dir, 'nonlin_simulations'))
-    mkdir(fullfile(project_dir, 'nonlin_simulations'));
-end
-if ~exist(fullfile(project_dir, 'sl_outputs'))
-    mkdir(fullfile(project_dir, 'sl_outputs'));
-end
-
 if RUN_SIMS_PAR || RUN_SIMS_SINGLE
   
-    save(fullfile(project_dir, 'nonlin_simulations', ['sim_out_list_', sim_type, '.mat']), 'sim_out_list', '-v7.3');
+    save(fullfile(sl_metadata_save_dir, ['sim_out_list_', sim_type, '.mat']), 'sim_out_list', '-v7.3');
     % for c = 1:length(sim_out_list.controller)
     %     [filepath,name,ext] = fileparts(strrep(sim_out_list.controller(c).FAST_InputFileName, 'fst', 'outb'));
     %     new_name = [name, '_', sim_type];
@@ -415,39 +419,39 @@ if RUN_SIMS_PAR || RUN_SIMS_SINGLE
     % end
 elseif RUN_OL_DQ
     % get open-loop sensitivity to IPC simulations from memory
-    load(fullfile(project_dir, 'nonlin_simulations', 'sim_out_list_ol_dq.mat'));
+    load(fullfile(sl_metadata_save_dir, 'sim_out_list_ol_dq.mat'));
 elseif RUN_OL_BLADE
     % get open-loop sensitivity to IPC simulations from memory
-    load(fullfile(project_dir, 'nonlin_simulations', 'sim_out_list_ol_blade.mat'));
+    load(fullfile(sl_metadata_save_dir, 'sim_out_list_ol_blade.mat'));
 end
 
 if RUN_CL && strcmp(WIND_TYPE, 'turbsim')
     if STRUCT_PARAM_SWEEP
         clear sim_out_list;
-        sim_out_list.controller = load(fullfile(project_dir, 'nonlin_simulations', 'sim_out_list_pi_param_sweep_turbsim.mat')); % load ipc case
+        sim_out_list.controller = load(fullfile(sl_metadata_save_dir, 'sim_out_list_pi_param_sweep_turbsim.mat')); % load ipc case
         sim_out_list.controller = sim_out_list.controller.sim_out_list;
-        sim_out_list.noipc = load(fullfile(project_dir, 'nonlin_simulations', 'sim_out_list_noipc_turbsim.mat'));
+        sim_out_list.noipc = load(fullfile(sl_metadata_save_dir, 'sim_out_list_noipc_turbsim.mat'));
         sim_out_list.noipc = sim_out_list.noipc.sim_out_list;
-        sim_out_list.baseline_controller = load(fullfile(project_dir, 'nonlin_simulations', 'sim_out_list_baseline_k_turbsim.mat')); % load baseline ipc case
+        sim_out_list.baseline_controller = load(fullfile(sl_metadata_save_dir, 'sim_out_list_baseline_k_turbsim.mat')); % load baseline ipc case
         sim_out_list.baseline_controller = sim_out_list.baseline_controller.sim_out_list;
     elseif OPTIMAL_K_COLLECTION
         clear sim_out_list;
-        sim_out_list.controller = load(fullfile(project_dir, 'nonlin_simulations', 'sim_out_list_k_cases_turbsim.mat'));
+        sim_out_list.controller = load(fullfile(sl_metadata_save_dir, 'sim_out_list_k_cases_turbsim.mat'));
         sim_out_list.controller = sim_out_list.controller.sim_out_list;
-        sim_out_list.noipc = load(fullfile(project_dir, 'nonlin_simulations', 'sim_out_list_noipc_turbsim.mat')); % load noipc case
+        sim_out_list.noipc = load(fullfile(sl_metadata_save_dir, 'sim_out_list_noipc_turbsim.mat')); % load noipc case
         sim_out_list.noipc = sim_out_list.noipc.sim_out_list;
-        sim_out_list.baseline_controller = load(fullfile(project_dir, 'nonlin_simulations', 'sim_out_list_baseline_k_turbsim.mat')); % load baseline ipc case
+        sim_out_list.baseline_controller = load(fullfile(sl_metadata_save_dir, 'sim_out_list_baseline_k_turbsim.mat')); % load baseline ipc case
         sim_out_list.baseline_controller = sim_out_list.baseline_controller.sim_out_list;
     elseif EXTREME_K_COLLECTION
         clear sim_out_list;
-        sim_out_list.controller = load(fullfile(project_dir, 'nonlin_simulations', 'sim_out_list_extreme_k_cases_turbsim.mat')); % load ipc case
+        sim_out_list.controller = load(fullfile(sl_metadata_save_dir, 'sim_out_list_extreme_k_cases_turbsim.mat')); % load ipc case
         sim_out_list.controller = sim_out_list.controller.sim_out_list;
-        sim_out_list.noipc = load(fullfile(project_dir, 'nonlin_simulations', 'sim_out_list_noipc_turbsim.mat')); % load noipc case
+        sim_out_list.noipc = load(fullfile(sl_metadata_save_dir, 'sim_out_list_noipc_turbsim.mat')); % load noipc case
         sim_out_list.noipc = sim_out_list.noipc.sim_out_list;
-        sim_out_list.baseline_controller = load(fullfile(project_dir, 'nonlin_simulations', 'sim_out_list_baseline_k_turbsim.mat')); % load baseline ipc case
+        sim_out_list.baseline_controller = load(fullfile(sl_metadata_save_dir, 'sim_out_list_baseline_k_turbsim.mat')); % load baseline ipc case
         sim_out_list.baseline_controller = sim_out_list.baseline_controller.sim_out_list;
     elseif ~USE_IPC
-        load(fullfile(project_dir, 'nonlin_simulations', 'sim_out_list_noipc_turbsim.mat'));
+        load(fullfile(sl_metadata_save_dir, 'sim_out_list_noipc_turbsim.mat'));
     end
 end
 
@@ -460,7 +464,7 @@ if EXTREME_K_COLLECTION || OPTIMAL_K_COLLECTION
     
     % dq values of blade-pitch and blade root bending moment for
     % particular wind field
-    values = load(sim_out_list.noipc(1).save_fn);
+    values = load([sim_out_list.noipc(1).save_fn '_1']);
     values = values.OutData.Data;
     dqValues = mbcTransformOutData(values, OutList);
 
@@ -490,10 +494,7 @@ if EXTREME_K_COLLECTION || OPTIMAL_K_COLLECTION
         end
         cc = cc + 1;
         % [values, ~, ~, ~, ~] = ReadFASTbinary(strrep(sim_out_list.controller(c).FAST_InputFileName, 'fst', 'outb'), 'n');
-        % TODO run extreme controllers nonlinear simulations
-        % TODO run extreme controllers nonlinear analysis
-        % TODO run extreme controllers linear analysis
-        values = load(sim_out_list.controller(c).save_fn);
+        values = load([sim_out_list.controller(c).save_fn '_' num2str(c)]);
         values = values.OutData.Data;
         dqValues = mbcTransformOutData(values, OutList);
 
@@ -523,7 +524,7 @@ if EXTREME_K_COLLECTION || OPTIMAL_K_COLLECTION
         cc = cc + 1;
         
         % [values, ~, ~, ~, ~] = ReadFASTbinary(strrep(sim_out_list.controller(c).FAST_InputFileName, 'fst', 'outb'), 'n');
-        values = load(sim_out_list.controller(c).save_fn);
+        values = load([sim_out_list.controller(c).save_fn '_' num2str(c)]);
         values = values.OutData.Data;
         dqValues = mbcTransformOutData(values, OutList); 
         
@@ -619,7 +620,7 @@ if EXTREME_K_COLLECTION || OPTIMAL_K_COLLECTION
     end
 end
 
-%% Plotting of Blade-Pitch Actuation and Loads in Time-Domain
+%% Plot Blade-Pitch Actuation and Loads in Time-Domain OUTPLOT
 if 0
 % plot(sim_out_list.controller.K_IPC_op.Data)
 % plot(sim_out_list.controller.Cyc_BldPitch2
@@ -707,7 +708,7 @@ saveas(gcf, fullfile(fig_dir, 'nonlin_ts.png'));
 end
 
 
-%% PSD Analysis of loads
+%% PSD Analysis of loads OUTPLOT
 % define loads of concern
 % Blade root O/P, Shaft My, Yaw bearing My/Mz, Hub, Nacelle, Main Bearing,
 % Blade Flapwise/Edgewise, Blade Oop/Ip, Tower
@@ -875,6 +876,18 @@ elseif EXTREME_K_COLLECTION
 elseif STRUCT_PARAM_SWEEP
     load(fullfile(code_dir, 'matfiles', 'PI_ParamSweep_redtable.mat'));
 end
+
+%% DEL analysis of loads
+% run python DEL analysis
+
+% read python DEL analysis output
+
+% plot percentage DEL reduction @ each mean wind speed for blade
+% out-of-plane load, nacelle yaw moment, nacelle pitch moment, shaft
+% bending moment around y-axis
+figure;
+
+
 %% Analysis of loads from nonlinear simulations
 
 Delta_op_nonlin = [];

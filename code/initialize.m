@@ -14,14 +14,20 @@ RUN_CL = 1;
 RUN_OL_DQ = 0;
 RUN_OL_BLADE = 0;
 
+VARY_REFERENCE = 0;
+VARY_REFERENCE_BASIS = [0.05, 0.1, 0.15, 0.2, 0.25]; % QUESTION MANUEL of peak, ss value?
+
+VARY_SATURATION = 0;
+VARY_SATURATION_BASIS = [0.05, 0.1, 0.15, 0.2, 0.25]; % QUESTION MANUEL of peak, ss value?
+
 COMPUTE_FFT = 0;
-HARMONICS = 1:3;
+HARMONICS = [2, 3, 6];
 
-USE_IPC = 0;
+USE_IPC = 1;
 
-STRUCT_PARAM_SWEEP = 1; % conduct nonlinear simulations for parameter sweep over MIMO PI Gains
+STRUCT_PARAM_SWEEP = 0; % conduct nonlinear simulations for parameter sweep over MIMO PI Gains
 OPTIMAL_K_COLLECTION = 0; % conduct nonlinear simulations for collection of Hinf-synthesized controllers
-EXTREME_K_COLLECTION = 0;
+EXTREME_K_COLLECTION = 1;
 BASELINE_K = 0; % conduct nonlinear simulations for baseline structured controller
 
 if STRUCT_PARAM_SWEEP || OPTIMAL_K_COLLECTION || EXTREME_K_COLLECTION || BASELINE_K
@@ -52,7 +58,6 @@ if strcmp(username, 'aoifework')
     addpath(fullfile(toolbox_dir, 'turbsim-toolbox/A_Functions/'));
     addpath(fullfile(toolbox_dir, 'PMtools/'));
 
-
     code_dir = fullfile(project_dir, 'code');
     chdir(code_dir);
 
@@ -72,6 +77,8 @@ if strcmp(username, 'aoifework')
     addpath(fullfile(fast_install_dir, 'lib'));
 
     mat_save_dir = fullfile(code_dir, 'matfiles');
+    sl_save_dir = fullfile(project_dir, 'sl_outputs');
+    sl_metadata_save_dir = fullfile(project_dir, 'sl_metadata');
 
 elseif strcmp(username, 'aohe7145')
     % scp -r /Users/aoifework/Documents/Research/ipc_tuning aohe7145@login.rc.colorado.edu:/projects/aohe7145/projects/ipc_tuning
@@ -85,6 +92,8 @@ elseif strcmp(username, 'aohe7145')
     toolbox_dir = fullfile(home_dir, 'toolboxes');
     code_dir = fullfile(project_dir, 'code');
     mat_save_dir = fullfile('/scratch/alpine/aohe7145/ipc_tuning', 'matfiles');
+    sl_save_dir = fullfile('/scratch/alpine/aohe7145/ipc_tuning', 'sl_outputs');
+    sl_metadata_save_dir = fullfile('/scratch/alpine/aohe7145/ipc_tuning', 'sl_metadata');
     % fast_install_dir = fullfile(home_dir, 'dev/WEIS/OpenFAST/install');
     
     FAST_runDirectory = fullfile(project_dir, 'simulations');
@@ -121,6 +130,17 @@ elseif strmp(username, 'manuel')
     lin_models_dir = fullfile('CHANGE ME', 'linfiles');
 
     mat_save_dir = fullfile(code_dir, 'matfiles');
+    sl_metadata_save_dir = fullfile(project_dir, 'nonlin_simulations');
+end
+
+if ~exist(mat_save_dir)
+    mkdir(mat_save_dir);
+end
+if ~exist(sl_save_dir)
+    mkdir(sl_save_dir);
+end
+if ~exist(sl_metadata_save_dir)
+    mkdir(sl_metadata_save_dir);
 end
 
 FAST_SimulinkModel_dir = simulink_model_dir;
