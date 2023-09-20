@@ -13,30 +13,51 @@ from pCrunch.utility import save_yaml, get_windspeeds, convert_summary_stats
 # TODO export DELs to .mat
 
 from scipy.io import loadmat
+import h5py
 
 import multiprocessing as mp
 
-SIM_TYPE = 'extreme_k_cases_turbsim'
-PROJECT_DIR = "/Users/aoifework/Documents/Research/ipc_tuning/"
-DATA_DIR =  os.path.join(PROJECT_DIR, 'sl_outputs')
+import argparse
+import platform
 
-def valid_op_file(fp):
+import matplotlib.pyplot as plt
+
+# SIM_TYPE = 'extreme_k_cases_turbsim'
+
+
+def valid_op_file(fp, sim_type):
     # return any([fnmatch(fp, ext) for ext in ["*.outb", "*.out"]])
-    pattern = SIM_TYPE + '_' '*.mat'
-    return fnmatch(fp, pattern)
+    # pattern = sim_type + '_[0-9]*.mat'
+    # return fnmatch(fp, pattern)
+    if '.mat' in fp and sim_type in fp:
+        return True
 
 if __name__ == '__main__':
     
-    ## PROJECT DIRECTORY
-    results_dir = os.path.join(PROJECT_DIR, "postprocessing_results")
-    if not os.path.exists(results_dir):
-        os.makedirs(results_dir)
+    ## set data storage directory
+    mactype = platform.system().lower()
+    if mactype == "darwin":
+        DATA_DIR = "/Users/aoifework/Documents/Research/ipc_tuning/sl_outputs"
+        RESULTS_DIR = "/Users/aoifework/Documents/Research/ipc_tuning/postprocessing_results"
+        OUTLIST_PATH = "/Users/aoifework/Documents/Research/ipc_tuning/OutList.mat"
+    elif mactype in ["linux", "linux2"]:
+        DATA_DIR = "/scratch/alpine/aohe7145/ipc_tuning/sl_outputs"
+        RESULTS_DIR = "/scratch/alpine/aohe7145/ipc_tuning/postprocessing_results"
+        OUTLIST_PATH = "/projects/aohe7145/projects/ipc_tuning/OutList.mat"
         
-    save_results = True
+    if not os.path.exists(RESULTS_DIR):
+        os.makedirs(RESULTS_DIR)
+    
+    ## parse simulation type arguments
+    arg_parser = argparse.ArgumentParser()
+    arg_parser.add_argument("-st", "--sim_type", help="Simulation Type",
+                            choices=["extreme_k_cases_turbsim", "optimal_k_cases_turbsim", "ol_dq", "ol_blade",
+                                     "baseline_k_turbsim", "noipc_turbsim", "pi_param_sweep_turbsim"])
+    args = arg_parser.parse_args()
     
     outfiles = [
         os.path.join(DATA_DIR, f) for f in os.listdir(DATA_DIR)
-        if valid_op_file(f)
+        if valid_op_file(f, args.sim_type)
     ]
     
     print(f"Found {len(outfiles)} files.")
@@ -47,7 +68,15 @@ if __name__ == '__main__':
     # output files. The easiest way to use this is to use the 'load_FAST_out' function.
     
     # outputs = load_FAST_out(outfiles[:3])
-    outputs = [loadmat(fn) for fn in outfiles]
+    out_channels = list(np.concatenate(np.concatenate(loadmat(OUTLIST_PATH)['OutList'])))
+    outputs = {}
+    for fn in outfiles:
+        # new_data = loadmat(fn)
+        
+        with h5py.File(fn, 'r') as f:
+            # time = f['OutData'][0, out_channels.index('Time')]
+            
+            outputs[fn] = np.array(f['OutData'])
     
     # An instance of 'OpenFASTBinary' (or 'OpenFASTAscii' if applicable) is created.
     # The instance stores the raw data but also provides many useful methods for
@@ -60,7 +89,8 @@ if __name__ == '__main__':
     # print(outputs[0].stddevs)
     
     # Individual channel time series can also be accessed with dict style indexing:
-    outputs[0]["Wind1VelX"]
+    
+    plt.plot(outputs[outfiles[0]][:, out_channels.index("Time")], outputs[outfiles[0]][:, out_channels.index("Wind1VelX")])
     
     ## PCRUNCH CONFIGURATION
     
@@ -118,7 +148,7 @@ if __name__ == '__main__':
         trim_data=(0,),  # If 'trim_data' is passed, all input files will
     )  # be trimmed to (tmin, tmax(optional))
     
-    la.process_outputs(cores=mp.cpu_count())  # Once LoadsAnalysis is configured, process outputs with
+    la.process_outputs(nd_outputs=outputs, cores=mp.cpu_count())  # Once LoadsAnalysis is configured, process outputs with
     # `process_outputs`. `cores` is optional but will trigger parallel processing if configured
     
     ## OUTPUTS

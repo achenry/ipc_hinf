@@ -12,8 +12,8 @@
 clear all;
 initialize;
 
-RUN_SIMS_PAR = 1;
-RUN_SIMS_SINGLE = 0;
+RUN_SIMS_PAR = 0;
+RUN_SIMS_SINGLE = 1;
 COMPUTE_FFT = 0;
 RUN_TURSIM = 0;
 
@@ -261,7 +261,7 @@ if RUN_SIMS_SINGLE || RUN_SIMS_PAR
         if STRUCT_PARAM_SWEEP
             sim_type = 'pi_param_sweep_turbsim';
         elseif OPTIMAL_K_COLLECTION
-            sim_type = 'opt_k_cases_turbsim';
+            sim_type = 'optimal_k_cases_turbsim';
         elseif EXTREME_K_COLLECTION
             sim_type = 'extreme_k_cases_turbsim';
         elseif BASELINE_K
@@ -436,7 +436,7 @@ if RUN_CL && strcmp(WIND_TYPE, 'turbsim')
         sim_out_list.baseline_controller = sim_out_list.baseline_controller.sim_out_list;
     elseif OPTIMAL_K_COLLECTION
         clear sim_out_list;
-        sim_out_list.controller = load(fullfile(sl_metadata_save_dir, 'sim_out_list_k_cases_turbsim.mat'));
+        sim_out_list.controller = load(fullfile(sl_metadata_save_dir, 'sim_out_list_optimal_k_cases_turbsim.mat'));
         sim_out_list.controller = sim_out_list.controller.sim_out_list;
         sim_out_list.noipc = load(fullfile(sl_metadata_save_dir, 'sim_out_list_noipc_turbsim.mat')); % load noipc case
         sim_out_list.noipc = sim_out_list.noipc.sim_out_list;
@@ -586,10 +586,10 @@ if EXTREME_K_COLLECTION || OPTIMAL_K_COLLECTION
         table_tmp.("Controller") = [{"None"}; num2cell(1:size(table_tmp, 1) - 1)'];
         
         if OPTIMAL_K_COLLECTION
-            save(fullfile(code_dir, 'matfiles', 'Optimal_Controllers_case_table.mat'), "Controllers_case_table");
+            save(fullfile(mat_save_dir, 'Optimal_Controllers_case_table.mat'), "Controllers_case_table");
             table2latex(table_tmp, fullfile(fig_dir, "optimal_controller_table.tex"));
         elseif EXTREME_K_COLLECTION
-            save(fullfile(code_dir, 'matfiles', 'Extreme_Controllers_case_table.mat'), "Controllers_case_table");
+            save(fullfile(mat_save_dir, 'Extreme_Controllers_case_table.mat'), "Controllers_case_table");
             table2latex(table_tmp, char(fullfile(fig_dir, 'extreme_controller_table.tex')));
         end
         
