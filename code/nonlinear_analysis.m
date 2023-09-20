@@ -232,6 +232,7 @@ del_data = readtable(fullfile(postprocessing_save_dir, 'DELs.csv'));
 % out-of-plane load, nacelle yaw moment, nacelle pitch moment, shaft
 % bending moment around y-axis
 figure;
+loads = {del_data};
 
 %% Plot Blade-Pitch Actuation and Loads in Time-Domain OUTPLOT
 if 0

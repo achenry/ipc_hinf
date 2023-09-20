@@ -152,6 +152,7 @@ if ~exist(fig_dir, 'dir')
 end
 
 FAST_SimulinkModel_dir = simulink_model_dir;
+FAST_SimulinkModel = 'AD_SOAR_c7_V2f_c73_Clean';
 
 fastRunner.FAST_exe = fullfile(fast_install_dir, 'bin/openfast');
 fastRunner.FAST_lib = fullfile(fast_install_dir, ['lib/libopenfastlib', libext]);
