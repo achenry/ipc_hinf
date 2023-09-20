@@ -3,33 +3,6 @@ initialize;
 
 C_WS_IDX = LPV_CONTROLLER_WIND_SPEEDS == NONLPV_CONTROLLER_WIND_SPEED;
 
-if EXTREME_K_COLLECTION
-    fig_dir = fullfile(fig_dir, 'extreme_controllers');
-elseif OPTIMAL_K_COLLECTION
-    fig_dir = fullfile(fig_dir, 'optimal_controllers');
-elseif BASELINE_K
-    fig_dir = fullfile(fig_dir, 'baseline_controller');
-end
-
-if ~exist(fig_dir, 'dir')
-    mkdir(fig_dir)
-end
-
-% Define transfer functions
-% What are GSo and KSi? What transfer functions do we care about?
-% => Shaping all in GenPlant. Eliminate d3, it is redundant, d3 column
-% matrices appear in others
-% => Ti<->Wu, To<->Wy, So<->We?
-% => Want to shape To. Check Julien's thesis for GSo, KSi.
-% Note: these functions will not work for structured controller, for which
-% G*K are element-wise multiplied
-% So = @(Plant, K) inv(eye(size(Plant)) + Plant*K) * eye(size(Plant)); % weighted by We, Wy
-% Si = @(Plant, K) inv(eye(size(Plant)) + K*Plant) * eye(size(Plant)); % weighted by Wu
-% GSo = @(Plant, K) inv(eye(size(Plant)) + Plant*K) * Plant; % weighted by We, Wy
-% KSi = @(Plant, K) inv(eye(size(Plant)) + K*Plant) * eye(size(Plant)); % weighted by Wu
-% To = @(Plant, K) inv(eye(size(Plant)) + Plant*K) * (Plant*K); % weighted by Wy
-% Ti = @(Plant, K) inv(eye(size(Plant)) + K*Plant) * (K*Plant); % weighted by Wu
-
 %% Load linear models, operating points, hnorms
 load(fullfile(code_dir, 'matfiles', 'Plant_red'));
 Plant = Plant_red;

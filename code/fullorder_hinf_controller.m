@@ -59,6 +59,7 @@ full_controller_case_basis.WeGain = case_basis.WeGain;
 full_controller_case_basis.W1Gain = case_basis.W1Gain;
 full_controller_case_basis.W2Gain = case_basis.W2Gain;
 full_controller_case_basis.RootMyc_ref = case_basis.Reference;
+full_controller_case_basis.BldPitch_sat = case_basis.Saturation;
 
 [FullOrderControllers_case_list, FullOrderControllers_case_name_list, FullOrderControllers_n_cases] ...
     = generateCases(full_controller_case_basis, 'full_order_tuned_controllers', false);

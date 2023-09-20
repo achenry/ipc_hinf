@@ -12,418 +12,10 @@
 clear all;
 initialize;
 
-RUN_SIMS_PAR = 1;
-RUN_SIMS_SINGLE = 0;
 COMPUTE_FFT = 0;
-RUN_TURSIM = 0;
 
-RootMyc_ref = [0, 0];
-
-%% Generate Turbsim Files
-if RUN_TURSIM
-    run_turbsim_multi;
-end
-
-%% Generate simulation cases with 100 seeds of turbulent wind field
-if RUN_OL_DQ
-    % generate disturbances on Blade-Pitch D/Q 
-    DistAmp = deg2rad(15);
-    RampRate = DistAmp; %1e-3;
-    SettleTime = 100;
-
-    BaselineSteadyState = SettleTime:(2 * SettleTime);
-
-    dRampStart = 2 * SettleTime + 1; % leave 100 seconds to settle, then another 100 to get mean and max baseline
-    dRampStop = dRampStart + (DistAmp / RampRate); % constant by 110
-    dSteadyState = dRampStop + SettleTime:dRampStop + (2 * SettleTime);
-    
-    qRampStart = dRampStop + (2 * SettleTime) + 1; % leave 100 seconds to settle, then another 100 to get mean and max
-    qRampStop = qRampStart + (DistAmp / RampRate); % constant by 220
-    qSteadyState = qRampStop + SettleTime:qRampStop + (2 * SettleTime);
-    
-    TMax = qSteadyState(end); % leave 100 seconds to settle, then another 100 to get mean and max
-elseif RUN_OL_BLADE
-    % generate disturbances on Blade-Pitch D/Q 
-    DistAmp = deg2rad(15); %1e-3; % rad
-    RampRate = DistAmp; %1e-3;
-    SettleTime = 100;
-
-    BaselineSteadyState = SettleTime:(2 * SettleTime);
-
-    b1RampStart = 2 * SettleTime + 1; % leave 100 seconds to settle, then another 100 to get mean and max baseline
-    b1RampStop = b1RampStart + (DistAmp / RampRate); % constant by 110
-    b1SteadyState = b1RampStop + SettleTime:b1RampStop + (2 * SettleTime);
-    
-    TMax = b1SteadyState(end); % leave 100 seconds to settle, then another 100 to get mean and max
-end
-
-Parameters.Control.IPCDQ.Enable = USE_IPC;
-
-%% Generate Simulation Cases
-
-% Generate Turbsim Cases
-
-% ux_mean = 11.4;
-class = 'A'; % class A
-n_seeds = 1;
-uxs = [16];
-
-if sum([RUN_OL_DQ, RUN_OL_BLADE, RUN_CL]) == 1
-    CaseGen.dir_matrix = FAST_runDirectory;
-    CaseGen.namebase = FAST_SimulinkModel;
-    [~, CaseGen.model_name, ~] = fileparts(fastRunner.FAST_InputFile);
-    clear case_basis;
-    case_basis.InflowWind.HWindSpeed = [];
-    if strcmp(WIND_TYPE, 'turbsim')
-        case_basis.InflowWind.WindType = {'3'};
-        case_basis.InflowWind.FileName_BTS = {};
-        for ux = uxs
-            for bts_idx = 1:n_seeds
-                case_basis.InflowWind.FileName_BTS{bts_idx} = ['"' fullfile(windfiles_dir, ...
-                    [class, '_', replace(num2str(ux), '.', '-'), '_', num2str(bts_idx), '.bts']) '"'];
-                case_basis.InflowWind.HWindSpeed = [case_basis.InflowWind.HWindSpeed, ux];
-          
-            end
-        end
-        
-    %     case_basis.InflowWind.HWindSpeed = num2str(ux_mean);
-    elseif strcmp(WIND_TYPE, 'steady')
-        case_basis.InflowWind.WindType = {'1'};
-        case_basis.InflowWind.HWindSpeed = split(num2str(WIND_SPEEDS));
-    end
-
-    case_basis.Fst.TMax = {num2str(TMax)};
-
-    [Wind_case_list, Wind_case_name_list, Wind_n_cases] = generateCases(case_basis, CaseGen.namebase, true);
- 
-end
-
-if STRUCT_PARAM_SWEEP || BASELINE_K
-    % Load MIMO PI Parameter Sweep Gains and Controllers (in tunable Block form)
-    if STRUCT_PARAM_SWEEP
-        load(fullfile(mat_save_dir, 'PI_ParameterSweep_case_list.mat'));
-    elseif BASELINE_K
-        load(fullfile(mat_save_dir, 'PI_BaselineParameters_case_list.mat'));
-    end
-
-    % Merge Wind and Controller Cases
-    case_idx = 1;
-    for c_idx = 1:length(PI_ParameterSweep_case_list)
-        for w_idx = 1:Wind_n_cases
-            for fn1 = fieldnames(Wind_case_list(w_idx))'
-                for fn2 = fieldnames(Wind_case_list(w_idx).(fn1{1}))'
-                    case_list(case_idx).(fn1{1}).(fn2{1}) = Wind_case_list(w_idx).(fn1{1}).(fn2{1});
-                end
-            end
-            for fn1 = fieldnames(PI_ParameterSweep_case_list(c_idx))'
-                case_list(case_idx).(fn1{1}) = PI_ParameterSweep_case_list(c_idx).(fn1{1});
-            end
-            case_idx = case_idx + 1;
-        end
-    end
-    n_cases = case_idx - 1;
-    case_name_list = arrayfun(@(n) ['case_', num2str(n)], 1:n_cases, 'UniformOutput', false);
-elseif OPTIMAL_K_COLLECTION || EXTREME_K_COLLECTION
-    if OPTIMAL_K_COLLECTION
-        % Load Controller Cases corresponding to scheduled full-order controllers
-        load(fullfile(mat_save_dir, 'Optimal_Controllers_case_list.mat'));
-    elseif EXTREME_K_COLLECTION
-        load(fullfile(mat_save_dir, 'Extreme_Controllers_case_list.mat'));
-    end
-    % Merge Wind and Controller Cases
-    case_idx = 1;
-    for c_idx = 1:length(Controllers_case_list)
-        for w_idx = 1:Wind_n_cases
-            for fn1 = fieldnames(Wind_case_list(w_idx))'
-                for fn2 = fieldnames(Wind_case_list(w_idx).(fn1{1}))'
-                    case_list(case_idx).(fn1{1}).(fn2{1}) = Wind_case_list(w_idx).(fn1{1}).(fn2{1});
-                end
-            end
-            for fn1 = fieldnames(Controllers_case_list(c_idx))'
-                case_list(case_idx).(fn1{1}) = Controllers_case_list(c_idx).(fn1{1});
-            end
-            case_idx = case_idx + 1;
-        end
-    end
-    n_cases = case_idx - 1;
-    case_name_list = arrayfun(@(n) ['case_', num2str(n)], 1:n_cases, 'UniformOutput', false);
-    if OPTIMAL_K_COLLECTION
-        save(fullfile(mat_save_dir, 'Optimal_Controllers_nonlinear_simulation_case_list.mat'), "case_list", '-v7.3');
-    elseif EXTREME_K_COLLECTION
-        save(fullfile(mat_save_dir, 'Extreme_Controllers_nonlinear_simulation_case_list.mat'), "case_list", '-v7.3');
-    elseif BASELINE_K
-        save(fullfile(mat_save_dir, 'Baseline_Controller_nonlinear_simulation_case_list.mat'), "case_list", '-v7.3');
-    end
-elseif ~USE_IPC % no ipc
-    case_list = Wind_case_list;
-    n_cases = Wind_n_cases;
-    case_name_list = Wind_case_name_list;
-    save(fullfile(mat_save_dir, 'noIPC_nonlinear_simulation_case_list.mat'), "case_list", '-v7.3');
-
-end
-
-%% Load files 
-
-% OutList for Blade & DQ coordinates
-% load(fullfile(project_dir, 'OutList.mat'));
-% load(fullfile(project_dir, 'dqOutList.mat'));
-
-%% Generate OpenFAST input files for each case
-
-input_mode = 2;
-def_fst_file = fullfile(FAST_directory, fastRunner.FAST_InputFile);
-def_infw_file = fullfile(FAST_directory, [fastRunner.FAST_InputFile, '_InflowFile']);
-templates_dir = fullfile(FAST_directory, 'templates');
-template_fst_dir = fullfile(templates_dir, 'Fst');
-template_infw_dir = fullfile(templates_dir, 'InflowWind');
-
-copyfile(fullfile(FAST_directory, 'Airfoils'), fullfile(FAST_runDirectory, 'Airfoils'));
-copyfile(fullfile(FAST_directory, '*.txt'), FAST_runDirectory);
-copyfile(fullfile(FAST_directory, '*.dat'), FAST_runDirectory);
-copyfile(fullfile(FAST_directory, '*.fst'), FAST_runDirectory);
-
-if RUN_SIMS_PAR
-    % load(fullfile(fastRunner.FAST_directory, 'ss_vals'));
-    parfor case_idx=1:n_cases
-
-        new_fst_name = fullfile(FAST_runDirectory, ...
-            case_name_list{case_idx});
-        new_infw_name = fullfile(FAST_runDirectory, ...
-            [case_name_list{case_idx}, '_InflowWind']);
-    
-        fst_lines = fields(case_list(case_idx).Fst);
-        fst_edits = {};
-    
-        for l = 1:length(fst_lines)
-            fst_edits{l} = case_list(case_idx).Fst.(fst_lines{l});
-        end
-    
-        if isfield(case_list, 'InflowWind')
-            fst_lines{l + 1} = 'InflowFile';
-            fst_edits{l + 1} = ['"' new_infw_name '.dat' '"'];
-        end
-        
-        infw_lines = fields(case_list(case_idx).InflowWind);
-        infw_edits = {};
-    
-        for l = 1:length(infw_lines)
-            infw_edits{l} = case_list(case_idx).InflowWind.(infw_lines{l});
-        end
-        
-        Af_EditFast(fst_lines, fst_edits, new_fst_name, def_fst_file, template_fst_dir, input_mode);
-        Af_EditInflow(infw_lines, infw_edits, new_infw_name, def_infw_file, template_infw_dir, input_mode);
-    end
-elseif RUN_SIMS_SINGLE
-    case_idx = 1;
-    new_fst_name = fullfile(FAST_runDirectory, ...
-            case_name_list{case_idx});
-    new_infw_name = fullfile(FAST_runDirectory, ...
-        [case_name_list{case_idx}, '_InflowWind']);
-
-    fst_lines = fields(case_list(case_idx).Fst);
-    fst_edits = {};
-
-    for l = 1:length(fst_lines)
-        fst_edits{l} = case_list(case_idx).Fst.(fst_lines{l});
-    end
-
-    if isfield(case_list, 'InflowWind')
-        fst_lines{l + 1} = 'InflowFile';
-        fst_edits{l + 1} = ['"' new_infw_name '.dat' '"'];
-    end
-    
-    infw_lines = fields(case_list(case_idx).InflowWind);
-    infw_edits = {};
-
-    for l = 1:length(infw_lines)
-        infw_edits{l} = case_list(case_idx).InflowWind.(infw_lines{l});
-    end
-    
-    Af_EditFast(fst_lines, fst_edits, new_fst_name, def_fst_file, template_fst_dir, input_mode);
-    Af_EditInflow(infw_lines, infw_edits, new_infw_name, def_infw_file, template_infw_dir, input_mode);
-end
-% Af_EditSub;
-% Af_EditServo;
-% Af_EditLin;
-% Af_EditHydro;
-% Af_EditElast;
-% Af_EditDriver;
-% Af_EditBeam;
-% Af_EditAero15;
-% Af_EditADriver;
-
-if RUN_SIMS_SINGLE || RUN_SIMS_PAR
-    if RUN_OL_DQ
-        sim_type = 'ol_dq';
-    elseif RUN_OL_BLADE
-        sim_type = 'ol_blade';
-    elseif RUN_CL && strcmp(WIND_TYPE, 'turbsim')
-        if STRUCT_PARAM_SWEEP
-            sim_type = 'pi_param_sweep_turbsim';
-        elseif OPTIMAL_K_COLLECTION
-            sim_type = 'optimal_k_cases_turbsim';
-        elseif EXTREME_K_COLLECTION
-            sim_type = 'extreme_k_cases_turbsim';
-        elseif BASELINE_K
-            sim_type = 'baseline_k_turbsim';
-        elseif ~USE_IPC
-            sim_type = 'noipc_turbsim';
-        end
-    end
-end
-
-if RUN_SIMS_PAR
-    cd(project_dir);
-    % sim_inputs = repmat(struct(), n_cases, 1 );
-    for case_idx = 1:n_cases
-    
-        case_list(case_idx).FAST_InputFileName = fullfile(FAST_runDirectory, ...
-            [case_name_list{case_idx}, '.fst']);
-    
-        % Populate thread parameters
-        if STRUCT_PARAM_SWEEP
-            % SL_model_name = 'AD_SOAR_c7_V2f_c73_MIMOPIControllerTest';
-            % K_IPC = c2d(tf(case_list(case_idx).Controller_scaled(:, :, ...
-            % LPV_CONTROLLER_WIND_SPEEDS == NONLPV_CONTROLLER_WIND_SPEED)), DT);
-            
-            SL_model_name = 'AD_SOAR_c7_V2f_c73_Clean_FullOrderControllerTest';
-            K_IPC = c2d(case_list(case_idx).Controller, DT);
-            sim_inputs(case_idx) = Simulink.SimulationInput(SL_model_name);
-            sim_inputs(case_idx) = sim_inputs(case_idx).setVariable('K_IPC', K_IPC);
-        elseif OPTIMAL_K_COLLECTION || EXTREME_K_COLLECTION
-            
-            if strcmp(case_list(case_idx).Structure, 'Full-Order')
-                SL_model_name = 'AD_SOAR_c7_V2f_c73_Clean_FullOrderControllerTest';
-            elseif strcmp(case_list(case_idx).Structure, 'Structured')
-                SL_model_name = 'AD_SOAR_c7_V2f_c73_Clean_StructuredControllerTest';
-            end
-            % QUESTION MANUEL shouldn't be need to negate controller, isn't
-            % SL model a positive feedback system? But negated controller
-            % results in poorer performance. Does it need to be converted
-            % to DT?
-            sim_inputs(case_idx) = Simulink.SimulationInput(SL_model_name);
-            K_IPC = c2d(case_list(case_idx).Controller_scaled, DT); % Note, this is the scaled controller
-            sim_inputs(case_idx) = sim_inputs(case_idx).setVariable('K_IPC', K_IPC);
-        elseif BASELINE_K
-            % sim_inputs(case_idx) = Simulink.SimulationInput('AD_SOAR_c7_V2f_c73_Clean_StructuredControllerTest');
-            % K_IPC = case_list(case_idx).Controller; % Note, this is NOT the scaled controller
-            % sim_inputs(case_idx) = sim_inputs(case_idx).setVariable('K_IPC', K_IPC);
-            SL_model_name = 'AD_SOAR_c7_V2f_c73_Clean';
-            sim_inputs(case_idx) = Simulink.SimulationInput(SL_model_name);
-        elseif ~USE_IPC
-            SL_model_name = 'AD_SOAR_c7_V2f_c73_Clean';
-            sim_inputs(case_idx) = Simulink.SimulationInput(SL_model_name);
-        end
-        
-        [filepath, name, ext] = fileparts(strrep(case_list(case_idx).FAST_InputFileName, '.fst', ''));
-        save_fn = fullfile(sl_save_dir, [name, '_', sim_type]);
-        case_list(case_idx).save_fn = save_fn;
-        sim_inputs(case_idx) = setBlockParameter(sim_inputs(case_idx), ...
-            [SL_model_name, '/To File'], 'Filename', save_fn);
-
-        sim_inputs(case_idx) = sim_inputs(case_idx).setVariable('TMax', TMax);
-        sim_inputs(case_idx) = sim_inputs(case_idx).setVariable('DT', Simulation.DT);
-        sim_inputs(case_idx) = sim_inputs(case_idx).setVariable('HWindSpeed', case_list(case_idx).InflowWind.HWindSpeed);
-        sim_inputs(case_idx) = sim_inputs(case_idx).setVariable('RootMyc_ref', case_list(case_idx).Reference);
-        
-    end
-
-    %% Run simulations in multiple parallel threads
-    
-    sim_out_list = parsim(sim_inputs, ...
-                   'TransferBaseWorkspaceVariables', true, ... % Run simulation
-                   'RunInBackground', 'off', ...
-                   'ShowProgress',  'on', ...
-                   'ShowSimulationManager', 'off');
-    for case_idx = 1:n_cases
-        sim_out_list(case_idx).InflowWind = case_list(case_idx).InflowWind;
-        sim_out_list(case_idx).save_fn = case_list(case_idx).save_fn;
-        sim_out_list(case_idx).FAST_InputFileName = case_list(case_idx).FAST_InputFileName;
-    end
-
-    
-elseif RUN_SIMS_SINGLE
-    % run single case
-    for case_idx = 1:1
-        FAST_InputFileName = fullfile(FAST_runDirectory, ...
-            [case_name_list{case_idx}, '.fst']);
-        DT = Simulation.DT;
-        HWindSpeed = case_list(case_idx).InflowWind.HWindSpeed;
-        RootMyc_ref = case_list(case_idx).Reference;
-
-        % save_fn = strrep(FAST_InputFileName, '.fst', '');
-        
-        if STRUCT_PARAM_SWEEP
-            % SL_model_name = 'AD_SOAR_c7_V2f_c73_MIMOPIControllerTest';
-             SL_model_name = 'AD_SOAR_c7_V2f_c73_Clean_FullOrderControllerTest';
-            % K_IPC = c2d(tf(case_list(case_idx).Controller_scaled(:, :, ...
-            %     LPV_CONTROLLER_WIND_SPEEDS == NONLPV_CONTROLLER_WIND_SPEED)), DT);
-            K_IPC = c2d(case_list(case_idx).Controller, DT);
-            % K_IPC(2, 2).Numerator(2) / K_IPC(2, 2).Denominator(1) 
-        elseif OPTIMAL_K_COLLECTION || EXTREME_K_COLLECTION
-            if strcmp(case_list(case_idx).Structure, 'Full-Order')
-                SL_model_name = 'AD_SOAR_c7_V2f_c73_Clean_FullOrderControllerTest';
-            elseif strcmp(case_list(case_idx).Structure, 'Structured')
-                SL_model_name = 'AD_SOAR_c7_V2f_c73_Clean_StructuredControllerTest';
-            end
-            % QUESTION MANUEL does it make sense to implement negative of
-            % tuned controller which assumed negative feedback since SL
-            % simulation assumes positive feedback?
-            K_IPC = c2d(case_list(case_idx).Controller_scaled, DT); % Note, this is the scaled controller
-        else
-            SL_model_name = 'AD_SOAR_c7_V2f_c73_Clean';
-        end
-        open_system(fullfile(FAST_SimulinkModel_dir, SL_model_name))
-        
-        [filepath, name, ext] = fileparts(strrep(FAST_InputFileName, '.fst', ''));
-        save_fn = fullfile(sl_save_dir, [name, '_', sim_type]);
-        set_param([SL_model_name, '/To File'], 'Filename', save_fn);
-
-        sim(fullfile(FAST_SimulinkModel_dir, ...
-                SL_model_name), [0, TMax]);
-
-        sim_out_list(case_idx).save_fn = save_fn;
-        sim_out_list(case_idx).InflowWind = case_list(case_idx).InflowWind;
-        sim_out_list(case_idx).FAST_InputFileName = FAST_InputFileName;
-    end
-end
-
-%% Perform Transformations on OutData
-% if RUN_SIMS_PAR || RUN_SIMS_SINGLE
-% % QUESTION use linear of nearest lpv?
-% %     load(fullfile(project_dir, 'sim_out_list_ol_dq.mat'));
-%     if RUN_OL_BLADE || RUN_OL_DQ
-%         load(fullfile(fastRunner.FAST_directory, 'op_absmax'));
-%     end
-%     for c = 1:length(sim_out_list)
-%         [Channels, ~, ~, ~, ~] = ReadFASTbinary(strrep(sim_out_list(c).FAST_InputFileName, 'fst', 'outb'), 'n');
-%         sim_out_list(c).values = Channels;
-%         sim_out_list(c).dqValues = mbcTransformOutData(sim_out_list(c).values, OutList);
-%         if RUN_OL_BLADE || RUN_OL_DQ
-%             sim_out_list(c).OutData.signals.normalizedValues = normalizeOutData(sim_out_list(c).OutData.signals.values, table2array(op_absmax.blade(c, :)));
-%             sim_out_list(c).OutData.signals.dqNormalizedValues = normalizeOutData(sim_out_list(c).OutData.signals.dqValues, table2array(op_absmax.dq(c, :)));
-% 
-%         end
-%     end
-% end
-
-%% Save/Load Simulation Data
-
-if RUN_SIMS_PAR || RUN_SIMS_SINGLE
-  
-    save(fullfile(sl_metadata_save_dir, ['sim_out_list_', sim_type, '.mat']), 'sim_out_list', '-v7.3');
-    % for c = 1:length(sim_out_list.controller)
-    %     [filepath,name,ext] = fileparts(strrep(sim_out_list.controller(c).FAST_InputFileName, 'fst', 'outb'));
-    %     new_name = [name, '_', sim_type];
-    %     % movefile(fullfile(filepath, [name, ext]), fullfile(project_dir, 'sl_outputs', [new_name, ext]));
-    % end
-elseif RUN_OL_DQ
-    % get open-loop sensitivity to IPC simulations from memory
-    load(fullfile(sl_metadata_save_dir, 'sim_out_list_ol_dq.mat'));
-elseif RUN_OL_BLADE
-    % get open-loop sensitivity to IPC simulations from memory
-    load(fullfile(sl_metadata_save_dir, 'sim_out_list_ol_blade.mat'));
-end
+generate_simulation_cases;
+%% Load Simulation Data
 
 if RUN_CL && strcmp(WIND_TYPE, 'turbsim')
     if STRUCT_PARAM_SWEEP
@@ -452,19 +44,26 @@ if RUN_CL && strcmp(WIND_TYPE, 'turbsim')
         sim_out_list.baseline_controller = sim_out_list.baseline_controller.sim_out_list;
     elseif ~USE_IPC
         load(fullfile(sl_metadata_save_dir, 'sim_out_list_noipc_turbsim.mat'));
+    elseif RUN_OL_DQ
+        % get open-loop sensitivity to IPC simulations from memory
+        load(fullfile(sl_metadata_save_dir, 'sim_out_list_ol_dq.mat'));
+    elseif RUN_OL_BLADE
+        % get open-loop sensitivity to IPC simulations from memory
+        load(fullfile(sl_metadata_save_dir, 'sim_out_list_ol_blade.mat'));
     end
 end
 
 %% Analysis of Blade-Pitch Actuation and Loads in Time-Domain
+if 0
 if EXTREME_K_COLLECTION || OPTIMAL_K_COLLECTION
     beta_dot_norm = @(beta_dot) ((beta_dot >= 0) * 5) + ((beta_dot < 0) * (-4)); % TODO get correct values
-
+    
     bts_filename = case_basis.InflowWind.FileName_BTS{1};
     ux = case_basis.InflowWind.HWindSpeed(1);
     
     % dq values of blade-pitch and blade root bending moment for
     % particular wind field
-    values = load([sim_out_list.noipc(1).save_fn '_1']);
+    values = load([sim_out_list.noipc(1).outdata_save_fn '_1']);
     values = values.OutData.Data;
     dqValues = mbcTransformOutData(values, OutList);
 
@@ -619,6 +218,20 @@ if EXTREME_K_COLLECTION || OPTIMAL_K_COLLECTION
         table2latex(table_tmp, fullfile(fig_dir, "param_sweep_table.tex"));
     end
 end
+end
+
+%% DEL analysis of loads
+% run python DEL analysis
+sim_types = 'extreme_k_cases_turbsim';
+status = system(['/Users/aoifework/miniconda3/envs/weis_dev/bin/python3 ', fullfile(project_dir, 'postprocessing', 'main.py'), ' -st ', sim_types]);
+
+% read python DEL analysis output
+del_data = readtable(fullfile(postprocessing_save_dir, 'DELs.csv'));
+
+% plot percentage DEL reduction @ each mean wind speed for blade
+% out-of-plane load, nacelle yaw moment, nacelle pitch moment, shaft
+% bending moment around y-axis
+figure;
 
 %% Plot Blade-Pitch Actuation and Loads in Time-Domain OUTPLOT
 if 0
@@ -738,7 +351,7 @@ for l = dqOutList'
         dq_op_arr = [dq_op_arr, l{1}];
     end
 end
-COMPUTE_FFT = 1;
+
 if COMPUTE_FFT
     % for each simulation
     blade_op_indices = [];
@@ -877,18 +490,8 @@ elseif STRUCT_PARAM_SWEEP
     load(fullfile(code_dir, 'matfiles', 'PI_ParamSweep_redtable.mat'));
 end
 
-%% DEL analysis of loads
-% run python DEL analysis
 
-% read python DEL analysis output
-
-% plot percentage DEL reduction @ each mean wind speed for blade
-% out-of-plane load, nacelle yaw moment, nacelle pitch moment, shaft
-% bending moment around y-axis
-figure;
-
-
-%% Analysis of loads from nonlinear simulations
+%% Analysis of loads from Open-Loop nonlinear simulations
 
 Delta_op_nonlin = [];
 % for each case, compute output mean and absmax before and after
@@ -1188,13 +791,6 @@ elseif RUN_OL_BLADE
 end
 
 
-%     n_output_plots = 0;
-%     for o = 1:length(OutList)
-%         op = OutList{o};
-%         if ~strcmp(op, 'Time') && ~strcmp(op(end), '2') && ~strcmp(op(end), '3')
-%             n_output_plots = n_output_plots + 1;
-%         end
-%     end
 
 % Blade root bending moment: out of plane, RootMyc1,2,3
 % Shaft bending moment (My), LSSTipMya. LSSTipMys

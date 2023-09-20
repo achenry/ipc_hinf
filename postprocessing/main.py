@@ -25,11 +25,11 @@ import matplotlib.pyplot as plt
 # SIM_TYPE = 'extreme_k_cases_turbsim'
 
 
-def valid_op_file(fp, sim_type):
+def valid_op_file(fp, sim_types):
     # return any([fnmatch(fp, ext) for ext in ["*.outb", "*.out"]])
     # pattern = sim_type + '_[0-9]*.mat'
     # return fnmatch(fp, pattern)
-    if '.mat' in fp and sim_type in fp:
+    if '.mat' in fp and any(sim_type in fp for sim_type in sim_types) and 'outdata' in fp:
         return True
 
 if __name__ == '__main__':
@@ -50,7 +50,7 @@ if __name__ == '__main__':
     
     ## parse simulation type arguments
     arg_parser = argparse.ArgumentParser()
-    arg_parser.add_argument("-st", "--sim_type", help="Simulation Type",
+    arg_parser.add_argument("-st", "--sim_type", help="Simulation Type", nargs='+',
                             choices=["extreme_k_cases_turbsim", "optimal_k_cases_turbsim", "ol_dq", "ol_blade",
                                      "baseline_k_turbsim", "noipc_turbsim", "pi_param_sweep_turbsim"])
     args = arg_parser.parse_args()
@@ -68,7 +68,7 @@ if __name__ == '__main__':
     # output files. The easiest way to use this is to use the 'load_FAST_out' function.
     
     # outputs = load_FAST_out(outfiles[:3])
-    out_channels = list(np.concatenate(np.concatenate(loadmat(OUTLIST_PATH)['OutList'])))
+    out_channels = np.concatenate(np.concatenate(loadmat(OUTLIST_PATH)['OutList']))
     outputs = {}
     for fn in outfiles:
         # new_data = loadmat(fn)
@@ -90,7 +90,7 @@ if __name__ == '__main__':
     
     # Individual channel time series can also be accessed with dict style indexing:
     
-    plt.plot(outputs[outfiles[0]][:, out_channels.index("Time")], outputs[outfiles[0]][:, out_channels.index("Wind1VelX")])
+    plt.plot(outputs[outfiles[0]][:, np.where(out_channels == "Time")[0][0]], outputs[outfiles[0]][:, np.where(out_channels == "Wind1VelX")[0][0]])
     
     ## PCRUNCH CONFIGURATION
     
@@ -141,14 +141,14 @@ if __name__ == '__main__':
     
     # The API has changed and is in more of an object oriented framework.
     la = LoadsAnalysis(
-        outfiles[:5],  # The primary input is a list of output files
+        outputs={k:v for i, (k, v) in enumerate(outputs.items()) if i < 5},  # The primary input is a list of output files
         magnitude_channels=magnitude_channels,  # All of the following inputs are optional
         fatigue_channels=fatigue_channels,  #
         extreme_channels=channel_extremes,  #
         trim_data=(0,),  # If 'trim_data' is passed, all input files will
     )  # be trimmed to (tmin, tmax(optional))
     
-    la.process_outputs(nd_outputs=outputs, cores=mp.cpu_count())  # Once LoadsAnalysis is configured, process outputs with
+    la.process_outputs(channels=out_channels, cores=mp.cpu_count())  # Once LoadsAnalysis is configured, process outputs with
     # `process_outputs`. `cores` is optional but will trigger parallel processing if configured
     
     ## OUTPUTS
@@ -158,10 +158,13 @@ if __name__ == '__main__':
     # These are indexable by channel, stat, file:
     la.summary_stats["RootMc1"]
     la.summary_stats[("RootMc1", 'min')]
-    la.summary_stats.loc[outfiles[0]]
+    la.summary_stats.loc[os.path.basename(outfiles[0])]
     
     # Damage equivalent loads are found here:
     la.DELs
     
     # Extreme events:
     la.extreme_events
+    
+    ## Export data
+    la.DELs.to_csv(os.path.join(RESULTS_DIR, f'DELs.csv'))

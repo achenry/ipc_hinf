@@ -18,7 +18,7 @@ VARY_REFERENCE = 0;
 VARY_REFERENCE_BASIS = [0.05, 0.1, 0.15, 0.2, 0.25]; % QUESTION MANUEL of peak, ss value?
 
 VARY_SATURATION = 0;
-VARY_SATURATION_BASIS = [0.05, 0.1, 0.15, 0.2, 0.25]; % QUESTION MANUEL of peak, ss value?
+VARY_SATURATION_BASIS = deg2rad(15) * [0.05, 0.1, 0.15, 0.2, 0.25]; % QUESTION MANUEL of peak, ss value?
 
 COMPUTE_FFT = 0;
 HARMONICS = [2, 3, 6];
@@ -79,6 +79,7 @@ if strcmp(username, 'aoifework')
     mat_save_dir = fullfile(code_dir, 'matfiles');
     sl_save_dir = fullfile(project_dir, 'sl_outputs');
     sl_metadata_save_dir = fullfile(project_dir, 'sl_metadata');
+    postprocessing_save_dir = fullfile(project_dir, 'postprocessing_results');
 
 elseif strcmp(username, 'aohe7145')
     % scp -r /Users/aoifework/Documents/Research/ipc_tuning aohe7145@login.rc.colorado.edu:/projects/aohe7145/projects/ipc_tuning
@@ -94,6 +95,7 @@ elseif strcmp(username, 'aohe7145')
     mat_save_dir = fullfile('/scratch/alpine/aohe7145/ipc_tuning', 'matfiles');
     sl_save_dir = fullfile('/scratch/alpine/aohe7145/ipc_tuning', 'sl_outputs');
     sl_metadata_save_dir = fullfile('/scratch/alpine/aohe7145/ipc_tuning', 'sl_metadata');
+    postprocessing_save_dir = fullfile('/scratch/alpine/aohe7145/ipc_tuning', 'postprocessing_results');
     % fast_install_dir = fullfile(home_dir, 'dev/WEIS/OpenFAST/install');
     
     FAST_runDirectory = fullfile(project_dir, 'simulations');
@@ -111,66 +113,52 @@ elseif strcmp(username, 'aohe7145')
 
     libext = '.dylib';
 
-    windfiles_dir = fullfile(project_dir, 'WindFiles');
+    windfiles_dir = fullfile('/scratch/alpine/aohe7145/ipc_tuning', 'WindFiles');
     
     addpath(fullfile(project_dir)); % sl model
     
     % FAST_SFunc location
     addpath(fullfile(fast_install_dir, 'lib'));
 
-
-elseif strmp(username, 'manuel')
-    
-    chdir(code_dir);
-
-    addpath(fullfile('CHANGE ME', 'PMtools')); % MANUEL: add your filepaths here
-    addpath(fullfile('CHANGE ME', 'matlab-toolbox/A_Functions'));
-    addpath(fullfile('CHANGE ME', 'matlab-toolbox/Utilities'));
-    addpath(fullfile('CHANGE ME', 'matlab-toolbox', 'MBC', 'Source')); % Need fx_mbc3 from this toolbox
-    lin_models_dir = fullfile('CHANGE ME', 'linfiles');
-
-    mat_save_dir = fullfile(code_dir, 'matfiles');
-    sl_metadata_save_dir = fullfile(project_dir, 'nonlin_simulations');
 end
 
-if ~exist(mat_save_dir)
+if ~exist(mat_save_dir, 'dir')
     mkdir(mat_save_dir);
 end
-if ~exist(sl_save_dir)
+if ~exist(sl_save_dir, 'dir')
     mkdir(sl_save_dir);
 end
-if ~exist(sl_metadata_save_dir)
+if ~exist(sl_metadata_save_dir, 'dir')
     mkdir(sl_metadata_save_dir);
+end
+if ~exist(postprocessing_save_dir, 'dir')
+    mkdir(postprocessing_save_dir);
+end
+if ~exist(FAST_runDirectory, 'dir')
+    mkdir(FAST_runDirectory);
+end
+
+
+if EXTREME_K_COLLECTION
+    fig_dir = fullfile(fig_dir, 'extreme_controllers');
+elseif OPTIMAL_K_COLLECTION
+    fig_dir = fullfile(fig_dir, 'optimal_controllers');
+elseif BASELINE_K
+    fig_dir = fullfile(fig_dir, 'baseline_controller');
+end
+
+if ~exist(fig_dir, 'dir')
+    mkdir(fig_dir)
 end
 
 FAST_SimulinkModel_dir = simulink_model_dir;
-if RUN_OL_DQ
-    FAST_SimulinkModel = 'AD_SOAR_c7_V2f_c73_Clean_OL_DQ';
-elseif RUN_OL_BLADE
-    FAST_SimulinkModel = 'AD_SOAR_c7_V2f_c73_Clean_OL_BLADE';
-else
-    FAST_SimulinkModel = 'AD_SOAR_c7_V2f_c73_ControllerTest';
-end
 
 fastRunner.FAST_exe = fullfile(fast_install_dir, 'bin/openfast');
 fastRunner.FAST_lib = fullfile(fast_install_dir, ['lib/libopenfastlib', libext]);
 fastRunner.FAST_InputFile = 'weis_job_00';
 fastRunner.run_name = 'excGenDOF_incSecOrd';
 
-if ~exist(FAST_runDirectory, 'dir')
-    mkdir(FAST_runDirectory);
-end
-
 autrun;
-
-
-
-if ~exist(mat_save_dir, 'dir')
-    mkdir(mat_save_dir);
-end
-if ~exist(fig_dir, 'dir')
-    mkdir(fig_dir);
-end
 
 %% Setup simulation
 Simulation.OpenFAST         = 1;
