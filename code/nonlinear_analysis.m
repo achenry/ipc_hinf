@@ -12,8 +12,8 @@
 clear all;
 initialize;
 
-RUN_SIMS_PAR = 0;
-RUN_SIMS_SINGLE = 1;
+RUN_SIMS_PAR = 1;
+RUN_SIMS_SINGLE = 0;
 COMPUTE_FFT = 0;
 RUN_TURSIM = 0;
 
