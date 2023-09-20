@@ -10,4 +10,4 @@
 module purge
 module load matlab/R2022b
 cd /projects/aohe7145/projects/ipc_tuning/code
-matlab -nodisplay -nosplash -nodesktop -r "run('nonlinear_analysis.m'); exit;" | tail -n +11
+matlab -nodisplay -nosplash -nodesktop -r "run('nonlinear_simulations.m'); exit;" | tail -n +11
