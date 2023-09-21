@@ -53,16 +53,16 @@ ncont = 2; % number of control inputs u, K has ncont outputs
 % then only Wy and We to penalize To and So, 
 % then Wy and We and Wu to penalize To and So and KSi and Ti
 % full_controller_case_basis.WindSpeedIndex = 1:length(LPV_CONTROLLER_WIND_SPEEDS);
-full_controller_case_basis.WindSpeedIndex = find(LPV_CONTROLLER_WIND_SPEEDS == NONLPV_CONTROLLER_WIND_SPEED); % TODO only works for non-scheduled
-full_controller_case_basis.WuGain = case_basis.WuGain;
-full_controller_case_basis.WeGain = case_basis.WeGain;
-full_controller_case_basis.W1Gain = case_basis.W1Gain;
-full_controller_case_basis.W2Gain = case_basis.W2Gain;
-full_controller_case_basis.RootMyc_ref = case_basis.Reference;
-full_controller_case_basis.BldPitch_sat = case_basis.Saturation;
+full_controller_case_basis.WindSpeedIndex.x = find(LPV_CONTROLLER_WIND_SPEEDS == NONLPV_CONTROLLER_WIND_SPEED); % TODO only works for non-scheduled
+full_controller_case_basis.WuGain.x = case_basis.WuGain.x;
+full_controller_case_basis.WeGain.x = case_basis.WeGain.x;
+full_controller_case_basis.W1Gain.x = case_basis.W1Gain.x;
+full_controller_case_basis.W2Gain.x = case_basis.W2Gain.x;
+full_controller_case_basis.Reference = case_basis.Reference;
+full_controller_case_basis.Saturation = case_basis.Saturation;
 
 [FullOrderControllers_case_list, FullOrderControllers_case_name_list, FullOrderControllers_n_cases] ...
-    = generateCases(full_controller_case_basis, 'full_order_tuned_controllers', false);
+    = generateCases(full_controller_case_basis, 'full_order_tuned_controllers', true);
 
 if EXTREME_K_COLLECTION
     % remove cases
@@ -71,14 +71,14 @@ if EXTREME_K_COLLECTION
         for c_idx = 1:FullOrderControllers_n_cases
             % want exactly 2 weighting matrices to be 'on'
             % and only one weighting filter to have a notch
-            if (~((length(FullOrderControllers_case_list(c_idx).WeGain.Numerator{1,1}) > 1) ...
-                    && (length(FullOrderControllers_case_list(c_idx).W1Gain.Numerator{1,1}) > 1))) ...
-                    && (ss(FullOrderControllers_case_list(c_idx).W1Gain).D(1, 1) ...
-                    + ss(FullOrderControllers_case_list(c_idx).W2Gain).D(1, 1) == IP_HIGH_GAIN + IP_LOW_GAIN) ... % want one (but not both) to have high gain
-                    && ((ss(FullOrderControllers_case_list(c_idx).WuGain).D(1, 1) ...
-                    + ss(FullOrderControllers_case_list(c_idx).WeGain).D(1, 1) == WU_HIGH_GAIN + OP_LOW_GAIN) ... 
-                    || (ss(FullOrderControllers_case_list(c_idx).WuGain).D(1, 1) ...
-                    + ss(FullOrderControllers_case_list(c_idx).WeGain).D(1, 1) == WE_HIGH_GAIN + OP_LOW_GAIN))
+            if (~((length(FullOrderControllers_case_list(c_idx).WeGains.Numerator{1,1}) > 1) ...
+                    && (length(FullOrderControllers_case_list(c_idx).W1Gains.Numerator{1,1}) > 1))) ...
+                    && (ss(FullOrderControllers_case_list(c_idx).W1Gains).D(1, 1) ...
+                    + ss(FullOrderControllers_case_list(c_idx).W2Gains).D(1, 1) == IP_HIGH_GAIN + IP_LOW_GAIN) ... % want one (but not both) to have high gain
+                    && ((ss(FullOrderControllers_case_list(c_idx).WuGains).D(1, 1) ...
+                    + ss(FullOrderControllers_case_list(c_idx).WeGains).D(1, 1) == WU_HIGH_GAIN + OP_LOW_GAIN) ... 
+                    || (ss(FullOrderControllers_case_list(c_idx).WuGains).D(1, 1) ...
+                    + ss(FullOrderControllers_case_list(c_idx).WeGains).D(1, 1) == WE_HIGH_GAIN + OP_LOW_GAIN))
                 continue;
             end
             exc_idx = [exc_idx, c_idx];
@@ -96,11 +96,11 @@ if 1
     FullOrderTuning = repmat(struct(), FullOrderControllers_n_cases, 1 );
     parfor case_idx = 1:FullOrderControllers_n_cases
         controller_case = FullOrderControllers_case_list(case_idx);
-        c_ws_idx = controller_case.WindSpeedIndex;
-        Wu_tmp = controller_case.WuGain * Wu;
-        We_tmp = controller_case.WeGain * We;
-        W1_tmp = controller_case.W1Gain * W1;
-        W2_tmp = controller_case.W2Gain * W2;
+        c_ws_idx = controller_case.WindSpeedIndex.x;
+        Wu_tmp = controller_case.WuGain.x * Wu;
+        We_tmp = controller_case.WeGain.x * We;
+        W1_tmp = controller_case.W1Gain.x * W1;
+        W2_tmp = controller_case.W2Gain.x * W2;
         Wy_tmp = Wy;
 
         [GenPlant_tmp, Win_tmp, Wout_tmp] = generateGenPlant(...
@@ -112,10 +112,10 @@ if 1
         
         % weighting_case_idx = floor(case_idx / length(LPV_CONTROLLER_WIND_SPEEDS)) + 1;
 
-        FullOrderTuning(case_idx).WuGain = controller_case.WuGain;
-        FullOrderTuning(case_idx).WeGain = controller_case.WeGain;
-        FullOrderTuning(case_idx).W1Gain = controller_case.W1Gain;
-        FullOrderTuning(case_idx).W2Gain = controller_case.W2Gain;
+        FullOrderTuning(case_idx).WuGain = controller_case.WuGain.x;
+        FullOrderTuning(case_idx).WeGain = controller_case.WeGain.x;
+        FullOrderTuning(case_idx).W1Gain = controller_case.W1Gain.x;
+        FullOrderTuning(case_idx).W2Gain = controller_case.W2Gain.x;
                 
         FullOrderTuning(case_idx).GenPlant = GenPlant_tmp;
         FullOrderTuning(case_idx).Win = Win_tmp;
@@ -171,24 +171,25 @@ if 1
     % combination and wind speed
     % for each wind speed
     FullOrderControllers = struct;
-    for c_ws_idx = full_controller_case_basis.WindSpeedIndex
+    for c_ws_idx = 1:length(full_controller_case_basis.WindSpeedIndex.x)
         weighting_case_idx = 1;
         % find all of the controller cases that correspond to this wind speed
         for case_idx = 1:FullOrderControllers_n_cases
             controller_case = FullOrderControllers_case_list(case_idx);
-            if c_ws_idx == controller_case.WindSpeedIndex
+            if full_controller_case_basis.WindSpeedIndex.x(c_ws_idx) == controller_case.WindSpeedIndex.x
                 % cc = find(full_controller_case_basis.WindSpeedIndex == find(LPV_CONTROLLER_WIND_SPEEDS == NONLPV_CONTROLLER_WIND_SPEED));
-                FullOrderControllers(weighting_case_idx).WuGain = FullOrderControllers_case_list(case_idx).WuGain;
-                FullOrderControllers(weighting_case_idx).WeGain = FullOrderControllers_case_list(case_idx).WeGain;
-                FullOrderControllers(weighting_case_idx).W1Gain = FullOrderControllers_case_list(case_idx).W1Gain;
-                FullOrderControllers(weighting_case_idx).W2Gain = FullOrderControllers_case_list(case_idx).W2Gain;
+                FullOrderControllers(weighting_case_idx).WuGain = FullOrderControllers_case_list(case_idx).WuGain.x;
+                FullOrderControllers(weighting_case_idx).WeGain = FullOrderControllers_case_list(case_idx).WeGain.x;
+                FullOrderControllers(weighting_case_idx).W1Gain = FullOrderControllers_case_list(case_idx).W1Gain.x;
+                FullOrderControllers(weighting_case_idx).W2Gain = FullOrderControllers_case_list(case_idx).W2Gain.x;
 
                 FullOrderControllers(weighting_case_idx).GenPlant(:, :, c_ws_idx) = FullOrderTuning(case_idx).GenPlant;
                 FullOrderControllers(weighting_case_idx).Win(:, :, c_ws_idx) = FullOrderTuning(case_idx).Win;
                 FullOrderControllers(weighting_case_idx).Wout(:, :, c_ws_idx) = FullOrderTuning(case_idx).Wout;
                 FullOrderControllers(weighting_case_idx).gamma(c_ws_idx) = FullOrderTuning(case_idx).gamma;
 
-                FullOrderControllers(weighting_case_idx).Controller(:, :, c_ws_idx) = FullOrderTuning(case_idx).Controller;
+                FullOrderControllers(weighting_case_idx).Controller(:, :, c_ws_idx) = ...
+                    FullOrderTuning(case_idx).Controller;
                 FullOrderControllers(weighting_case_idx).CL(:, :, c_ws_idx) = FullOrderTuning(case_idx).CL;
 
                 FullOrderControllers(weighting_case_idx).Controller_scaled(:, :, c_ws_idx) = ...
@@ -221,11 +222,11 @@ if 1
         FullOrderControllers(w_idx).Controller = ss(FullOrderControllers(w_idx).Controller);
         FullOrderControllers(w_idx).Controller.InputName = {'Measured M_d Tracking Error', 'Measured M_q Tracking Error'};
         FullOrderControllers(w_idx).Controller.OutputName = {'\beta_d Control Input', '\beta_q Control Input'};
-        FullOrderControllers(w_idx).Controller.SamplingGrid = struct('u', LPV_CONTROLLER_WIND_SPEEDS(full_controller_case_basis.WindSpeedIndex));
+        FullOrderControllers(w_idx).Controller.SamplingGrid = struct('u', LPV_CONTROLLER_WIND_SPEEDS(full_controller_case_basis.WindSpeedIndex.x));
         FullOrderControllers(w_idx).Controller_scaled = ss(FullOrderControllers(w_idx).Controller_scaled);
         FullOrderControllers(w_idx).Controller_scaled.InputName = {'Measured M_d Tracking Error', 'Measured M_q Tracking Error'};
         FullOrderControllers(w_idx).Controller_scaled.OutputName = {'\beta_d Control Input', '\beta_q Control Input'};
-        FullOrderControllers(w_idx).Controller_scaled.SamplingGrid = struct('u', LPV_CONTROLLER_WIND_SPEEDS(full_controller_case_basis.WindSpeedIndex));
+        FullOrderControllers(w_idx).Controller_scaled.SamplingGrid = struct('u', LPV_CONTROLLER_WIND_SPEEDS(full_controller_case_basis.WindSpeedIndex.x));
     end
     
     % go through each controller case and find the corresponding controller in
@@ -238,10 +239,10 @@ if 1
         
         for w_idx = 1:n_weighting_cases
             
-            if (sum(ss(FullOrderControllers(w_idx).WuGain - Controllers_case_list(c_idx).WuGain).D, 'all') || ...
-                sum(ss(FullOrderControllers(w_idx).WeGain - Controllers_case_list(c_idx).WeGain).D, 'all') || ...
-                sum(ss(FullOrderControllers(w_idx).W1Gain - Controllers_case_list(c_idx).W1Gain).D, 'all') || ...
-                sum(ss(FullOrderControllers(w_idx).W2Gain - Controllers_case_list(c_idx).W2Gain).D, 'all'))
+            if (sum(ss(FullOrderControllers(w_idx).WuGain - Controllers_case_list(c_idx).WuGain.x).D, 'all') || ...
+                sum(ss(FullOrderControllers(w_idx).WeGain - Controllers_case_list(c_idx).WeGain.x).D, 'all') || ...
+                sum(ss(FullOrderControllers(w_idx).W1Gain - Controllers_case_list(c_idx).W1Gain.x).D, 'all') || ...
+                sum(ss(FullOrderControllers(w_idx).W2Gain - Controllers_case_list(c_idx).W2Gain.x).D, 'all'))
                 continue;
             end
             
@@ -257,9 +258,9 @@ if 1
             elseif strcmp(Controllers_case_list(c_idx).Scheduling.x, 'No')
                 for c_ws_idx = 1:length(LPV_CONTROLLER_WIND_SPEEDS)
                     Controllers_case_list(c_idx).Controller(:, :, c_ws_idx) ...
-                        = K_tmp(:, :, full_controller_case_basis.WindSpeedIndex == find(LPV_CONTROLLER_WIND_SPEEDS == NONLPV_CONTROLLER_WIND_SPEED));
+                        = K_tmp(:, :, full_controller_case_basis.WindSpeedIndex.x == find(LPV_CONTROLLER_WIND_SPEEDS == NONLPV_CONTROLLER_WIND_SPEED));
                     Controllers_case_list(c_idx).Controller_scaled(:, :, c_ws_idx) ...
-                        = K_tmp_scaled(:, :, full_controller_case_basis.WindSpeedIndex == find(LPV_CONTROLLER_WIND_SPEEDS == NONLPV_CONTROLLER_WIND_SPEED));
+                        = K_tmp_scaled(:, :, full_controller_case_basis.WindSpeedIndex.x == find(LPV_CONTROLLER_WIND_SPEEDS == NONLPV_CONTROLLER_WIND_SPEED));
                 end     
             end
             % TODO check if Genplant, stability margins for multiple wind
@@ -295,7 +296,8 @@ if 1
    
     
     fileID = fopen('./weighting_cases.txt','w');
-    case_desc = {'No IPC'};
+    % case_desc = {'No IPC'};
+    case_desc = {};
     % loop through weighting cases and print information
     for w_idx = 1:n_weighting_cases
         fprintf(fileID, '\nCase %d\n', w_idx);
@@ -434,7 +436,6 @@ if 1
         'MultiDiskOutput_GM', 'MultiDiskOutput_PM', 'MultiDiskOutput_DM', ...
         'MultiDiskIO_GM', 'MultiDiskIO_PM', 'MultiDiskIO_DM', ...
         'wc', 'ADC', 'RootMycBlade1 MSE'});
-% 'Hinf(Ti)', 'Hinf(To)', 'Hinf(Si)', 'Hinf(So)', ... 
 
     
     Controllers_case_table.("WorstCase_SingleClassical_GM") = ...

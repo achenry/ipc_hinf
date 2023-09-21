@@ -181,11 +181,8 @@ if REPROCESS_SWEEP
         for case_idx = 1:length(PI_ParameterSweep)
             if c_ws_idx == PI_ParameterSweep(case_idx).Gains(:, 'WindSpeedIdx').Variables
 
-                % cc = find(c_ws_idx == Sweep.Vary.WindSpeedIdx);
-
                 PI_ParameterSweepControllers(weighting_case_idx).Controller = ...
                     PI_ParameterSweep(case_idx).Controller;
-                % PI_ParameterSweep.Controller_scaled(:, :, w_idx, j) = PI_ParameterSweep_tmp(case_idx).Controller_scaled;
                 
                 Gains_tmp(weighting_case_idx, :) = PI_ParameterSweep(case_idx).Gains(:, 1:4).Variables;
                 PI_ParameterSweepControllers(weighting_case_idx).Gains = ...

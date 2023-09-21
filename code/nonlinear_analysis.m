@@ -23,7 +23,7 @@ if RUN_CL && strcmp(WIND_TYPE, 'turbsim')
         clear sim_out_list;
         sim_out_list.controller = load(fullfile(sl_metadata_save_dir, 'sim_out_list_pi_param_sweep_turbsim.mat')); % load ipc case
         sim_out_list.controller = sim_out_list.controller.sim_out_list;
-        sim_out_list.noipc = load(fullfile(sl_metadata_save_dir, 'sim_out_list_noipc_turbsim.mat'));
+        sim_out_list.noipc = load(fullfile(sl_metadata_save_dir, 'sim_out_list_baseline_k_turbsim.mat'));
         sim_out_list.noipc = sim_out_list.noipc.sim_out_list;
         sim_out_list.baseline_controller = load(fullfile(sl_metadata_save_dir, 'sim_out_list_baseline_k_turbsim.mat')); % load baseline ipc case
         sim_out_list.baseline_controller = sim_out_list.baseline_controller.sim_out_list;
@@ -31,20 +31,20 @@ if RUN_CL && strcmp(WIND_TYPE, 'turbsim')
         clear sim_out_list;
         sim_out_list.controller = load(fullfile(sl_metadata_save_dir, 'sim_out_list_optimal_k_cases_turbsim.mat'));
         sim_out_list.controller = sim_out_list.controller.sim_out_list;
-        sim_out_list.noipc = load(fullfile(sl_metadata_save_dir, 'sim_out_list_noipc_turbsim.mat')); % load noipc case
-        sim_out_list.noipc = sim_out_list.noipc.sim_out_list;
+        sim_out_list.noipc = load(fullfile(sl_metadata_save_dir, 'sim_out_list_baseline_k_turbsim.mat')); % load noipc case
+        sim_out_list.noipc = sim_out_list.noipc.sim_out_list(1);
         sim_out_list.baseline_controller = load(fullfile(sl_metadata_save_dir, 'sim_out_list_baseline_k_turbsim.mat')); % load baseline ipc case
         sim_out_list.baseline_controller = sim_out_list.baseline_controller.sim_out_list;
     elseif EXTREME_K_COLLECTION
         clear sim_out_list;
         sim_out_list.controller = load(fullfile(sl_metadata_save_dir, 'sim_out_list_extreme_k_cases_turbsim.mat')); % load ipc case
         sim_out_list.controller = sim_out_list.controller.sim_out_list;
-        sim_out_list.noipc = load(fullfile(sl_metadata_save_dir, 'sim_out_list_noipc_turbsim.mat')); % load noipc case
+        sim_out_list.noipc = load(fullfile(sl_metadata_save_dir, 'sim_out_list_baseline_k_turbsim.mat')); % load noipc case
         sim_out_list.noipc = sim_out_list.noipc.sim_out_list;
         sim_out_list.baseline_controller = load(fullfile(sl_metadata_save_dir, 'sim_out_list_baseline_k_turbsim.mat')); % load baseline ipc case
         sim_out_list.baseline_controller = sim_out_list.baseline_controller.sim_out_list;
     elseif ~USE_IPC
-        load(fullfile(sl_metadata_save_dir, 'sim_out_list_noipc_turbsim.mat'));
+        load(fullfile(sl_metadata_save_dir, 'sim_out_list_baseline_k_turbsim.mat'));
     end
 else
     if RUN_OL_DQ
