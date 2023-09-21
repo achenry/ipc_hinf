@@ -11,6 +11,7 @@
 % controller type with IPC on
 clear all;
 initialize;
+init_hinf_controller;
 
 RUN_SIMS_PAR = 1;
 RUN_SIMS_SINGLE = 0;
@@ -176,14 +177,14 @@ if RUN_SIMS_PAR
             % K_IPC = c2d(tf(case_list(case_idx).Controller_scaled(:, :, ...
             % LPV_CONTROLLER_WIND_SPEEDS == NONLPV_CONTROLLER_WIND_SPEED)), DT);
             
-            SL_model_name = 'AD_SOAR_c7_V2f_c73_Clean_FullOrderControllerTest';
+            SL_model_name = 'AD_SOAR_c7_V2f_c73_Clean_FullOrderControllerTest_old';
             K_IPC = c2d(case_list(case_idx).Controller, DT);
             sim_inputs(case_idx) = Simulink.SimulationInput(SL_model_name);
             sim_inputs(case_idx) = sim_inputs(case_idx).setVariable('K_IPC', K_IPC);
         elseif OPTIMAL_K_COLLECTION || EXTREME_K_COLLECTION
             
             if strcmp(case_list(case_idx).Structure, 'Full-Order')
-                SL_model_name = 'AD_SOAR_c7_V2f_c73_Clean_FullOrderControllerTest';
+                SL_model_name = 'AD_SOAR_c7_V2f_c73_Clean_FullOrderControllerTest_old';
             elseif strcmp(case_list(case_idx).Structure, 'Structured')
                 SL_model_name = 'AD_SOAR_c7_V2f_c73_Clean_StructuredControllerTest';
             end
@@ -223,8 +224,8 @@ if RUN_SIMS_PAR
         sim_inputs(case_idx) = sim_inputs(case_idx).setVariable('TMax', TMax);
         sim_inputs(case_idx) = sim_inputs(case_idx).setVariable('DT', Simulation.DT);
         sim_inputs(case_idx) = sim_inputs(case_idx).setVariable('HWindSpeed', case_list(case_idx).InflowWind.HWindSpeed);
-        sim_inputs(case_idx) = sim_inputs(case_idx).setVariable('RootMyc_ref', case_list(case_idx).Reference);
-        sim_inputs(case_idx) = sim_inputs(case_idx).setVariable('BldPitch_sat', case_list(case_idx).Saturation);
+        sim_inputs(case_idx) = sim_inputs(case_idx).setVariable('RootMyc_ref', [case_list(case_idx).Reference.d case_list(case_idx).Reference.q]);
+        sim_inputs(case_idx) = sim_inputs(case_idx).setVariable('BldPitch_sat', [case_list(case_idx).Saturation.d case_list(case_idx).Saturation.q]);
         
     end
 
@@ -250,21 +251,21 @@ elseif RUN_SIMS_SINGLE
             [case_name_list{case_idx}, '.fst']);
         DT = Simulation.DT;
         HWindSpeed = case_list(case_idx).InflowWind.HWindSpeed;
-        RootMyc_ref = case_list(case_idx).Reference;
-        BldPitch_sat = case_list(case_idx).Saturation;
+        RootMyc_ref = [case_list(case_idx).Reference.d case_list(case_idx).Reference.q];
+        BldPitch_sat = [case_list(case_idx).Saturation.d case_list(case_idx).Saturation.q];
 
         % save_fn = strrep(FAST_InputFileName, '.fst', '');
         
         if STRUCT_PARAM_SWEEP
             % SL_model_name = 'AD_SOAR_c7_V2f_c73_MIMOPIControllerTest';
-             SL_model_name = 'AD_SOAR_c7_V2f_c73_Clean_FullOrderControllerTest';
+             SL_model_name = 'AD_SOAR_c7_V2f_c73_Clean_FullOrderControllerTest_old';
             % K_IPC = c2d(tf(case_list(case_idx).Controller_scaled(:, :, ...
             %     LPV_CONTROLLER_WIND_SPEEDS == NONLPV_CONTROLLER_WIND_SPEED)), DT);
             K_IPC = c2d(case_list(case_idx).Controller, DT);
             % K_IPC(2, 2).Numerator(2) / K_IPC(2, 2).Denominator(1) 
         elseif OPTIMAL_K_COLLECTION || EXTREME_K_COLLECTION
             if strcmp(case_list(case_idx).Structure, 'Full-Order')
-                SL_model_name = 'AD_SOAR_c7_V2f_c73_Clean_FullOrderControllerTest';
+                SL_model_name = 'AD_SOAR_c7_V2f_c73_Clean_FullOrderControllerTest_old';
             elseif strcmp(case_list(case_idx).Structure, 'Structured')
                 SL_model_name = 'AD_SOAR_c7_V2f_c73_Clean_StructuredControllerTest';
             end

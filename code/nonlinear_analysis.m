@@ -15,6 +15,7 @@ initialize;
 COMPUTE_FFT = 0;
 
 generate_simulation_cases;
+
 %% Load Simulation Data
 
 if RUN_CL && strcmp(WIND_TYPE, 'turbsim')
@@ -44,7 +45,9 @@ if RUN_CL && strcmp(WIND_TYPE, 'turbsim')
         sim_out_list.baseline_controller = sim_out_list.baseline_controller.sim_out_list;
     elseif ~USE_IPC
         load(fullfile(sl_metadata_save_dir, 'sim_out_list_noipc_turbsim.mat'));
-    elseif RUN_OL_DQ
+    end
+else
+    if RUN_OL_DQ
         % get open-loop sensitivity to IPC simulations from memory
         load(fullfile(sl_metadata_save_dir, 'sim_out_list_ol_dq.mat'));
     elseif RUN_OL_BLADE
@@ -222,7 +225,7 @@ end
 
 %% DEL analysis of loads
 % run python DEL analysis
-sim_types = 'extreme_k_cases_turbsim';
+sim_types = 'extreme_k_cases_turbsim noipc_turbsim';
 status = system(['/Users/aoifework/miniconda3/envs/weis_dev/bin/python3 ', fullfile(project_dir, 'postprocessing', 'main.py'), ' -st ', sim_types]);
 
 % read python DEL analysis output
@@ -232,7 +235,26 @@ del_data = readtable(fullfile(postprocessing_save_dir, 'DELs.csv'));
 % out-of-plane load, nacelle yaw moment, nacelle pitch moment, shaft
 % bending moment around y-axis
 figure;
-loads = {del_data};
+loads = cell(length(del_data.Properties.VariableNames) - 1, 1);
+[loads{:}] = del_data.Properties.VariableNames{2:end};
+noipc_dels = del_data(contains(del_data.("Var1"), 'noipc_turbsim'), loads).Variables;
+tuned_dels = del_data(contains(del_data.("Var1"), 'extreme_k_cases_turbsim'), loads).Variables;
+delta_del = ((tuned_dels - noipc_dels) / noipc_dels) * 100;
+% bar(loads, delta_del);
+% find mean wind speed associated with this case
+ux_vals = [];
+for outdata_fn = del_data.("Var1")
+    % values = load(outdata_fn);
+    % ux = getData(values, OutList, 'WindVelX1');
+    split_str = split(outdata_fn{1}, '_');
+    case_idx = str2num(split_str{2});
+    ux_vals = [ux_vals, case_list(case_idx).InflowWind.HWindSpeed];
+    % TODO need to get noipc/baseline hwindspeeds
+end
+del_data.("HWindSpeed") = ux_vals;
+
+bar(loads, tuned_dels);
+
 
 %% Plot Blade-Pitch Actuation and Loads in Time-Domain OUTPLOT
 if 0

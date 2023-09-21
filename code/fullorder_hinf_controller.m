@@ -97,7 +97,6 @@ if 1
     parfor case_idx = 1:FullOrderControllers_n_cases
         controller_case = FullOrderControllers_case_list(case_idx);
         c_ws_idx = controller_case.WindSpeedIndex;
-        % Wy_tmp = controller_case.Wy * Wy;
         Wu_tmp = controller_case.WuGain * Wu;
         We_tmp = controller_case.WeGain * We;
         W1_tmp = controller_case.W1Gain * W1;
@@ -132,10 +131,6 @@ if 1
                     * FullOrderTuning(case_idx).Controller ...
                     * inv(op_scaling(:, :, c_ws_idx)));
         
-        % Lo = Plant(:, :, c_ws_idx) ...
-        %                 * FullOrderTuning(case_idx).Controller_scaled;
-        % Li = FullOrderTuning(case_idx).Controller_scaled ...
-        %                 * Plant(:, :, c_ws_idx);
         % negative Plant st e = r(dy) - y(yP) is input to controller, 
         % negative Controller for positive u input to Plant
         SF_tmp = loopsens(-Plant(:, :, c_ws_idx), -FullOrderTuning(case_idx).Controller_scaled);
@@ -167,25 +162,8 @@ if 1
 
         % QUESTION MANUEL is this how to compute bandwidth
         FullOrderTuning(case_idx).wc = getGainCrossover(FullOrderTuning(case_idx).Controller_scaled, min(dc, [], 'all') / sqrt(2));
-
-        % bodemag(Li); xline(FullOrderTuning(case_idx).wci); yline(mag2db(dci(2,2)));
-
-        % check norms of KSi, Ti, So, GSo (4 channels) and To
-        
-        % Ti_tmp = Ti(Plant(:, :, c_ws_idx), FullOrderTuning(case_idx).Controller_scaled); % 
-        % To_tmp = To(Plant(:, :, c_ws_idx), FullOrderTuning(case_idx).Controller_scaled);
-        % KSi_tmp = KSi(Plant(:, :, c_ws_idx), FullOrderTuning(case_idx).Controller_scaled);
-        % So_tmp = So(Plant(:, :, c_ws_idx), FullOrderTuning(case_idx).Controller_scaled);
-        % GSo_tmp = GSo(Plant(:, :, c_ws_idx), FullOrderTuning(case_idx).Controller_scaled);
         
         FullOrderTuning(case_idx).SF = SF_tmp;
-
-        % FullOrderTuning(case_idx).inf_norms.Ti = norm(SF_tmp.Ti, Inf);
-        % FullOrderTuning(case_idx).inf_norms.To = norm(SF_tmp.To, Inf);
-        % FullOrderTuning(case_idx).inf_norms.KSi = norm(KSi_tmp);
-        % FullOrderTuning(case_idx).inf_norms.Si = norm(SF_tmp.Si, Inf);
-        % FullOrderTuning(case_idx).inf_norms.So = norm(SF_tmp.So, Inf);
-        % FullOrderTuning(case_idx).inf_norms.GSo = norm(GSo_tmp);
 
     end
    
@@ -199,41 +177,35 @@ if 1
         for case_idx = 1:FullOrderControllers_n_cases
             controller_case = FullOrderControllers_case_list(case_idx);
             if c_ws_idx == controller_case.WindSpeedIndex
-                cc = find(full_controller_case_basis.WindSpeedIndex == find(LPV_CONTROLLER_WIND_SPEEDS == NONLPV_CONTROLLER_WIND_SPEED));
+                % cc = find(full_controller_case_basis.WindSpeedIndex == find(LPV_CONTROLLER_WIND_SPEEDS == NONLPV_CONTROLLER_WIND_SPEED));
                 FullOrderControllers(weighting_case_idx).WuGain = FullOrderControllers_case_list(case_idx).WuGain;
                 FullOrderControllers(weighting_case_idx).WeGain = FullOrderControllers_case_list(case_idx).WeGain;
                 FullOrderControllers(weighting_case_idx).W1Gain = FullOrderControllers_case_list(case_idx).W1Gain;
                 FullOrderControllers(weighting_case_idx).W2Gain = FullOrderControllers_case_list(case_idx).W2Gain;
 
-                FullOrderControllers(weighting_case_idx).GenPlant(:, :, cc) = FullOrderTuning(case_idx).GenPlant;
-                FullOrderControllers(weighting_case_idx).Win(:, :, cc) = FullOrderTuning(case_idx).Win;
-                FullOrderControllers(weighting_case_idx).Wout(:, :, cc) = FullOrderTuning(case_idx).Wout;
-                FullOrderControllers(weighting_case_idx).gamma(cc) = FullOrderTuning(case_idx).gamma;
+                FullOrderControllers(weighting_case_idx).GenPlant(:, :, c_ws_idx) = FullOrderTuning(case_idx).GenPlant;
+                FullOrderControllers(weighting_case_idx).Win(:, :, c_ws_idx) = FullOrderTuning(case_idx).Win;
+                FullOrderControllers(weighting_case_idx).Wout(:, :, c_ws_idx) = FullOrderTuning(case_idx).Wout;
+                FullOrderControllers(weighting_case_idx).gamma(c_ws_idx) = FullOrderTuning(case_idx).gamma;
 
-                FullOrderControllers(weighting_case_idx).Controller(:, :, cc) = FullOrderTuning(case_idx).Controller;
-                FullOrderControllers(weighting_case_idx).CL(:, :, cc) = FullOrderTuning(case_idx).CL;
+                FullOrderControllers(weighting_case_idx).Controller(:, :, c_ws_idx) = FullOrderTuning(case_idx).Controller;
+                FullOrderControllers(weighting_case_idx).CL(:, :, c_ws_idx) = FullOrderTuning(case_idx).CL;
 
-                FullOrderControllers(weighting_case_idx).Controller_scaled(:, :, cc) = ...
+                FullOrderControllers(weighting_case_idx).Controller_scaled(:, :, c_ws_idx) = ...
                    FullOrderTuning(case_idx).Controller_scaled;
                 
-                FullOrderControllers(weighting_case_idx).Mrgo(:, cc) = FullOrderTuning(case_idx).Mrgo;
-                FullOrderControllers(weighting_case_idx).Mrgi(:, cc) = FullOrderTuning(case_idx).Mrgi;
-                FullOrderControllers(weighting_case_idx).DMo(:, cc) = FullOrderTuning(case_idx).DMo;
-                FullOrderControllers(weighting_case_idx).DMi(:, cc) = FullOrderTuning(case_idx).DMi;
-                FullOrderControllers(weighting_case_idx).MMo(:, cc) = FullOrderTuning(case_idx).MMo;
-                FullOrderControllers(weighting_case_idx).MMi(:, cc) = FullOrderTuning(case_idx).MMi;
-                FullOrderControllers(weighting_case_idx).MMio(:, cc) = FullOrderTuning(case_idx).MMio;
+                FullOrderControllers(weighting_case_idx).Mrgo(:, c_ws_idx) = FullOrderTuning(case_idx).Mrgo;
+                FullOrderControllers(weighting_case_idx).Mrgi(:, c_ws_idx) = FullOrderTuning(case_idx).Mrgi;
+                FullOrderControllers(weighting_case_idx).DMo(:, c_ws_idx) = FullOrderTuning(case_idx).DMo;
+                FullOrderControllers(weighting_case_idx).DMi(:, c_ws_idx) = FullOrderTuning(case_idx).DMi;
+                FullOrderControllers(weighting_case_idx).MMo(:, c_ws_idx) = FullOrderTuning(case_idx).MMo;
+                FullOrderControllers(weighting_case_idx).MMi(:, c_ws_idx) = FullOrderTuning(case_idx).MMi;
+                FullOrderControllers(weighting_case_idx).MMio(:, c_ws_idx) = FullOrderTuning(case_idx).MMio;
 
-                FullOrderControllers(weighting_case_idx).wc(:, cc) = FullOrderTuning(case_idx).wc;
+                FullOrderControllers(weighting_case_idx).wc(:, c_ws_idx) = FullOrderTuning(case_idx).wc;
                 % FullOrderControllers(weighting_case_idx).n_wc(:, cc) = FullOrderTuning(case_idx).n_wc;
                 
-                FullOrderControllers(weighting_case_idx).SF(cc) = FullOrderTuning(case_idx).SF;
-                % FullOrderControllers(weighting_case_idx).inf_norms.Ti(cc) = FullOrderTuning(case_idx).inf_norms.Ti;
-                % FullOrderControllers(weighting_case_idx).inf_norms.To(cc) = FullOrderTuning(case_idx).inf_norms.To;
-                % FullOrderControllers(weighting_case_idx).inf_norms.KSi(c_ws_idx) = FullOrderTuning(case_idx).inf_norms.KSi;
-                % FullOrderControllers(weighting_case_idx).inf_norms.Si(cc) = FullOrderTuning(case_idx).inf_norms.Si;
-                % FullOrderControllers(weighting_case_idx).inf_norms.So(cc) = FullOrderTuning(case_idx).inf_norms.So;
-                % FullOrderControllers(weighting_case_idx).inf_norms.GSo(c_ws_idx) = FullOrderTuning(case_idx).inf_norms.GSo;
+                FullOrderControllers(weighting_case_idx).SF(c_ws_idx) = FullOrderTuning(case_idx).SF;
 
                 weighting_case_idx = weighting_case_idx + 1;
             end
@@ -314,18 +286,6 @@ if 1
             
             
             Controllers_case_list(c_idx).SF.Stable = FullOrderControllers(w_idx).SF.Stable;
-            % Controllers_case_list(c_idx).SF.Ti = FullOrderControllers(w_idx).SF.Ti;
-            % Controllers_case_list(c_idx).SF.To = FullOrderControllers(w_idx).SF.To;
-            % PI_ParameterSweep.tfs.KSi(:, :, i, j) = PI_ParameterSweep_tmp(v).tfs.KSi;
-            % Controllers_case_list(c_idx).SF.Si = FullOrderControllers(w_idx).SF.Si;
-            % Controllers_case_list(c_idx).SF.So = FullOrderControllers(w_idx).SF.So;
-    
-            % Controllers_case_list(c_idx).inf_norms.Ti = FullOrderControllers(w_idx).inf_norms.Ti;
-            % Controllers_case_list(c_idx).inf_norms.To = FullOrderControllers(w_idx).inf_norms.To;
-            % Controllers_case_list(c_idx).inf_norms.KSi = FullOrderControllers(w_idx).inf_norms.KSi;
-            % Controllers_case_list(c_idx).inf_norms.Si = FullOrderControllers(w_idx).inf_norms.Si;
-            % Controllers_case_list(c_idx).inf_norms.So = FullOrderControllers(w_idx).inf_norms.So;
-            % Controllers_case_list(c_idx).inf_norms.GSo = FullOrderControllers(w_idx).inf_norms.GSo;
             
         end
         Controllers_case_list(c_idx).Controller_scaled.SamplingGrid = struct('u', LPV_CONTROLLER_WIND_SPEEDS);
@@ -375,13 +335,10 @@ if 1
     
     % QUESTION MANUEL how to find bandwidth of controller (DM), robustness margins
     % for noipc case?
+    % TODO what if controller was tuned for particular wind speed
     n_weighting_cases = (FullOrderControllers_n_cases / length(full_controller_case_basis.WindSpeedIndex));
     for w_idx = 1:n_weighting_cases
         Stable_tmp(w_idx) = Controllers_case_list(w_idx).SF.Stable;
-        % Ti_infnorm_tmp(w_idx) = Controllers_case_list(w_idx).inf_norms.Ti;
-        % To_infnorm_tmp(w_idx) = Controllers_case_list(w_idx).inf_norms.To;
-        % Si_infnorm_tmp(w_idx) = Controllers_case_list(w_idx).inf_norms.Si;
-        % So_infnorm_tmp(w_idx) = Controllers_case_list(w_idx).inf_norms.So;
 
         Mrgi_tmp(w_idx, 1, 1) = Controllers_case_list(w_idx).Mrgi(1).GainMargin(1);
         if length(Controllers_case_list(w_idx).Mrgi(1).PhaseMargin)
@@ -445,11 +402,6 @@ if 1
         % n_wc_tmp(w_idx, :) = Controllers_case_list(w_idx).n_wc;
     end
     
-    % [0; Ti_infnorm_tmp'], ...
-        % [0; To_infnorm_tmp'], ... % [0; PI_ParameterSweep.inf_norms.KSi], ...
-        % [0; Si_infnorm_tmp'], ...
-        % [0; So_infnorm_tmp'], ... % [0; PI_ParameterSweep.inf_norms.GSo], ... % Ti_tmp, To_tmp, KSi_tmp, So_tmp, GSo_tmp, ...
-
     % Make table comparing controllers
     Controllers_case_table = table( ...
         (0:n_weighting_cases)', case_desc', ... 

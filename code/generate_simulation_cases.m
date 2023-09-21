@@ -5,23 +5,24 @@
 % ux_mean = 11.4;
 class = 'A'; % class A
 n_seeds = 1;
-uxs = [16];
+uxs = LPV_CONTROLLER_WIND_SPEEDS;
 
 if sum([RUN_OL_DQ, RUN_OL_BLADE, RUN_CL]) == 1
     CaseGen.dir_matrix = FAST_runDirectory;
     CaseGen.namebase = FAST_SimulinkModel;
     [~, CaseGen.model_name, ~] = fileparts(fastRunner.FAST_InputFile);
-    clear case_basis;
-    case_basis.InflowWind.HWindSpeed = [];
+    % clear case_basis;
+    case_basis.InflowWind.HWindSpeed = [nan];
+    i = 1;
     if strcmp(WIND_TYPE, 'turbsim')
         case_basis.InflowWind.WindType = {'3'};
         case_basis.InflowWind.FileName_BTS = {};
         for ux = uxs
             for bts_idx = 1:n_seeds
-                case_basis.InflowWind.FileName_BTS{bts_idx} = ['"' fullfile(windfiles_dir, ...
+                case_basis.InflowWind.FileName_BTS{i} = ['"' fullfile(windfiles_dir, ...
                     [class, '_', replace(num2str(ux), '.', '-'), '_', num2str(bts_idx), '.bts']) '"'];
-                case_basis.InflowWind.HWindSpeed = [case_basis.InflowWind.HWindSpeed, ux];
-          
+                % case_basis.InflowWind.HWindSpeed(i) = ux;
+                i = i + 1;
             end
         end
         
@@ -86,6 +87,14 @@ elseif OPTIMAL_K_COLLECTION || EXTREME_K_COLLECTION
     end
     n_cases = case_idx - 1;
     case_name_list = arrayfun(@(n) ['case_', num2str(n)], 1:n_cases, 'UniformOutput', false);
+
+    if strcmp(WIND_TYPE, 'turbsim')
+        for c_idx = 1:n_cases
+            x = split(case_list(case_idx).InflowWind.FileName_BTS{c_idx}, '_');
+            case_list(case_idx).InflowWind.HWindSpeed = x;
+        end
+    end
+
     if OPTIMAL_K_COLLECTION
         save(fullfile(mat_save_dir, 'Optimal_Controllers_nonlinear_simulation_case_list.mat'), "case_list", '-v7.3');
     elseif EXTREME_K_COLLECTION

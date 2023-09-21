@@ -111,8 +111,10 @@ W2 = tf(1 * eye(2));
 if EXTREME_K_COLLECTION
     case_basis.Scheduling = {'No'}; %, 'No'};
     case_basis.Structure = {'Full-Order'}; %, 'Structured'};
-    case_basis.Reference = {[0, 0]};
-    case_basis.Saturation = {[1, 1]};
+    case_basis.Reference.d = [0];
+    case_basis.Reference.q = [0];
+    case_basis.Saturation.d = [Inf];
+    case_basis.Saturation.q = [Inf];
 
     IP_HIGH_GAIN = 1;
     WU_HIGH_GAIN = 10;
@@ -184,25 +186,31 @@ elseif OPTIMAL_K_COLLECTION
     case_basis.Structure = {'Full-Order'}; %, 'Structured'};
 
     if VARY_REFERENCE
-        case_basis.Reference = {};
+        case_basis.Reference.d = [];
+        case_basis.Reference.q = [];
         for ref = VARY_REFERENCE_BASIS
             % TODO choose reference to be percentage of linearization value
-            case_basis.Reference{end + 1} = ones(2, 1) * ref * op_absmax.dq(idx.Variables, {'RootMycD', 'RootMycQ'}).Variables;
-            mbcTransformOutData(values, OutList)
-            case_basis.Reference{end + 1} = ones(2, 1) * ref * ss_vals.dq(idx.Variables, {'RootMycD', 'RootMycQ'}).Variables;
+            case_basis.Reference.d(end + 1) = ref * op_absmax.dq(idx.Variables, 'RootMycD').Variables;
+            case_basis.Reference.q(end + 1) = ref * op_absmax.dq(idx.Variables, 'RootMycQ').Variables;
+            % mbcTransformOutData(values, OutList)
+            case_basis.Reference.d(end + 1) = ref * ss_vals.dq(idx.Variables, 'RootMycD').Variables;
+            case_basis.Reference.q(end + 1) = ref * ss_vals.dq(idx.Variables, 'RootMycQ').Variables;
         end
     else
-        case_basis.Reference = {[0, 0]};
+        case_basis.Reference = [0];
     end
 
     if VARY_SATURATION
-        case_basis.Saturation = {};
+        case_basis.Saturation.d = [];
+        case_basis.Saturation.q = [];
         for sat = VARY_SATURATION_BASIS
             % TODO choose saturation to be percentage of linearization value
-            case_basis.Saturation{end + 1} = ones(2, 1) * sat * op_absmax.dq(idx.Variables, {'BldPitch1D', 'BldPitch1Q'}).Variables;
+            case_basis.Saturation.d(end + 1) = sat * op_absmax.dq(idx.Variables, 'BldPitch1D').Variables;
+            case_basis.Saturation.q(end + 1) = sat * op_absmax.dq(idx.Variables, 'BldPitch1Q').Variables;
         end
     else
-        case_basis.Reference = {[0, 0]};
+        case_basis.Saturation.d = [Inf];
+        case_basis.Saturation.q = [Inf];
     end
 
     % case_basis.WuGain = {tf(10 * eye(2)), tf(100 * eye(2))}; %{100, 200, 400, 800, 1600}; % for detuning blade-pitch actuation
@@ -217,6 +225,11 @@ elseif OPTIMAL_K_COLLECTION
     
     [Controllers_case_list, Controllers_case_name_list, Controllers_n_cases] ...
         = generateCases(case_basis, 'tuned_controllers', false);
+else
+    case_basis.Reference.d = [0];
+    case_basis.Reference.q = [0];
+    case_basis.Saturation.d = [Inf];
+    case_basis.Saturation.q = [Inf];
 end
 
 %% Synthesize Continuous-Time Generalized Plant P from plant Plant and weighting filters W
