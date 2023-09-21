@@ -108,6 +108,7 @@ elseif strcmp(username, 'aohe7145')
     addpath(fullfile(toolbox_dir, 'matlab-toolbox', 'MBC', 'Source'));
     addpath(fullfile(toolbox_dir, 'turbsim-toolbox/A_Functions/'));
     addpath(fullfile(toolbox_dir, 'PMtools/'));
+    addpath(fullfile(code_dir, 'helper_functions/'));
 
     chdir(code_dir);
 
