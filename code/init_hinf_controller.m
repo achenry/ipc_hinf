@@ -19,9 +19,9 @@ load(fullfile(FAST_directory, 'op_absmax.mat'));
 % load(fullfile(FAST_directory, 'ss_vals.mat'));
 clear ip_scaling op_scaling
 for c_ws_idx = 1:length(LPV_CONTROLLER_WIND_SPEEDS)
-    idx = (op_absmax.dq(:, 'Wind1VelX') == LPV_CONTROLLER_WIND_SPEEDS(c_ws_idx));
-    ip_scaling(:, :, c_ws_idx) = diag(deg2rad(op_absmax.dq(idx.Variables, {'BldPitchC', 'BldPitchC'}).Variables));
-    op_scaling(:, :, c_ws_idx) = diag(op_absmax.dq(idx.Variables, {'RootMycC', 'RootMycC'}).Variables);
+    idx = (op_absmax.dq(:, 'Wind1VelX').Variables == LPV_CONTROLLER_WIND_SPEEDS(c_ws_idx));
+    ip_scaling(:, :, c_ws_idx) = diag(deg2rad(op_absmax.dq(idx, {'BldPitchC', 'BldPitchC'}).Variables));
+    op_scaling(:, :, c_ws_idx) = diag(op_absmax.dq(idx, {'RootMycC', 'RootMycC'}).Variables);
     
     % ip_scaling_2(:, :, c_ws_idx) = diag(deg2rad(ss_vals.dq(idx.Variables, {'BldPitchC', 'BldPitchC'}).Variables) * 0.2);
     % op_scaling_2(:, :, c_ws_idx) = diag(ss_vals.dq(idx.Variables, {'RootMycC', 'RootMycC'}).Variables * 0.2);

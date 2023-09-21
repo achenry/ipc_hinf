@@ -10,7 +10,6 @@
 % run a parfor loop to simulate 10 minutes of a turbsim wind field for each
 % controller type with IPC on
 clear all;
-initialize;
 init_hinf_controller;
 
 RUN_SIMS_PAR = 1;
