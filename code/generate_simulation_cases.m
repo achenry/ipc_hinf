@@ -12,7 +12,7 @@ if sum([RUN_OL_DQ, RUN_OL_BLADE, RUN_CL]) == 1
     CaseGen.namebase = FAST_SimulinkModel;
     [~, CaseGen.model_name, ~] = fileparts(fastRunner.FAST_InputFile);
     % clear case_basis;
-    case_basis.InflowWind.HWindSpeed = [nan];
+    case_basis.InflowWind.HWindSpeed = [0];
     i = 1;
     if strcmp(WIND_TYPE, 'turbsim')
         case_basis.InflowWind.WindType = {'3'};
