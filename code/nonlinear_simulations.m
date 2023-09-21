@@ -199,8 +199,11 @@ if RUN_SIMS_PAR
             % sim_inputs(case_idx) = Simulink.SimulationInput('AD_SOAR_c7_V2f_c73_Clean_StructuredControllerTest');
             % K_IPC = case_list(case_idx).Controller; % Note, this is NOT the scaled controller
             % sim_inputs(case_idx) = sim_inputs(case_idx).setVariable('K_IPC', K_IPC);
-            SL_model_name = 'AD_SOAR_c7_V2f_c73_Clean';
+            % SL_model_name = 'AD_SOAR_c7_V2f_c73_Clean';
+            SL_model_name = 'AD_SOAR_c7_V2f_c73_Clean_FullOrderControllerTest_old';
+            K_IPC = case_list(case_idx).Controller;
             sim_inputs(case_idx) = Simulink.SimulationInput(SL_model_name);
+            sim_inputs(case_idx) = sim_inputs(case_idx).setVariable('K_IPC', K_IPC);
         elseif ~USE_IPC
             SL_model_name = 'AD_SOAR_c7_V2f_c73_Clean';
             sim_inputs(case_idx) = Simulink.SimulationInput(SL_model_name);
@@ -273,6 +276,9 @@ elseif RUN_SIMS_SINGLE
             % tuned controller which assumed negative feedback since SL
             % simulation assumes positive feedback?
             K_IPC = c2d(case_list(case_idx).Controller_scaled, DT); % Note, this is the scaled controller
+        elseif BASELINE_K
+            SL_model_name = 'AD_SOAR_c7_V2f_c73_Clean_FullOrderControllerTest_old';
+            K_IPC = case_list(case_idx).Controller;
         else
             SL_model_name = 'AD_SOAR_c7_V2f_c73_Clean';
         end

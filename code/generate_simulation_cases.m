@@ -87,9 +87,9 @@ elseif OPTIMAL_K_COLLECTION || EXTREME_K_COLLECTION
     end
     n_cases = case_idx - 1;
     case_name_list = arrayfun(@(n) ['case_', num2str(n)], 1:n_cases, 'UniformOutput', false);
-
-    if strcmp(WIND_TYPE, 'turbsim')
-        for c_idx = 1:n_cases
+    
+    for c_idx = 1:n_cases
+        if strcmp(WIND_TYPE, 'turbsim')
             x = split(case_list(case_idx).InflowWind.FileName_BTS{c_idx}, '_');
             case_list(case_idx).InflowWind.HWindSpeed = x;
         end

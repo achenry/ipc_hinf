@@ -4,7 +4,7 @@ initialize;
 C_WS_IDX = LPV_CONTROLLER_WIND_SPEEDS == NONLPV_CONTROLLER_WIND_SPEED;
 
 %% Load linear models, operating points, hnorms
-load(fullfile(code_dir, 'matfiles', 'Plant_red'));
+load(fullfile(mat_save_dir, 'Plant_red'));
 Plant = Plant_red;
 Plant.InputName = {'\beta_d Control Input', '\beta_q Control Input'};
 Plant.OutputName = {'M_d Output', 'M_q Output'};
@@ -109,8 +109,8 @@ W2 = tf(1 * eye(2));
 %% Create Case Basis for different controllers
 
 if EXTREME_K_COLLECTION
-    case_basis.Scheduling = {'No'}; %, 'No'};
-    case_basis.Structure = {'Full-Order'}; %, 'Structured'};
+    case_basis.Scheduling.x = {'No'}; %, 'No'};
+    case_basis.Structure.x = {'Full-Order'}; %, 'Structured'};
     case_basis.Reference.d = [0];
     case_basis.Reference.q = [0];
     case_basis.Saturation.d = [Inf];
@@ -182,8 +182,8 @@ if EXTREME_K_COLLECTION
         Controllers_case_name_list = arrayfun(@(n) ['tuned_controllers_', num2str(n)], 1:Controllers_n_cases, 'UniformOutput', false);
     end
 elseif OPTIMAL_K_COLLECTION
-    case_basis.Scheduling = {'No'}; %, 'No'};
-    case_basis.Structure = {'Full-Order'}; %, 'Structured'};
+    case_basis.Scheduling.x = {'No'}; %, 'No'};
+    case_basis.Structure.x = {'Full-Order'}; %, 'Structured'};
 
     if VARY_REFERENCE
         case_basis.Reference.d = [];
@@ -285,7 +285,7 @@ Notch_3P_0 = tf([1,2*omega_3P_rad*zeta/drop,(omega_3P_rad)^2],[1,2*omega_3P_rad*
 Notch_6P_0 = tf([1,2*omega_6P_rad*zeta/drop,(omega_6P_rad)^2],[1,2*omega_6P_rad*zeta,(omega_6P_rad)^2]);
 
 K0 = PI0 * Notch_6P_0 * Notch_3P_0;
-save(fullfile(code_dir, 'matfiles', 'K0.mat'), 'K0');
+save(fullfile(mat_save_dir, 'K0.mat'), 'K0');
 
 
 %% Plotting
