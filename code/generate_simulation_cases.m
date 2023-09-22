@@ -82,19 +82,16 @@ elseif OPTIMAL_K_COLLECTION || EXTREME_K_COLLECTION
             for fn1 = fieldnames(Controllers_case_list(c_idx))'
                 case_list(case_idx).(fn1{1}) = Controllers_case_list(c_idx).(fn1{1});
             end
+            if strcmp(WIND_TYPE, 'turbsim')
+                x = split(case_list(case_idx).InflowWind.FileName_BTS, '_');
+                case_list(case_idx).InflowWind.HWindSpeed = x;
+            end
             case_idx = case_idx + 1;
         end
     end
     n_cases = case_idx - 1;
     case_name_list = arrayfun(@(n) ['case_', num2str(n)], 1:n_cases, 'UniformOutput', false);
     
-    for c_idx = 1:n_cases
-        if strcmp(WIND_TYPE, 'turbsim')
-            x = split(case_list(case_idx).InflowWind.FileName_BTS{c_idx}, '_');
-            case_list(case_idx).InflowWind.HWindSpeed = x;
-        end
-    end
-
     if OPTIMAL_K_COLLECTION
         save(fullfile(mat_save_dir, 'Optimal_Controllers_nonlinear_simulation_case_list.mat'), "case_list", '-v7.3');
     elseif EXTREME_K_COLLECTION
