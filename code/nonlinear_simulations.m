@@ -12,9 +12,10 @@
 clear all;
 init_hinf_controller;
 
-RUN_SIMS_PAR = 0;
-RUN_SIMS_SINGLE = 1;
+RUN_SIMS_PAR = 1;
+RUN_SIMS_SINGLE = 0;
 RUN_TURSIM = 0;
+GENERATE_CASES = 0;
 
 %% Generate Turbsim Files
 if RUN_TURSIM
@@ -56,7 +57,26 @@ end
 
 Parameters.Control.IPCDQ.Enable = USE_IPC;
 
-generate_simulation_cases;
+if GENERATE_CASES
+    generate_simulation_cases;
+else
+    if MAX_SIMULATIONS > -1
+        save_prefix = 'debug_';
+    else
+        save_prefix = '';
+    end
+
+    if OPTIMAL_K_COLLECTION
+        load(fullfile(mat_save_dir, [save_prefix, 'Optimal_Controllers_nonlinear_simulation_case_list.mat']));
+    elseif EXTREME_K_COLLECTION
+        load(fullfile(mat_save_dir, [save_prefix, 'Extreme_Controllers_nonlinear_simulation_case_list.mat']));
+    elseif BASELINE_K
+        load(fullfile(mat_save_dir, [save_prefix, 'Baseline_Controller_nonlinear_simulation_case_list.mat']));
+    elseif STRUCT_PARAM_SWEEP
+        load(fullfile(mat_save_dir, [save_prefix, 'Structured_Controllers_nonlinear_simulation_case_list.mat']));
+    end
+    n_cases = length(case_list);
+end
 
 %% Generate OpenFAST input files for each case
 
@@ -74,7 +94,7 @@ copyfile(fullfile(FAST_directory, '*.fst'), FAST_runDirectory);
 
 if RUN_SIMS_PAR
     % load(fullfile(fastRunner.FAST_directory, 'ss_vals'));
-    parfor case_idx=1:n_cases
+    for case_idx=1:n_cases
 
         new_fst_name = fullfile(FAST_runDirectory, ...
             case_name_list{case_idx});
@@ -182,9 +202,9 @@ if RUN_SIMS_PAR
             sim_inputs(case_idx) = sim_inputs(case_idx).setVariable('K_IPC', K_IPC);
         elseif OPTIMAL_K_COLLECTION || EXTREME_K_COLLECTION
             
-            if strcmp(case_list(case_idx).Structure, 'Full-Order')
+            if strcmp(case_list(case_idx).Structure.x, 'Full-Order')
                 SL_model_name = 'AD_SOAR_c7_V2f_c73_Clean_FullOrderControllerTest_old';
-            elseif strcmp(case_list(case_idx).Structure, 'Structured')
+            elseif strcmp(case_list(case_idx).Structure.x, 'Structured')
                 SL_model_name = 'AD_SOAR_c7_V2f_c73_Clean_StructuredControllerTest';
             end
             % QUESTION MANUEL shouldn't be need to negate controller, isn't
@@ -266,9 +286,9 @@ elseif RUN_SIMS_SINGLE
             K_IPC = c2d(case_list(case_idx).Controller, DT);
             % K_IPC(2, 2).Numerator(2) / K_IPC(2, 2).Denominator(1) 
         elseif OPTIMAL_K_COLLECTION || EXTREME_K_COLLECTION
-            if strcmp(case_list(case_idx).Structure, 'Full-Order')
+            if strcmp(case_list(case_idx).Structure.x, 'Full-Order')
                 SL_model_name = 'AD_SOAR_c7_V2f_c73_Clean_FullOrderControllerTest_old';
-            elseif strcmp(case_list(case_idx).Structure, 'Structured')
+            elseif strcmp(case_list(case_idx).Structure.x, 'Structured')
                 SL_model_name = 'AD_SOAR_c7_V2f_c73_Clean_StructuredControllerTest';
             end
             % QUESTION MANUEL does it make sense to implement negative of
@@ -304,6 +324,5 @@ end
 %% Save Simulation Data
 
 if RUN_SIMS_PAR || RUN_SIMS_SINGLE
-  
     save(fullfile(sl_metadata_save_dir, ['sim_out_list_', sim_type, '.mat']), 'sim_out_list', '-v7.3');
 end

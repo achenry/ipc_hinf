@@ -5,13 +5,13 @@
 % ux_mean = 11.4;
 class = 'A'; % class A
 n_seeds = 1;
-uxs = LPV_CONTROLLER_WIND_SPEEDS;
+% uxs = NONLPV_CONTROLLER_WIND_SPEEDS;
 
 if sum([RUN_OL_DQ, RUN_OL_BLADE, RUN_CL]) == 1
     CaseGen.dir_matrix = FAST_runDirectory;
     CaseGen.namebase = FAST_SimulinkModel;
     [~, CaseGen.model_name, ~] = fileparts(fastRunner.FAST_InputFile);
-    % clear case_basis;
+    clear case_basis;
     case_basis.InflowWind.HWindSpeed = [0];
     i = 1;
     if strcmp(WIND_TYPE, 'turbsim')
@@ -34,7 +34,7 @@ if sum([RUN_OL_DQ, RUN_OL_BLADE, RUN_CL]) == 1
 
     case_basis.Fst.TMax = {num2str(TMax)};
 
-    [Wind_case_list, Wind_case_name_list, Wind_n_cases] = generateCases(case_basis, CaseGen.namebase, true);
+    [Wind_case_list, Wind_case_name_list, n_wind_cases] = generateCases(case_basis, CaseGen.namebase, true);
  
 end
 
@@ -47,9 +47,19 @@ if STRUCT_PARAM_SWEEP || BASELINE_K
     end
 
     % Merge Wind and Controller Cases
+    % case_idx = 1;
+    n_controller_cases = length(PI_ParameterSweep_case_list);
+    if MAX_SIMULATIONS > -1
+        n_total_cases = min(n_controller_cases * n_wind_cases, MAX_SIMULATIONS);
+    else
+        n_total_cases = n_controller_cases * n_wind_cases;
+    end
+    case_list = repmat(struct(), n_total_cases, 1 );
     case_idx = 1;
-    for c_idx = 1:length(PI_ParameterSweep_case_list)
-        for w_idx = 1:Wind_n_cases
+    for c_idx = 1:n_controller_cases
+        for w_idx = 1:n_wind_cases
+            % case_idx = (c_idx - 1) * n_controller_cases + w_idx;
+            sprintf(['Generating case ', num2str(case_idx)]);
             for fn1 = fieldnames(Wind_case_list(w_idx))'
                 for fn2 = fieldnames(Wind_case_list(w_idx).(fn1{1}))'
                     case_list(case_idx).(fn1{1}).(fn2{1}) = Wind_case_list(w_idx).(fn1{1}).(fn2{1});
@@ -59,10 +69,29 @@ if STRUCT_PARAM_SWEEP || BASELINE_K
                 case_list(case_idx).(fn1{1}) = PI_ParameterSweep_case_list(c_idx).(fn1{1});
             end
             case_idx = case_idx + 1;
+            if MAX_SIMULATIONS > -1 && case_idx > MAX_SIMULATIONS
+                break;
+            end
+        end
+        if MAX_SIMULATIONS > -1 && case_idx > MAX_SIMULATIONS
+            break;
         end
     end
-    n_cases = case_idx - 1;
+    % n_cases = case_idx - 1;
+    n_cases = length(case_list);
     case_name_list = arrayfun(@(n) ['case_', num2str(n)], 1:n_cases, 'UniformOutput', false);
+
+    if MAX_SIMULATIONS > -1
+        save_prefix = 'debug_';
+    else
+        save_prefix = '';
+    end
+    
+    if STRUCT_PARAM_SWEEP
+        save(fullfile(mat_save_dir, [save_prefix, 'Structured_Controllers_nonlinear_simulation_case_list.mat']), "case_list", "case_name_list", '-v7.3');
+    elseif BASELINE_K
+        save(fullfile(mat_save_dir, [save_prefix, 'Baseline_Controller_nonlinear_simulation_case_list.mat']), "case_list", "case_name_list", '-v7.3');
+    end
 elseif OPTIMAL_K_COLLECTION || EXTREME_K_COLLECTION
     if OPTIMAL_K_COLLECTION
         % Load Controller Cases corresponding to scheduled full-order controllers
@@ -71,9 +100,19 @@ elseif OPTIMAL_K_COLLECTION || EXTREME_K_COLLECTION
         load(fullfile(mat_save_dir, 'Extreme_Controllers_case_list.mat'));
     end
     % Merge Wind and Controller Cases
+    % case_idx = 1;
+    n_controller_cases = length(Controllers_case_list);
+    if MAX_SIMULATIONS > -1
+        n_total_cases = min(n_controller_cases * n_wind_cases, MAX_SIMULATIONS);
+    else
+        n_total_cases = n_controller_cases * n_wind_cases;
+    end
+    case_list = repmat(struct(), n_total_cases, 1 );
     case_idx = 1;
-    for c_idx = 1:length(Controllers_case_list)
-        for w_idx = 1:Wind_n_cases
+    for c_idx = 1:n_controller_cases
+        for w_idx = 1:n_wind_cases
+            % case_idx = (c_idx - 1) * n_controller_cases + w_idx;
+            sprintf(['Generating case ', num2str(case_idx)]);
             for fn1 = fieldnames(Wind_case_list(w_idx))'
                 for fn2 = fieldnames(Wind_case_list(w_idx).(fn1{1}))'
                     case_list(case_idx).(fn1{1}).(fn2{1}) = Wind_case_list(w_idx).(fn1{1}).(fn2{1});
@@ -83,26 +122,39 @@ elseif OPTIMAL_K_COLLECTION || EXTREME_K_COLLECTION
                 case_list(case_idx).(fn1{1}) = Controllers_case_list(c_idx).(fn1{1});
             end
             if strcmp(WIND_TYPE, 'turbsim')
-                x = split(case_list(case_idx).InflowWind.FileName_BTS, '_');
+                [~,x,~] = fileparts(case_list(case_idx).InflowWind.FileName_BTS);
+                x = split(x, '_');
+                x = str2num(x{2});
                 case_list(case_idx).InflowWind.HWindSpeed = x;
             end
             case_idx = case_idx + 1;
+            if MAX_SIMULATIONS > -1 && case_idx > MAX_SIMULATIONS
+                break;
+            end
+        end
+        if MAX_SIMULATIONS > -1 && case_idx > MAX_SIMULATIONS
+            break;
         end
     end
-    n_cases = case_idx - 1;
+    % n_cases = case_idx - 1;
+    n_cases = length(case_list);
     case_name_list = arrayfun(@(n) ['case_', num2str(n)], 1:n_cases, 'UniformOutput', false);
     
+    if MAX_SIMULATIONS > -1
+        save_prefix = 'debug_';
+    else
+        save_prefix = '';
+    end
+
     if OPTIMAL_K_COLLECTION
-        save(fullfile(mat_save_dir, 'Optimal_Controllers_nonlinear_simulation_case_list.mat'), "case_list", '-v7.3');
+        save(fullfile(mat_save_dir, [save_prefix, 'Optimal_Controllers_nonlinear_simulation_case_list.mat']), "case_list", "case_name_list", '-v7.3');
     elseif EXTREME_K_COLLECTION
-        save(fullfile(mat_save_dir, 'Extreme_Controllers_nonlinear_simulation_case_list.mat'), "case_list", '-v7.3');
-    elseif BASELINE_K
-        save(fullfile(mat_save_dir, 'Baseline_Controller_nonlinear_simulation_case_list.mat'), "case_list", '-v7.3');
+        save(fullfile(mat_save_dir, [save_prefix, 'Extreme_Controllers_nonlinear_simulation_case_list.mat']), "case_list", "case_name_list", '-v7.3');
     end
 elseif ~USE_IPC % no ipc
     case_list = Wind_case_list;
-    n_cases = Wind_n_cases;
+    n_cases = n_wind_cases;
     case_name_list = Wind_case_name_list;
-    save(fullfile(mat_save_dir, 'noIPC_nonlinear_simulation_case_list.mat'), "case_list", '-v7.3');
+    save(fullfile(mat_save_dir, 'noIPC_nonlinear_simulation_case_list.mat'), "case_list", "case_name_list", '-v7.3');
 
 end

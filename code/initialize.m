@@ -43,6 +43,7 @@ end
 username = char(java.lang.System.getProperty('user.name'));
 % char(java.net.InetAddress.getLocalHost.getHostName)
 if strcmp(username, 'aoifework')
+    MAX_SIMULATIONS = 10;
     home_dir = '/Users/aoifework/Documents';
     toolbox_dir = fullfile(home_dir, 'toolboxes');
     project_dir = fullfile(home_dir, 'Research', 'ipc_tuning');
@@ -82,6 +83,7 @@ if strcmp(username, 'aoifework')
     postprocessing_save_dir = fullfile(project_dir, 'postprocessing_results');
 
 elseif strcmp(username, 'aohe7145')
+    MAX_SIMULATIONS = -1;
     % scp -r /Users/aoifework/Documents/Research/ipc_tuning aohe7145@login.rc.colorado.edu:/projects/aohe7145/projects/ipc_tuning
     % scp -r /Users/aoifework/Documents/toolboxes aohe7145@login.rc.colorado.edu:/projects/aohe7145/toolboxes
     % scp -r /Users/aoifework/Documents/usflowt_src/ aohe7145@login.rc.colorado.edu:/projects/aohe7145/usflowt_src/

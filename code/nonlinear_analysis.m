@@ -14,7 +14,15 @@ initialize;
 
 COMPUTE_FFT = 0;
 
-generate_simulation_cases;
+if OPTIMAL_K_COLLECTION
+    load(fullfile(mat_save_dir, 'Optimal_Controllers_nonlinear_simulation_case_list.mat'));
+elseif EXTREME_K_COLLECTION
+    load(fullfile(mat_save_dir, 'Extreme_Controllers_nonlinear_simulation_case_list.mat'));
+elseif BASELINE_K
+    load(fullfile(mat_save_dir, 'Baseline_Controller_nonlinear_simulation_case_list.mat'));
+elseif STRUCT_PARAM_SWEEP
+    load(fullfile(mat_save_dir, 'Structured_Controllers_nonlinear_simulation_case_list.mat'));
+end
 
 %% Load Simulation Data
 

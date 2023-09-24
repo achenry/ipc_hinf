@@ -116,6 +116,8 @@ if EXTREME_K_COLLECTION
     case_basis.Saturation.d = [Inf];
     case_basis.Saturation.q = [Inf];
 
+    uxs = [NONLPV_CONTROLLER_WIND_SPEED];
+
     IP_HIGH_GAIN = 1;
     WU_HIGH_GAIN = 10;
     WE_HIGH_GAIN = 10;
@@ -184,6 +186,7 @@ if EXTREME_K_COLLECTION
 elseif OPTIMAL_K_COLLECTION
     case_basis.Scheduling.x = {'No'}; %, 'No'};
     case_basis.Structure.x = {'Full-Order'}; %, 'Structured'};
+    uxs = LPV_CONTROLLER_WIND_SPEEDS;
 
     if VARY_REFERENCE
         case_basis.Reference.d = [];
@@ -230,6 +233,8 @@ else
     case_basis.Reference.q = [0];
     case_basis.Saturation.d = [Inf];
     case_basis.Saturation.q = [Inf];
+
+    uxs = [NONLPV_CONTROLLER_WIND_SPEED];
 end
 
 %% Synthesize Continuous-Time Generalized Plant P from plant Plant and weighting filters W
