@@ -16,6 +16,7 @@ RUN_SIMS_PAR = 1;
 RUN_SIMS_SINGLE = 0;
 RUN_TURSIM = 0;
 GENERATE_CASES = 0;
+GENERATE_FASTINPUT_FILES = 0;
 
 %% Generate Turbsim Files
 if RUN_TURSIM
@@ -79,7 +80,7 @@ else
 end
 
 %% Generate OpenFAST input files for each case
-
+if GENERATE_FASTINPUT_FILES
 input_mode = 2;
 def_fst_file = fullfile(FAST_directory, fastRunner.FAST_InputFile);
 def_infw_file = fullfile(FAST_directory, [fastRunner.FAST_InputFile, '_InflowFile']);
@@ -161,6 +162,7 @@ end
 % Af_EditBeam;
 % Af_EditAero15;
 % Af_EditADriver;
+end
 
 if RUN_SIMS_SINGLE || RUN_SIMS_PAR
     if RUN_OL_DQ
