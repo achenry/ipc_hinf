@@ -8,6 +8,11 @@
 #SBATCH --output=nonlin_sim.%j.out
 
 module purge
+module load intel
+module load mkl
 module load matlab/R2022b
+export CC=gcc
+export CXX=g++
+
 cd /projects/aohe7145/projects/ipc_tuning/code
 matlab -nodisplay -nosplash -nodesktop -r "run('nonlinear_simulations.m'); exit;" | tail -n +11
