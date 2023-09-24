@@ -393,6 +393,13 @@ if COMPUTE_FFT
     for i = 1:length(dq_op_arr)
         dq_op_indices = [dq_op_indices strmatch(dq_op_arr{i}, dqOutList)];
     end
+    
+    values = load(sim_out_list.noipc(1).save_fn);
+    values = values.OutData.Data;
+    dqValues = mbcTransformOutData(values, OutList);
+    op_data_blade_noipc = values(cut_transients/DT + 1:end, blade_op_indices);
+    op_data_cdq_noipc = dqValues(cut_transients/DT + 1:end, blade_op_indices);
+
     % TODO make sure this study is being done for equivalent wind fields
     for c = 1:length(sim_out_list.controller)
         sprintf(['Processing Simulation ' num2str(c)]);
@@ -405,8 +412,6 @@ if COMPUTE_FFT
         op_data_blade_controller = values(cut_transients/DT + 1:end, blade_op_indices);
         op_data_cdq_controller = dqValues(cut_transients/DT + 1:end, blade_op_indices);
         
-        op_data_blade_noipc = values(cut_transients/DT + 1:end, blade_op_indices);
-        op_data_cdq_noipc = dqValues(cut_transients/DT + 1:end, blade_op_indices);
 
         % compute fft for rotating domain corresponding to Blade 1
         fft_blade_controller(:, :, c) = fft(op_data_blade_controller, size(op_data_blade_controller, 1), 1);
