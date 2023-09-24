@@ -43,7 +43,7 @@ end
 username = char(java.lang.System.getProperty('user.name'));
 % char(java.net.InetAddress.getLocalHost.getHostName)
 if strcmp(username, 'aoifework')
-    MAX_SIMULATIONS = 10;
+    MAX_SIMULATIONS = -1;
     home_dir = '/Users/aoifework/Documents';
     toolbox_dir = fullfile(home_dir, 'toolboxes');
     project_dir = fullfile(home_dir, 'Research', 'ipc_tuning');
@@ -89,7 +89,7 @@ elseif strcmp(username, 'aohe7145')
     % scp -r /Users/aoifework/Documents/usflowt_src/ aohe7145@login.rc.colorado.edu:/projects/aohe7145/usflowt_src/
     home_dir = '/projects/aohe7145/';
     project_dir = fullfile(home_dir, 'projects', 'ipc_tuning');
-    fast_install_dir = fullfile(home_dir, 'toolboxes/openfast_dev/glue-codes/simulink/src');
+    fast_install_dir = fullfile(home_dir, 'toolboxes/openfast_dev/install/lib');
     simulink_model_dir = fullfile(project_dir, 'simulink_models');
     fig_dir = fullfile(project_dir, 'paper', 'figs');
     toolbox_dir = fullfile(home_dir, 'toolboxes');
