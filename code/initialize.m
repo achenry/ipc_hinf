@@ -67,7 +67,7 @@ if strcmp(username, 'aoifework')
     libext = '.dylib';
     
     % fast_install_dir = fullfile(home_dir, 'dev/WEIS/OpenFAST/install');
-    fast_install_dir = fullfile(toolbox_dir, 'openfast/install');
+    fast_install_dir = fullfile(toolbox_dir, 'openfast/install/lib');
     FAST_runDirectory = fullfile(project_dir, 'simulations');
 
     windfiles_dir = fullfile(project_dir, 'WindFiles');
@@ -75,7 +75,7 @@ if strcmp(username, 'aoifework')
     addpath(fullfile(project_dir)); % sl model
     
     % FAST_SFunc location
-    addpath(fullfile(fast_install_dir, 'lib'));
+    addpath(fast_install_dir);
 
     mat_save_dir = fullfile(code_dir, 'matfiles');
     sl_save_dir = fullfile(project_dir, 'sl_outputs');
@@ -121,7 +121,7 @@ elseif strcmp(username, 'aohe7145')
     addpath(fullfile(project_dir)); % sl model
     
     % FAST_SFunc location
-    addpath(fullfile(fast_install_dir, 'lib'));
+    addpath(fast_install_dir);
 
 end
 
