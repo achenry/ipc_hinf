@@ -4,7 +4,6 @@
 
 %% Setup workspace
 init_hinf_controller;
-fig_dir = fullfile(fig_dir, 'struct_controllers');
 
 %% TODO Formulate Tunable PI+Notch+LPF Continuous-Time Controller Structure that resembles full-order controller
 exact_int = 1 / tf('s');
@@ -12,10 +11,10 @@ approx_int = 1 / (tf('s') + 1e-12);
 % approx_int = 1 / (tf('s'));
 
 % MIMO tunable PI
-Kp_diag = realp('Kp_diag', baseline_PI.Kp); % baseline_PI.Kp
-Ki_diag = realp('Ki_diag', baseline_PI.Ki); % baseline_PI.Ki
-Kp_offdiag = realp('Kp_offdiag', baseline_PI.Kp);
-Ki_offdiag = realp('Ki_offdiag', baseline_PI.Ki);
+Kp_diag = realp('Kp_diag', -baseline_PI.Kp); % baseline_PI.Kp
+Ki_diag = realp('Ki_diag', -baseline_PI.Ki); % baseline_PI.Ki
+Kp_offdiag = realp('Kp_offdiag', -baseline_PI.Kp);
+Ki_offdiag = realp('Ki_offdiag', -baseline_PI.Ki);
 PI_diag = eye(2) * (Kp_diag + Ki_diag * approx_int);
 PI_offdiag = rot90(eye(2)) * (Kp_offdiag + Ki_offdiag * approx_int);
 PI = PI_diag + PI_offdiag;
@@ -40,12 +39,17 @@ Notch_3P_diag = tf([1 2*zeta_diag*gbar_diag*omega_3P_rad omega_3P_rad^2], ...
 % Notch = [Notch_3P_diag, Notch_2P_offdiag; Notch_2P_offdiag, Notch_3P_diag];
 Notch = Notch_3P_diag * eye(2);
 
+PI_Notch = [PI(1,1)*Notch(1,1), PI(1,2)*Notch(1,2);
+            PI(2,1)*Notch(2,1), PI(2,2)*Notch(2,2)];
+
 % MIMO tunable low-pass filter => not tunable TODO above 3P, fix Wu
 % roll-off keep low-freq magnitude tunable (static gain) QUESTION is this
 % too high for a bp frequency?
 LPF = 1 / (s + w1_u) * eye(2);
 
 % Full MIMO Structured Controller
+% LPF to remove all higher frequencies but still allow us to
+% mitigate 3P loads
 K_struct = [PI(1,1)*Notch(1,1)*LPF(1,1), PI(1,2)*Notch(1,2)*LPF(1,2);
             PI(2,1)*Notch(2,1)*LPF(2,1), PI(2,2)*Notch(2,2)*LPF(2,2)];
 K_struct.InputName = {'Measured RootMycD Tracking Error', 'Measured RootMycQ Tracking Error'};
@@ -60,20 +64,84 @@ end
 
 %% Conduct Parameter Sweep for MIMO PI Controller
 % omega = logspace(-2, 2, 200);
-if BASELINE_K % QUESTION does it need to be negative??
-    Sweep.Vary.Kp_diag = [Parameters.cIPC.DQ_Kp_1P];
+
+if BASELINE_K
+    % DT PI
+    z = tf('z', DT);
+    x = -Parameters.cIPC.DQ_Kp_1P ...
+        -Parameters.cIPC.DQ_Ki_1P * (DT * z / (z - 1));
+    x = d2c(x);
+
+    % CT PI gains
+    Sweep.Vary.Kp_diag = [x.Numerator{1}(1)]; 
     Sweep.Vary.Kp_offdiag = [0];
-    Sweep.Vary.Ki_diag = [Parameters.cIPC.DQ_Ki_1P];
+    Sweep.Vary.Ki_diag = [x.Numerator{1}(2)];
     Sweep.Vary.Ki_offdiag = [0];
-    % Sweep.Vary.WindSpeedIdx = 1:length(LPV_CONTROLLER_WIND_SPEEDS);
+
+    % DT 3P Notch filter to filter out 3P
+    zeta = 1; drop = 10;
+    x = Af_MovingNotch(omega_3P_rad, zeta, zeta/drop, Control.DT); % convert to DT
+    x = d2c(x);
+
+    % CT Notch gains
+    Sweep.Vary.gbar_diag = [x.Numerator{1}(2)/x.Denominator{1}(2)];
+    Sweep.Vary.zeta_diag = [x.Denominator{1}(2) / (2 * omega_3P_rad)];
+    
     Sweep.Vary.WindSpeedIdx = [find(C_WS_IDX)];
     
     K_grid = combinations(Sweep.Vary.Kp_diag, Sweep.Vary.Kp_offdiag, ...
                                   Sweep.Vary.Ki_diag, Sweep.Vary.Ki_offdiag, ...
+                                  Sweep.Vary.gbar_diag, Sweep.Vary.zeta_diag, ...
                                   Sweep.Vary.WindSpeedIdx);
+    if 1
+        case_idx = 1;
+        K_tmp1 = PI_Notch;
+        K_tmp1.Blocks.Kp_diag.Value = K_grid(case_idx, 1).Variables;
+        K_tmp1.Blocks.Kp_offdiag.Value = K_grid(case_idx, 2).Variables;
+        K_tmp1.Blocks.Ki_diag.Value = K_grid(case_idx, 3).Variables;
+        K_tmp1.Blocks.Ki_offdiag.Value = K_grid(case_idx, 4).Variables;
+        K_tmp1.Blocks.gbar_diag.Value = K_grid(case_idx, 5).Variables;
+        K_tmp1.Blocks.zeta_diag.Value = K_grid(case_idx, 6).Variables;
+        K_tmp1 = ss(K_tmp1);
+
+        % Plot baseline OUTPLOT
+        figure;
+        x = K_tmp1;
+        x.OutputName = {'$\beta_d$ Control Input', '$\beta_q$ Control Input'};
+        x.InputName = {'$M_d$ Tracking Error', '$M_q$ Tracking Error'};
+        bodeplot(x, bode_plot_opt);
+    
+        axh = findall(gcf, 'type', 'axes');
+        xline(axh(3), omega_1P_rad * HARMONICS, 'k--', 'LineWidth', 2);
+        % xline(axh(5), omega_1P_rad * HARMONICS, 'k--', 'LineWidth', 2);
+        % xline(axh(7), omega_1P_rad * HARMONICS, 'k--', 'LineWidth', 2);
+        xline(axh(9), omega_1P_rad * HARMONICS, 'k--', 'LineWidth', 2);
+    
+        obj = findobj(gcf,'Type','hggroup');
+        for idx = 1:numel(obj)
+            for jdx = 1:numel(obj(idx).Children)
+                obj(idx).Children(jdx).LineWidth = 2;
+            end
+        end
+    
+        set(gcf, 'Position', [0 0 1500 900]);
+        hold off;
+    
+        savefig(gcf, fullfile(fig_dir, 'BaselineController_bodemag.fig'));
+        saveas(gcf, fullfile(fig_dir, 'BaselineController_bodemag.png'));
+
+        % K_tmp2 = PI;
+        % K_tmp2.Blocks.Kp_diag.Value = K_grid(case_idx, 1).Variables;
+        % K_tmp2.Blocks.Kp_offdiag.Value = K_grid(case_idx, 2).Variables;
+        % K_tmp2.Blocks.Ki_diag.Value = K_grid(case_idx, 3).Variables;
+        % K_tmp2.Blocks.Ki_offdiag.Value = K_grid(case_idx, 4).Variables;
+        % K_tmp2 = ss(K_tmp2);
+        % figure;
+        % bode(K_tmp2, bode_plot_opt);
+    end
 
     % add no ipc case
-    K_grid = [combinations([0], [0], [0], [0], Sweep.Vary.WindSpeedIdx); ...
+    K_grid = [combinations([0], [0], [0], [0], [0], [0], Sweep.Vary.WindSpeedIdx); ...
               K_grid];
 
 elseif STRUCT_PARAM_SWEEP
@@ -89,27 +157,30 @@ elseif STRUCT_PARAM_SWEEP
     Sweep.Vary.Kp_offdiag = logspace(-3, 4, 8); %logspace(-9, 0, 10); % linspace(approx_Kp.KQD_range(1), approx_Kp.KQD_range(2), 5);
     Sweep.Vary.Ki_diag = logspace(-3, 4, 8); % linspace(approx_Ki.KD_range(1), approx_Ki.KD_range(2), 5);
     Sweep.Vary.Ki_offdiag = logspace(-3, 4, 8); %logspace(-9, 0, 10); % linspace(approx_Ki.KDQ_range(1), approx_Ki.KDQ_range(2), 5);
+    
+    zeta = 1; drop = 10;
+    Sweep.Vary.gbar_diag = [zeta/drop];
+    Sweep.Vary.zeta_diag = [zeta];
+    
     Sweep.Vary.WindSpeedIdx = [find(C_WS_IDX)];
     
     K_grid = combinations(Sweep.Vary.Kp_diag, Sweep.Vary.Kp_offdiag, ...
                                   Sweep.Vary.Ki_diag, Sweep.Vary.Ki_offdiag, ...
+                                  Sweep.Vary.gbar_diag, Sweep.Vary.zeta_diag, ...
                                   Sweep.Vary.WindSpeedIdx);
 end
 
 REPROCESS_SWEEP = 1;
 if REPROCESS_SWEEP
-    Sweep.Params = {'Kp_diag', 'Kp_offdiag', 'Ki_diag', 'Ki_offdiag', 'WindSpeedIdx'};
+    Sweep.Params = {'Kp_diag', 'Kp_offdiag', 'Ki_diag', 'Ki_offdiag', 'gbar_diag', 'zeta_diag', 'WindSpeedIdx'};
     
-    
-                                  % [find(C_WS_IDX)]);
-                                  % 1:length(LPV_CONTROLLER_WIND_SPEEDS));
-    K_grid.Properties.VariableNames = {'Kp_diag', 'Kp_offdiag', 'Ki_diag', 'Ki_offdiag', 'WindSpeedIdx'};
+    K_grid.Properties.VariableNames = {'Kp_diag', 'Kp_offdiag', 'Ki_diag', 'Ki_offdiag', 'gbar_diag', 'zeta_diag', 'WindSpeedIdx'};
     
     
     % for each gridpoint
     PI_ParameterSweep = repmat(struct(), size(K_grid, 1), 1);
     parfor case_idx = 1:size(K_grid, 1)
-        K_tmp = PI;
+        K_tmp = PI_Notch;
         % parameter sweep for PI based on diskmargin, hinfnorm of To for tracking,
         % (bandwidth of To) for one wind-speed => to know how critical
         % robustness is, followed by nonlinear simulation to evaluate ADC and
@@ -118,15 +189,20 @@ if REPROCESS_SWEEP
         K_tmp.Blocks.Kp_offdiag.Value = K_grid(case_idx, 'Kp_offdiag').Variables;
         K_tmp.Blocks.Ki_diag.Value = K_grid(case_idx, 'Ki_diag').Variables;
         K_tmp.Blocks.Ki_offdiag.Value = K_grid(case_idx, 'Ki_offdiag').Variables;
+        K_tmp.Blocks.gbar_diag.Value = K_grid(case_idx, 'gbar_diag').Variables;
+        K_tmp.Blocks.zeta_diag.Value = K_grid(case_idx, 'zeta_diag').Variables;
+
         c_ws_idx = K_grid(case_idx, 'WindSpeedIdx').Variables;
     
         PI_ParameterSweep(case_idx).Gains = K_grid(case_idx, :);
-
+        
         PI_ParameterSweep(case_idx).Controller = ss(K_tmp);
 
         % negative Plant st e = r(dy) - y(yP) is input to controller, 
         % negative Controller for positive u input to Plant
         SF_tmp = loopsens(-Plant(:, :, c_ws_idx), -PI_ParameterSweep(case_idx).Controller);
+
+        % TODO why are Classical margins NaN for baseline case?
         
         % classical gain/phase margins at plant outputs
         Mrgo_tmp = allmargin(SF_tmp.Lo);
@@ -151,23 +227,27 @@ if REPROCESS_SWEEP
         PI_ParameterSweep(case_idx).MMi = MMi_tmp;
         PI_ParameterSweep(case_idx).MMio = MMio_tmp;
         
-        dc = abs(dcgain(PI_ParameterSweep(case_idx).Controller));
+        % PI_ParameterSweep(case_idx).wc = getGainCrossover(SF_tmp.Lo, 1);
+        x = getGainCrossover(inv(SF_tmp.So), 1);
+        PI_ParameterSweep(case_idx).wc = x(1);
 
-        % QUESTION MANUEL is this how to compute bandwidth
-        if dc(1, 1) > 0
-        PI_ParameterSweep(case_idx).wc = getGainCrossover(...
-            PI_ParameterSweep(case_idx).Controller, ...
-            min(dc(1, 1), [], 'all') / sqrt(2));
-        else
-            PI_ParameterSweep(case_idx).wc = nan;
-        end
+
+        % dc = abs(dcgain(PI_ParameterSweep(case_idx).Controller));
+        % if dc(1, 1) > 0
+        % PI_ParameterSweep(case_idx).wc = getGainCrossover(...
+        %     PI_ParameterSweep(case_idx).Controller, ...
+        %     min(dc(1, 1), [], 'all') / sqrt(2));
+        % else
+        %     PI_ParameterSweep(case_idx).wc = nan;
+        % end
         
         % K_tmp = ip_scaling(:, :, c_ws_idx) * K_tmp * inv(op_scaling(:, :, c_ws_idx));
         % PI_ParameterSweep(case_idx).Controller_scaled = K_tmp;
-        % QUESTION MANUEL does it make sense to sweep over unscaled
-        % controller here  
         
         PI_ParameterSweep(case_idx).SF = SF_tmp;
+
+        PI_ParameterSweep(case_idx).Reference = case_basis.Reference;
+        PI_ParameterSweep(case_idx).Saturation = case_basis.Saturation;
     
     end
     
@@ -183,17 +263,23 @@ if REPROCESS_SWEEP
 
                 PI_ParameterSweepControllers(weighting_case_idx).Controller = ...
                     PI_ParameterSweep(case_idx).Controller;
-                
+                if 0
+                    bode(PI_ParameterSweepControllers(weighting_case_idx).Controller, bode_plot_opt);
+                end
+
                 Gains_tmp(weighting_case_idx, :) = PI_ParameterSweep(case_idx).Gains(:, 1:4).Variables;
                 PI_ParameterSweepControllers(weighting_case_idx).Gains = ...
                     Gains_tmp(weighting_case_idx, :);
                 
                 if length(PI_ParameterSweep(case_idx).Mrgo(1).GainMargin)
                     Mrgo_tmp(weighting_case_idx, c_ws_idx, :, :) = ...
-                        [PI_ParameterSweep(case_idx).Mrgo(1).GainMargin(1) PI_ParameterSweep(case_idx).Mrgo(1).PhaseMargin(1);
-                        PI_ParameterSweep(case_idx).Mrgo(2).GainMargin(1) PI_ParameterSweep(case_idx).Mrgo(2).PhaseMargin(1)];
+                        [PI_ParameterSweep(case_idx).Mrgo(1).GainMargin(1) ...
+                        PI_ParameterSweep(case_idx).Mrgo(1).PhaseMargin(1);
+                        PI_ParameterSweep(case_idx).Mrgo(2).GainMargin(1) ...
+                        PI_ParameterSweep(case_idx).Mrgo(2).PhaseMargin(1)];
                 else
-                    Mrgo_tmp(weighting_case_idx, c_ws_idx, :, :) = [nan nan; nan nan];
+                    Mrgo_tmp(weighting_case_idx, c_ws_idx, :, :) = ...
+                        [nan nan; nan nan];
                 end
 
                 PI_ParameterSweepControllers(weighting_case_idx).Mrgo(:, :, c_ws_idx) = ...
@@ -201,8 +287,10 @@ if REPROCESS_SWEEP
                 
                 if length(PI_ParameterSweep(case_idx).Mrgi(1).GainMargin)
                     Mrgi_tmp(weighting_case_idx, c_ws_idx, :, :) = ...    
-                    [PI_ParameterSweep(case_idx).Mrgi(1).GainMargin(1) PI_ParameterSweep(case_idx).Mrgi(1).PhaseMargin(1);
-                        PI_ParameterSweep(case_idx).Mrgi(2).GainMargin(1) PI_ParameterSweep(case_idx).Mrgi(2).PhaseMargin(1)];
+                    [PI_ParameterSweep(case_idx).Mrgi(1).GainMargin(1) ...
+                    PI_ParameterSweep(case_idx).Mrgi(1).PhaseMargin(1);
+                        PI_ParameterSweep(case_idx).Mrgi(2).GainMargin(1) ...
+                        PI_ParameterSweep(case_idx).Mrgi(2).PhaseMargin(1)];
                 else
                     Mrgi_tmp(weighting_case_idx, c_ws_idx, :, :) = ... 
                         [nan nan; nan nan]; 
@@ -212,31 +300,46 @@ if REPROCESS_SWEEP
                     Mrgi_tmp(weighting_case_idx, c_ws_idx);
                 
                 DMo_tmp(weighting_case_idx, c_ws_idx, :, :) = ...
-                    [PI_ParameterSweep(case_idx).DMo(1).GainMargin(2) PI_ParameterSweep(case_idx).DMo(1).PhaseMargin(2) PI_ParameterSweep(case_idx).DMo(1).DiskMargin;
-                     PI_ParameterSweep(case_idx).DMo(2).GainMargin(2) PI_ParameterSweep(case_idx).DMo(2).PhaseMargin(2) PI_ParameterSweep(case_idx).DMo(2).DiskMargin];
+                    [PI_ParameterSweep(case_idx).DMo(1).GainMargin(2) ...
+                    PI_ParameterSweep(case_idx).DMo(1).PhaseMargin(2) ...
+                    PI_ParameterSweep(case_idx).DMo(1).DiskMargin;
+                     PI_ParameterSweep(case_idx).DMo(2).GainMargin(2) ...
+                     PI_ParameterSweep(case_idx).DMo(2).PhaseMargin(2) ...
+                     PI_ParameterSweep(case_idx).DMo(2).DiskMargin];
                 
-                PI_ParameterSweepControllers(weighting_case_idx).DMo(:, :, c_ws_idx) = DMo_tmp(weighting_case_idx, c_ws_idx, :, :);
+                PI_ParameterSweepControllers(weighting_case_idx).DMo(:, :, c_ws_idx) = ...
+                    DMo_tmp(weighting_case_idx, c_ws_idx, :, :);
 
                 DMi_tmp(weighting_case_idx, c_ws_idx, :, :) = ...
-                    [PI_ParameterSweep(case_idx).DMi(1).GainMargin(2) PI_ParameterSweep(case_idx).DMi(1).PhaseMargin(2) PI_ParameterSweep(case_idx).DMi(1).DiskMargin;
-                     PI_ParameterSweep(case_idx).DMi(2).GainMargin(2) PI_ParameterSweep(case_idx).DMi(2).PhaseMargin(2) PI_ParameterSweep(case_idx).DMi(2).DiskMargin];
+                    [PI_ParameterSweep(case_idx).DMi(1).GainMargin(2) ...
+                    PI_ParameterSweep(case_idx).DMi(1).PhaseMargin(2) ...
+                    PI_ParameterSweep(case_idx).DMi(1).DiskMargin;
+                     PI_ParameterSweep(case_idx).DMi(2).GainMargin(2) ...
+                     PI_ParameterSweep(case_idx).DMi(2).PhaseMargin(2) ...
+                     PI_ParameterSweep(case_idx).DMi(2).DiskMargin];
                 
                 PI_ParameterSweepControllers(weighting_case_idx).DMi(:, :, c_ws_idx) ...
                     = DMi_tmp(weighting_case_idx, c_ws_idx, :, :);
 
                 MMo_tmp(weighting_case_idx, c_ws_idx, :) = ...
-                    [PI_ParameterSweep(case_idx).MMo.GainMargin(2) PI_ParameterSweep(case_idx).MMo.PhaseMargin(2) PI_ParameterSweep(case_idx).MMo.DiskMargin];
+                    [PI_ParameterSweep(case_idx).MMo.GainMargin(2) ...
+                    PI_ParameterSweep(case_idx).MMo.PhaseMargin(2) ...
+                    PI_ParameterSweep(case_idx).MMo.DiskMargin];
                 PI_ParameterSweepControllers(weighting_case_idx).MMo(:, c_ws_idx) = ...
                     MMo_tmp(weighting_case_idx, c_ws_idx, :);
 
 
                 MMi_tmp(weighting_case_idx, c_ws_idx, :) = ...
-                    [PI_ParameterSweep(case_idx).MMi.GainMargin(2) PI_ParameterSweep(case_idx).MMi.PhaseMargin(2) PI_ParameterSweep(case_idx).MMi.DiskMargin];
+                    [PI_ParameterSweep(case_idx).MMi.GainMargin(2) ...
+                    PI_ParameterSweep(case_idx).MMi.PhaseMargin(2) ...
+                    PI_ParameterSweep(case_idx).MMi.DiskMargin];
                 PI_ParameterSweepControllers(weighting_case_idx).MMi(:, c_ws_idx) = ...
                     MMi_tmp(weighting_case_idx, c_ws_idx, :);
 
                 MMio_tmp(weighting_case_idx, c_ws_idx, :) = ...
-                    [PI_ParameterSweep(case_idx).MMio.GainMargin(2) PI_ParameterSweep(case_idx).MMio.PhaseMargin(2) PI_ParameterSweep(case_idx).MMio.DiskMargin];
+                    [PI_ParameterSweep(case_idx).MMio.GainMargin(2) ...
+                    PI_ParameterSweep(case_idx).MMio.PhaseMargin(2) ...
+                    PI_ParameterSweep(case_idx).MMio.DiskMargin];
                 PI_ParameterSweepControllers(weighting_case_idx).MMio(:, c_ws_idx) = ...
                     MMio_tmp(weighting_case_idx, c_ws_idx, :);
                 
@@ -247,10 +350,18 @@ if REPROCESS_SWEEP
                 % else
                 wc_tmp(weighting_case_idx) = PI_ParameterSweep(case_idx).wc(1);
                 PI_ParameterSweepControllers(weighting_case_idx).wc = wc_tmp(weighting_case_idx);
+                
                 % end
                 
-                Stable_tmp(weighting_case_idx, c_ws_idx) = PI_ParameterSweep(case_idx).SF.Stable;
-                PI_ParameterSweepControllers(weighting_case_idx).SF.Stable(c_ws_idx) = Stable_tmp(weighting_case_idx, c_ws_idx);
+                Stable_tmp(weighting_case_idx, c_ws_idx) = ...
+                    PI_ParameterSweep(case_idx).SF.Stable;
+                PI_ParameterSweepControllers(weighting_case_idx).SF.Stable(c_ws_idx) = ...
+                    Stable_tmp(weighting_case_idx, c_ws_idx);
+
+                PI_ParameterSweepControllers(weighting_case_idx).Reference = ...
+                    PI_ParameterSweep(case_idx).Reference;
+                PI_ParameterSweepControllers(weighting_case_idx).Saturation = ...
+                    PI_ParameterSweep(case_idx).Saturation;
 
                 weighting_case_idx = weighting_case_idx + 1;
             end
@@ -262,6 +373,8 @@ if REPROCESS_SWEEP
 
     % Make table comparing controllers
     % ws_idx = unique(PI_ParameterSweep_tmp(v).Gains(:, 'WindSpeedIdx').Variables) == find(C_WS_IDX);
+    % TODO change Kp_diag... to Case Desc.
+
     ws_idx = find(C_WS_IDX);
     PI_ParameterSweep_table = table( ...
         (1:size(PI_ParameterSweepControllers, 2))', ... 
@@ -438,6 +551,9 @@ if 1
             PI_ParameterSweep_case_list(vv).Kp_offdiag = PI_ParameterSweepControllers(v).Gains(2);
             PI_ParameterSweep_case_list(vv).Ki_diag = PI_ParameterSweepControllers(v).Gains(3);
             PI_ParameterSweep_case_list(vv).Ki_offdiag = PI_ParameterSweepControllers(v).Gains(4);
+
+            PI_ParameterSweep_case_list(vv).Reference = PI_ParameterSweepControllers(v).Reference;
+            PI_ParameterSweep_case_list(vv).Saturation = PI_ParameterSweepControllers(v).Saturation;
         % end
     
         vv = vv + 1;
@@ -445,7 +561,7 @@ if 1
     
     % PI_ParameterSweep_redtable = [num2cell(zeros(1, size(PI_ParameterSweep_redtable, 2))); PI_ParameterSweep_redtable]; % NoIPC case
 
-    if BASELINE_K
+    if BASELINE_K % first structure is noipc case, second is baseline case
         save(fullfile(mat_save_dir, 'PI_BaselineParameters_case_list.mat'), "PI_ParameterSweep_case_list");
         save(fullfile(mat_save_dir, 'PI_BaselineParameters_redtable.mat'), "PI_ParameterSweep_redtable");
     elseif STRUCT_PARAM_SWEEP
@@ -756,6 +872,7 @@ end
 % TODO full-order first, the describe w/ minimum number of filters for
 % structured controller
 if 0
+if 0
     parfor c_ws_idx = 1:length(LPV_CONTROLLER_WIND_SPEEDS)
         opt = hinfstructOptions('Display', 'iter'); %, 'TolGain', 1e-6);
         [K_tmp, gamma_tmp, opt_info] = hinfstruct(GenPlant(:, :, c_ws_idx), K_struct, opt); % lft(P, PI_DQ)
@@ -773,7 +890,9 @@ if 0
     save(fullfile(mat_save_dir, 'StructuredTuning.mat'), "K_struct_tuned", "gamma_struct_tuned");
 
 else
-    load(fullfile(mat_save_dir, 'StructuredTuning.mat'));
+    if exist(fullfile(mat_save_dir, 'StructuredTuning.mat'))
+        load(fullfile(mat_save_dir, 'StructuredTuning.mat'));
+    end
 end
 
 for c_idx = 1:Controllers_n_cases
@@ -781,15 +900,15 @@ for c_idx = 1:Controllers_n_cases
         continue;
     end
     % Add LPV controller to Controller_list
-    if strcmp(Controllers_case_list(c_idx).Scheduling.x, 'Yes')
+    if Controllers_case_list(c_idx).Scheduling.x
         Controllers_case_list(c_idx).Controller = K_struct_tuned;
     % Add nonLPV controller to Controller_list
-    elseif strcmp(Controllers_case_list(c_idx).Scheduling.x, 'No')
+    elseif ~Controllers_case_list(c_idx).Scheduling.x
         Controllers_case_list(c_idx).Controller = K_struct_tuned(:, :, LPV_CONTROLLER_WIND_SPEEDS == NONLPV_CONTROLLER_WIND_SPEED);
     end
 end
 save(fullfile(mat_save_dir, 'Controllers_case_list.mat'), "Controllers_case_list");
-
+end
 % QUESTION need to filter wind speed for LPV parameter input?
 
 
@@ -851,7 +970,7 @@ if 0
             Plant_scaled(:, :, c_ws_idx), K_struct_tuned(:, :, C_WS_IDX));
     SF_full = loopsens(...
             Plant_scaled(:, :, c_ws_idx), K_full_tuned(:, :, C_WS_IDX));
-    % QUESTION frequency the larges peak (hinf norm) occurs
+    
     sigmaplot(SF_0.So, SF_struct.So, SF_full.So);
     legend('Baseline', 'Structured Tuned', 'Full-Order Tuned');
     set(gcf, 'Position', [0 0 1500 900]);

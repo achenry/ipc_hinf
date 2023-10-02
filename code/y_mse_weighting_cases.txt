@@ -1,0 +1,73 @@
+
+Case 1 Wind Speed 12.000000
+ W1 = 0.05 W2 = 1 ->  Wu = 100 We = 2
+Case 1 Wind Speed 14.000000
+ W1 = 0.05 W2 = 1 ->  Wu = 100 We = 2
+Case 1 Wind Speed 16.000000
+ W1 = 0.05 W2 = 1 ->  Wu = 100 We = 2
+Case 1 Wind Speed 18.000000
+ W1 = 0.05 W2 = 1 ->  Wu = 100 We = 2
+Case 1 Wind Speed 20.000000
+ W1 = 0.05 W2 = 1 ->  Wu = 100 We = 2
+Case 1 Wind Speed 22.000000
+ W1 = 0.05 W2 = 1 ->  Wu = 100 We = 2
+Case 2 Wind Speed 12.000000
+ W1 = 0.05 W2 = 1 ->  Wu = 75 We = 2
+Case 2 Wind Speed 14.000000
+ W1 = 0.05 W2 = 1 ->  Wu = 75 We = 2
+Case 2 Wind Speed 16.000000
+ W1 = 0.05 W2 = 1 ->  Wu = 75 We = 2
+Case 2 Wind Speed 18.000000
+ W1 = 0.05 W2 = 1 ->  Wu = 75 We = 2
+Case 2 Wind Speed 20.000000
+ W1 = 0.05 W2 = 1 ->  Wu = 75 We = 2
+Case 2 Wind Speed 22.000000
+ W1 = 0.05 W2 = 1 ->  Wu = 75 We = 2
+Case 3 Wind Speed 12.000000
+ W1 = 0.05 W2 = 1 ->  Wu = 50 We = 2
+Case 3 Wind Speed 14.000000
+ W1 = 0.05 W2 = 1 ->  Wu = 50 We = 2
+Case 3 Wind Speed 16.000000
+ W1 = 0.05 W2 = 1 ->  Wu = 50 We = 2
+Case 3 Wind Speed 18.000000
+ W1 = 0.05 W2 = 1 ->  Wu = 50 We = 2
+Case 3 Wind Speed 20.000000
+ W1 = 0.05 W2 = 1 ->  Wu = 50 We = 2
+Case 3 Wind Speed 22.000000
+ W1 = 0.05 W2 = 1 ->  Wu = 50 We = 2
+Case 4 Wind Speed 12.000000
+ W1 = 0.05 W2 = 1 ->  Wu = 10 We = 2
+Case 4 Wind Speed 14.000000
+ W1 = 0.05 W2 = 1 ->  Wu = 10 We = 2
+Case 4 Wind Speed 16.000000
+ W1 = 0.05 W2 = 1 ->  Wu = 10 We = 2
+Case 4 Wind Speed 18.000000
+ W1 = 0.05 W2 = 1 ->  Wu = 10 We = 2
+Case 4 Wind Speed 20.000000
+ W1 = 0.05 W2 = 1 ->  Wu = 10 We = 2
+Case 4 Wind Speed 22.000000
+ W1 = 0.05 W2 = 1 ->  Wu = 10 We = 2
+Case 5 Wind Speed 12.000000
+ W1 = 0.05 W2 = 1 ->  Wu = 5 We = 2
+Case 5 Wind Speed 14.000000
+ W1 = 0.05 W2 = 1 ->  Wu = 5 We = 2
+Case 5 Wind Speed 16.000000
+ W1 = 0.05 W2 = 1 ->  Wu = 5 We = 2
+Case 5 Wind Speed 18.000000
+ W1 = 0.05 W2 = 1 ->  Wu = 5 We = 2
+Case 5 Wind Speed 20.000000
+ W1 = 0.05 W2 = 1 ->  Wu = 5 We = 2
+Case 5 Wind Speed 22.000000
+ W1 = 0.05 W2 = 1 ->  Wu = 5 We = 2
+Case 6 Wind Speed 12.000000
+ W1 = 0.05 W2 = 1 ->  Wu = 1 We = 2
+Case 6 Wind Speed 14.000000
+ W1 = 0.05 W2 = 1 ->  Wu = 1 We = 2
+Case 6 Wind Speed 16.000000
+ W1 = 0.05 W2 = 1 ->  Wu = 1 We = 2
+Case 6 Wind Speed 18.000000
+ W1 = 0.05 W2 = 1 ->  Wu = 1 We = 2
+Case 6 Wind Speed 20.000000
+ W1 = 0.05 W2 = 1 ->  Wu = 1 We = 2
+Case 6 Wind Speed 22.000000
+ W1 = 0.05 W2 = 1 ->  Wu = 1 We = 2

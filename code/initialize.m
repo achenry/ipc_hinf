@@ -14,6 +14,9 @@ RUN_CL = 1;
 RUN_OL_DQ = 0;
 RUN_OL_BLADE = 0;
 
+VARY_WU = 1;
+VARY_WU_BASIS = 100 * [0.01, 0.05, 0.1, 0.5, 0.75, 1.0];
+
 VARY_REFERENCE = 0;
 VARY_REFERENCE_BASIS = [0.05, 0.1, 0.15, 0.2, 0.25]; % QUESTION MANUEL of peak, ss value?
 
@@ -26,9 +29,11 @@ HARMONICS = [2, 3, 6];
 USE_IPC = 1;
 
 STRUCT_PARAM_SWEEP = 0; % conduct nonlinear simulations for parameter sweep over MIMO PI Gains
-OPTIMAL_K_COLLECTION = 0; % conduct nonlinear simulations for collection of Hinf-synthesized controllers
-EXTREME_K_COLLECTION = 1;
+OPTIMAL_K_COLLECTION = 1; % conduct nonlinear simulations for collection of Hinf-synthesized controllers
+EXTREME_K_COLLECTION = 0;
 BASELINE_K = 0; % conduct nonlinear simulations for baseline structured controller
+
+set(0, 'defaultTextInterpreter', 'latex'); 
 
 if STRUCT_PARAM_SWEEP || OPTIMAL_K_COLLECTION || EXTREME_K_COLLECTION || BASELINE_K
     USE_IPC = 1;
@@ -49,6 +54,15 @@ if strcmp(username, 'aoifework')
     project_dir = fullfile(home_dir, 'Research', 'ipc_tuning');
     simulink_model_dir = fullfile(project_dir, 'simulink_models');
     fig_dir = fullfile(project_dir, 'paper', 'figs');
+
+    fast_install_dir = fullfile(toolbox_dir, 'openfast/install/lib');
+    FAST_runDirectory = fullfile(project_dir, 'simulations');
+    windfiles_dir = fullfile(project_dir, 'WindFiles');
+    code_dir = fullfile(project_dir, 'code');
+    mat_save_dir = fullfile(code_dir, 'matfiles');
+    sl_save_dir = fullfile(project_dir, 'sl_outputs');
+    sl_metadata_save_dir = fullfile(project_dir, 'sl_metadata');
+    postprocessing_save_dir = fullfile(project_dir, 'postprocessing_results');
     
     addpath(simulink_model_dir);
     addpath(fullfile(toolbox_dir, 'turbsim-toolbox'));
@@ -58,29 +72,14 @@ if strcmp(username, 'aoifework')
     addpath(fullfile(toolbox_dir, 'matlab-toolbox', 'MBC', 'Source'));
     addpath(fullfile(toolbox_dir, 'turbsim-toolbox/A_Functions/'));
     addpath(fullfile(toolbox_dir, 'PMtools/'));
+    addpath(fullfile(code_dir, 'helper_functions/'));
+    addpath(fullfile(project_dir));
+    addpath(fast_install_dir); % FAST_SFunc location
 
-    code_dir = fullfile(project_dir, 'code');
     chdir(code_dir);
 
-    addpath(fullfile(code_dir, 'helper_functions/'));
-
     libext = '.dylib';
-    
-    % fast_install_dir = fullfile(home_dir, 'dev/WEIS/OpenFAST/install');
-    fast_install_dir = fullfile(toolbox_dir, 'openfast/install/lib');
-    FAST_runDirectory = fullfile(project_dir, 'simulations');
 
-    windfiles_dir = fullfile(project_dir, 'WindFiles');
-    
-    addpath(fullfile(project_dir)); % sl model
-    
-    % FAST_SFunc location
-    addpath(fast_install_dir);
-
-    mat_save_dir = fullfile(code_dir, 'matfiles');
-    sl_save_dir = fullfile(project_dir, 'sl_outputs');
-    sl_metadata_save_dir = fullfile(project_dir, 'sl_metadata');
-    postprocessing_save_dir = fullfile(project_dir, 'postprocessing_results');
 
 elseif strcmp(username, 'aohe7145')
     MAX_SIMULATIONS = -1;
@@ -111,6 +110,8 @@ elseif strcmp(username, 'aohe7145')
     addpath(fullfile(toolbox_dir, 'turbsim-toolbox/A_Functions/'));
     addpath(fullfile(toolbox_dir, 'PMtools/'));
     addpath(fullfile(code_dir, 'helper_functions/'));
+    addpath(fullfile(project_dir));
+    addpath(fast_install_dir); % FAST_SFunc location
 
     chdir(code_dir);
 
@@ -118,11 +119,6 @@ elseif strcmp(username, 'aohe7145')
 
     windfiles_dir = fullfile('/scratch/alpine/aohe7145/ipc_tuning', 'WindFiles');
     
-    addpath(fullfile(project_dir)); % sl model
-    
-    % FAST_SFunc location
-    addpath(fast_install_dir);
-
 end
 
 if ~exist(mat_save_dir, 'dir')
@@ -229,6 +225,11 @@ sigma_plot_opt.XLabel.FontSize = 25;
 sigma_plot_opt.YLabel.FontSize = 25;
 sigma_plot_opt.TickLabel.FontSize = 22;
 sigma_plot_opt.Grid = 'on';
+sigma_plot_opt.Title.Interpreter = 'latex';
+sigma_plot_opt.InputLabels.Interpreter = 'latex';
+sigma_plot_opt.OutputLabels.Interpreter = 'latex';
+sigma_plot_opt.XLabel.Interpreter = 'latex';
+sigma_plot_opt.YLabel.Interpreter = 'latex';
 
 bode_plot_opt = bodeoptions;
 bode_plot_opt.Title.FontSize = 25;
@@ -243,6 +244,11 @@ bode_plot_opt.Grid = 'on';
 bode_plot_opt.PhaseMatchingFreq = 0;
 bode_plot_opt.PhaseMatchingValue = 0;
 bode_plot_opt.PhaseVisible = 'off';
+bode_plot_opt.Title.Interpreter = 'latex';
+bode_plot_opt.InputLabels.Interpreter = 'latex';
+bode_plot_opt.OutputLabels.Interpreter = 'latex';
+bode_plot_opt.XLabel.Interpreter = 'latex';
+bode_plot_opt.YLabel.Interpreter = 'latex';
 %bode_plot_opt.XLim = [];
 % bode_plot_opt.XLimMode = 'manual';
 
@@ -255,6 +261,11 @@ time_plot_opt.XLabel.FontSize = 25;
 time_plot_opt.YLabel.FontSize = 25;
 time_plot_opt.TickLabel.FontSize = 22;
 time_plot_opt.Grid = 'on';
+time_plot_opt.Title.Interpreter = 'latex';
+time_plot_opt.InputLabels.Interpreter = 'latex';
+time_plot_opt.OutputLabels.Interpreter = 'latex';
+time_plot_opt.XLabel.Interpreter = 'latex';
+time_plot_opt.YLabel.Interpreter = 'latex';
 % plot_opt.Xlim = [0, 600];
 
 pz_plot_opt = pzoptions;
@@ -266,3 +277,8 @@ pz_plot_opt.OutputLabels.FontSize = 25;
 pz_plot_opt.XLabel.FontSize = 25;
 pz_plot_opt.YLabel.FontSize = 25;
 pz_plot_opt.TickLabel.FontSize = 22;
+pz_plot_opt.Title.Interpreter = 'latex';
+pz_plot_opt.InputLabels.Interpreter = 'latex';
+pz_plot_opt.OutputLabels.Interpreter = 'latex';
+pz_plot_opt.XLabel.Interpreter = 'latex';
+pz_plot_opt.YLabel.Interpreter = 'latex';

@@ -2,73 +2,59 @@
 % 6/8/17 - Including Precone angle in gain calculation
 % This script sets up the variables for the CP simulink models
 
-% addpath('/Users/aoifework/Documents/toolboxes/matlab-toolbox/A_Functions/')
-% addpath('./TurbSim/A_Functions/')
+% LOAD TURBINE PARAMETERS
+ptemp                   = load(fullfile('TurbineParameters',Parameters.Turbine.String));
+Parameters.Turbine      = catstruct(ptemp.Parameters.Turbine,Parameters.Turbine);
 
-% Load Wind File
-% velocity, twrVelocity, y, z, zTwr, nz, ny, dz, dy, dt, zHub, z1,mffws] = readTSgrid('./TurbSim/TurbSim_IF/TurbSim.bts');
-% time = 0:dt:(size(velocity, 1) - 1) * dt;
-% ws_ts = timeseries(velocity(:, 1), time);
-
-% load('/Users/aoifework/Documents/Research/learning_actuation/SOAR-25-V2f_DLC12_PitchActuatorAnalysis/B_14_2.mat')
-% rs_dt = Chan.tt(2) - Chan.tt(1);
-% rs_ts = timeseries(Chan.RotSpeed, Chan.tt);
-
-%% LOAD TURBINE PARAMETERS
-if exist('TurbineParameters', 'file')
-    ptemp                   = load(fullfile('TurbineParameters', Parameters.Turbine.String));
-    Parameters.Turbine      = catstruct(ptemp.Parameters.Turbine, Parameters.Turbine);
-    
-    if isfield(Parameters,'Control')
-        Parameters.Control      = catstruct(ptemp.Parameters.Control,Parameters.Control);
-    else
-        Parameters.Control = ptemp.Parameters.Control;
-    end
-    if isfield(Parameters,'Tower')
-        Parameters.Tower      = catstruct(ptemp.Parameters.Tower,Parameters.Tower);
-    else
-        Parameters.Tower = ptemp.Parameters.Tower;
-    end
+if isfield(Parameters,'Control')
+    Parameters.Control      = catstruct(ptemp.Parameters.Control,Parameters.Control);
 else
-    load 'SOAR-25-V2f'
-    ptemp.Parameters = Parameters;
+    Parameters.Control = ptemp.Parameters.Control;
+end
+if isfield(Parameters,'Tower')
+    Parameters.Tower      = catstruct(ptemp.Parameters.Tower,Parameters.Tower);
+else
+    Parameters.Tower = ptemp.Parameters.Tower;
 end
 % ============================================================= %
 
 
+
 %%
-Upratelimiter.Disable = 51922763.3;%51922763.3;5192
-Downratelimiter.Disable = -99922763;%-99922763;
+Upratelimiter.Disable=51922763.3;%51922763.3;5192
+Downratelimiter.Disable=-99922763;%-99922763;
 % Setup simulation variables ONLY USED FOR NREL BASELINE CONTROLLER!!!
 % S_ConstTq=1;    % Switch: 1 will enable constant torque in Region 3
 S_LowBPLim=1;   % Switch: 1 will hold Region 3 for BP>1, 0 will have Region 3 dependent on speed alone
 
 %% Parking Brake
-Parameters.Turbine.Brake = 1;
+Parameters.Turbine.Brake        = 1;
 
 %% Set IC's of turbine
-Parameters.Turbine.IC.Bp = 10; % Blade pitch IC, [degrees]
-Parameters.Turbine.IC.BpSH = 0;
-Parameters.Turbine.IC.Wr = 4.118; % Rotor speed IC [rpm]
-Parameters.Turbine.IC.Wg = 4.118;
-Parameters.Turbine.IC.Tg = 35e3;
+Parameters.Turbine.IC.Bp=10; % Blade pitch IC, [degrees]
+Parameters.Turbine.IC.BpSH=0;
+Parameters.Turbine.IC.Wr=4.118; % Rotor speed IC [rpm]
+Parameters.Turbine.IC.Wg=4.118;
+Parameters.Turbine.IC.Tg=35e3;
 Parameters.Turbine.max_pitch = 90; % deg
 
 %% Sampling Rate
 Control.DT = 0.0125;
 
 %% TEMP FOR WSE TEST
-% range of rotor speeds
-RotorSpeedDomain  = linspace(Parameters.Turbine.wr_min, 1.15*Parameters.Turbine.wr_rated, 10);
+%range of rotor speeds
+RotorSpeedDomain  = linspace(Parameters.Turbine.wr_min,1.15*Parameters.Turbine.wr_rated,10);
 Parameters.Control.PowerRating = 1.0;
 
 %% Low pass filter for High Speed Shaft speed
-Parameters.LPF.f_cut = 0.125; % new value after SUMR-D issue is 1 HZ;0.5 old  %Low pass filter cut-off frequency [Hz]
+Parameters.LPF.f_cut = .125; %new value after SUMR-D issue is 1 HZ;0.5 old  %Low pass filter cut-off frequency [Hz]
 Parameters.LPF.w_cut = 2*pi*Parameters.LPF.f_cut;         %Low pass filter cut-off frequency [rad/s]
 
-Parameters.LPF.LPnum = [(1-exp(-Parameters.LPF.w_cut*Control.DT)) 0];
-Parameters.LPF.LPden = [1 -exp(-Parameters.LPF.w_cut*Control.DT)];
+Parameters.LPF.LPnum=[(1-exp(-Parameters.LPF.w_cut*.0125)) 0];
+Parameters.LPF.LPden=[1 -exp(-Parameters.LPF.w_cut*.0125)];
 % ============================================================= %
+
+
 
 %% Torque Controller Variables (Defined in Simulink Matlab Function)
 Turbine = Parameters.Turbine;
@@ -97,7 +83,7 @@ c1_5 = T_1d5_high - m1_5*wg_1d5;
 
 %% Linear Region 2.5
 T_rated     = Turbine.T_rated;
-wg_rated    = Parameters.Turbine.wg_rated; % rpm
+wg_rated    = Parameters.Turbine.wg_rated;
 R25_start   = 0.95;
 w2_high     = R25_start*wg_rated;
 T_2_high    = k_opt*w2_high^2;
@@ -116,13 +102,13 @@ if TorqueControlParams.PIControl
     w2_high     = R25_start*wg_rated;
 end
 
-% hard coded from Bossanyi, with gain factor
+%hard coded from Bossanyi, with gain factor
 Tq_Kp = (rpm2radps(4200)/1)*990.9534067;
 Tq_Ki = (rpm2radps(2100)/1)/2;
 Tq_Kd = 0;
 Kaw = 5;
 
-% Margins for transition
+%Margins for transition
 R1d5_Thresh = 0.05;
 R2d5_Thresh = 0.05;
 
@@ -135,9 +121,9 @@ Parameters.Control.SetSmooth.g_2         = 5;
 LPF_SetSmooth                            = Af_LPF(2*pi/10,1,Control.DT,1);
 
 %% Assign Values to Struct
-TorqueControlParams.wg_rated    = wg_rated; % rpm
-TorqueControlParams.T_rated     = T_rated; % Nm
-TorqueControlParams.w2_high     = w2_high; 
+TorqueControlParams.wg_rated    = wg_rated;
+TorqueControlParams.T_rated     = T_rated;
+TorqueControlParams.w2_high     = w2_high;
 TorqueControlParams.w1_high     = wg_1d5;
 TorqueControlParams.T1_high     = T_1d5_high;
 TorqueControlParams.wg_min      = wg_min;
@@ -153,7 +139,7 @@ TorqueControlParams.Kd          = Tq_Kd;
 TorqueControlParams.T           = Control.DT;
 TorqueControlParams.w2_low      = wg_1d5;
 TorqueControlParams.T2_low      = k_opt*(wg_min*1.05)^2;
-TorqueControlParams.fine_pitch  = Parameters.Turbine.fine_pitch; % deg
+TorqueControlParams.fine_pitch  = Parameters.Turbine.fine_pitch;
 TorqueControlParams.Kaw         = Kaw;
 TorqueControlParams.StartupTime = 0;
 TorqueControlParams.R1d5_Thresh = R1d5_Thresh;
@@ -165,7 +151,7 @@ TorqueControlParams.R25_start   = R25_start;
 
 %% BLADE PITCH CONTROL
 %% Blade Pitch Actuator
-Parameters.PitchActuator.f_cutoff   = ptemp.Parameters.PitchActuator.f_cutoff;%1 Hz
+Parameters.PitchActuator.f_cutoff   =ptemp.Parameters.PitchActuator.f_cutoff;%1; %0.1%Hz, fast.1#32.5 0.1
 Parameters.PitchActuator.damping    = 0.7;%0.7; %0.7 
 Parameters.PitchActuator.TF_num     = ((2*pi*Parameters.PitchActuator.f_cutoff)^2)*1;
 Parameters.PitchActuator.TF_den     = [1,2*Parameters.PitchActuator.damping*(2*pi*Parameters.PitchActuator.f_cutoff),(2*pi*Parameters.PitchActuator.f_cutoff)^2];
@@ -178,16 +164,14 @@ PitchControlParams.theta_k  = Parameters.Turbine.theta_kP*[Parameters.Turbine.Co
 PitchControlParams.Sens_0   = Parameters.Turbine.Sens_0;
 
 %First principles zero-pitch gains
-GainFactor = Parameters.Control.p_factor;% 1;
+GainFactor =Parameters.Control.p_factor;% 1;
 PitchControlParams.Kp_0 =( GainFactor*2*Parameters.Turbine.Jtot*rpm2radps(Parameters.Turbine.wr_rated)*PitchControlParams.zeta*PitchControlParams.omega_n/(Parameters.Turbine.G*-PitchControlParams.Sens_0))*5;
 PitchControlParams.Ki_0 = GainFactor*Parameters.Turbine.Jtot*rpm2radps(Parameters.Turbine.wr_rated)*PitchControlParams.omega_n^2/(Parameters.Turbine.G*-PitchControlParams.Sens_0);
 % ============================================================= %
 
 %% INDIVIDUAL PITCH CONTROL
 %% Cyclic Pitch Controller
-Parameters.Control.IPCDQ.Enable     = 0;
-Parameters.Control.IPC3DQ.Enable     = 0;
-Parameters.Control.IPCDQ.Excite3P     = 0;
+Parameters.Control.IPCDQ.Enable     = 1;
 Parameters.Control.IPCDQ.Mode       = 1;  % 1 no IPC below rated (no power loss), 2 IPC always on, 3 M_0 dependent
 
 % IPC DQ GAINS
@@ -196,28 +180,12 @@ Parameters.cIPC.DQ_Kp_1P = kmul*40e-8;%0e-8;
 Parameters.cIPC.DQ_Ki_1P = kmul*30e-8;%16e-8;
 Parameters.cIPC.DQ_Kd_1P = kmul*5e-8;%0e-7;
 
-Parameters.cIPC.D_Kp_1P = 2.8066e-06; %kmul*40e-8;%0e-8;
-Parameters.cIPC.Q_Kp_1P = 2.6919e-06; %kmul*40e-8;%0e-8;
-Parameters.cIPC.D_Ki_1P = 2.8066e-06; %kmul*30e-8;%16e-8;
-Parameters.cIPC.Q_Ki_1P = 2.6919e-06; %kmul*30e-8;%16e-8;
-Parameters.cIPC.D_Kd_1P = kmul*5e-8;%0e-7;
-Parameters.cIPC.Q_Kd_1P = kmul*5e-8;%0e-7;
-
-Parameters.cIPC.D_Kp_3P = 6.1751e-06; %kmul*40e-8;%0e-8;
-Parameters.cIPC.Q_Kp_3P = 6.1617e-06; %kmul*40e-8;%0e-8;
-Parameters.cIPC.D_Ki_3P = 6.1751e-06; % kmul*30e-8;%16e-8;
-Parameters.cIPC.Q_Ki_3P = 6.1617e-06; %kmul*30e-8;%16e-8;
-Parameters.cIPC.D_Kd_3P = kmul*5e-8; %0e-7;
-Parameters.cIPC.Q_Kd_3P = kmul*5e-8; %0e-7;
-
 Parameters.cIPC.DQ_Kp_2P = 2e-8;
 Parameters.cIPC.DQ_Ki_2P = 4e-8;
 
-% RotorSpeedDomain = linspace(Parameters.Turbine.wr_min, 1.15*Parameters.Turbine.wr_rated, 10)
-om_1P = 2*pi*RotorSpeedDomain/60; %rad/s
+om_1P = 2*pi*RotorSpeedDomain/60;
 
-% Cyclic Pitch Controller Filters, scheduled by omega [rad/s] - parameter
-% input is 2/3/4/6 * Omega
+% Cyclic Pitch Controller Filters
 [~,IPCDQ_NF_2P] = Af_MovingNotch(2*om_1P,0.8,0.02,Control.DT);
 [~,IPCDQ_NF_4P] = Af_MovingNotch(4*om_1P,0.5,0.01,Control.DT);
 
@@ -232,18 +200,6 @@ drop = 10;
 PSM0_LPF    = Af_LPF(2*pi/1,.707,Control.DT);
 
 IPCDQ_LPF    = Af_LPF(3*om_1P(8),.707,Control.DT);
-
-RotorSpeedDomain_bp = linspace(0.98*Parameters.Turbine.wr_rated, 1.02*Parameters.Turbine.wr_rated, 10);
-om_1P_bp = 2*pi*RotorSpeedDomain_bp/60; %rad/s
-[~, bandpass_1P]  = Af_MovingNotch_bandpass(om_1P_bp,0.8,0.08,Control.DT);
-
-% om_1P_bp / (2*pi) % Hz
-[~, bandpass_3P]  = Af_MovingNotch_bandpass(3*om_1P_bp,0.8,0.08,Control.DT); 
-% 3*om_1P_bp / (2*pi) % Hz
-% QUESTION MANUEL this seems to result in selection of 2P loads?, do we need matrices for full range of omega?
-% [~, bandpass_1P]  = Af_MovingNotch_bandpass((2*pi/60) * Parameters.Turbine.wr_rated,0.8,0.08,Control.DT);
-% [~, bandpass_3P]  = Af_MovingNotch_bandpass(3*(2*pi/60)*Parameters.Turbine.wr_rated,0.8,0.08,Control.DT);
-% bode(bandpass_1P, bandpass_3P)
 
 % Cyclic Pitch Phase Lead
 % 0 deg yaw
@@ -262,23 +218,11 @@ PitchControlParams.IPCDQ_k_sat  = Parameters.Control.IPCDQ.k_sat;
 
 
 %% CPC Filters
-% Slow LPF for LPV parameter MANUEL QUESTION should this differ ie
-% omega_sloe * 3 for 3P filter? => No, just for high-freq
-% MANUEL QUESTION should phase in IPC controller differ for 3P load
-% mitigation? => 3*Phase for 3P
-% Should IPCDQ_LPF differ for 3P?
+% Slow LPF for LPV parameter
 omega_slow = 0.05;
-omega_slow2 = (2*pi*Parameters.Turbine.wr_rated/60) * 6;
 zeta_slow = 0.7;
 LPF_slow = tf([omega_slow^2],[1,2*zeta_slow*omega_slow,omega_slow^2]);
 dLPF_slow = c2d(ss(LPF_slow),Control.DT);
-LPF_slow2 = tf([omega_slow2^2],[1,2*zeta_slow*omega_slow2,omega_slow2^2]);
-dLPF_slow2 = c2d(ss(LPF_slow2),Control.DT);
-% bodemag(LPF_slow2)
-% hold on;
-% plot([2*pi*Parameters.Turbine.wr_rated/60, 2*pi*Parameters.Turbine.wr_rated/60], [-100, 20])
-% hold off;
-% 2*pi*Parameters.Turbine.wr_rated/60
 
 % MISC CYCLIC PITCH CONTROL DEPENDENCIES
 LSM0_LPF    = Af_LPF(2*pi,.707,Control.DT);
@@ -293,8 +237,6 @@ PitchControlParams.theta_fine   = Parameters.Turbine.fine_pitch;
 Parameters.Control.DTU_PS.Enable    = 0;
 
 Parameters.Control.DTU_PS.TB_LPF = Af_LPF(2*pi*.025,.707,Control.DT);
-[dLPF_windspeed, ~] = Af_LPF(2*pi*.025,.707,Control.DT);
-dLPF_windspeed = ss(dLPF_windspeed);
 
 % init
 iWS = 1; Parameters.Control.DTU_PS.UU = 0;      Parameters.Control.DTU_PS.PP = 0;  %init
@@ -326,13 +268,13 @@ Parameters.Control.DTU_PS.UU(iWS) = 50;     Parameters.Control.DTU_PS.PP(iWS) = 
 
 Parameters.Control.DTU_PS.uu = linspace(0,50,1000);
 Parameters.Control.DTU_PS.pp = interp1(Parameters.Control.DTU_PS.UU,...
-    Parameters.Control.DTU_PS.PP, Parameters.Control.DTU_PS.uu,'cubic');
+    Parameters.Control.DTU_PS.PP,Parameters.Control.DTU_PS.uu,'cubic');
 
 % ============================================================= %
 
 
 %% Yaw 
-OLControlParams.YawError = 360;
+OLControlParams.YawError =360;
 OLControlParams.Disable = 1;
 % ============================================================= %
 
@@ -368,10 +310,10 @@ Parameters.Control.WSE.P_0          = diag([0.1,0.1,1])^2; %inital cov.
 Parameters.Control.WSE.L            = 320; %turb. length scale (m)
 
 % Turbine Parameters
-Parameters.Control.WSE.A            = pi * (cosd(Parameters.Turbine.ConeAngle) * Parameters.Turbine.R)^2;       %rotor area m^2 (SHAFT TILT IGNORED)
+Parameters.Control.WSE.A            = pi * (cosd(Parameters.Turbine.ConeAngle) * Parameters.Turbine.R) ^2;       %rotor area m^2 (SHAFT TILT IGNORED)
 Parameters.Control.WSE.rho          = Parameters.Turbine.rho;
 Parameters.Control.WSE.Rrot         = Parameters.Turbine.R;
-Parameters.Control.WSE.ConeAngle    = Parameters.Turbine.ConeAngle; % deg
+Parameters.Control.WSE.ConeAngle    = Parameters.Turbine.ConeAngle;
 Parameters.Control.WSE.G            = Parameters.Turbine.G;
 Parameters.Control.WSE.J_tot        = Parameters.Turbine.Jtot;
 
@@ -384,13 +326,13 @@ Parameters.Control.WSE.R = 0.02;
 
 Parameters.Control.WSE.H = [Parameters.Turbine.G, 0 , 0];
 
-% Cp Parameterization TODO where is this .mat file
-if exist('Cp_Param.mat','file')
-    load('Cp_Param')
+% Cp Parameterization
+if exist(fullfile('ControlParameters',Parameters.Turbine.String,'Cp_Param.mat'),'file')
+    load(fullfile('ControlParameters',Parameters.Turbine.String,'Cp_Param'))
 else
     disp(['CONTROL Warning: ',Parameters.Turbine.String,' Cp Params. not found: EKF may give unexpected results']);
     disp('Loading default Cp Params., Disabling WSE');
-    load(fullfile(project_dir,'SUMR-13_v1_c5_a0333_v113_P169_B3','Cp_Param'),'a_hat_opt','a_hat')
+    load(fullfile('ControlParameters','SUMR-13_v1_c5_a0333_v113_P169_B3','Cp_Param'),'a_hat_opt','a_hat')
     Parameters.Control.WSE.enable       = 0;
 end
 

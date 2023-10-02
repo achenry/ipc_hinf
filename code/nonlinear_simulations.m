@@ -9,7 +9,6 @@
 
 % run a parfor loop to simulate 10 minutes of a turbsim wind field for each
 % controller type with IPC on
-clear all;
 init_hinf_controller;
 
 RUN_SIMS_PAR = 1;
@@ -17,6 +16,8 @@ RUN_SIMS_SINGLE = 0;
 RUN_TURSIM = 0;
 GENERATE_CASES = 1;
 GENERATE_FASTINPUT_FILES = 1;
+
+single_run_case_idx = 100;
 
 %% Generate Turbsim Files
 if RUN_TURSIM
@@ -57,6 +58,14 @@ elseif RUN_OL_BLADE
 end
 
 Parameters.Control.IPCDQ.Enable = USE_IPC;
+% TODO include single seed for extreme controllers, five seeds for optimal
+% controllers
+
+if true || EXTREME_K_COLLECTION 
+    n_seeds = 1;
+else
+    n_seeds = 5;
+end
 
 if GENERATE_CASES
     generate_simulation_cases;
@@ -66,7 +75,7 @@ else
     else
         save_prefix = '';
     end
-
+    
     if OPTIMAL_K_COLLECTION
         load(fullfile(mat_save_dir, [save_prefix, 'Optimal_Controllers_nonlinear_simulation_case_list.mat']));
     elseif EXTREME_K_COLLECTION
@@ -125,17 +134,17 @@ if RUN_SIMS_PAR
         Af_EditInflow(infw_lines, infw_edits, new_infw_name, def_infw_file, template_infw_dir, input_mode);
     end
 elseif RUN_SIMS_SINGLE
-    case_idx = 1;
+    
     new_fst_name = fullfile(FAST_runDirectory, ...
-            case_name_list{case_idx});
+            case_name_list{single_run_case_idx});
     new_infw_name = fullfile(FAST_runDirectory, ...
-        [case_name_list{case_idx}, '_InflowWind']);
+        [case_name_list{single_run_case_idx}, '_InflowWind']);
 
-    fst_lines = fields(case_list(case_idx).Fst);
+    fst_lines = fields(case_list(single_run_case_idx).Fst);
     fst_edits = {};
 
     for l = 1:length(fst_lines)
-        fst_edits{l} = case_list(case_idx).Fst.(fst_lines{l});
+        fst_edits{l} = case_list(single_run_case_idx).Fst.(fst_lines{l});
     end
 
     if isfield(case_list, 'InflowWind')
@@ -143,11 +152,11 @@ elseif RUN_SIMS_SINGLE
         fst_edits{l + 1} = ['"' new_infw_name '.dat' '"'];
     end
     
-    infw_lines = fields(case_list(case_idx).InflowWind);
+    infw_lines = fields(case_list(single_run_case_idx).InflowWind);
     infw_edits = {};
 
     for l = 1:length(infw_lines)
-        infw_edits{l} = case_list(case_idx).InflowWind.(infw_lines{l});
+        infw_edits{l} = case_list(single_run_case_idx).InflowWind.(infw_lines{l});
     end
     
     Af_EditFast(fst_lines, fst_edits, new_fst_name, def_fst_file, template_fst_dir, input_mode);
@@ -173,7 +182,13 @@ if RUN_SIMS_SINGLE || RUN_SIMS_PAR
         if STRUCT_PARAM_SWEEP
             sim_type = 'pi_param_sweep_turbsim';
         elseif OPTIMAL_K_COLLECTION
-            sim_type = 'optimal_k_cases_turbsim';
+            if VARY_WU
+                sim_type = 'optimal_k_cases_turbsim_wu';
+            elseif VARY_REFERENCE
+                sim_type = 'optimal_k_cases_turbsim_ref';
+            elseif VARY_SATURATION
+                sim_type = 'optimal_k_cases_turbsim_sat';
+            end
         elseif EXTREME_K_COLLECTION
             sim_type = 'extreme_k_cases_turbsim';
         elseif BASELINE_K
@@ -191,7 +206,7 @@ if RUN_SIMS_PAR
     
         case_list(case_idx).FAST_InputFileName = fullfile(FAST_runDirectory, ...
             [case_name_list{case_idx}, '.fst']);
-    
+        
         % Populate thread parameters
         if STRUCT_PARAM_SWEEP
             % SL_model_name = 'AD_SOAR_c7_V2f_c73_MIMOPIControllerTest';
@@ -202,19 +217,33 @@ if RUN_SIMS_PAR
             K_IPC = c2d(case_list(case_idx).Controller, DT);
             sim_inputs(case_idx) = Simulink.SimulationInput(SL_model_name);
             sim_inputs(case_idx) = sim_inputs(case_idx).setVariable('K_IPC', K_IPC);
-        elseif OPTIMAL_K_COLLECTION || EXTREME_K_COLLECTION
+        elseif EXTREME_K_COLLECTION
             
             if strcmp(case_list(case_idx).Structure.x, 'Full-Order')
                 SL_model_name = 'AD_SOAR_c7_V2f_c73_Clean_FullOrderControllerTest_old';
             elseif strcmp(case_list(case_idx).Structure.x, 'Structured')
                 SL_model_name = 'AD_SOAR_c7_V2f_c73_Clean_StructuredControllerTest';
             end
-            % QUESTION MANUEL shouldn't be need to negate controller, isn't
-            % SL model a positive feedback system? But negated controller
-            % results in poorer performance. Does it need to be converted
-            % to DT?
             sim_inputs(case_idx) = Simulink.SimulationInput(SL_model_name);
+            
             K_IPC = c2d(case_list(case_idx).Controller_scaled, DT); % Note, this is the scaled controller
+            if 0
+                bode(K_IPC, bode_plot_opt);
+            end
+            sim_inputs(case_idx) = sim_inputs(case_idx).setVariable('K_IPC', K_IPC);
+        elseif OPTIMAL_K_COLLECTION
+            
+            if strcmp(case_list(case_idx).Structure.x, 'Full-Order')
+                SL_model_name = 'AD_SOAR_c7_V2f_c73_Clean_FullOrderControllerTest_old';
+            elseif strcmp(case_list(case_idx).Structure.x, 'Structured')
+                SL_model_name = 'AD_SOAR_c7_V2f_c73_Clean_StructuredControllerTest';
+            end
+            sim_inputs(case_idx) = Simulink.SimulationInput(SL_model_name);
+            
+            K_IPC = c2d(case_list(case_idx).Controller_scaled, DT); % Note, this is the scaled controller
+            if 0
+                bode(K_IPC, bode_plot_opt);
+            end
             sim_inputs(case_idx) = sim_inputs(case_idx).setVariable('K_IPC', K_IPC);
         elseif BASELINE_K
             % sim_inputs(case_idx) = Simulink.SimulationInput('AD_SOAR_c7_V2f_c73_Clean_StructuredControllerTest');
@@ -222,12 +251,13 @@ if RUN_SIMS_PAR
             % sim_inputs(case_idx) = sim_inputs(case_idx).setVariable('K_IPC', K_IPC);
             % SL_model_name = 'AD_SOAR_c7_V2f_c73_Clean';
             SL_model_name = 'AD_SOAR_c7_V2f_c73_Clean_FullOrderControllerTest_old';
-            K_IPC = case_list(case_idx).Controller;
+            K_IPC = c2d(case_list(case_idx).Controller, DT);
+            bode(K_IPC, bode_plot_opt);
             sim_inputs(case_idx) = Simulink.SimulationInput(SL_model_name);
             sim_inputs(case_idx) = sim_inputs(case_idx).setVariable('K_IPC', K_IPC);
-        elseif ~USE_IPC
-            SL_model_name = 'AD_SOAR_c7_V2f_c73_Clean';
-            sim_inputs(case_idx) = Simulink.SimulationInput(SL_model_name);
+        % elseif ~USE_IPC
+        %     SL_model_name = 'AD_SOAR_c7_V2f_c73_Clean';
+        %     sim_inputs(case_idx) = Simulink.SimulationInput(SL_model_name);
         end
         
         [filepath, name, ext] = fileparts(strrep(case_list(case_idx).FAST_InputFileName, '.fst', ''));
@@ -248,6 +278,7 @@ if RUN_SIMS_PAR
         sim_inputs(case_idx) = sim_inputs(case_idx).setVariable('TMax', TMax);
         sim_inputs(case_idx) = sim_inputs(case_idx).setVariable('DT', Simulation.DT);
         sim_inputs(case_idx) = sim_inputs(case_idx).setVariable('HWindSpeed', case_list(case_idx).InflowWind.HWindSpeed);
+        sim_inputs(case_idx) = sim_inputs(case_idx).setVariable('Scheduling', case_list(case_idx).Scheduling.x);
         sim_inputs(case_idx) = sim_inputs(case_idx).setVariable('RootMyc_ref', [case_list(case_idx).Reference.d case_list(case_idx).Reference.q]);
         sim_inputs(case_idx) = sim_inputs(case_idx).setVariable('BldPitch_sat', [case_list(case_idx).Saturation.d case_list(case_idx).Saturation.q]);
         
@@ -261,6 +292,7 @@ if RUN_SIMS_PAR
                    'ShowProgress',  'on', ...
                    'ShowSimulationManager', 'off');
     for case_idx = 1:n_cases
+        sim_out_list(case_idx).CaseDesc = case_list(case_idx).CaseDesc;
         sim_out_list(case_idx).InflowWind = case_list(case_idx).InflowWind;
         sim_out_list(case_idx).outdata_save_fn = case_list(case_idx).outdata_save_fn;
         sim_out_list(case_idx).blpitch_save_fn = case_list(case_idx).blpitch_save_fn;
@@ -270,11 +302,12 @@ if RUN_SIMS_PAR
     
 elseif RUN_SIMS_SINGLE
     % run single case
-    for case_idx = 1:1
+    for case_idx = single_run_case_idx:single_run_case_idx
         FAST_InputFileName = fullfile(FAST_runDirectory, ...
             [case_name_list{case_idx}, '.fst']);
         DT = Simulation.DT;
         HWindSpeed = case_list(case_idx).InflowWind.HWindSpeed;
+        Scheduling = case_list(case_idx).Scheduling.x;
         RootMyc_ref = [case_list(case_idx).Reference.d case_list(case_idx).Reference.q];
         BldPitch_sat = [case_list(case_idx).Saturation.d case_list(case_idx).Saturation.q];
 
@@ -293,16 +326,15 @@ elseif RUN_SIMS_SINGLE
             elseif strcmp(case_list(case_idx).Structure.x, 'Structured')
                 SL_model_name = 'AD_SOAR_c7_V2f_c73_Clean_StructuredControllerTest';
             end
-            % QUESTION MANUEL does it make sense to implement negative of
-            % tuned controller which assumed negative feedback since SL
-            % simulation assumes positive feedback?
             K_IPC = c2d(case_list(case_idx).Controller_scaled, DT); % Note, this is the scaled controller
         elseif BASELINE_K
             SL_model_name = 'AD_SOAR_c7_V2f_c73_Clean_FullOrderControllerTest_old';
-            K_IPC = case_list(case_idx).Controller;
+            K_IPC = c2d(case_list(case_idx).Controller, DT);
         else
             SL_model_name = 'AD_SOAR_c7_V2f_c73_Clean';
         end
+        % bode(K_IPC(:, :, 3), bode_plot_opt);
+
         open_system(fullfile(FAST_SimulinkModel_dir, SL_model_name))
         
         [filepath, name, ext] = fileparts(strrep(FAST_InputFileName, '.fst', ''));
@@ -315,7 +347,8 @@ elseif RUN_SIMS_SINGLE
 
         sim(fullfile(FAST_SimulinkModel_dir, ...
                 SL_model_name), [0, TMax]);
-
+        
+        sim_out_list(case_idx).CaseDesc = case_list(case_idx).CaseDesc;
         sim_out_list(case_idx).outdata_save_fn = outdata_save_fn;
         sim_out_list(case_idx).blpitch_save_fn = blpitch_save_fn;
         sim_out_list(case_idx).InflowWind = case_list(case_idx).InflowWind;

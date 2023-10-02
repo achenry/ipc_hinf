@@ -51,15 +51,25 @@ ncont = 2; % number of control inputs u, K has ncont outputs
 
 % consider case of only Wy to penalize To, 
 % then only Wy and We to penalize To and So, 
-% then Wy and We and Wu to penalize To and So and KSi and Ti
+% then Wy and We and Wu to penalize To and So and KSo and Ti
 % full_controller_case_basis.WindSpeedIndex = 1:length(LPV_CONTROLLER_WIND_SPEEDS);
-full_controller_case_basis.WindSpeedIndex.x = find(LPV_CONTROLLER_WIND_SPEEDS == NONLPV_CONTROLLER_WIND_SPEED); % TODO only works for non-scheduled
-full_controller_case_basis.WuGain.x = case_basis.WuGain.x;
-full_controller_case_basis.WeGain.x = case_basis.WeGain.x;
-full_controller_case_basis.W1Gain.x = case_basis.W1Gain.x;
-full_controller_case_basis.W2Gain.x = case_basis.W2Gain.x;
-full_controller_case_basis.Reference = case_basis.Reference;
-full_controller_case_basis.Saturation = case_basis.Saturation;
+if EXTREME_K_COLLECTION
+    full_controller_case_basis.WindSpeedIndex.x = find(LPV_CONTROLLER_WIND_SPEEDS == NONLPV_CONTROLLER_WIND_SPEED);
+    full_controller_case_basis.WuGain.x = case_basis.WuGain.x;
+    full_controller_case_basis.WeGain.x = case_basis.WeGain.x;
+    full_controller_case_basis.W1Gain.x = case_basis.W1Gain.x;
+    full_controller_case_basis.W2Gain.x = case_basis.W2Gain.x;
+    full_controller_case_basis.Reference = case_basis.Reference;
+    full_controller_case_basis.Saturation = case_basis.Saturation;
+elseif OPTIMAL_K_COLLECTION
+    full_controller_case_basis.WindSpeedIndex.x = 1:length(LPV_CONTROLLER_WIND_SPEEDS);
+    full_controller_case_basis.WuGain = case_basis.WuGain;
+    full_controller_case_basis.WeGain = case_basis.WeGain;
+    full_controller_case_basis.W1Gain = case_basis.W1Gain;
+    full_controller_case_basis.W2Gain = case_basis.W2Gain;
+    full_controller_case_basis.Reference = case_basis.Reference;
+    full_controller_case_basis.Saturation = case_basis.Saturation;
+end
 
 [FullOrderControllers_case_list, FullOrderControllers_case_name_list, FullOrderControllers_n_cases] ...
     = generateCases(full_controller_case_basis, 'full_order_tuned_controllers', true);
@@ -94,79 +104,93 @@ end
 %% Synthesize Gain-Scheduled Continuous-Time Controller w/ hinfsyn for gain controller, full-order controller
 if 1
     FullOrderTuning = repmat(struct(), FullOrderControllers_n_cases, 1 );
+    for f = fieldnames(case_basis.W1Gain)'
     parfor case_idx = 1:FullOrderControllers_n_cases
         controller_case = FullOrderControllers_case_list(case_idx);
         c_ws_idx = controller_case.WindSpeedIndex.x;
-        Wu_tmp = controller_case.WuGain.x * Wu;
-        We_tmp = controller_case.WeGain.x * We;
-        W1_tmp = controller_case.W1Gain.x * W1;
-        W2_tmp = controller_case.W2Gain.x * W2;
-        Wy_tmp = Wy;
 
-        [GenPlant_tmp, Win_tmp, Wout_tmp] = generateGenPlant(...
-            Plant_scaled(:, :, c_ws_idx), ...
-            Wu_tmp, We_tmp, W1_tmp, W2_tmp);
-        
-        opts = hinfsynOptions('Display', 'on'); 
-        [K_tmp, CL_full_tuned_tmp, gamma_tmp] = hinfsyn(GenPlant_tmp, nmeas, ncont, opts); % NOTE does not compute for pure integrator in weighting matrix
-        
-        % weighting_case_idx = floor(case_idx / length(LPV_CONTROLLER_WIND_SPEEDS)) + 1;
+        FullOrderTuning(case_idx).WuGain = controller_case.WuGain;
+        FullOrderTuning(case_idx).WeGain.(f{1}) = controller_case.WeGain.(f{1});
+        FullOrderTuning(case_idx).W1Gain.(f{1}) = controller_case.W1Gain.(f{1});
+        FullOrderTuning(case_idx).W2Gain.(f{1}) = controller_case.W2Gain.(f{1});
 
-        FullOrderTuning(case_idx).WuGain = controller_case.WuGain.x;
-        FullOrderTuning(case_idx).WeGain = controller_case.WeGain.x;
-        FullOrderTuning(case_idx).W1Gain = controller_case.W1Gain.x;
-        FullOrderTuning(case_idx).W2Gain = controller_case.W2Gain.x;
-                
-        FullOrderTuning(case_idx).GenPlant = GenPlant_tmp;
-        FullOrderTuning(case_idx).Win = Win_tmp;
-        FullOrderTuning(case_idx).Wout = Wout_tmp;
-        FullOrderTuning(case_idx).CL = CL_full_tuned_tmp;
-        FullOrderTuning(case_idx).Controller = ss(K_tmp); 
-        FullOrderTuning(case_idx).Controller.InputName = {'Measured M_d Tracking Error', 'Measured M_q Tracking Error'};
-        FullOrderTuning(case_idx).Controller.OutputName = {'\beta_d Control Input', '\beta_q Control Input'};
-        FullOrderTuning(case_idx).gamma = gamma_tmp;
+        % for f = fieldnames(controller_case.WuGain)'
+            Wu_tmp = controller_case.WuGain.x * Wu;
+            We_tmp = controller_case.WeGain.(f{1}) * We;
+            W1_tmp = controller_case.W1Gain.(f{1}) * W1;
+            W2_tmp = controller_case.W2Gain.(f{1}) * W2;
 
-        FullOrderTuning(case_idx).Controller_scaled = ...
-                    ss(ip_scaling(:, :, c_ws_idx) ...
-                    * FullOrderTuning(case_idx).Controller ...
-                    * inv(op_scaling(:, :, c_ws_idx)));
-        
-        % negative Plant st e = r(dy) - y(yP) is input to controller, 
-        % negative Controller for positive u input to Plant
-        SF_tmp = loopsens(-Plant(:, :, c_ws_idx), -FullOrderTuning(case_idx).Controller_scaled);
-        
-        % classical gain/phase margins at plant outputs
-        Mrgo_tmp = allmargin(SF_tmp.Lo);
+            [GenPlant_tmp, Win_tmp, Wout_tmp] = generateGenPlant(...
+                Plant_scaled(:, :, c_ws_idx), ...
+                Wu_tmp, We_tmp, W1_tmp, W2_tmp);
+            
+            opts = hinfsynOptions('Display', 'on'); 
+            [K_tmp, CL_full_tuned_tmp, gamma_tmp] = hinfsyn(GenPlant_tmp, nmeas, ncont, opts); % NOTE does not compute for pure integrator in weighting matrix
+    
+            FullOrderTuning(case_idx).GenPlant.(f{1}) = GenPlant_tmp;
+            FullOrderTuning(case_idx).Win.(f{1}) = Win_tmp;
+            FullOrderTuning(case_idx).Wout.(f{1}) = Wout_tmp;
+            FullOrderTuning(case_idx).CL.(f{1}) = CL_full_tuned_tmp;
+            FullOrderTuning(case_idx).Controller.(f{1}) = ss(K_tmp); 
+            FullOrderTuning(case_idx).Controller.(f{1}).InputName = {'Measured M_d Tracking Error', 'Measured M_q Tracking Error'};
+            FullOrderTuning(case_idx).Controller.(f{1}).OutputName = {'\beta_d Control Input', '\beta_q Control Input'};
+            FullOrderTuning(case_idx).gamma.(f{1}) = gamma_tmp;
+    
+            FullOrderTuning(case_idx).Controller_scaled.(f{1}) = ...
+                        ss(ip_scaling(:, :, c_ws_idx) ...
+                        * FullOrderTuning(case_idx).Controller.(f{1}) ...
+                        * inv(op_scaling(:, :, c_ws_idx)));
+            
+            % negative Plant st e = r(dy) - y(yP) is input to controller, 
+            % negative Controller for positive u input to Plant
+            SF_tmp = loopsens(-Plant(:, :, c_ws_idx), -FullOrderTuning(case_idx).Controller_scaled.(f{1}));
+            
+            % classical gain/phase margins at plant outputs
+            Mrgo_tmp = allmargin(SF_tmp.Lo);
+    
+            % classical gain/phase margins at plant inputs
+            Mrgi_tmp = allmargin(SF_tmp.Li);
+    
+            % vary gain/phase perturbation at all plant outputs
+            [DMo_tmp, MMo_tmp] = diskmargin(SF_tmp.Lo);
+    
+            % vary gain/phase perturbation at all plant inputs
+            [DMi_tmp, MMi_tmp] = diskmargin(SF_tmp.Li);
+    
+            % vary gain/phase perturbation at all inputs and outputs
+            MMio_tmp = diskmargin(Plant(:, :, c_ws_idx), FullOrderTuning(case_idx).Controller_scaled.(f{1}));
+            
+            FullOrderTuning(case_idx).Mrgo.(f{1}) = Mrgo_tmp;
+            FullOrderTuning(case_idx).Mrgi.(f{1}) = Mrgi_tmp;
+            FullOrderTuning(case_idx).DMo.(f{1}) = DMo_tmp;
+            FullOrderTuning(case_idx).DMi.(f{1}) = DMi_tmp;
+            FullOrderTuning(case_idx).MMo.(f{1}) = MMo_tmp;
+            FullOrderTuning(case_idx).MMi.(f{1}) = MMi_tmp;
+            FullOrderTuning(case_idx).MMio.(f{1}) = MMio_tmp;
+    
+            % FullOrderTuning(case_idx).ß = getGainCrossover(FullOrderTuning(case_idx).Controller_scaled, min(dc, [], 'all') / sqrt(2));
+            % [s, w] = sigma(SF_tmp.So);
+            % FullOrderTuning(case_idx).wc = getGainCrossover(max(s), 0.707);
+            % QUESTION MANUEL shouldn't Lo be unity at low freq? Only the
+            % case for CL output from hinfsyn...due to weightings?
+            % is this the best way to compute bandwidth since we don't
+            % cross unity?
+            % Lo does not look like an integrator, is that okay?
 
-        % classical gain/phase margins at plant inputs
-        Mrgi_tmp = allmargin(SF_tmp.Li);
-
-        % vary gain/phase perturbation at all plant outputs
-        [DMo_tmp, MMo_tmp] = diskmargin(SF_tmp.Lo);
-
-        % vary gain/phase perturbation at all plant inputs
-        [DMi_tmp, MMi_tmp] = diskmargin(SF_tmp.Li);
-
-        % vary gain/phase perturbation at all inputs and outputs
-        MMio_tmp = diskmargin(Plant(:, :, c_ws_idx), FullOrderTuning(case_idx).Controller_scaled);
-        
-        FullOrderTuning(case_idx).Mrgo = Mrgo_tmp;
-        FullOrderTuning(case_idx).Mrgi = Mrgi_tmp;
-        FullOrderTuning(case_idx).DMo = DMo_tmp;
-        FullOrderTuning(case_idx).DMi = DMi_tmp;
-        FullOrderTuning(case_idx).MMo = MMo_tmp;
-        FullOrderTuning(case_idx).MMi = MMi_tmp;
-        FullOrderTuning(case_idx).MMio = MMio_tmp;
-        
-        dc = abs(dcgain(FullOrderTuning(case_idx).Controller_scaled));
-
-        % QUESTION MANUEL is this how to compute bandwidth
-        FullOrderTuning(case_idx).wc = getGainCrossover(FullOrderTuning(case_idx).Controller_scaled, min(dc, [], 'all') / sqrt(2));
-        
-        FullOrderTuning(case_idx).SF = SF_tmp;
+            % [s, ~] = sigma(SF_tmp.So);
+            % s = max(s);
+            % dc = abs(dcgain(s));
+            % dc = max(s(:, 1));
+            x = getGainCrossover(inv(SF_tmp.So), 1);
+            FullOrderTuning(case_idx).wc.(f{1}) = x(1);
+            % bode(SF_tmp.Lo, SF_tmp.To, bode_plot_opt)
+            % xline()
+            FullOrderTuning(case_idx).SF.(f{1}) = SF_tmp;
+        % end
 
     end
-   
+    end
+
     % restructure synthesized controller cases per weighting matrix
     % combination and wind speed
     % for each wind speed
@@ -177,37 +201,63 @@ if 1
         for case_idx = 1:FullOrderControllers_n_cases
             controller_case = FullOrderControllers_case_list(case_idx);
             if full_controller_case_basis.WindSpeedIndex.x(c_ws_idx) == controller_case.WindSpeedIndex.x
-                % cc = find(full_controller_case_basis.WindSpeedIndex == find(LPV_CONTROLLER_WIND_SPEEDS == NONLPV_CONTROLLER_WIND_SPEED));
-                FullOrderControllers(weighting_case_idx).WuGain = FullOrderControllers_case_list(case_idx).WuGain.x;
-                FullOrderControllers(weighting_case_idx).WeGain = FullOrderControllers_case_list(case_idx).WeGain.x;
-                FullOrderControllers(weighting_case_idx).W1Gain = FullOrderControllers_case_list(case_idx).W1Gain.x;
-                FullOrderControllers(weighting_case_idx).W2Gain = FullOrderControllers_case_list(case_idx).W2Gain.x;
+                FullOrderControllers(weighting_case_idx).WuGain = FullOrderControllers_case_list(case_idx).WuGain;
+                for f = fieldnames(case_basis.W1Gain)'
+                    % cc = find(full_controller_case_basis.WindSpeedIndex == find(LPV_CONTROLLER_WIND_SPEEDS == NONLPV_CONTROLLER_WIND_SPEED));
+                    
+                    FullOrderControllers(weighting_case_idx).WeGain.(f{1}) = FullOrderControllers_case_list(case_idx).WeGain.(f{1});
+                    FullOrderControllers(weighting_case_idx).W1Gain.(f{1}) = FullOrderControllers_case_list(case_idx).W1Gain.(f{1});
+                    FullOrderControllers(weighting_case_idx).W2Gain.(f{1}) = FullOrderControllers_case_list(case_idx).W2Gain.(f{1});
+    
+                    FullOrderControllers(weighting_case_idx).GenPlant.(f{1})(:, :, c_ws_idx) = FullOrderTuning(case_idx).GenPlant.(f{1});
+                    FullOrderControllers(weighting_case_idx).Win.(f{1})(:, :, c_ws_idx) = FullOrderTuning(case_idx).Win.(f{1});
+                    FullOrderControllers(weighting_case_idx).Wout.(f{1})(:, :, c_ws_idx) = FullOrderTuning(case_idx).Wout.(f{1});
+                    FullOrderControllers(weighting_case_idx).gamma.(f{1})(c_ws_idx) = FullOrderTuning(case_idx).gamma.(f{1});
+    
+                    FullOrderControllers(weighting_case_idx).Controller.(f{1})(:, :, c_ws_idx) = ...
+                        FullOrderTuning(case_idx).Controller.(f{1});
+                    FullOrderControllers(weighting_case_idx).CL.(f{1})(:, :, c_ws_idx) = FullOrderTuning(case_idx).CL.(f{1});
+    
+                    FullOrderControllers(weighting_case_idx).Controller_scaled.(f{1})(:, :, c_ws_idx) = ...
+                       FullOrderTuning(case_idx).Controller_scaled.(f{1});
+                    
+                    FullOrderControllers(weighting_case_idx).Mrgo.(f{1})(:, c_ws_idx) = FullOrderTuning(case_idx).Mrgo.(f{1});
+                    FullOrderControllers(weighting_case_idx).Mrgi.(f{1})(:, c_ws_idx) = FullOrderTuning(case_idx).Mrgi.(f{1});
+                    FullOrderControllers(weighting_case_idx).DMo.(f{1})(:, c_ws_idx) = FullOrderTuning(case_idx).DMo.(f{1});
+                    FullOrderControllers(weighting_case_idx).DMi.(f{1})(:, c_ws_idx) = FullOrderTuning(case_idx).DMi.(f{1});
+                    FullOrderControllers(weighting_case_idx).MMo.(f{1})(:, c_ws_idx) = FullOrderTuning(case_idx).MMo.(f{1});
+                    FullOrderControllers(weighting_case_idx).MMi.(f{1})(:, c_ws_idx) = FullOrderTuning(case_idx).MMi.(f{1});
+                    FullOrderControllers(weighting_case_idx).MMio.(f{1})(:, c_ws_idx) = FullOrderTuning(case_idx).MMio.(f{1});
+    
+                    FullOrderControllers(weighting_case_idx).wc.(f{1})(c_ws_idx) = FullOrderTuning(case_idx).wc.(f{1});
+                    % FullOrderControllers(weighting_case_idx).n_wc(:, cc) = FullOrderTuning(case_idx).n_wc;
+                    
+                    FullOrderControllers(weighting_case_idx).SF.(f{1})(c_ws_idx) = FullOrderTuning(case_idx).SF.(f{1});
+                    FullOrderControllers(weighting_case_idx).Stable.(f{1})(c_ws_idx) = FullOrderTuning(case_idx).SF.(f{1}).Stable;
+                    
+                    if 1
+                        K_tmp = FullOrderTuning(case_idx).Controller.(f{1});
+                        CL_tmp = FullOrderTuning(case_idx).CL.(f{1});
+                        GenPlant_tmp = FullOrderTuning(case_idx).GenPlant.(f{1});
+                        y = lft(GenPlant_tmp, K_tmp);
+                        figure; bodemag(CL_tmp); hold on; bodemag(y); grid on;
 
-                FullOrderControllers(weighting_case_idx).GenPlant(:, :, c_ws_idx) = FullOrderTuning(case_idx).GenPlant;
-                FullOrderControllers(weighting_case_idx).Win(:, :, c_ws_idx) = FullOrderTuning(case_idx).Win;
-                FullOrderControllers(weighting_case_idx).Wout(:, :, c_ws_idx) = FullOrderTuning(case_idx).Wout;
-                FullOrderControllers(weighting_case_idx).gamma(c_ws_idx) = FullOrderTuning(case_idx).gamma;
+                        SF_tmp = FullOrderTuning(case_idx).SF.(f{1});
+                        figure; bodemag(SF_tmp.So, SF_tmp.To)
+                        figure; bodemag(SF_tmp.So + SF_tmp.To) % good
+                        
+                        K_tmp.OutputName = {'\beta_d Control Input', '\beta_q Control Input'};
+                        Plant_scaled.InputName = {'\beta_d Control Input', '\beta_q Control Input'};
+                        K_tmp.InputName = {'Measured M_d Tracking Error', 'Measured M_q Tracking Error'};
+                        Plant.OutputName = {'Measured M_d Output', 'Measured M_q Output'};
+                        x = feedback(series(K_tmp, Plant(:, :, c_ws_idx)), eye(2));
+                        
+                        figure; bodemag(x); bodemag(y);
+                        bode(SF_tmp.Lo, SF_tmp.To, bode_plot_opt)
+                        % weighting_case_idx = floor(case_idx / length(LPV_CONTROLLER_WIND_SPEEDS)) + 1;
+                    end
 
-                FullOrderControllers(weighting_case_idx).Controller(:, :, c_ws_idx) = ...
-                    FullOrderTuning(case_idx).Controller;
-                FullOrderControllers(weighting_case_idx).CL(:, :, c_ws_idx) = FullOrderTuning(case_idx).CL;
-
-                FullOrderControllers(weighting_case_idx).Controller_scaled(:, :, c_ws_idx) = ...
-                   FullOrderTuning(case_idx).Controller_scaled;
-                
-                FullOrderControllers(weighting_case_idx).Mrgo(:, c_ws_idx) = FullOrderTuning(case_idx).Mrgo;
-                FullOrderControllers(weighting_case_idx).Mrgi(:, c_ws_idx) = FullOrderTuning(case_idx).Mrgi;
-                FullOrderControllers(weighting_case_idx).DMo(:, c_ws_idx) = FullOrderTuning(case_idx).DMo;
-                FullOrderControllers(weighting_case_idx).DMi(:, c_ws_idx) = FullOrderTuning(case_idx).DMi;
-                FullOrderControllers(weighting_case_idx).MMo(:, c_ws_idx) = FullOrderTuning(case_idx).MMo;
-                FullOrderControllers(weighting_case_idx).MMi(:, c_ws_idx) = FullOrderTuning(case_idx).MMi;
-                FullOrderControllers(weighting_case_idx).MMio(:, c_ws_idx) = FullOrderTuning(case_idx).MMio;
-
-                FullOrderControllers(weighting_case_idx).wc(:, c_ws_idx) = FullOrderTuning(case_idx).wc;
-                % FullOrderControllers(weighting_case_idx).n_wc(:, cc) = FullOrderTuning(case_idx).n_wc;
-                
-                FullOrderControllers(weighting_case_idx).SF(c_ws_idx) = FullOrderTuning(case_idx).SF;
-
+                end
                 weighting_case_idx = weighting_case_idx + 1;
             end
         end
@@ -215,18 +265,91 @@ if 1
     if length(FullOrderControllers) == 1
         FullOrderControllers = [FullOrderControllers];
     end
+    
+    if 0
+        FullOrderControllers(weighting_case_idx).SF.(f{1})(c_ws_idx)
+        weighting_case_idx = 6; % 0db at high freq for So for all ctlr types, good
+        weighting_case_idx = 1; % 0db at high freq for So for all ctlr types, good
+        figure(1);
+        f = 'y_mse'; % 0db at high freq for So, good
+        f = 'rob'; % % 0db at high freq for So, good
+        f = 'adc'; % % 0db at high freq for So, good
+        bode(FullOrderControllers(weighting_case_idx).CL.(f)(3:4, 1:2, 3), bode_plot_opt);
+        inner_CL = inv(FullOrderControllers(weighting_case_idx).Wout.(f)(1:4, 1:4, 3)) * FullOrderControllers(weighting_case_idx).CL.(f)(:, :, 3) * inv(FullOrderControllers(weighting_case_idx).Win.(f)(1:4, 1:4, 3));
+        inner_CL.InputName = cellfun(@(l) ['Weighted ', l], FullOrderControllers(weighting_case_idx).CL.(f)(:, :, 3).InputName, 'UniformOutput', false);
+        inner_CL.OutputName = cellfun(@(l) strrep(l, 'Weighted', 'Unweighted'), FullOrderControllers(weighting_case_idx).CL.(f)(:, :, 3).OutputName, 'UniformOutput', false);
+        figure(2);
+        bode(inner_CL(3:4, 1:2), bode_plot_opt);
+        
+        G = Plant(:, :, 3); C = FullOrderControllers(weighting_case_idx).Controller_scaled.(f)(:, :, 3);
+        C.u = 'e'; C.y = 'u'; G.u = 'u'; G.y = 'y';
+        Sum = sumblk('e = r - y', 2);
+        To = connect(G, C, Sum, 'r', 'y');
+        So = connect(G, C, Sum, 'r', 'e');
+        figure(3);
+        bode(To, So, bode_plot_opt); legend('To', 'So');
+    end
 
-    n_weighting_cases = (FullOrderControllers_n_cases / length(full_controller_case_basis.WindSpeedIndex));
-
+    n_weighting_cases = (FullOrderControllers_n_cases / length(full_controller_case_basis.WindSpeedIndex.x));
+    
     for w_idx = 1:n_weighting_cases
-        FullOrderControllers(w_idx).Controller = ss(FullOrderControllers(w_idx).Controller);
-        FullOrderControllers(w_idx).Controller.InputName = {'Measured M_d Tracking Error', 'Measured M_q Tracking Error'};
-        FullOrderControllers(w_idx).Controller.OutputName = {'\beta_d Control Input', '\beta_q Control Input'};
-        FullOrderControllers(w_idx).Controller.SamplingGrid = struct('u', LPV_CONTROLLER_WIND_SPEEDS(full_controller_case_basis.WindSpeedIndex.x));
-        FullOrderControllers(w_idx).Controller_scaled = ss(FullOrderControllers(w_idx).Controller_scaled);
-        FullOrderControllers(w_idx).Controller_scaled.InputName = {'Measured M_d Tracking Error', 'Measured M_q Tracking Error'};
-        FullOrderControllers(w_idx).Controller_scaled.OutputName = {'\beta_d Control Input', '\beta_q Control Input'};
-        FullOrderControllers(w_idx).Controller_scaled.SamplingGrid = struct('u', LPV_CONTROLLER_WIND_SPEEDS(full_controller_case_basis.WindSpeedIndex.x));
+        for f = fieldnames(case_basis.W1Gain)'
+            FullOrderControllers(w_idx).Controller.(f{1}) = ss(FullOrderControllers(w_idx).Controller.(f{1}));
+            FullOrderControllers(w_idx).Controller.(f{1}).InputName = {'Measured M_d Tracking Error', 'Measured M_q Tracking Error'};
+            FullOrderControllers(w_idx).Controller.(f{1}).OutputName = {'\beta_d Control Input', '\beta_q Control Input'};
+            FullOrderControllers(w_idx).Controller.(f{1}).SamplingGrid = struct('u', LPV_CONTROLLER_WIND_SPEEDS);
+            FullOrderControllers(w_idx).Controller_scaled.(f{1}) = ss(FullOrderControllers(w_idx).Controller_scaled.(f{1}));
+            FullOrderControllers(w_idx).Controller_scaled.(f{1}).InputName = {'Measured M_d Tracking Error', 'Measured M_q Tracking Error'};
+            FullOrderControllers(w_idx).Controller_scaled.(f{1}).OutputName = {'\beta_d Control Input', '\beta_q Control Input'};
+            FullOrderControllers(w_idx).Controller_scaled.(f{1}).SamplingGrid = struct('u', LPV_CONTROLLER_WIND_SPEEDS);
+        end
+    end
+
+        % case_desc = {'No IPC'};
+    case_desc = {};
+    case_wind_speeds = [];
+    % loop through weighting cases and print information
+    for f = fieldnames(case_basis.W1Gain)'
+        fileID = fopen([f{1}, '_weighting_cases.txt'],'w');
+        for w_idx = 1:n_weighting_cases
+            for c_ws_idx = 1:length(LPV_CONTROLLER_WIND_SPEEDS)
+                fprintf(fileID, '\nCase %d Wind Speed %f\n', w_idx, LPV_CONTROLLER_WIND_SPEEDS(c_ws_idx));
+                
+                ip_msg = [];
+                % if (ss(FullOrderControllers(w_idx).W1Gain).D(1, 1) == IP_HIGH_GAIN)
+                    ip_msg = [ip_msg, ' W1 = ', num2str(ss(FullOrderControllers(w_idx).W1Gain.(f{1})).D(1, 1))];
+                % end
+            
+                if length(ss(FullOrderControllers(w_idx).W1Gain.(f{1})).C)
+                    ip_msg = [ip_msg, ' with notch '];
+                end
+                
+                % if (ss(FullOrderControllers(w_idx).W2Gain).D(1, 1) == IP_HIGH_GAIN)
+                    ip_msg = [ip_msg, ' W2 = ', num2str(ss(FullOrderControllers(w_idx).W2Gain.(f{1})).D(1, 1))];
+                % end
+                ip_msg = [ip_msg, ' -> '];
+                fprintf(fileID, ip_msg);
+                
+                op_msg = [];
+                % if (ss(FullOrderControllers(w_idx).WuGain).D(1, 1) == OP_HIGH_GAIN)
+                    op_msg = [op_msg, ' Wu = ', num2str(ss(FullOrderControllers(w_idx).WuGain.x).D(1, 1))];
+                % end
+            
+                % if (ss(FullOrderControllers(w_idx).WeGain).D(1, 1) == OP_HIGH_GAIN)
+                    op_msg = [op_msg, ' We = ', num2str(ss(FullOrderControllers(w_idx).WeGain.(f{1})).D(1, 1))];
+                % end
+                if length(ss(FullOrderControllers(w_idx).WeGain.(f{1})).C)
+                    op_msg = [op_msg, ' with notch '];
+                end
+                
+                op_msg = [op_msg];
+                case_desc = [case_desc, [f{1} ip_msg op_msg]];
+                case_wind_speeds = [case_wind_speeds, LPV_CONTROLLER_WIND_SPEEDS(c_ws_idx)];
+
+                fprintf(fileID, op_msg);
+            end
+        end
+        fclose(fileID);
     end
     
     % go through each controller case and find the corresponding controller in
@@ -235,180 +358,152 @@ if 1
         if ~strcmp(Controllers_case_list(c_idx).Structure.x, 'Full-Order')
             continue;
         end
-        % weighting_case_idx = floor(c_idx / length(LPV_CONTROLLER_WIND_SPEEDS)) + 1;
         
         for w_idx = 1:n_weighting_cases
-            
-            if (sum(ss(FullOrderControllers(w_idx).WuGain - Controllers_case_list(c_idx).WuGain.x).D, 'all') || ...
-                sum(ss(FullOrderControllers(w_idx).WeGain - Controllers_case_list(c_idx).WeGain.x).D, 'all') || ...
-                sum(ss(FullOrderControllers(w_idx).W1Gain - Controllers_case_list(c_idx).W1Gain.x).D, 'all') || ...
-                sum(ss(FullOrderControllers(w_idx).W2Gain - Controllers_case_list(c_idx).W2Gain.x).D, 'all'))
-                continue;
-            end
-            
-            K_tmp = FullOrderControllers(w_idx).Controller;
-            K_tmp_scaled = FullOrderControllers(w_idx).Controller_scaled;
+            for f = fieldnames(case_basis.W1Gain)'
+                if (sum(ss(FullOrderControllers(w_idx).WuGain.x - Controllers_case_list(c_idx).WuGain.x).D, 'all') || ...
+                    sum(ss(FullOrderControllers(w_idx).WeGain.(f{1}) - Controllers_case_list(c_idx).WeGain.(f{1})).D, 'all') || ...
+                    sum(ss(FullOrderControllers(w_idx).W1Gain.(f{1}) - Controllers_case_list(c_idx).W1Gain.(f{1})).D, 'all') || ...
+                    sum(ss(FullOrderControllers(w_idx).W2Gain.(f{1}) - Controllers_case_list(c_idx).W2Gain.(f{1})).D, 'all'))
+                    continue;
+                end
+                
+                K_tmp = FullOrderControllers(w_idx).Controller.(f{1});
+                K_tmp_scaled = FullOrderControllers(w_idx).Controller_scaled.(f{1});
+        
+                % Add gain-scheduled controller to Controller_list
+                if Controllers_case_list(c_idx).Scheduling.x
+                    Controllers_case_list(c_idx).Controller.(f{1}) = K_tmp;
+                    Controllers_case_list(c_idx).Controller_scaled.(f{1}) = K_tmp_scaled;
+                % Add non gain-scheduled controller to Controller_list by repeating
+                % same system for every parameter value
+                elseif ~Controllers_case_list(c_idx).Scheduling.x
+                    for c_ws_idx = 1:length(LPV_CONTROLLER_WIND_SPEEDS)
+                        Controllers_case_list(c_idx).Controller.(f{1})(:, :, c_ws_idx) ...
+                            = K_tmp(:, :, full_controller_case_basis.WindSpeedIndex.x == find(LPV_CONTROLLER_WIND_SPEEDS == NONLPV_CONTROLLER_WIND_SPEED));
+                        Controllers_case_list(c_idx).Controller_scaled.(f{1})(:, :, c_ws_idx) ...
+                            = K_tmp_scaled(:, :, full_controller_case_basis.WindSpeedIndex.x == find(LPV_CONTROLLER_WIND_SPEEDS == NONLPV_CONTROLLER_WIND_SPEED));
+                    end     
+                end
+                
+                Controllers_case_list(c_idx).GenPlant.(f{1}) = FullOrderControllers(w_idx).GenPlant.(f{1});
+                Controllers_case_list(c_idx).Wout.(f{1}) = FullOrderControllers(w_idx).Wout.(f{1});
+                Controllers_case_list(c_idx).Win.(f{1}) = FullOrderControllers(w_idx).Win.(f{1});
+                Controllers_case_list(c_idx).gamma.(f{1}) = FullOrderControllers(w_idx).gamma.(f{1});
+                
+                Controllers_case_list(c_idx).Mrgi.(f{1}) = FullOrderControllers(w_idx).Mrgi.(f{1});
+                Controllers_case_list(c_idx).Mrgo.(f{1}) = FullOrderControllers(w_idx).Mrgo.(f{1});
+                Controllers_case_list(c_idx).DMi.(f{1}) = FullOrderControllers(w_idx).DMi.(f{1});
+                Controllers_case_list(c_idx).DMo.(f{1}) = FullOrderControllers(w_idx).DMo.(f{1});
+                Controllers_case_list(c_idx).MMo.(f{1}) = FullOrderControllers(w_idx).MMo.(f{1});
+                Controllers_case_list(c_idx).MMi.(f{1}) = FullOrderControllers(w_idx).MMi.(f{1});
+                Controllers_case_list(c_idx).MMio.(f{1}) = FullOrderControllers(w_idx).MMio.(f{1});
     
-            % Add gain-scheduled controller to Controller_list
-            if strcmp(Controllers_case_list(c_idx).Scheduling.x, 'Yes')
-                Controllers_case_list(c_idx).Controller = K_tmp;
-                Controllers_case_list(c_idx).Controller_scaled = K_tmp_scaled;
-            % Add non gain-scheduled controller to Controller_list by repeating
-            % same system for every parameter value
-            elseif strcmp(Controllers_case_list(c_idx).Scheduling.x, 'No')
-                for c_ws_idx = 1:length(LPV_CONTROLLER_WIND_SPEEDS)
-                    Controllers_case_list(c_idx).Controller(:, :, c_ws_idx) ...
-                        = K_tmp(:, :, full_controller_case_basis.WindSpeedIndex.x == find(LPV_CONTROLLER_WIND_SPEEDS == NONLPV_CONTROLLER_WIND_SPEED));
-                    Controllers_case_list(c_idx).Controller_scaled(:, :, c_ws_idx) ...
-                        = K_tmp_scaled(:, :, full_controller_case_basis.WindSpeedIndex.x == find(LPV_CONTROLLER_WIND_SPEEDS == NONLPV_CONTROLLER_WIND_SPEED));
-                end     
-            end
-            % TODO check if Genplant, stability margins for multiple wind
-            % speeds exits
-            Controllers_case_list(c_idx).GenPlant = FullOrderControllers(w_idx).GenPlant;
-            Controllers_case_list(c_idx).Wout = FullOrderControllers(w_idx).Wout;
-            Controllers_case_list(c_idx).Win = FullOrderControllers(w_idx).Win;
-            Controllers_case_list(c_idx).gamma = FullOrderControllers(w_idx).gamma;
-            
-            Controllers_case_list(c_idx).Mrgi = FullOrderControllers(w_idx).Mrgi;
-            Controllers_case_list(c_idx).Mrgo = FullOrderControllers(w_idx).Mrgo;
-            Controllers_case_list(c_idx).DMi = FullOrderControllers(w_idx).DMi;
-            Controllers_case_list(c_idx).DMo = FullOrderControllers(w_idx).DMo;
-            Controllers_case_list(c_idx).MMo = FullOrderControllers(w_idx).MMo;
-            Controllers_case_list(c_idx).MMi = FullOrderControllers(w_idx).MMi;
-            Controllers_case_list(c_idx).MMio = FullOrderControllers(w_idx).MMio;
+                Controllers_case_list(c_idx).wc.(f{1}) = FullOrderControllers(w_idx).wc.(f{1});
 
-            Controllers_case_list(c_idx).n_wc = length(FullOrderControllers(w_idx).wc);
-
-            if Controllers_case_list(c_idx).n_wc == 0
-                Controllers_case_list(c_idx).wc = -1;
-            else
-                Controllers_case_list(c_idx).wc = FullOrderControllers(w_idx).wc(1);
-            end
-            
-            
-            Controllers_case_list(c_idx).SF.Stable = FullOrderControllers(w_idx).SF.Stable;
-            
+                Controllers_case_list(c_idx).Stable.(f{1}) = FullOrderControllers(w_idx).Stable.(f{1});
+                
+            end   
         end
-        Controllers_case_list(c_idx).Controller_scaled.SamplingGrid = struct('u', LPV_CONTROLLER_WIND_SPEEDS);
+        Controllers_case_list(c_idx).Controller_scaled.(f{1}).SamplingGrid = struct('u', LPV_CONTROLLER_WIND_SPEEDS);
         
     end
-   
     
-    fileID = fopen('./weighting_cases.txt','w');
-    % case_desc = {'No IPC'};
-    case_desc = {};
-    % loop through weighting cases and print information
-    for w_idx = 1:n_weighting_cases
-        fprintf(fileID, '\nCase %d\n', w_idx);
-        
-        ip_msg = [];
-        % if (ss(FullOrderControllers(w_idx).W1Gain).D(1, 1) == IP_HIGH_GAIN)
-            ip_msg = [ip_msg, ' W1 = ', num2str(ss(FullOrderControllers(w_idx).W1Gain).D(1, 1))];
-        % end
-    
-        if length(ss(FullOrderControllers(w_idx).W1Gain).C)
-            ip_msg = [ip_msg, ' with notch '];
+    i = 1;
+    for f = fieldnames(case_basis.W1Gain)'
+        for w_idx = 1:n_weighting_cases
+            for c_ws_idx = 1:length(LPV_CONTROLLER_WIND_SPEEDS)
+                Controllers_case_list(w_idx).CaseDesc.(f{1}) = case_desc(i);
+                i = i + 1;
+            end
         end
-        
-        % if (ss(FullOrderControllers(w_idx).W2Gain).D(1, 1) == IP_HIGH_GAIN)
-            ip_msg = [ip_msg, ' W2 = ', num2str(ss(FullOrderControllers(w_idx).W2Gain).D(1, 1))];
-        % end
-        ip_msg = [ip_msg, ' -> '];
-        fprintf(fileID, ip_msg);
-        
-        op_msg = [];
-        % if (ss(FullOrderControllers(w_idx).WuGain).D(1, 1) == OP_HIGH_GAIN)
-            op_msg = [op_msg, ' Wu = ', num2str(ss(FullOrderControllers(w_idx).WuGain).D(1, 1))];
-        % end
-    
-        % if (ss(FullOrderControllers(w_idx).WeGain).D(1, 1) == OP_HIGH_GAIN)
-            op_msg = [op_msg, ' We = ', num2str(ss(FullOrderControllers(w_idx).WeGain).D(1, 1))];
-        % end
-        if length(ss(FullOrderControllers(w_idx).WeGain).C)
-            op_msg = [op_msg, ' with notch '];
-        end
-        
-        op_msg = [op_msg];
-        case_desc = [case_desc, [ip_msg op_msg]];
-        fprintf(fileID, op_msg);
-        
-    end
-    fclose(fileID);
-    
-    % QUESTION MANUEL how to find bandwidth of controller (DM), robustness margins
-    % for noipc case?
-    % TODO what if controller was tuned for particular wind speed
-    n_weighting_cases = (FullOrderControllers_n_cases / length(full_controller_case_basis.WindSpeedIndex));
-    for w_idx = 1:n_weighting_cases
-        Stable_tmp(w_idx) = Controllers_case_list(w_idx).SF.Stable;
-        % TODO allow for different wind speeds
-        Mrgi_tmp(w_idx, 1, 1) = Controllers_case_list(w_idx).Mrgi(1).GainMargin(1);
-        if length(Controllers_case_list(w_idx).Mrgi(1).PhaseMargin)
-            Mrgi_tmp(w_idx, 1, 2) = Controllers_case_list(w_idx).Mrgi(1).PhaseMargin(1);
-        else
-            Mrgi_tmp(w_idx, 1, 2) = 0;
-        end
-
-        Mrgi_tmp(w_idx, 2, 1) = Controllers_case_list(w_idx).Mrgi(2).GainMargin(1);
-        if length(Controllers_case_list(w_idx).Mrgi(2).PhaseMargin)
-            Mrgi_tmp(w_idx, 2, 2) = Controllers_case_list(w_idx).Mrgi(2).PhaseMargin(1);
-        else
-            Mrgi_tmp(w_idx, 2, 2) = 0;
-        end
-
-        Mrgo_tmp(w_idx, 1, 1) = Controllers_case_list(w_idx).Mrgo(1).GainMargin(1);
-
-        if length(Controllers_case_list(w_idx).Mrgo(1).PhaseMargin)
-            Mrgo_tmp(w_idx, 1, 2) = Controllers_case_list(w_idx).Mrgo(1).PhaseMargin(1);
-        else
-            Mrgo_tmp(w_idx, 1, 2) = 0;
-        end
-
-        Mrgo_tmp(w_idx, 2, 1) = Controllers_case_list(w_idx).Mrgo(2).GainMargin(1);
-
-        if length(Controllers_case_list(w_idx).Mrgo(2).PhaseMargin)
-            Mrgo_tmp(w_idx, 2, 2) = Controllers_case_list(w_idx).Mrgo(2).PhaseMargin(1);
-        else
-            Mrgo_tmp(w_idx, 2, 2) = 0;
-        end
-        
-        DMi_tmp(w_idx, 1, 1) = Controllers_case_list(w_idx).DMi(1).GainMargin(2);
-        DMi_tmp(w_idx, 1, 2) = Controllers_case_list(w_idx).DMi(1).PhaseMargin(2);
-        DMi_tmp(w_idx, 1, 3) = Controllers_case_list(w_idx).DMi(1).DiskMargin;
-
-        DMi_tmp(w_idx, 2, 1) = Controllers_case_list(w_idx).DMi(2).GainMargin(2);
-        DMi_tmp(w_idx, 2, 2) = Controllers_case_list(w_idx).DMi(2).PhaseMargin(2);
-        DMi_tmp(w_idx, 2, 3) = Controllers_case_list(w_idx).DMi(2).DiskMargin;
-        
-        DMo_tmp(w_idx, 1, 1) = Controllers_case_list(w_idx).DMo(1).GainMargin(2);
-        DMo_tmp(w_idx, 1, 2) = Controllers_case_list(w_idx).DMo(1).PhaseMargin(2);
-        DMo_tmp(w_idx, 1, 3) = Controllers_case_list(w_idx).DMo(1).DiskMargin;
-        
-        DMo_tmp(w_idx, 2, 1) = Controllers_case_list(w_idx).DMo(2).GainMargin(2);
-        DMo_tmp(w_idx, 2, 2) = Controllers_case_list(w_idx).DMo(2).PhaseMargin(2);
-        DMo_tmp(w_idx, 2, 3) = Controllers_case_list(w_idx).DMo(2).DiskMargin;
-        
-        MMi_tmp(w_idx, 1) = Controllers_case_list(w_idx).MMi.GainMargin(2);
-        MMi_tmp(w_idx, 2) = Controllers_case_list(w_idx).MMi.PhaseMargin(2);
-        MMi_tmp(w_idx, 3) = Controllers_case_list(w_idx).MMi.DiskMargin;
-        
-        MMo_tmp(w_idx, 1) = Controllers_case_list(w_idx).MMo.GainMargin(2);
-        MMo_tmp(w_idx, 2) = Controllers_case_list(w_idx).MMo.PhaseMargin(2);
-        MMo_tmp(w_idx, 3) = Controllers_case_list(w_idx).MMo.DiskMargin;
-        
-        MMio_tmp(w_idx, 1) = Controllers_case_list(w_idx).MMio.GainMargin(2);
-        MMio_tmp(w_idx, 2) = Controllers_case_list(w_idx).MMio.PhaseMargin(2);
-        MMio_tmp(w_idx, 3) = Controllers_case_list(w_idx).MMio.DiskMargin;
-        
-        wc_tmp(w_idx) = Controllers_case_list(w_idx).wc;
-        % n_wc_tmp(w_idx, :) = Controllers_case_list(w_idx).n_wc;
     end
     
+    n_weighting_cases = (FullOrderControllers_n_cases / length(full_controller_case_basis.WindSpeedIndex.x));
+    fs = fieldnames(case_basis.W1Gain)';
+    i = 1;
+    for f_idx = 1:length(fs)
+        for w_idx = 1:n_weighting_cases
+            for c_ws_idx = 1:length(LPV_CONTROLLER_WIND_SPEEDS)
+
+                f = fs(f_idx);
+                % i = (f_idx - 1) + w_idx;
+    
+                Stable_tmp(i) = Controllers_case_list(w_idx).Stable.(f{1})(c_ws_idx);
+                Mrgi_tmp(i, 1, 1) = Controllers_case_list(w_idx).Mrgi.(f{1})(1, c_ws_idx).GainMargin(1);
+                pm = Controllers_case_list(w_idx).Mrgi.(f{1})(1, c_ws_idx).PhaseMargin;
+                if length(pm)
+                    Mrgi_tmp(i, 1, 2) = pm(1);
+                else
+                    Mrgi_tmp(i, 1, 2) = 0;
+                end
+            
+                Mrgi_tmp(i, 2, 1) = Controllers_case_list(w_idx).Mrgi.(f{1})(2, c_ws_idx).GainMargin(1);
+                pm = Controllers_case_list(w_idx).Mrgi.(f{1})(2, c_ws_idx).PhaseMargin;
+                if length(pm)
+                    Mrgi_tmp(i, 2, 2) = pm(1);
+                else
+                    Mrgi_tmp(i, 2, 2) = 0;
+                end
+        
+                Mrgo_tmp(i, 1, 1) = Controllers_case_list(w_idx).Mrgo.(f{1})(1).GainMargin(1);
+                % SF_tmp = loopsens(-Plant(:, :, c_ws_idx), -¸.Controller_scaled.(f{1}));
+                % bode(SF_tmp.To)
+                pm = Controllers_case_list(w_idx).Mrgo.(f{1})(1, c_ws_idx).PhaseMargin;
+                if length(pm)
+                    Mrgo_tmp(i, 1, 2) = pm(1);
+                else
+                    Mrgo_tmp(i, 1, 2) = 0;
+                end
+        
+                Mrgo_tmp(i, 2, 1) = Controllers_case_list(w_idx).Mrgo.(f{1})(2).GainMargin(1);
+                pm = Controllers_case_list(w_idx).Mrgo.(f{1})(2, c_ws_idx).PhaseMargin;
+                if length(pm)
+                    Mrgo_tmp(i, 2, 2) = pm(1);
+                else
+                    Mrgo_tmp(i, 2, 2) = 0;
+                end
+                
+                DMi_tmp(i, 1, 1) = Controllers_case_list(w_idx).DMi.(f{1})(1, c_ws_idx).GainMargin(2);
+                DMi_tmp(i, 1, 2) = Controllers_case_list(w_idx).DMi.(f{1})(1, c_ws_idx).PhaseMargin(2);
+                DMi_tmp(i, 1, 3) = Controllers_case_list(w_idx).DMi.(f{1})(1, c_ws_idx).DiskMargin;
+        
+                DMi_tmp(i, 2, 1) = Controllers_case_list(w_idx).DMi.(f{1})(2, c_ws_idx).GainMargin(2);
+                DMi_tmp(i, 2, 2) = Controllers_case_list(w_idx).DMi.(f{1})(2, c_ws_idx).PhaseMargin(2);
+                DMi_tmp(i, 2, 3) = Controllers_case_list(w_idx).DMi.(f{1})(2, c_ws_idx).DiskMargin;
+                
+                DMo_tmp(i, 1, 1) = Controllers_case_list(w_idx).DMo.(f{1})(1, c_ws_idx).GainMargin(2);
+                DMo_tmp(i, 1, 2) = Controllers_case_list(w_idx).DMo.(f{1})(1, c_ws_idx).PhaseMargin(2);
+                DMo_tmp(i, 1, 3) = Controllers_case_list(w_idx).DMo.(f{1})(1, c_ws_idx).DiskMargin;
+                
+                DMo_tmp(i, 2, 1) = Controllers_case_list(w_idx).DMo.(f{1})(2, c_ws_idx).GainMargin(2);
+                DMo_tmp(i, 2, 2) = Controllers_case_list(w_idx).DMo.(f{1})(2, c_ws_idx).PhaseMargin(2);
+                DMo_tmp(i, 2, 3) = Controllers_case_list(w_idx).DMo.(f{1})(2, c_ws_idx).DiskMargin;
+                
+                MMi_tmp(i, 1) = Controllers_case_list(w_idx).MMi.(f{1})(c_ws_idx).GainMargin(2);
+                MMi_tmp(i, 2) = Controllers_case_list(w_idx).MMi.(f{1})(c_ws_idx).PhaseMargin(2);
+                MMi_tmp(i, 3) = Controllers_case_list(w_idx).MMi.(f{1})(c_ws_idx).DiskMargin;
+                
+                MMo_tmp(i, 1) = Controllers_case_list(w_idx).MMo.(f{1})(c_ws_idx).GainMargin(2);
+                MMo_tmp(i, 2) = Controllers_case_list(w_idx).MMo.(f{1})(c_ws_idx).PhaseMargin(2);
+                MMo_tmp(i, 3) = Controllers_case_list(w_idx).MMo.(f{1})(c_ws_idx).DiskMargin;
+                
+                MMio_tmp(i, 1) = Controllers_case_list(w_idx).MMio.(f{1})(c_ws_idx).GainMargin(2);
+                MMio_tmp(i, 2) = Controllers_case_list(w_idx).MMio.(f{1})(c_ws_idx).PhaseMargin(2);
+                MMio_tmp(i, 3) = Controllers_case_list(w_idx).MMio.(f{1})(c_ws_idx).DiskMargin;
+                
+                wc_tmp(i) = Controllers_case_list(w_idx).wc.(f{1})(c_ws_idx);
+                
+                i = i + 1;
+            end
+        end
+    end
+    
+    n_total_cases = length(wc_tmp);
     % Make table comparing controllers
     Controllers_case_table = table( ...
-        (1:n_weighting_cases)', case_desc', ... 
-        Stable_tmp', ...
+        (1:n_total_cases)', case_desc', ... 
+        case_wind_speeds', Stable_tmp', ...
         mag2db(Mrgi_tmp(:, 1, 1)), Mrgi_tmp(:, 1, 2), ...
         mag2db(Mrgi_tmp(:, 2, 1)), Mrgi_tmp(:, 2, 2), ...
         mag2db(Mrgo_tmp(:, 1, 1)), Mrgo_tmp(:, 1, 2), ...
@@ -421,9 +516,9 @@ if 1
         mag2db(MMo_tmp(:, 1)), MMo_tmp(:, 2), MMo_tmp(:, 3), ...
         mag2db(MMio_tmp(:, 1)), MMio_tmp(:, 2), MMio_tmp(:, 3), ...
         wc_tmp', ...
-        zeros(n_weighting_cases, 1), zeros(n_weighting_cases, 1), ...
+        zeros(n_total_cases, 1), zeros(n_total_cases, 1), ...
         'VariableNames', ...
-        {'Case No.', 'Case Desc.', 'Stable', ...
+        {'Case No.', 'Case Desc.', 'TunedWindSpeed', 'Stable', ...
         'ClassicalInput_GMD', 'ClassicalInput_PMD', ...
         'ClassicalInput_GMQ', 'ClassicalInput_PMQ', ...
         'ClassicalOutput_GMD', 'ClassicalOutput_PMD', ...
@@ -437,34 +532,45 @@ if 1
         'MultiDiskIO_GM', 'MultiDiskIO_PM', 'MultiDiskIO_DM', ...
         'wc', 'ADC', 'RootMycBlade1 MSE'});
 
-    
-    Controllers_case_table.("WorstCase_SingleClassical_GM") = ...
-        min(Controllers_case_table(:, ...
-        ["ClassicalInput_GMD", "ClassicalInput_GMQ", ...
-        "ClassicalOutput_GMD", "ClassicalOutput_GMQ"]), [], 2).Variables;
-    Controllers_case_table.("WorstCase_SingleClassical_PM") = ...
-        min(Controllers_case_table(:, ...
-        ["ClassicalInput_PMD", "ClassicalInput_PMQ", ...
-        "ClassicalOutput_PMD", "ClassicalOutput_PMQ"]), [], 2).Variables;
+    for c_ws_idx = 1:length(LPV_CONTROLLER_WIND_SPEEDS)
+        ws_cond = Controllers_case_table.("TunedWindSpeed") == LPV_CONTROLLER_WIND_SPEEDS(c_ws_idx);
+        
+        Controllers_case_table(ws_cond, "WorstCase_SingleClassical_GM") = ...
+            min(Controllers_case_table(ws_cond, ...
+            ["ClassicalInput_GMD", "ClassicalInput_GMQ", ...
+            "ClassicalOutput_GMD", "ClassicalOutput_GMQ"]), [], 2);
+        
+        Controllers_case_table(ws_cond, "WorstCase_SingleClassical_PM") = ...
+            min(Controllers_case_table(ws_cond, ...
+            ["ClassicalInput_PMD", "ClassicalInput_PMQ", ...
+            "ClassicalOutput_PMD", "ClassicalOutput_PMQ"]), [], 2);
+        
+        % get indices of cases with lowest disk margins, then get
+        % corresponding gain and phase margins
+        [M, I] = min(Controllers_case_table(ws_cond, ...
+            ["SingleDiskInput_DMD", "SingleDiskInput_DMQ", ...
+            "SingleDiskOutput_DMD", "SingleDiskOutput_DMQ"]), [], 2);
 
-    [M, I] = min(Controllers_case_table(:, ...
-        ["SingleDiskInput_DMD", "SingleDiskInput_DMQ", ...
-        "SingleDiskOutput_DMD", "SingleDiskOutput_DMQ"]), [], 2);
-    x = Controllers_case_table(:, ...
-        ["SingleDiskInput_GMD", "SingleDiskInput_GMQ", ...
-        "SingleDiskOutput_GMD", "SingleDiskOutput_GMQ"]).Variables;
-    Controllers_case_table.("WorstCase_SingleDisk_GM") = x(I.Variables);
-    x = Controllers_case_table(:, ...
-        ["SingleDiskInput_PMD", "SingleDiskInput_PMQ", ...
-        "SingleDiskOutput_PMD", "SingleDiskOutput_PMQ"]).Variables;
-    Controllers_case_table.("WorstCase_SingleDisk_PM") = x(I.Variables);
+        x = Controllers_case_table(ws_cond, ...
+            ["SingleDiskInput_GMD", "SingleDiskInput_GMQ", ...
+            "SingleDiskOutput_GMD", "SingleDiskOutput_GMQ"]);
+        x = table2array(x);
+        i = I.Variables;
+        Controllers_case_table(ws_cond, "WorstCase_SingleDisk_GM") = table(x(i), 'VariableNames', {'WorstCase_SingleDisk_GM'});
 
+        x = Controllers_case_table(ws_cond, ...
+            ["SingleDiskInput_PMD", "SingleDiskInput_PMQ", ...
+            "SingleDiskOutput_PMD", "SingleDiskOutput_PMQ"]);
+        x = table2array(x);
+        i = I.Variables;
+        Controllers_case_table(ws_cond, "WorstCase_SingleDisk_PM") = table(x(i), 'VariableNames', {'WorstCase_SingleDisk_PM'});
+
+    end
     % Controllers_case_table.("Mean DMo") = mean(Controllers_case_table(:, ["DMoD", "DMoQ"]), 2).Variables;
     % Controllers_case_table.("Mean DM") = mean(Controllers_case_table(:, ["Mean DMi", "Mean DMo"]), 2).Variables;
 
-    sortrows(Controllers_case_table, 'MultiDiskIO_DM', 'descend')
-    % QUESTION MANUEL how to estimate bandwidth when tf never crosses unity
-    sortrows(Controllers_case_table, 'wc', 'descend')
+    % sortrows(Controllers_case_table, 'MultiDiskIO_DM', 'descend')
+    % sortrows(Controllers_case_table, 'wc', 'descend')
 
     if EXTREME_K_COLLECTION
         save(fullfile(mat_save_dir, 'Extreme_Controllers_case_list.mat'), "Controllers_case_list", '-v7.3');
@@ -489,64 +595,213 @@ end
 
 %% Plot transfer functions and weighting functions for full-order controller
 PLOTTING = 0;
-% TODO plot transfer functions for single wind speed
 if PLOTTING
 
-    cc = find(full_controller_case_basis.WindSpeedIndex == find(LPV_CONTROLLER_WIND_SPEEDS == NONLPV_CONTROLLER_WIND_SPEED));
-    n_weighting_cases = (FullOrderControllers_n_cases / length(full_controller_case_basis.WindSpeedIndex));
+    cc = find(full_controller_case_basis.WindSpeedIndex.x == find(LPV_CONTROLLER_WIND_SPEEDS == NONLPV_CONTROLLER_WIND_SPEED));
+    n_weighting_cases = (FullOrderControllers_n_cases / length(full_controller_case_basis.WindSpeedIndex.x));
 
-    % TODO Plot singular values of KSi, Ti; So, GSo vs f for single wind speed on
-    % 2*2 plot for open-loop vs closed-loop
-    % QUESTION what meaning does the open-loop singular value have for
-    % these transfer functions, only defined and non-identity for So?
-
-    for w_idx = 1:n_weighting_cases
+    %% TODO Plot transfer functions of KSo, Ti; So, GSi vs f for single wind speed on
+    % 2*2 bodeplot OR singular values for open-loop vs closed-loop OUTPLOT
+    % QUESTION MANUEL do these plots make sense, bound on GSi seems
+    % ineffective, should I choose a single singular value to plot, which
+    % one? Messy to plot gamma bounds for all weighting cases, do you think
+    % its necessary?
+    % for each controller type: robustness, adc, y_mse
+    % controller over wind speedfs = fieldnames(case_basis.W1Gain)';
+    for f = fieldnames(case_basis.W1Gain)'
         figure;
-        % bodemag(Wu_tmp, We_tmp, W1_tmp, W2_tmp); legend('Wu', 'We', 'W1', 'W2');
-        Wu_tmp = Controllers_case_list(w_idx).WuGain * Wu;
-        We_tmp = Controllers_case_list(w_idx).WeGain * We;
-        W1_tmp = Controllers_case_list(w_idx).W1Gain * W1;
-        W2_tmp = Controllers_case_list(w_idx).W2Gain * W2;
+        ax_KSo = subplot(2, 2, 1);
+        ax_Ti = subplot(2, 2, 2);
+        ax_So = subplot(2, 2, 3);
+        ax_GSi = subplot(2, 2, 4);
+        ax_KSo_del_idx = []; ax_Ti_del_idx = []; 
+        ax_So_del_idx = []; ax_GSi_del_idx = [];
+        Wu_gains = [];
+        for w_idx = 1:n_weighting_cases
+            % bodemag(Wu_tmp, We_tmp, W1_tmp, W2_tmp); legend('Wu', 'We', 'W1', 'W2');
+           
+            Wu_gains = [Wu_gains,  ss(Controllers_case_list(w_idx).WuGain.x).D(1, 1)];
+            Wu_tmp = Controllers_case_list(w_idx).WuGain.x * Wu;
+            We_tmp = Controllers_case_list(w_idx).WeGain.(f{1}) * We;
+            W1_tmp = Controllers_case_list(w_idx).W1Gain.(f{1}) * W1;
+            W2_tmp = Controllers_case_list(w_idx).W2Gain.(f{1}) * W2;
+    
+            SF = loopsens(-Plant(:, :, cc), ...
+                -Controllers_case_list(w_idx).Controller_scaled.(f{1})(:, :, cc));
+    
+            % sys_KSi = SF.Si * Controllers_case_list(w_idx).Controller_scaled.(f{1})(:, :, cc) * W1_tmp;
+            sys_KSo = SF.CSo * W1_tmp;
+            sys_Ti = SF.Ti * W2_tmp;
+            % sys_Ti2 = (Controllers_case_list(w_idx).Controller_scaled(:, :, cc) * Plant(:, :, cc)) / ...
+            %           (eye(size(Plant(:, :, cc))) + Controllers_case_list(w_idx).Controller_scaled(:, :, cc) * Plant(:, :, cc)) * W2_tmp;
+            
+            sys_So = SF.So * W1_tmp;
+            % sys_So_cl2 = inv(eye(size(Plant(:, :, cc))) + Plant(:, :, cc) * Controllers_case_list(w_idx).Controller_scaled(:, :, cc)) * W1_tmp;
+            % sys_GSi = Plant(:, :, cc) * SF.So * W2_tmp;
+            sys_GSi = SF.PSi * W2_tmp;
+            
+            % [s, w] = sigma(sys_KSi);
+            sigmaplot(ax_KSo, sys_KSo, sigma_plot_opt); hold on;
+            a = findobj(ax_KSo, 'Type', 'line');
+            ax_KSo_del_idx = [ax_KSo_del_idx, length(ax_KSo_del_idx) + 2:2];
+            % legend(ax_KSi, ['Wu = ', num2str(Wu_gains(end))], 'Bound', 'Location', 'westoutside');
+            subtitle(ax_KSo, '$KS_o$', 'Interpreter','latex');
+            
+            % [s, w] = sigma(sys_Ti);
+            sigmaplot(ax_Ti, sys_Ti, sigma_plot_opt); hold on;
+            a = findobj(ax_Ti, 'Type', 'line');
+            ax_Ti_del_idx = [ax_Ti_del_idx, length(ax_Ti_del_idx) + 2:2];
+            
+            % legend(['Wu = ', num2str(Wu_gains(end))], 'Bound');
+            subtitle(ax_Ti, '$T_i$', 'Interpreter','latex');
+            
+            sigmaplot(ax_So, sys_So, sigma_plot_opt); hold on;
+            a = findobj(ax_So, 'Type', 'line');
+            ax_So_del_idx = [ax_So_del_idx, length(ax_So_del_idx) + 2:2];
+            
+            % legend(['Wu = ', num2str(Wu_gains(end))], 'Bound');
+            subtitle(ax_So, '$S_o$', 'Interpreter','latex');
 
-        SF = loopsens(-Plant(:, :, cc), ...
-            -Controllers_case_list(w_idx).Controller_scaled(:, :, cc));
-        % SF = Controllers_case_list(w_idx).SF;
+            sigmaplot(ax_GSi, sys_GSi, sigma_plot_opt); hold on;
+            a = findobj(ax_GSi, 'Type', 'line');
+            ax_GSi_del_idx = [ax_GSi_del_idx, length(ax_GSi_del_idx) + 2:2];
+            
+            % legend(['Wu = ', num2str(Wu_gains(end))], 'Bound');
+            subtitle(ax_GSi, '$GS_i$', 'Interpreter','latex');
 
-        sys_KSi = Controllers_case_list(w_idx).Controller_scaled(:, :, cc) * SF.Si * W1_tmp;
-        sys_Ti = SF.Ti * W2_tmp;
-        % sys_Ti2 = (Controllers_case_list(w_idx).Controller_scaled(:, :, cc) * Plant(:, :, cc)) / ...
-        %           (eye(size(Plant(:, :, cc))) + Controllers_case_list(w_idx).Controller_scaled(:, :, cc) * Plant(:, :, cc)) * W2_tmp;
-        % QUESTION MANUEL does this make sense?
-        sys_So_cl = SF.So * W1_tmp;
-        % sys_So_cl2 = inv(eye(size(Plant(:, :, cc))) + Plant(:, :, cc) * Controllers_case_list(w_idx).Controller_scaled(:, :, cc)) * W1_tmp;
-        sys_So_ol = Plant(:, :, cc) * W1_tmp;
-        sys_GSo = Plant(:, :, cc) * SF.So * W2_tmp;
+            % sigmaplot(ax_KSo, inv(Wu_tmp) * Controllers_case_list(w_idx).gamma.(f{1})(cc), '--', sigma_plot_opt);
+            % sigmaplot(ax_Ti, inv(Wu_tmp) * Controllers_case_list(w_idx).gamma.(f{1})(cc), '--', sigma_plot_opt);
+            % sigmaplot(ax_So, inv(We_tmp) * Controllers_case_list(w_idx).gamma.(f{1})(cc), '--', sigma_plot_opt);
+            % sigmaplot(ax_GSi, inv(We_tmp) * Controllers_case_list(w_idx).gamma.(f{1})(cc), '--', sigma_plot_opt);
+        end
+        % sgtitle([f{1}, ' Controller'], 'Interpreter', 'latex');
+        % TODO no legend save seperately
+        % legend(ax_KSo, [arrayfun(@(wu) ['$W_u = ', num2str(wu), '$'], Wu_gains, 'UniformOutput', false)], ...
+        %     'NumColumns', 1, 'Location', 'westoutside', 'Interpreter', 'latex');
+        % legend(ax_Ti, [arrayfun(@(wu) ['$W_u = ', num2str(wu), '$'], Wu_gains, 'UniformOutput', false)], ... % 'Bound'], ...
+        %     'NumColumns', 1, 'Location', 'eastoutside', 'Interpreter', 'latex');
+        % legend(ax_So, [arrayfun(@(wu) ['$W_u = ', num2str(wu), '$'], Wu_gains, 'UniformOutput', false)], ... %
+        %     'NumColumns', 1, 'Location', 'westoutside', 'Interpreter', 'latex');
+        % legend(ax_GSi, [arrayfun(@(wu) ['$W_u = ', num2str(wu), '$'], Wu_gains, 'UniformOutput', false)], ... %
+        %     'NumColumns', 1, 'Location', 'eastoutside', 'Interpreter', 'latex');
 
-        ax = subplot(2, 2, 1);
-        sigmaplot(ax, sys_KSi, inv(Wu_tmp) * Controllers_case_list(w_idx).gamma(cc), sigma_plot_opt);
-        legend('Closed-Loop', 'Bound');
-        title(ax, 'KS_i');
-
-        ax = subplot(2, 2, 2);
-        sigmaplot(ax, sys_Ti, inv(Wu_tmp) * Controllers_case_list(w_idx).gamma(cc), sigma_plot_opt);
-        legend('Closed-Loop', 'Bound');
-        title(ax, 'T_i');
-        
-
-        ax = subplot(2, 2, 3);
-        sigmaplot(ax, sys_So_ol, sys_So_cl, inv(We_tmp) * Controllers_case_list(w_idx).gamma(cc), sigma_plot_opt);
-        legend('Open-Loop', 'Closed-Loop', 'Bound');
-        title(ax, 'S_o');
-        % QUESTION MANUEL should these bounds limit the singular values?
-        ax = subplot(2, 2, 4);
-        sigmaplot(ax, sys_GSo, inv(We_tmp) * Controllers_case_list(w_idx).gamma(cc), sigma_plot_opt);
-        legend('Closed-Loop', 'Bound');
-        title(ax, 'GS_o');
+        axesHandlesToChildObjects = findobj(ax_KSo, 'Type', 'line');
+        delete(axesHandlesToChildObjects(ax_KSo_del_idx)); % remove first singluar value
+        axesHandlesToChildObjects = findobj(ax_Ti, 'Type', 'line');
+        delete(axesHandlesToChildObjects(ax_Ti_del_idx)); % remove first singluar value
+        axesHandlesToChildObjects = findobj(ax_So, 'Type', 'line');
+        delete(axesHandlesToChildObjects(ax_So_del_idx)); % remove first singluar value
+        axesHandlesToChildObjects = findobj(ax_GSi, 'Type', 'line');
+        delete(axesHandlesToChildObjects(ax_GSo_del_idx)); % remove first singluar value
+    
+        set(gcf, 'Position', [0 0 1500 900]);
+        savefig(gcf, fullfile(fig_dir, [f{1}, '_fullorder_singular_vals.fig']));
+        saveas(gcf, fullfile(fig_dir, [f{1}, '_fullorder_singular_vals.png']));
+    
     end
+    
+    %% Plot classical, disk margins for controller tuned for different wind speeds OUTPLOT
+    
+    for f = fieldnames(case_basis.W1Gain)'
+        ctrl_cond = contains(Controllers_case_table.("Case Desc."), f{1});
 
-    % TODO Plot classical, disk and MIMO stability margins of designed
-    % controller over wind speeds for controller tuned at 16m/s and
-    % controller tuned for different wind speeds OUTPLOT
+        figure;
+        % top row: gain margins vs wind speed for worst case single channel
+        % classical margin, worst case single channel disk margin, multi
+        % input/output disk margin
+        % bottom row: phase margins vs wind speed for worst case single channel
+        % classical margin, worst case single channel disk margin, multi
+        % input/output disk margin
+        ax_gm_1 = subplot(2, 3, 1);
+        ax_gm_2 = subplot(2, 3, 2);
+        ax_gm_3 = subplot(2, 3, 3);
+        ax_pm_1 = subplot(2, 3, 4);
+        ax_pm_2 = subplot(2, 3, 5);
+        ax_pm_3 = subplot(2, 3, 6);
+        Wu_gains = [];
+        for w_idx = 1:n_weighting_cases
+            wu = ss(Controllers_case_list(w_idx).WuGain.x).D(1, 1);
+            Wu_gains = [Wu_gains,  wu];
+
+            data_gm_1 = []; data_gm_2 = []; data_gm_3 = [];
+            data_pm_1 = []; data_pm_2 = []; data_pm_3 = [];
+            for c_ws_idx = 1:length(LPV_CONTROLLER_WIND_SPEEDS)
+                ws_cond = Controllers_case_table.("TunedWindSpeed") == LPV_CONTROLLER_WIND_SPEEDS(c_ws_idx);
+                x = Controllers_case_table(ctrl_cond & ws_cond, "WorstCase_SingleClassical_GM").Variables;
+                data_gm_1 = [data_gm_1 x(w_idx)];
+                x = Controllers_case_table(ctrl_cond & ws_cond, "WorstCase_SingleDisk_GM").Variables;
+                data_gm_2 = [data_gm_2 x(w_idx)];
+                x = Controllers_case_table(ctrl_cond & ws_cond, "MultiDiskIO_GM").Variables;
+                data_gm_3 = [data_gm_3 x(w_idx)];
+
+                x = Controllers_case_table(ctrl_cond & ws_cond, "WorstCase_SingleClassical_PM").Variables;
+                data_pm_1 = [data_pm_1 x(w_idx)];
+                x = Controllers_case_table(ctrl_cond & ws_cond, "WorstCase_SingleDisk_PM").Variables;
+                data_pm_2 = [data_pm_2 x(w_idx)];
+                x = Controllers_case_table(ctrl_cond & ws_cond, "MultiDiskIO_PM").Variables;
+                data_pm_3 = [data_pm_3 x(w_idx)];
+            end
+            subplot(2, 3, 1); plot(LPV_CONTROLLER_WIND_SPEEDS, data_gm_1); hold on;
+            subplot(2, 3, 2); plot(LPV_CONTROLLER_WIND_SPEEDS, data_gm_2); hold on;
+            subplot(2, 3, 3); plot(LPV_CONTROLLER_WIND_SPEEDS, data_gm_3); hold on;
+            subplot(2, 3, 4); plot(LPV_CONTROLLER_WIND_SPEEDS, data_pm_1); hold on;
+            subplot(2, 3, 5); plot(LPV_CONTROLLER_WIND_SPEEDS, data_pm_2); hold on;
+            subplot(2, 3, 6); plot(LPV_CONTROLLER_WIND_SPEEDS, data_pm_3); hold on;
+
+        end
+        % TODO no legend save seperately
+        subplot(2, 3, 1); 
+        % legend([arrayfun(@(wu) ['$W_u = ', num2str(wu), '$'], Wu_gains, 'UniformOutput', false)], ...
+        %     'NumColumns', 1, 'Location', 'westoutside', 'Interpreter', 'latex'); 
+        xticks(LPV_CONTROLLER_WIND_SPEEDS);
+        xlabel('Wind Speed [m/s]');
+        subtitle("Worst Case Classical Gain Margin [dB]");
+
+        subplot(2, 3, 2); 
+        % legend([arrayfun(@(wu) ['$W_u = ', num2str(wu), '$'], Wu_gains, 'UniformOutput', false)], ...
+        %     'NumColumns', 1, 'Location', 'westoutside', 'Interpreter', 'latex'); 
+        xticks(LPV_CONTROLLER_WIND_SPEEDS);
+        xlabel('Wind Speed [m/s]');
+        subtitle("Worst Case Loop-at-a-Time Disk Gain Margin [dB]");
+
+        subplot(2, 3, 3); 
+        % legend([arrayfun(@(wu) ['$W_u = ', num2str(wu), '$'], Wu_gains, 'UniformOutput', false)], ...
+        %     'NumColumns', 1, 'Location', 'westoutside', 'Interpreter', 'latex'); 
+        xticks(LPV_CONTROLLER_WIND_SPEEDS);
+        xlabel('Wind Speed [m/s]');
+        subtitle("Multiloop Disk Gain Margin [dB]");
+
+        subplot(2, 3, 4); 
+        % legend([arrayfun(@(wu) ['$W_u = ', num2str(wu), '$'], Wu_gains, 'UniformOutput', false)], ...
+        %     'NumColumns', 1, 'Location', 'westoutside', 'Interpreter', 'latex'); 
+        xticks(LPV_CONTROLLER_WIND_SPEEDS);
+        xlabel('Wind Speed [m/s]');
+        subtitle("Worst Case Classical Phase Margin [deg]");
+
+        subplot(2, 3, 5); 
+        % legend([arrayfun(@(wu) ['$W_u = ', num2str(wu), '$'], Wu_gains, 'UniformOutput', false)], ...
+        %     'NumColumns', 1, 'Location', 'westoutside', 'Interpreter', 'latex'); 
+        xticks(LPV_CONTROLLER_WIND_SPEEDS);
+        xlabel('Wind Speed [m/s]');
+        subtitle("Worst Case Loop-at-a-Time Disk Phase Margin [deg]");
+
+        subplot(2, 3, 6); 
+        % legend([arrayfun(@(wu) ['$W_u = ', num2str(wu), '$'], Wu_gains, 'UniformOutput', false)], ...
+        %     'NumColumns', 1, 'Location', 'westoutside', 'Interpreter', 'latex'); 
+        xticks(LPV_CONTROLLER_WIND_SPEEDS);
+        xlabel('Wind Speed [m/s]');
+        subtitle("Multiloop Disk Phase Margin [deg]");
+        % 
+        % ax1 = subplot(2, 3, 1); ax2 = subplot(2, 3, 2); ax3 = subplot(2, 3, 3);
+        % linkaxes([ax1, ax2, ax3]);
+        % ax1 = subplot(2, 3, 4); ax2 = subplot(2, 3, 5); ax3 = subplot(2, 3, 6);
+        % linkaxes([ax1, ax2, ax3]);
+
+        % sgtitle([f{1}, ' Controller'], 'Interpreter', 'latex'); 
+        set(gcf, 'Position', [0 0 1500 900]);
+        savefig(gcf, fullfile(fig_dir, [f{1}, '_fullorder_rob_margins.fig']));
+        saveas(gcf, fullfile(fig_dir, [f{1}, '_fullorder_rob_margins.png']));
+    end
 
     %% Plot robustness margins OUTPLOT
     figure;
@@ -635,7 +890,7 @@ if PLOTTING
         % tracking error
         % performance loops are bottom two rows, control effort top two rows
         % (nothing shaped on right col, shaping occuring on left col)
-        % So (bottom left corner, d1->ze) and GSo (bottom right corner,
+        % So (bottom left corner, d1->ze) and GSi (bottom right corner,
         % d2->ze) have been shifted
         loopData = getLoopData(GenPlant_inner, ...
             Controllers_case_list(w_idx).Controller(:, :, cc), ...
@@ -663,11 +918,13 @@ if PLOTTING
         W2_tmp = Controllers_case_list(w_idx).W2Gain * W2;
         SF = loopsens(-Plant(:, :, cc), ...
             -Controllers_case_list(w_idx).Controller_scaled(:, :, cc));
-        sys_KSi = Controllers_case_list(w_idx).Controller_scaled(:, :, cc) * SF.Si * W1_tmp;
+        % sys_KSi = SF.Si * Controllers_case_list(w_idx).Controller_scaled(:, :, cc) * W1_tmp;
+        sys_KSo = SF.CSo * W1_tmp;
         sys_Ti = SF.Ti * W2_tmp;
-        sys_So_cl = SF.So * W1_tmp;
-        sys_So_ol = Plant(:, :, cc) * W1_tmp;
-        sys_GSo = Plant(:, :, cc) * SF.So * W2_tmp;
+        sys_So = SF.So * W1_tmp;
+        % sys_So_ol = Plant(:, :, cc) * W1_tmp;
+        % sys_GSi = SF.So * Plant(:, :, cc) * W2_tmp;
+        sys_GSi = Sf.PSi * W2_tmp;
 
         % Plot output sensitivity function and its weighting matrix, dy-y or
         % n->e or r->e (ideally 0)
@@ -757,102 +1014,121 @@ if PLOTTING
         % savefig(gcf, fullfile(fig_dir, ['case', num2str(w_idx), '_', 'Ti_full_bodemag.fig']));
         % saveas(gcf, fullfile(fig_dir, ['case', num2str(w_idx), '_', 'Ti_full_bodemag.png']));
     
-        % Plot GSo with two weighting functions
-        % GSo = -e/W2d2, input disturbance -> tracking error
+        % Plot GSi with two weighting functions
+        % GSi = -e/W2d2, input disturbance -> tracking error
         subplot(2,2,4);
-        sys_GSo.InputName = GenPlant.InputName(3:4); % control disturbance
-        sys_GSo.OutputName = We_tmp.InputName; % tracking error
+        sys_GSi.InputName = GenPlant.InputName(3:4); % control disturbance
+        sys_GSi.OutputName = We_tmp.InputName; % tracking error
         bodeplot(...
-            sys_GSo, ...
+            sys_GSi, ...
             inv(We_tmp) * Controllers_case_list(w_idx).gamma(cc), w, bode_plot_opt);
-        title('GS_o Function');
+        title('GS_i Function');
         axh = findall(gcf, 'type', 'axes');
         for a = 1:length(axh)
             xline(axh(a), [loopData.peaks.wGAM]);
         end
         set(gcf, 'Position', [0 0 1500 900]);
-        legend('GS_o W_2', 'W_e^{-1}\gamma', 'W_y^{-1}\gamma');
-        % savefig(gcf, fullfile(fig_dir, ['case', num2str(w_idx), '_', 'GSo_full_bodemag.fig']));
-        % saveas(gcf, fullfile(fig_dir, ['case', num2str(w_idx), '_', 'GSo_full_bodemag.png']));
+        legend('GS_i W_2', 'W_e^{-1}\gamma', 'W_y^{-1}\gamma');
+        % savefig(gcf, fullfile(fig_dir, ['case', num2str(w_idx), '_', 'GSi_full_bodemag.fig']));
+        % saveas(gcf, fullfile(fig_dir, ['case', num2str(w_idx), '_', 'GSi_full_bodemag.png']));
 
-        % Plot KS_i with two weighting functions
-        % KSi = u/W1d1, output disturbance -> control input
+        % Plot KS_o with two weighting functions
+        % KSo = u/W1d1, output disturbance -> control input
         subplot(2,2,1);
-        sys_KSi.InputName = GenPlant.InputName(1:2); % output disturbance/reference
-        sys_KSi.OutputName = Wu_tmp.InputName; % control input
+        sys_KSo.InputName = GenPlant.InputName(1:2); % output disturbance/reference
+        sys_KSo.OutputName = Wu_tmp.InputName; % control input
         bodeplot(...
-            sys_KSi, ...
+            sys_KSo, ...
             inv(Wu_tmp) * Controllers_case_list(w_idx).gamma(cc), w, ...
              bode_plot_opt);
-        title('KS_i Function');
+        title('KS_o Function');
         axh = findall(gcf, 'type', 'axes');
         for a = 1:length(axh)
             xline(axh(a), [loopData.peaks.wGAM]);
         end
         set(gcf, 'Position', [0 0 1500 900]);
-        legend('GS_o W_1', 'W_u^{-1}\gamma');
+        legend('KS_o W_1', 'W_u^{-1}\gamma');
         
         savefig(gcf, fullfile(fig_dir, ['case', num2str(w_idx), '_', 'fullorder_tfs_bodemag.fig']));
         saveas(gcf, fullfile(fig_dir, ['case', num2str(w_idx), '_', 'fullorder_tfs_bodemag.png']));
     end
     
     %% Plot tuned controller for this weighting case OUTPLOT
-    for w_idx = 1:n_weighting_cases
-        
+    cc = find(full_controller_case_basis.WindSpeedIndex.x == find(LPV_CONTROLLER_WIND_SPEEDS == NONLPV_CONTROLLER_WIND_SPEED));
+    % first case = black = highest Wu_gain
+    for f = fieldnames(case_basis.W1Gain)'
+        ctrl_cond = contains(Controllers_case_table.("Case Desc."), f{1});
+
         figure;
-        bcol = copper(length(LPV_CONTROLLER_WIND_SPEEDS)); % Define the color order based on the number of models
-        % rcol = jet(length(LPV_CONTROLLER_WIND_SPEEDS));
-        % ycol = hot(length(LPV_CONTROLLER_WIND_SPEEDS)); % https://www.mathworks.com/help/matlab/colors-1.html?s_tid=CRUX_lftnav
-    
-        omega = logspace(-2, 4, 300);
-    
-        for c_ws_idx = 1:length(LPV_CONTROLLER_WIND_SPEEDS)
-            if false || LPV_CONTROLLER_WIND_SPEEDS(c_ws_idx) ~= NONLPV_CONTROLLER_WIND_SPEED
-                continue;
-            end
-            
-            % QUESTION MANUEL problem with scaling, amplitudes are small!!
-            K_tmp_scaled = Controllers_case_list(w_idx).Controller_scaled(:, :, c_ws_idx);
-            K_tmp = Controllers_case_list(w_idx).Controller(:, :, c_ws_idx);
-            % K_tmp = Controllers_case_list(w_idx).Controller(:, :, cc);
-            K_tmp.InputName = {'M_d Tracking Error', 'M_q Tracking Error'};
-            K_tmp.OutputName = {'\beta_d Control Input', '\beta_q Control Input'};
-            K_tmp_scaled.InputName = {'M_d Tracking Error', 'M_q Tracking Error'};
-            K_tmp_scaled.OutputName = {'\beta_d Control Input', '\beta_q Control Input'};
+        Wu_gains = [];
 
-            % Plot baseline and tuned controllers
-            bodeplot(K_tmp_scaled, omega, bode_plot_opt);
-    
-            % Find handles of all lines in the figure that have the color blue
-            blineHandle = findobj(gcf,'Type','line','-and','Color','b');
-            % rlineHandle = findobj(gcf,'Type','line','-and','Color','r');
-            % ylineHandle = findobj(gcf,'Type','line','-and','Color','y');
-    
-            % Change the color to the one you defined
-            set(blineHandle,'Color',bcol(c_ws_idx,:));
-            % set(rlineHandle,'Color',rcol(c_ws_idx,:));
-            % set(ylineHandle,'Color',ycol(c_ws_idx,:));
+        clear controllers;
+        % 
+        for w_idx = 1:n_weighting_cases
+
+            wu = ss(Controllers_case_list(w_idx).WuGain.x).D(1, 1);
+            Wu_gains = [Wu_gains,  wu];
             
-            hold on
+            % bcol = copper(n_weighting_cases); % Define the color order based on the number of models
+            % rcol = jet(length(LPV_CONTROLLER_WIND_SPEEDS));
+            % ycol = hot(length(LPV_CONTROLLER_WIND_SPEEDS)); % https://www.mathworks.com/help/matlab/colors-1.html?s_tid=CRUX_lftnav
+        
+            omega = logspace(-2, 4, 300);
+        
+            % for c_ws_idx = 1:length(LPV_CONTROLLER_WIND_SPEEDS)
+                
+                K_tmp = Controllers_case_list(w_idx).Controller.(f{1})(:, :, cc);
+                K_tmp.InputName = {'$M_d$ Tracking Error', '$M_q$ Tracking Error'};
+                K_tmp.OutputName = {'$\beta_d$ Control Input', '$\beta_q$ Control Input'};
+                controllers(:, :, w_idx) = K_tmp;
+                % K_tmp_scaled.InputName = {'$M_d$ Tracking Error', '$M_q$ Tracking Error'};
+                % K_tmp_scaled.OutputName = {'$\beta_d$ Control Input', '$\beta_q$ Control Input'};
+    
+                
+        
+                % Find handles of all lines in the figure that have the color blue
+                % blineHandle = findobj(gcf, 'Type', 'line', '-and', 'Color', 'b');
+                % rlineHandle = findobj(gcf,'Type','line','-and','Color','r');
+                % ylineHandle = findobj(gcf,'Type','line','-and','Color','y');
+        
+                % Change the color to the one you defined
+                % set(blineHandle,'Color', bcol(w_idx, :));
+                % set(rlineHandle,'Color',rcol(c_ws_idx,:));
+                % set(ylineHandle,'Color',ycol(c_ws_idx,:));
+                
+                % hold on
+            % end
+        
+        %      legend([arrayfun(@(n) ['Case ', num2str(n)], ... 
+        % 1:n_weighting_cases, 'UniformOutput', false) {'', '', '', ''}], ...
+        % 'NumColumns', 2);
+            
+            % legend('Structured Baseline', 'Structured Tuned', 'Full-Order Tuned', '', '', '', '');
+            %         title('Frequency Response of Tuned Controllers');
+            % hold off;
+    
         end
-    
-    %      legend([arrayfun(@(n) ['Case ', num2str(n)], ... 
-    % 1:n_weighting_cases, 'UniformOutput', false) {'', '', '', ''}], ...
-    % 'NumColumns', 2);
 
+        bcol = copper(n_weighting_cases); % Define the color order based on the number of models
+
+        % Plot baseline and tuned controllers
+        bodeplot(controllers, 'b', omega, bode_plot_opt);
+
+        % Find handles of all lines in the figure that have the color blue
         axh = findall(gcf, 'type', 'axes');
-        xline(axh(3), omega_1P_rad * HARMONICS);
-        xline(axh(5), omega_1P_rad * HARMONICS);
-        xline(axh(7), omega_1P_rad * HARMONICS);
-        xline(axh(9), omega_1P_rad * HARMONICS);
-        set(gcf, 'Position', [0 0 1500 900]);
-        % legend('Structured Baseline', 'Structured Tuned', 'Full-Order Tuned', '', '', '', '');
-        %         title('Frequency Response of Tuned Controllers');
-        hold off;
+        
+        for ax_idx = [3, 5, 7, 9]
+            xline(axh(ax_idx), omega_1P_rad * HARMONICS);
+            blineHandle = findobj(axh(ax_idx), 'Type', 'line', '-and', 'Color', 'b');
+            for w_idx = 1:n_weighting_cases
+                % Change the color to the one you defined
+                set(blineHandle(w_idx), 'Color', bcol(w_idx, :));
+            end
+        end
 
         set(gcf, 'Position', [0 0 1500 900]);
-        savefig(gcf, fullfile(fig_dir, ['case', num2str(w_idx), '_', 'fullorder_controller_bodemag.fig']));
-        saveas(gcf, fullfile(fig_dir, ['case', num2str(w_idx), '_', 'fullorder_controller_bodemag.png']));
-    end 
+        savefig(gcf, fullfile(fig_dir, [f{1} '_fullorder_controller_bodemag.fig']));
+        saveas(gcf, fullfile(fig_dir, [f{1} '_fullorder_controller_bodemag.png']));
+    end
 
 end
