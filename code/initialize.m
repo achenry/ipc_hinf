@@ -1,37 +1,34 @@
 %% Initialize workspace and add paths
-close all;
-clc;
-clear all;
+username = char(java.lang.System.getProperty('user.name'));
+if strcmp(username, 'aoifework')
+    config;
+end
 
-TMax = 600;
-n_seeds = 100;
-WIND_TYPE = 'turbsim';
-WIND_SPEEDS = 0.5:0.5:22;
-LPV_CONTROLLER_WIND_SPEEDS = 12:2:22;
-NONLPV_CONTROLLER_WIND_SPEED = 16;
-SIMS_INDICES = 1:9;
-RUN_CL = 1;
-RUN_OL_DQ = 0;
-RUN_OL_BLADE = 0;
-
-VARY_WU = 1;
-VARY_WU_BASIS = 100 * [0.01, 0.05, 0.1, 0.5, 0.75, 1.0];
-
-VARY_REFERENCE = 0;
-VARY_REFERENCE_BASIS = [0.05, 0.1, 0.15, 0.2, 0.25]; % QUESTION MANUEL of peak, ss value?
-
-VARY_SATURATION = 0;
-VARY_SATURATION_BASIS = deg2rad(15) * [0.05, 0.1, 0.15, 0.2, 0.25]; % QUESTION MANUEL of peak, ss value?
-
-COMPUTE_FFT = 0;
-HARMONICS = [2, 3, 6];
-
-USE_IPC = 1;
-
-STRUCT_PARAM_SWEEP = 0; % conduct nonlinear simulations for parameter sweep over MIMO PI Gains
-OPTIMAL_K_COLLECTION = 1; % conduct nonlinear simulations for collection of Hinf-synthesized controllers
-EXTREME_K_COLLECTION = 0;
-BASELINE_K = 0; % conduct nonlinear simulations for baseline structured controller
+if RUN_SIMS_SINGLE || RUN_SIMS_PAR
+    if RUN_OL_DQ
+        sim_type = 'ol_dq';
+    elseif RUN_OL_BLADE
+        sim_type = 'ol_blade';
+    elseif RUN_CL && strcmp(WIND_TYPE, 'turbsim')
+        if STRUCT_PARAM_SWEEP
+            sim_type = 'pi_param_sweep_turbsim';
+        elseif OPTIMAL_K_COLLECTION
+            if VARY_WU
+                sim_type = 'optimal_k_cases_turbsim_wu';
+            elseif VARY_REFERENCE
+                sim_type = 'optimal_k_cases_turbsim_ref';
+            elseif VARY_SATURATION
+                sim_type = 'optimal_k_cases_turbsim_sat';
+            end
+        elseif EXTREME_K_COLLECTION
+            sim_type = 'extreme_k_cases_turbsim';
+        elseif BASELINE_K
+            sim_type = 'baseline_k_turbsim';
+        elseif ~USE_IPC
+            sim_type = 'noipc_turbsim';
+        end
+    end
+end
 
 set(0, 'defaultTextInterpreter', 'latex'); 
 
@@ -83,9 +80,6 @@ if strcmp(username, 'aoifework')
 
 elseif strcmp(username, 'aohe7145')
     MAX_SIMULATIONS = -1;
-    % scp -r /Users/aoifework/Documents/Research/ipc_tuning aohe7145@login.rc.colorado.edu:/projects/aohe7145/projects/ipc_tuning
-    % scp -r /Users/aoifework/Documents/toolboxes aohe7145@login.rc.colorado.edu:/projects/aohe7145/toolboxes
-    % scp -r /Users/aoifework/Documents/usflowt_src/ aohe7145@login.rc.colorado.edu:/projects/aohe7145/usflowt_src/
     home_dir = '/projects/aohe7145/';
     project_dir = fullfile(home_dir, 'projects', 'ipc_tuning');
     fast_install_dir = fullfile(home_dir, 'toolboxes/openfast_dev/install/lib');

@@ -1,0 +1,4803 @@
+
+Case 1 Wind Speed 12.000000
+ W1 = 1 W2 = 1 ->  Wu = 100 We = 100
+Case 2 Wind Speed 12.000000
+ W1 = 1 W2 = 1 ->  Wu = 80 We = 100
+Case 3 Wind Speed 12.000000
+ W1 = 1 W2 = 1 ->  Wu = 40 We = 100
+Case 4 Wind Speed 12.000000
+ W1 = 1 W2 = 1 ->  Wu = 20 We = 100
+Case 5 Wind Speed 12.000000
+ W1 = 1 W2 = 1 ->  Wu = 10 We = 100
+Case 6 Wind Speed 12.000000
+ W1 = 1 W2 = 1 ->  Wu = 5 We = 100
+Case 7 Wind Speed 12.000000
+ W1 = 1 W2 = 1 ->  Wu = 1 We = 100
+Case 8 Wind Speed 12.000000
+ W1 = 1 W2 = 1 ->  Wu = 100 We = 80
+Case 9 Wind Speed 12.000000
+ W1 = 1 W2 = 1 ->  Wu = 80 We = 80
+Case 10 Wind Speed 12.000000
+ W1 = 1 W2 = 1 ->  Wu = 40 We = 80
+Case 11 Wind Speed 12.000000
+ W1 = 1 W2 = 1 ->  Wu = 20 We = 80
+Case 12 Wind Speed 12.000000
+ W1 = 1 W2 = 1 ->  Wu = 10 We = 80
+Case 13 Wind Speed 12.000000
+ W1 = 1 W2 = 1 ->  Wu = 5 We = 80
+Case 14 Wind Speed 12.000000
+ W1 = 1 W2 = 1 ->  Wu = 1 We = 80
+Case 15 Wind Speed 12.000000
+ W1 = 1 W2 = 1 ->  Wu = 100 We = 40
+Case 16 Wind Speed 12.000000
+ W1 = 1 W2 = 1 ->  Wu = 80 We = 40
+Case 17 Wind Speed 12.000000
+ W1 = 1 W2 = 1 ->  Wu = 40 We = 40
+Case 18 Wind Speed 12.000000
+ W1 = 1 W2 = 1 ->  Wu = 20 We = 40
+Case 19 Wind Speed 12.000000
+ W1 = 1 W2 = 1 ->  Wu = 10 We = 40
+Case 20 Wind Speed 12.000000
+ W1 = 1 W2 = 1 ->  Wu = 5 We = 40
+Case 21 Wind Speed 12.000000
+ W1 = 1 W2 = 1 ->  Wu = 1 We = 40
+Case 22 Wind Speed 12.000000
+ W1 = 1 W2 = 1 ->  Wu = 100 We = 20
+Case 23 Wind Speed 12.000000
+ W1 = 1 W2 = 1 ->  Wu = 80 We = 20
+Case 24 Wind Speed 12.000000
+ W1 = 1 W2 = 1 ->  Wu = 40 We = 20
+Case 25 Wind Speed 12.000000
+ W1 = 1 W2 = 1 ->  Wu = 20 We = 20
+Case 26 Wind Speed 12.000000
+ W1 = 1 W2 = 1 ->  Wu = 10 We = 20
+Case 27 Wind Speed 12.000000
+ W1 = 1 W2 = 1 ->  Wu = 5 We = 20
+Case 28 Wind Speed 12.000000
+ W1 = 1 W2 = 1 ->  Wu = 1 We = 20
+Case 29 Wind Speed 12.000000
+ W1 = 1 W2 = 1 ->  Wu = 100 We = 10
+Case 30 Wind Speed 12.000000
+ W1 = 1 W2 = 1 ->  Wu = 80 We = 10
+Case 31 Wind Speed 12.000000
+ W1 = 1 W2 = 1 ->  Wu = 40 We = 10
+Case 32 Wind Speed 12.000000
+ W1 = 1 W2 = 1 ->  Wu = 20 We = 10
+Case 33 Wind Speed 12.000000
+ W1 = 1 W2 = 1 ->  Wu = 10 We = 10
+Case 34 Wind Speed 12.000000
+ W1 = 1 W2 = 1 ->  Wu = 5 We = 10
+Case 35 Wind Speed 12.000000
+ W1 = 1 W2 = 1 ->  Wu = 1 We = 10
+Case 36 Wind Speed 12.000000
+ W1 = 1 W2 = 1 ->  Wu = 100 We = 5
+Case 37 Wind Speed 12.000000
+ W1 = 1 W2 = 1 ->  Wu = 80 We = 5
+Case 38 Wind Speed 12.000000
+ W1 = 1 W2 = 1 ->  Wu = 40 We = 5
+Case 39 Wind Speed 12.000000
+ W1 = 1 W2 = 1 ->  Wu = 20 We = 5
+Case 40 Wind Speed 12.000000
+ W1 = 1 W2 = 1 ->  Wu = 10 We = 5
+Case 41 Wind Speed 12.000000
+ W1 = 1 W2 = 1 ->  Wu = 5 We = 5
+Case 42 Wind Speed 12.000000
+ W1 = 1 W2 = 1 ->  Wu = 1 We = 5
+Case 43 Wind Speed 12.000000
+ W1 = 1 W2 = 1 ->  Wu = 100 We = 1
+Case 44 Wind Speed 12.000000
+ W1 = 1 W2 = 1 ->  Wu = 80 We = 1
+Case 45 Wind Speed 12.000000
+ W1 = 1 W2 = 1 ->  Wu = 40 We = 1
+Case 46 Wind Speed 12.000000
+ W1 = 1 W2 = 1 ->  Wu = 20 We = 1
+Case 47 Wind Speed 12.000000
+ W1 = 1 W2 = 1 ->  Wu = 10 We = 1
+Case 48 Wind Speed 12.000000
+ W1 = 1 W2 = 1 ->  Wu = 5 We = 1
+Case 49 Wind Speed 12.000000
+ W1 = 1 W2 = 1 ->  Wu = 1 We = 1
+Case 50 Wind Speed 12.000000
+ W1 = 0.8 W2 = 1 ->  Wu = 100 We = 100
+Case 51 Wind Speed 12.000000
+ W1 = 0.8 W2 = 1 ->  Wu = 80 We = 100
+Case 52 Wind Speed 12.000000
+ W1 = 0.8 W2 = 1 ->  Wu = 40 We = 100
+Case 53 Wind Speed 12.000000
+ W1 = 0.8 W2 = 1 ->  Wu = 20 We = 100
+Case 54 Wind Speed 12.000000
+ W1 = 0.8 W2 = 1 ->  Wu = 10 We = 100
+Case 55 Wind Speed 12.000000
+ W1 = 0.8 W2 = 1 ->  Wu = 5 We = 100
+Case 56 Wind Speed 12.000000
+ W1 = 0.8 W2 = 1 ->  Wu = 1 We = 100
+Case 57 Wind Speed 12.000000
+ W1 = 0.8 W2 = 1 ->  Wu = 100 We = 80
+Case 58 Wind Speed 12.000000
+ W1 = 0.8 W2 = 1 ->  Wu = 80 We = 80
+Case 59 Wind Speed 12.000000
+ W1 = 0.8 W2 = 1 ->  Wu = 40 We = 80
+Case 60 Wind Speed 12.000000
+ W1 = 0.8 W2 = 1 ->  Wu = 20 We = 80
+Case 61 Wind Speed 12.000000
+ W1 = 0.8 W2 = 1 ->  Wu = 10 We = 80
+Case 62 Wind Speed 12.000000
+ W1 = 0.8 W2 = 1 ->  Wu = 5 We = 80
+Case 63 Wind Speed 12.000000
+ W1 = 0.8 W2 = 1 ->  Wu = 1 We = 80
+Case 64 Wind Speed 12.000000
+ W1 = 0.8 W2 = 1 ->  Wu = 100 We = 40
+Case 65 Wind Speed 12.000000
+ W1 = 0.8 W2 = 1 ->  Wu = 80 We = 40
+Case 66 Wind Speed 12.000000
+ W1 = 0.8 W2 = 1 ->  Wu = 40 We = 40
+Case 67 Wind Speed 12.000000
+ W1 = 0.8 W2 = 1 ->  Wu = 20 We = 40
+Case 68 Wind Speed 12.000000
+ W1 = 0.8 W2 = 1 ->  Wu = 10 We = 40
+Case 69 Wind Speed 12.000000
+ W1 = 0.8 W2 = 1 ->  Wu = 5 We = 40
+Case 70 Wind Speed 12.000000
+ W1 = 0.8 W2 = 1 ->  Wu = 1 We = 40
+Case 71 Wind Speed 12.000000
+ W1 = 0.8 W2 = 1 ->  Wu = 100 We = 20
+Case 72 Wind Speed 12.000000
+ W1 = 0.8 W2 = 1 ->  Wu = 80 We = 20
+Case 73 Wind Speed 12.000000
+ W1 = 0.8 W2 = 1 ->  Wu = 40 We = 20
+Case 74 Wind Speed 12.000000
+ W1 = 0.8 W2 = 1 ->  Wu = 20 We = 20
+Case 75 Wind Speed 12.000000
+ W1 = 0.8 W2 = 1 ->  Wu = 10 We = 20
+Case 76 Wind Speed 12.000000
+ W1 = 0.8 W2 = 1 ->  Wu = 5 We = 20
+Case 77 Wind Speed 12.000000
+ W1 = 0.8 W2 = 1 ->  Wu = 1 We = 20
+Case 78 Wind Speed 12.000000
+ W1 = 0.8 W2 = 1 ->  Wu = 100 We = 10
+Case 79 Wind Speed 12.000000
+ W1 = 0.8 W2 = 1 ->  Wu = 80 We = 10
+Case 80 Wind Speed 12.000000
+ W1 = 0.8 W2 = 1 ->  Wu = 40 We = 10
+Case 81 Wind Speed 12.000000
+ W1 = 0.8 W2 = 1 ->  Wu = 20 We = 10
+Case 82 Wind Speed 12.000000
+ W1 = 0.8 W2 = 1 ->  Wu = 10 We = 10
+Case 83 Wind Speed 12.000000
+ W1 = 0.8 W2 = 1 ->  Wu = 5 We = 10
+Case 84 Wind Speed 12.000000
+ W1 = 0.8 W2 = 1 ->  Wu = 1 We = 10
+Case 85 Wind Speed 12.000000
+ W1 = 0.8 W2 = 1 ->  Wu = 100 We = 5
+Case 86 Wind Speed 12.000000
+ W1 = 0.8 W2 = 1 ->  Wu = 80 We = 5
+Case 87 Wind Speed 12.000000
+ W1 = 0.8 W2 = 1 ->  Wu = 40 We = 5
+Case 88 Wind Speed 12.000000
+ W1 = 0.8 W2 = 1 ->  Wu = 20 We = 5
+Case 89 Wind Speed 12.000000
+ W1 = 0.8 W2 = 1 ->  Wu = 10 We = 5
+Case 90 Wind Speed 12.000000
+ W1 = 0.8 W2 = 1 ->  Wu = 5 We = 5
+Case 91 Wind Speed 12.000000
+ W1 = 0.8 W2 = 1 ->  Wu = 1 We = 5
+Case 92 Wind Speed 12.000000
+ W1 = 0.8 W2 = 1 ->  Wu = 100 We = 1
+Case 93 Wind Speed 12.000000
+ W1 = 0.8 W2 = 1 ->  Wu = 80 We = 1
+Case 94 Wind Speed 12.000000
+ W1 = 0.8 W2 = 1 ->  Wu = 40 We = 1
+Case 95 Wind Speed 12.000000
+ W1 = 0.8 W2 = 1 ->  Wu = 20 We = 1
+Case 96 Wind Speed 12.000000
+ W1 = 0.8 W2 = 1 ->  Wu = 10 We = 1
+Case 97 Wind Speed 12.000000
+ W1 = 0.8 W2 = 1 ->  Wu = 5 We = 1
+Case 98 Wind Speed 12.000000
+ W1 = 0.8 W2 = 1 ->  Wu = 1 We = 1
+Case 99 Wind Speed 12.000000
+ W1 = 0.4 W2 = 1 ->  Wu = 100 We = 100
+Case 100 Wind Speed 12.000000
+ W1 = 0.4 W2 = 1 ->  Wu = 80 We = 100
+Case 101 Wind Speed 12.000000
+ W1 = 0.4 W2 = 1 ->  Wu = 40 We = 100
+Case 102 Wind Speed 12.000000
+ W1 = 0.4 W2 = 1 ->  Wu = 20 We = 100
+Case 103 Wind Speed 12.000000
+ W1 = 0.4 W2 = 1 ->  Wu = 10 We = 100
+Case 104 Wind Speed 12.000000
+ W1 = 0.4 W2 = 1 ->  Wu = 5 We = 100
+Case 105 Wind Speed 12.000000
+ W1 = 0.4 W2 = 1 ->  Wu = 1 We = 100
+Case 106 Wind Speed 12.000000
+ W1 = 0.4 W2 = 1 ->  Wu = 100 We = 80
+Case 107 Wind Speed 12.000000
+ W1 = 0.4 W2 = 1 ->  Wu = 80 We = 80
+Case 108 Wind Speed 12.000000
+ W1 = 0.4 W2 = 1 ->  Wu = 40 We = 80
+Case 109 Wind Speed 12.000000
+ W1 = 0.4 W2 = 1 ->  Wu = 20 We = 80
+Case 110 Wind Speed 12.000000
+ W1 = 0.4 W2 = 1 ->  Wu = 10 We = 80
+Case 111 Wind Speed 12.000000
+ W1 = 0.4 W2 = 1 ->  Wu = 5 We = 80
+Case 112 Wind Speed 12.000000
+ W1 = 0.4 W2 = 1 ->  Wu = 1 We = 80
+Case 113 Wind Speed 12.000000
+ W1 = 0.4 W2 = 1 ->  Wu = 100 We = 40
+Case 114 Wind Speed 12.000000
+ W1 = 0.4 W2 = 1 ->  Wu = 80 We = 40
+Case 115 Wind Speed 12.000000
+ W1 = 0.4 W2 = 1 ->  Wu = 40 We = 40
+Case 116 Wind Speed 12.000000
+ W1 = 0.4 W2 = 1 ->  Wu = 20 We = 40
+Case 117 Wind Speed 12.000000
+ W1 = 0.4 W2 = 1 ->  Wu = 10 We = 40
+Case 118 Wind Speed 12.000000
+ W1 = 0.4 W2 = 1 ->  Wu = 5 We = 40
+Case 119 Wind Speed 12.000000
+ W1 = 0.4 W2 = 1 ->  Wu = 1 We = 40
+Case 120 Wind Speed 12.000000
+ W1 = 0.4 W2 = 1 ->  Wu = 100 We = 20
+Case 121 Wind Speed 12.000000
+ W1 = 0.4 W2 = 1 ->  Wu = 80 We = 20
+Case 122 Wind Speed 12.000000
+ W1 = 0.4 W2 = 1 ->  Wu = 40 We = 20
+Case 123 Wind Speed 12.000000
+ W1 = 0.4 W2 = 1 ->  Wu = 20 We = 20
+Case 124 Wind Speed 12.000000
+ W1 = 0.4 W2 = 1 ->  Wu = 10 We = 20
+Case 125 Wind Speed 12.000000
+ W1 = 0.4 W2 = 1 ->  Wu = 5 We = 20
+Case 126 Wind Speed 12.000000
+ W1 = 0.4 W2 = 1 ->  Wu = 1 We = 20
+Case 127 Wind Speed 12.000000
+ W1 = 0.4 W2 = 1 ->  Wu = 100 We = 10
+Case 128 Wind Speed 12.000000
+ W1 = 0.4 W2 = 1 ->  Wu = 80 We = 10
+Case 129 Wind Speed 12.000000
+ W1 = 0.4 W2 = 1 ->  Wu = 40 We = 10
+Case 130 Wind Speed 12.000000
+ W1 = 0.4 W2 = 1 ->  Wu = 20 We = 10
+Case 131 Wind Speed 12.000000
+ W1 = 0.4 W2 = 1 ->  Wu = 10 We = 10
+Case 132 Wind Speed 12.000000
+ W1 = 0.4 W2 = 1 ->  Wu = 5 We = 10
+Case 133 Wind Speed 12.000000
+ W1 = 0.4 W2 = 1 ->  Wu = 1 We = 10
+Case 134 Wind Speed 12.000000
+ W1 = 0.4 W2 = 1 ->  Wu = 100 We = 5
+Case 135 Wind Speed 12.000000
+ W1 = 0.4 W2 = 1 ->  Wu = 80 We = 5
+Case 136 Wind Speed 12.000000
+ W1 = 0.4 W2 = 1 ->  Wu = 40 We = 5
+Case 137 Wind Speed 12.000000
+ W1 = 0.4 W2 = 1 ->  Wu = 20 We = 5
+Case 138 Wind Speed 12.000000
+ W1 = 0.4 W2 = 1 ->  Wu = 10 We = 5
+Case 139 Wind Speed 12.000000
+ W1 = 0.4 W2 = 1 ->  Wu = 5 We = 5
+Case 140 Wind Speed 12.000000
+ W1 = 0.4 W2 = 1 ->  Wu = 1 We = 5
+Case 141 Wind Speed 12.000000
+ W1 = 0.4 W2 = 1 ->  Wu = 100 We = 1
+Case 142 Wind Speed 12.000000
+ W1 = 0.4 W2 = 1 ->  Wu = 80 We = 1
+Case 143 Wind Speed 12.000000
+ W1 = 0.4 W2 = 1 ->  Wu = 40 We = 1
+Case 144 Wind Speed 12.000000
+ W1 = 0.4 W2 = 1 ->  Wu = 20 We = 1
+Case 145 Wind Speed 12.000000
+ W1 = 0.4 W2 = 1 ->  Wu = 10 We = 1
+Case 146 Wind Speed 12.000000
+ W1 = 0.4 W2 = 1 ->  Wu = 5 We = 1
+Case 147 Wind Speed 12.000000
+ W1 = 0.4 W2 = 1 ->  Wu = 1 We = 1
+Case 148 Wind Speed 12.000000
+ W1 = 0.2 W2 = 1 ->  Wu = 100 We = 100
+Case 149 Wind Speed 12.000000
+ W1 = 0.2 W2 = 1 ->  Wu = 80 We = 100
+Case 150 Wind Speed 12.000000
+ W1 = 0.2 W2 = 1 ->  Wu = 40 We = 100
+Case 151 Wind Speed 12.000000
+ W1 = 0.2 W2 = 1 ->  Wu = 20 We = 100
+Case 152 Wind Speed 12.000000
+ W1 = 0.2 W2 = 1 ->  Wu = 10 We = 100
+Case 153 Wind Speed 12.000000
+ W1 = 0.2 W2 = 1 ->  Wu = 5 We = 100
+Case 154 Wind Speed 12.000000
+ W1 = 0.2 W2 = 1 ->  Wu = 1 We = 100
+Case 155 Wind Speed 12.000000
+ W1 = 0.2 W2 = 1 ->  Wu = 100 We = 80
+Case 156 Wind Speed 12.000000
+ W1 = 0.2 W2 = 1 ->  Wu = 80 We = 80
+Case 157 Wind Speed 12.000000
+ W1 = 0.2 W2 = 1 ->  Wu = 40 We = 80
+Case 158 Wind Speed 12.000000
+ W1 = 0.2 W2 = 1 ->  Wu = 20 We = 80
+Case 159 Wind Speed 12.000000
+ W1 = 0.2 W2 = 1 ->  Wu = 10 We = 80
+Case 160 Wind Speed 12.000000
+ W1 = 0.2 W2 = 1 ->  Wu = 5 We = 80
+Case 161 Wind Speed 12.000000
+ W1 = 0.2 W2 = 1 ->  Wu = 1 We = 80
+Case 162 Wind Speed 12.000000
+ W1 = 0.2 W2 = 1 ->  Wu = 100 We = 40
+Case 163 Wind Speed 12.000000
+ W1 = 0.2 W2 = 1 ->  Wu = 80 We = 40
+Case 164 Wind Speed 12.000000
+ W1 = 0.2 W2 = 1 ->  Wu = 40 We = 40
+Case 165 Wind Speed 12.000000
+ W1 = 0.2 W2 = 1 ->  Wu = 20 We = 40
+Case 166 Wind Speed 12.000000
+ W1 = 0.2 W2 = 1 ->  Wu = 10 We = 40
+Case 167 Wind Speed 12.000000
+ W1 = 0.2 W2 = 1 ->  Wu = 5 We = 40
+Case 168 Wind Speed 12.000000
+ W1 = 0.2 W2 = 1 ->  Wu = 1 We = 40
+Case 169 Wind Speed 12.000000
+ W1 = 0.2 W2 = 1 ->  Wu = 100 We = 20
+Case 170 Wind Speed 12.000000
+ W1 = 0.2 W2 = 1 ->  Wu = 80 We = 20
+Case 171 Wind Speed 12.000000
+ W1 = 0.2 W2 = 1 ->  Wu = 40 We = 20
+Case 172 Wind Speed 12.000000
+ W1 = 0.2 W2 = 1 ->  Wu = 20 We = 20
+Case 173 Wind Speed 12.000000
+ W1 = 0.2 W2 = 1 ->  Wu = 10 We = 20
+Case 174 Wind Speed 12.000000
+ W1 = 0.2 W2 = 1 ->  Wu = 5 We = 20
+Case 175 Wind Speed 12.000000
+ W1 = 0.2 W2 = 1 ->  Wu = 1 We = 20
+Case 176 Wind Speed 12.000000
+ W1 = 0.2 W2 = 1 ->  Wu = 100 We = 10
+Case 177 Wind Speed 12.000000
+ W1 = 0.2 W2 = 1 ->  Wu = 80 We = 10
+Case 178 Wind Speed 12.000000
+ W1 = 0.2 W2 = 1 ->  Wu = 40 We = 10
+Case 179 Wind Speed 12.000000
+ W1 = 0.2 W2 = 1 ->  Wu = 20 We = 10
+Case 180 Wind Speed 12.000000
+ W1 = 0.2 W2 = 1 ->  Wu = 10 We = 10
+Case 181 Wind Speed 12.000000
+ W1 = 0.2 W2 = 1 ->  Wu = 5 We = 10
+Case 182 Wind Speed 12.000000
+ W1 = 0.2 W2 = 1 ->  Wu = 1 We = 10
+Case 183 Wind Speed 12.000000
+ W1 = 0.2 W2 = 1 ->  Wu = 100 We = 5
+Case 184 Wind Speed 12.000000
+ W1 = 0.2 W2 = 1 ->  Wu = 80 We = 5
+Case 185 Wind Speed 12.000000
+ W1 = 0.2 W2 = 1 ->  Wu = 40 We = 5
+Case 186 Wind Speed 12.000000
+ W1 = 0.2 W2 = 1 ->  Wu = 20 We = 5
+Case 187 Wind Speed 12.000000
+ W1 = 0.2 W2 = 1 ->  Wu = 10 We = 5
+Case 188 Wind Speed 12.000000
+ W1 = 0.2 W2 = 1 ->  Wu = 5 We = 5
+Case 189 Wind Speed 12.000000
+ W1 = 0.2 W2 = 1 ->  Wu = 1 We = 5
+Case 190 Wind Speed 12.000000
+ W1 = 0.2 W2 = 1 ->  Wu = 100 We = 1
+Case 191 Wind Speed 12.000000
+ W1 = 0.2 W2 = 1 ->  Wu = 80 We = 1
+Case 192 Wind Speed 12.000000
+ W1 = 0.2 W2 = 1 ->  Wu = 40 We = 1
+Case 193 Wind Speed 12.000000
+ W1 = 0.2 W2 = 1 ->  Wu = 20 We = 1
+Case 194 Wind Speed 12.000000
+ W1 = 0.2 W2 = 1 ->  Wu = 10 We = 1
+Case 195 Wind Speed 12.000000
+ W1 = 0.2 W2 = 1 ->  Wu = 5 We = 1
+Case 196 Wind Speed 12.000000
+ W1 = 0.2 W2 = 1 ->  Wu = 1 We = 1
+Case 197 Wind Speed 12.000000
+ W1 = 0.1 W2 = 1 ->  Wu = 100 We = 100
+Case 198 Wind Speed 12.000000
+ W1 = 0.1 W2 = 1 ->  Wu = 80 We = 100
+Case 199 Wind Speed 12.000000
+ W1 = 0.1 W2 = 1 ->  Wu = 40 We = 100
+Case 200 Wind Speed 12.000000
+ W1 = 0.1 W2 = 1 ->  Wu = 20 We = 100
+Case 201 Wind Speed 12.000000
+ W1 = 0.1 W2 = 1 ->  Wu = 10 We = 100
+Case 202 Wind Speed 12.000000
+ W1 = 0.1 W2 = 1 ->  Wu = 5 We = 100
+Case 203 Wind Speed 12.000000
+ W1 = 0.1 W2 = 1 ->  Wu = 1 We = 100
+Case 204 Wind Speed 12.000000
+ W1 = 0.1 W2 = 1 ->  Wu = 100 We = 80
+Case 205 Wind Speed 12.000000
+ W1 = 0.1 W2 = 1 ->  Wu = 80 We = 80
+Case 206 Wind Speed 12.000000
+ W1 = 0.1 W2 = 1 ->  Wu = 40 We = 80
+Case 207 Wind Speed 12.000000
+ W1 = 0.1 W2 = 1 ->  Wu = 20 We = 80
+Case 208 Wind Speed 12.000000
+ W1 = 0.1 W2 = 1 ->  Wu = 10 We = 80
+Case 209 Wind Speed 12.000000
+ W1 = 0.1 W2 = 1 ->  Wu = 5 We = 80
+Case 210 Wind Speed 12.000000
+ W1 = 0.1 W2 = 1 ->  Wu = 1 We = 80
+Case 211 Wind Speed 12.000000
+ W1 = 0.1 W2 = 1 ->  Wu = 100 We = 40
+Case 212 Wind Speed 12.000000
+ W1 = 0.1 W2 = 1 ->  Wu = 80 We = 40
+Case 213 Wind Speed 12.000000
+ W1 = 0.1 W2 = 1 ->  Wu = 40 We = 40
+Case 214 Wind Speed 12.000000
+ W1 = 0.1 W2 = 1 ->  Wu = 20 We = 40
+Case 215 Wind Speed 12.000000
+ W1 = 0.1 W2 = 1 ->  Wu = 10 We = 40
+Case 216 Wind Speed 12.000000
+ W1 = 0.1 W2 = 1 ->  Wu = 5 We = 40
+Case 217 Wind Speed 12.000000
+ W1 = 0.1 W2 = 1 ->  Wu = 1 We = 40
+Case 218 Wind Speed 12.000000
+ W1 = 0.1 W2 = 1 ->  Wu = 100 We = 20
+Case 219 Wind Speed 12.000000
+ W1 = 0.1 W2 = 1 ->  Wu = 80 We = 20
+Case 220 Wind Speed 12.000000
+ W1 = 0.1 W2 = 1 ->  Wu = 40 We = 20
+Case 221 Wind Speed 12.000000
+ W1 = 0.1 W2 = 1 ->  Wu = 20 We = 20
+Case 222 Wind Speed 12.000000
+ W1 = 0.1 W2 = 1 ->  Wu = 10 We = 20
+Case 223 Wind Speed 12.000000
+ W1 = 0.1 W2 = 1 ->  Wu = 5 We = 20
+Case 224 Wind Speed 12.000000
+ W1 = 0.1 W2 = 1 ->  Wu = 1 We = 20
+Case 225 Wind Speed 12.000000
+ W1 = 0.1 W2 = 1 ->  Wu = 100 We = 10
+Case 226 Wind Speed 12.000000
+ W1 = 0.1 W2 = 1 ->  Wu = 80 We = 10
+Case 227 Wind Speed 12.000000
+ W1 = 0.1 W2 = 1 ->  Wu = 40 We = 10
+Case 228 Wind Speed 12.000000
+ W1 = 0.1 W2 = 1 ->  Wu = 20 We = 10
+Case 229 Wind Speed 12.000000
+ W1 = 0.1 W2 = 1 ->  Wu = 10 We = 10
+Case 230 Wind Speed 12.000000
+ W1 = 0.1 W2 = 1 ->  Wu = 5 We = 10
+Case 231 Wind Speed 12.000000
+ W1 = 0.1 W2 = 1 ->  Wu = 1 We = 10
+Case 232 Wind Speed 12.000000
+ W1 = 0.1 W2 = 1 ->  Wu = 100 We = 5
+Case 233 Wind Speed 12.000000
+ W1 = 0.1 W2 = 1 ->  Wu = 80 We = 5
+Case 234 Wind Speed 12.000000
+ W1 = 0.1 W2 = 1 ->  Wu = 40 We = 5
+Case 235 Wind Speed 12.000000
+ W1 = 0.1 W2 = 1 ->  Wu = 20 We = 5
+Case 236 Wind Speed 12.000000
+ W1 = 0.1 W2 = 1 ->  Wu = 10 We = 5
+Case 237 Wind Speed 12.000000
+ W1 = 0.1 W2 = 1 ->  Wu = 5 We = 5
+Case 238 Wind Speed 12.000000
+ W1 = 0.1 W2 = 1 ->  Wu = 1 We = 5
+Case 239 Wind Speed 12.000000
+ W1 = 0.1 W2 = 1 ->  Wu = 100 We = 1
+Case 240 Wind Speed 12.000000
+ W1 = 0.1 W2 = 1 ->  Wu = 80 We = 1
+Case 241 Wind Speed 12.000000
+ W1 = 0.1 W2 = 1 ->  Wu = 40 We = 1
+Case 242 Wind Speed 12.000000
+ W1 = 0.1 W2 = 1 ->  Wu = 20 We = 1
+Case 243 Wind Speed 12.000000
+ W1 = 0.1 W2 = 1 ->  Wu = 10 We = 1
+Case 244 Wind Speed 12.000000
+ W1 = 0.1 W2 = 1 ->  Wu = 5 We = 1
+Case 245 Wind Speed 12.000000
+ W1 = 0.1 W2 = 1 ->  Wu = 1 We = 1
+Case 246 Wind Speed 12.000000
+ W1 = 0.05 W2 = 1 ->  Wu = 100 We = 100
+Case 247 Wind Speed 12.000000
+ W1 = 0.05 W2 = 1 ->  Wu = 80 We = 100
+Case 248 Wind Speed 12.000000
+ W1 = 0.05 W2 = 1 ->  Wu = 40 We = 100
+Case 249 Wind Speed 12.000000
+ W1 = 0.05 W2 = 1 ->  Wu = 20 We = 100
+Case 250 Wind Speed 12.000000
+ W1 = 0.05 W2 = 1 ->  Wu = 10 We = 100
+Case 251 Wind Speed 12.000000
+ W1 = 0.05 W2 = 1 ->  Wu = 5 We = 100
+Case 252 Wind Speed 12.000000
+ W1 = 0.05 W2 = 1 ->  Wu = 1 We = 100
+Case 253 Wind Speed 12.000000
+ W1 = 0.05 W2 = 1 ->  Wu = 100 We = 80
+Case 254 Wind Speed 12.000000
+ W1 = 0.05 W2 = 1 ->  Wu = 80 We = 80
+Case 255 Wind Speed 12.000000
+ W1 = 0.05 W2 = 1 ->  Wu = 40 We = 80
+Case 256 Wind Speed 12.000000
+ W1 = 0.05 W2 = 1 ->  Wu = 20 We = 80
+Case 257 Wind Speed 12.000000
+ W1 = 0.05 W2 = 1 ->  Wu = 10 We = 80
+Case 258 Wind Speed 12.000000
+ W1 = 0.05 W2 = 1 ->  Wu = 5 We = 80
+Case 259 Wind Speed 12.000000
+ W1 = 0.05 W2 = 1 ->  Wu = 1 We = 80
+Case 260 Wind Speed 12.000000
+ W1 = 0.05 W2 = 1 ->  Wu = 100 We = 40
+Case 261 Wind Speed 12.000000
+ W1 = 0.05 W2 = 1 ->  Wu = 80 We = 40
+Case 262 Wind Speed 12.000000
+ W1 = 0.05 W2 = 1 ->  Wu = 40 We = 40
+Case 263 Wind Speed 12.000000
+ W1 = 0.05 W2 = 1 ->  Wu = 20 We = 40
+Case 264 Wind Speed 12.000000
+ W1 = 0.05 W2 = 1 ->  Wu = 10 We = 40
+Case 265 Wind Speed 12.000000
+ W1 = 0.05 W2 = 1 ->  Wu = 5 We = 40
+Case 266 Wind Speed 12.000000
+ W1 = 0.05 W2 = 1 ->  Wu = 1 We = 40
+Case 267 Wind Speed 12.000000
+ W1 = 0.05 W2 = 1 ->  Wu = 100 We = 20
+Case 268 Wind Speed 12.000000
+ W1 = 0.05 W2 = 1 ->  Wu = 80 We = 20
+Case 269 Wind Speed 12.000000
+ W1 = 0.05 W2 = 1 ->  Wu = 40 We = 20
+Case 270 Wind Speed 12.000000
+ W1 = 0.05 W2 = 1 ->  Wu = 20 We = 20
+Case 271 Wind Speed 12.000000
+ W1 = 0.05 W2 = 1 ->  Wu = 10 We = 20
+Case 272 Wind Speed 12.000000
+ W1 = 0.05 W2 = 1 ->  Wu = 5 We = 20
+Case 273 Wind Speed 12.000000
+ W1 = 0.05 W2 = 1 ->  Wu = 1 We = 20
+Case 274 Wind Speed 12.000000
+ W1 = 0.05 W2 = 1 ->  Wu = 100 We = 10
+Case 275 Wind Speed 12.000000
+ W1 = 0.05 W2 = 1 ->  Wu = 80 We = 10
+Case 276 Wind Speed 12.000000
+ W1 = 0.05 W2 = 1 ->  Wu = 40 We = 10
+Case 277 Wind Speed 12.000000
+ W1 = 0.05 W2 = 1 ->  Wu = 20 We = 10
+Case 278 Wind Speed 12.000000
+ W1 = 0.05 W2 = 1 ->  Wu = 10 We = 10
+Case 279 Wind Speed 12.000000
+ W1 = 0.05 W2 = 1 ->  Wu = 5 We = 10
+Case 280 Wind Speed 12.000000
+ W1 = 0.05 W2 = 1 ->  Wu = 1 We = 10
+Case 281 Wind Speed 12.000000
+ W1 = 0.05 W2 = 1 ->  Wu = 100 We = 5
+Case 282 Wind Speed 12.000000
+ W1 = 0.05 W2 = 1 ->  Wu = 80 We = 5
+Case 283 Wind Speed 12.000000
+ W1 = 0.05 W2 = 1 ->  Wu = 40 We = 5
+Case 284 Wind Speed 12.000000
+ W1 = 0.05 W2 = 1 ->  Wu = 20 We = 5
+Case 285 Wind Speed 12.000000
+ W1 = 0.05 W2 = 1 ->  Wu = 10 We = 5
+Case 286 Wind Speed 12.000000
+ W1 = 0.05 W2 = 1 ->  Wu = 5 We = 5
+Case 287 Wind Speed 12.000000
+ W1 = 0.05 W2 = 1 ->  Wu = 1 We = 5
+Case 288 Wind Speed 12.000000
+ W1 = 0.05 W2 = 1 ->  Wu = 100 We = 1
+Case 289 Wind Speed 12.000000
+ W1 = 0.05 W2 = 1 ->  Wu = 80 We = 1
+Case 290 Wind Speed 12.000000
+ W1 = 0.05 W2 = 1 ->  Wu = 40 We = 1
+Case 291 Wind Speed 12.000000
+ W1 = 0.05 W2 = 1 ->  Wu = 20 We = 1
+Case 292 Wind Speed 12.000000
+ W1 = 0.05 W2 = 1 ->  Wu = 10 We = 1
+Case 293 Wind Speed 12.000000
+ W1 = 0.05 W2 = 1 ->  Wu = 5 We = 1
+Case 294 Wind Speed 12.000000
+ W1 = 0.05 W2 = 1 ->  Wu = 1 We = 1
+Case 295 Wind Speed 12.000000
+ W1 = 0.01 W2 = 1 ->  Wu = 100 We = 100
+Case 296 Wind Speed 12.000000
+ W1 = 0.01 W2 = 1 ->  Wu = 80 We = 100
+Case 297 Wind Speed 12.000000
+ W1 = 0.01 W2 = 1 ->  Wu = 40 We = 100
+Case 298 Wind Speed 12.000000
+ W1 = 0.01 W2 = 1 ->  Wu = 20 We = 100
+Case 299 Wind Speed 12.000000
+ W1 = 0.01 W2 = 1 ->  Wu = 10 We = 100
+Case 300 Wind Speed 12.000000
+ W1 = 0.01 W2 = 1 ->  Wu = 5 We = 100
+Case 301 Wind Speed 12.000000
+ W1 = 0.01 W2 = 1 ->  Wu = 1 We = 100
+Case 302 Wind Speed 12.000000
+ W1 = 0.01 W2 = 1 ->  Wu = 100 We = 80
+Case 303 Wind Speed 12.000000
+ W1 = 0.01 W2 = 1 ->  Wu = 80 We = 80
+Case 304 Wind Speed 12.000000
+ W1 = 0.01 W2 = 1 ->  Wu = 40 We = 80
+Case 305 Wind Speed 12.000000
+ W1 = 0.01 W2 = 1 ->  Wu = 20 We = 80
+Case 306 Wind Speed 12.000000
+ W1 = 0.01 W2 = 1 ->  Wu = 10 We = 80
+Case 307 Wind Speed 12.000000
+ W1 = 0.01 W2 = 1 ->  Wu = 5 We = 80
+Case 308 Wind Speed 12.000000
+ W1 = 0.01 W2 = 1 ->  Wu = 1 We = 80
+Case 309 Wind Speed 12.000000
+ W1 = 0.01 W2 = 1 ->  Wu = 100 We = 40
+Case 310 Wind Speed 12.000000
+ W1 = 0.01 W2 = 1 ->  Wu = 80 We = 40
+Case 311 Wind Speed 12.000000
+ W1 = 0.01 W2 = 1 ->  Wu = 40 We = 40
+Case 312 Wind Speed 12.000000
+ W1 = 0.01 W2 = 1 ->  Wu = 20 We = 40
+Case 313 Wind Speed 12.000000
+ W1 = 0.01 W2 = 1 ->  Wu = 10 We = 40
+Case 314 Wind Speed 12.000000
+ W1 = 0.01 W2 = 1 ->  Wu = 5 We = 40
+Case 315 Wind Speed 12.000000
+ W1 = 0.01 W2 = 1 ->  Wu = 1 We = 40
+Case 316 Wind Speed 12.000000
+ W1 = 0.01 W2 = 1 ->  Wu = 100 We = 20
+Case 317 Wind Speed 12.000000
+ W1 = 0.01 W2 = 1 ->  Wu = 80 We = 20
+Case 318 Wind Speed 12.000000
+ W1 = 0.01 W2 = 1 ->  Wu = 40 We = 20
+Case 319 Wind Speed 12.000000
+ W1 = 0.01 W2 = 1 ->  Wu = 20 We = 20
+Case 320 Wind Speed 12.000000
+ W1 = 0.01 W2 = 1 ->  Wu = 10 We = 20
+Case 321 Wind Speed 12.000000
+ W1 = 0.01 W2 = 1 ->  Wu = 5 We = 20
+Case 322 Wind Speed 12.000000
+ W1 = 0.01 W2 = 1 ->  Wu = 1 We = 20
+Case 323 Wind Speed 12.000000
+ W1 = 0.01 W2 = 1 ->  Wu = 100 We = 10
+Case 324 Wind Speed 12.000000
+ W1 = 0.01 W2 = 1 ->  Wu = 80 We = 10
+Case 325 Wind Speed 12.000000
+ W1 = 0.01 W2 = 1 ->  Wu = 40 We = 10
+Case 326 Wind Speed 12.000000
+ W1 = 0.01 W2 = 1 ->  Wu = 20 We = 10
+Case 327 Wind Speed 12.000000
+ W1 = 0.01 W2 = 1 ->  Wu = 10 We = 10
+Case 328 Wind Speed 12.000000
+ W1 = 0.01 W2 = 1 ->  Wu = 5 We = 10
+Case 329 Wind Speed 12.000000
+ W1 = 0.01 W2 = 1 ->  Wu = 1 We = 10
+Case 330 Wind Speed 12.000000
+ W1 = 0.01 W2 = 1 ->  Wu = 100 We = 5
+Case 331 Wind Speed 12.000000
+ W1 = 0.01 W2 = 1 ->  Wu = 80 We = 5
+Case 332 Wind Speed 12.000000
+ W1 = 0.01 W2 = 1 ->  Wu = 40 We = 5
+Case 333 Wind Speed 12.000000
+ W1 = 0.01 W2 = 1 ->  Wu = 20 We = 5
+Case 334 Wind Speed 12.000000
+ W1 = 0.01 W2 = 1 ->  Wu = 10 We = 5
+Case 335 Wind Speed 12.000000
+ W1 = 0.01 W2 = 1 ->  Wu = 5 We = 5
+Case 336 Wind Speed 12.000000
+ W1 = 0.01 W2 = 1 ->  Wu = 1 We = 5
+Case 337 Wind Speed 12.000000
+ W1 = 0.01 W2 = 1 ->  Wu = 100 We = 1
+Case 338 Wind Speed 12.000000
+ W1 = 0.01 W2 = 1 ->  Wu = 80 We = 1
+Case 339 Wind Speed 12.000000
+ W1 = 0.01 W2 = 1 ->  Wu = 40 We = 1
+Case 340 Wind Speed 12.000000
+ W1 = 0.01 W2 = 1 ->  Wu = 20 We = 1
+Case 341 Wind Speed 12.000000
+ W1 = 0.01 W2 = 1 ->  Wu = 10 We = 1
+Case 342 Wind Speed 12.000000
+ W1 = 0.01 W2 = 1 ->  Wu = 5 We = 1
+Case 343 Wind Speed 12.000000
+ W1 = 0.01 W2 = 1 ->  Wu = 1 We = 1
+Case 344 Wind Speed 12.000000
+ W1 = 1 W2 = 0.8 ->  Wu = 100 We = 100
+Case 345 Wind Speed 12.000000
+ W1 = 1 W2 = 0.8 ->  Wu = 80 We = 100
+Case 346 Wind Speed 12.000000
+ W1 = 1 W2 = 0.8 ->  Wu = 40 We = 100
+Case 347 Wind Speed 12.000000
+ W1 = 1 W2 = 0.8 ->  Wu = 20 We = 100
+Case 348 Wind Speed 12.000000
+ W1 = 1 W2 = 0.8 ->  Wu = 10 We = 100
+Case 349 Wind Speed 12.000000
+ W1 = 1 W2 = 0.8 ->  Wu = 5 We = 100
+Case 350 Wind Speed 12.000000
+ W1 = 1 W2 = 0.8 ->  Wu = 1 We = 100
+Case 351 Wind Speed 12.000000
+ W1 = 1 W2 = 0.8 ->  Wu = 100 We = 80
+Case 352 Wind Speed 12.000000
+ W1 = 1 W2 = 0.8 ->  Wu = 80 We = 80
+Case 353 Wind Speed 12.000000
+ W1 = 1 W2 = 0.8 ->  Wu = 40 We = 80
+Case 354 Wind Speed 12.000000
+ W1 = 1 W2 = 0.8 ->  Wu = 20 We = 80
+Case 355 Wind Speed 12.000000
+ W1 = 1 W2 = 0.8 ->  Wu = 10 We = 80
+Case 356 Wind Speed 12.000000
+ W1 = 1 W2 = 0.8 ->  Wu = 5 We = 80
+Case 357 Wind Speed 12.000000
+ W1 = 1 W2 = 0.8 ->  Wu = 1 We = 80
+Case 358 Wind Speed 12.000000
+ W1 = 1 W2 = 0.8 ->  Wu = 100 We = 40
+Case 359 Wind Speed 12.000000
+ W1 = 1 W2 = 0.8 ->  Wu = 80 We = 40
+Case 360 Wind Speed 12.000000
+ W1 = 1 W2 = 0.8 ->  Wu = 40 We = 40
+Case 361 Wind Speed 12.000000
+ W1 = 1 W2 = 0.8 ->  Wu = 20 We = 40
+Case 362 Wind Speed 12.000000
+ W1 = 1 W2 = 0.8 ->  Wu = 10 We = 40
+Case 363 Wind Speed 12.000000
+ W1 = 1 W2 = 0.8 ->  Wu = 5 We = 40
+Case 364 Wind Speed 12.000000
+ W1 = 1 W2 = 0.8 ->  Wu = 1 We = 40
+Case 365 Wind Speed 12.000000
+ W1 = 1 W2 = 0.8 ->  Wu = 100 We = 20
+Case 366 Wind Speed 12.000000
+ W1 = 1 W2 = 0.8 ->  Wu = 80 We = 20
+Case 367 Wind Speed 12.000000
+ W1 = 1 W2 = 0.8 ->  Wu = 40 We = 20
+Case 368 Wind Speed 12.000000
+ W1 = 1 W2 = 0.8 ->  Wu = 20 We = 20
+Case 369 Wind Speed 12.000000
+ W1 = 1 W2 = 0.8 ->  Wu = 10 We = 20
+Case 370 Wind Speed 12.000000
+ W1 = 1 W2 = 0.8 ->  Wu = 5 We = 20
+Case 371 Wind Speed 12.000000
+ W1 = 1 W2 = 0.8 ->  Wu = 1 We = 20
+Case 372 Wind Speed 12.000000
+ W1 = 1 W2 = 0.8 ->  Wu = 100 We = 10
+Case 373 Wind Speed 12.000000
+ W1 = 1 W2 = 0.8 ->  Wu = 80 We = 10
+Case 374 Wind Speed 12.000000
+ W1 = 1 W2 = 0.8 ->  Wu = 40 We = 10
+Case 375 Wind Speed 12.000000
+ W1 = 1 W2 = 0.8 ->  Wu = 20 We = 10
+Case 376 Wind Speed 12.000000
+ W1 = 1 W2 = 0.8 ->  Wu = 10 We = 10
+Case 377 Wind Speed 12.000000
+ W1 = 1 W2 = 0.8 ->  Wu = 5 We = 10
+Case 378 Wind Speed 12.000000
+ W1 = 1 W2 = 0.8 ->  Wu = 1 We = 10
+Case 379 Wind Speed 12.000000
+ W1 = 1 W2 = 0.8 ->  Wu = 100 We = 5
+Case 380 Wind Speed 12.000000
+ W1 = 1 W2 = 0.8 ->  Wu = 80 We = 5
+Case 381 Wind Speed 12.000000
+ W1 = 1 W2 = 0.8 ->  Wu = 40 We = 5
+Case 382 Wind Speed 12.000000
+ W1 = 1 W2 = 0.8 ->  Wu = 20 We = 5
+Case 383 Wind Speed 12.000000
+ W1 = 1 W2 = 0.8 ->  Wu = 10 We = 5
+Case 384 Wind Speed 12.000000
+ W1 = 1 W2 = 0.8 ->  Wu = 5 We = 5
+Case 385 Wind Speed 12.000000
+ W1 = 1 W2 = 0.8 ->  Wu = 1 We = 5
+Case 386 Wind Speed 12.000000
+ W1 = 1 W2 = 0.8 ->  Wu = 100 We = 1
+Case 387 Wind Speed 12.000000
+ W1 = 1 W2 = 0.8 ->  Wu = 80 We = 1
+Case 388 Wind Speed 12.000000
+ W1 = 1 W2 = 0.8 ->  Wu = 40 We = 1
+Case 389 Wind Speed 12.000000
+ W1 = 1 W2 = 0.8 ->  Wu = 20 We = 1
+Case 390 Wind Speed 12.000000
+ W1 = 1 W2 = 0.8 ->  Wu = 10 We = 1
+Case 391 Wind Speed 12.000000
+ W1 = 1 W2 = 0.8 ->  Wu = 5 We = 1
+Case 392 Wind Speed 12.000000
+ W1 = 1 W2 = 0.8 ->  Wu = 1 We = 1
+Case 393 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.8 ->  Wu = 100 We = 100
+Case 394 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.8 ->  Wu = 80 We = 100
+Case 395 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.8 ->  Wu = 40 We = 100
+Case 396 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.8 ->  Wu = 20 We = 100
+Case 397 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.8 ->  Wu = 10 We = 100
+Case 398 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.8 ->  Wu = 5 We = 100
+Case 399 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.8 ->  Wu = 1 We = 100
+Case 400 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.8 ->  Wu = 100 We = 80
+Case 401 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.8 ->  Wu = 80 We = 80
+Case 402 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.8 ->  Wu = 40 We = 80
+Case 403 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.8 ->  Wu = 20 We = 80
+Case 404 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.8 ->  Wu = 10 We = 80
+Case 405 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.8 ->  Wu = 5 We = 80
+Case 406 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.8 ->  Wu = 1 We = 80
+Case 407 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.8 ->  Wu = 100 We = 40
+Case 408 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.8 ->  Wu = 80 We = 40
+Case 409 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.8 ->  Wu = 40 We = 40
+Case 410 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.8 ->  Wu = 20 We = 40
+Case 411 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.8 ->  Wu = 10 We = 40
+Case 412 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.8 ->  Wu = 5 We = 40
+Case 413 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.8 ->  Wu = 1 We = 40
+Case 414 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.8 ->  Wu = 100 We = 20
+Case 415 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.8 ->  Wu = 80 We = 20
+Case 416 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.8 ->  Wu = 40 We = 20
+Case 417 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.8 ->  Wu = 20 We = 20
+Case 418 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.8 ->  Wu = 10 We = 20
+Case 419 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.8 ->  Wu = 5 We = 20
+Case 420 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.8 ->  Wu = 1 We = 20
+Case 421 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.8 ->  Wu = 100 We = 10
+Case 422 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.8 ->  Wu = 80 We = 10
+Case 423 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.8 ->  Wu = 40 We = 10
+Case 424 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.8 ->  Wu = 20 We = 10
+Case 425 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.8 ->  Wu = 10 We = 10
+Case 426 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.8 ->  Wu = 5 We = 10
+Case 427 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.8 ->  Wu = 1 We = 10
+Case 428 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.8 ->  Wu = 100 We = 5
+Case 429 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.8 ->  Wu = 80 We = 5
+Case 430 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.8 ->  Wu = 40 We = 5
+Case 431 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.8 ->  Wu = 20 We = 5
+Case 432 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.8 ->  Wu = 10 We = 5
+Case 433 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.8 ->  Wu = 5 We = 5
+Case 434 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.8 ->  Wu = 1 We = 5
+Case 435 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.8 ->  Wu = 100 We = 1
+Case 436 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.8 ->  Wu = 80 We = 1
+Case 437 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.8 ->  Wu = 40 We = 1
+Case 438 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.8 ->  Wu = 20 We = 1
+Case 439 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.8 ->  Wu = 10 We = 1
+Case 440 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.8 ->  Wu = 5 We = 1
+Case 441 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.8 ->  Wu = 1 We = 1
+Case 442 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.8 ->  Wu = 100 We = 100
+Case 443 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.8 ->  Wu = 80 We = 100
+Case 444 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.8 ->  Wu = 40 We = 100
+Case 445 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.8 ->  Wu = 20 We = 100
+Case 446 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.8 ->  Wu = 10 We = 100
+Case 447 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.8 ->  Wu = 5 We = 100
+Case 448 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.8 ->  Wu = 1 We = 100
+Case 449 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.8 ->  Wu = 100 We = 80
+Case 450 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.8 ->  Wu = 80 We = 80
+Case 451 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.8 ->  Wu = 40 We = 80
+Case 452 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.8 ->  Wu = 20 We = 80
+Case 453 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.8 ->  Wu = 10 We = 80
+Case 454 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.8 ->  Wu = 5 We = 80
+Case 455 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.8 ->  Wu = 1 We = 80
+Case 456 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.8 ->  Wu = 100 We = 40
+Case 457 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.8 ->  Wu = 80 We = 40
+Case 458 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.8 ->  Wu = 40 We = 40
+Case 459 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.8 ->  Wu = 20 We = 40
+Case 460 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.8 ->  Wu = 10 We = 40
+Case 461 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.8 ->  Wu = 5 We = 40
+Case 462 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.8 ->  Wu = 1 We = 40
+Case 463 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.8 ->  Wu = 100 We = 20
+Case 464 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.8 ->  Wu = 80 We = 20
+Case 465 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.8 ->  Wu = 40 We = 20
+Case 466 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.8 ->  Wu = 20 We = 20
+Case 467 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.8 ->  Wu = 10 We = 20
+Case 468 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.8 ->  Wu = 5 We = 20
+Case 469 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.8 ->  Wu = 1 We = 20
+Case 470 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.8 ->  Wu = 100 We = 10
+Case 471 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.8 ->  Wu = 80 We = 10
+Case 472 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.8 ->  Wu = 40 We = 10
+Case 473 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.8 ->  Wu = 20 We = 10
+Case 474 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.8 ->  Wu = 10 We = 10
+Case 475 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.8 ->  Wu = 5 We = 10
+Case 476 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.8 ->  Wu = 1 We = 10
+Case 477 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.8 ->  Wu = 100 We = 5
+Case 478 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.8 ->  Wu = 80 We = 5
+Case 479 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.8 ->  Wu = 40 We = 5
+Case 480 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.8 ->  Wu = 20 We = 5
+Case 481 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.8 ->  Wu = 10 We = 5
+Case 482 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.8 ->  Wu = 5 We = 5
+Case 483 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.8 ->  Wu = 1 We = 5
+Case 484 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.8 ->  Wu = 100 We = 1
+Case 485 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.8 ->  Wu = 80 We = 1
+Case 486 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.8 ->  Wu = 40 We = 1
+Case 487 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.8 ->  Wu = 20 We = 1
+Case 488 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.8 ->  Wu = 10 We = 1
+Case 489 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.8 ->  Wu = 5 We = 1
+Case 490 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.8 ->  Wu = 1 We = 1
+Case 491 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.8 ->  Wu = 100 We = 100
+Case 492 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.8 ->  Wu = 80 We = 100
+Case 493 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.8 ->  Wu = 40 We = 100
+Case 494 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.8 ->  Wu = 20 We = 100
+Case 495 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.8 ->  Wu = 10 We = 100
+Case 496 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.8 ->  Wu = 5 We = 100
+Case 497 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.8 ->  Wu = 1 We = 100
+Case 498 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.8 ->  Wu = 100 We = 80
+Case 499 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.8 ->  Wu = 80 We = 80
+Case 500 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.8 ->  Wu = 40 We = 80
+Case 501 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.8 ->  Wu = 20 We = 80
+Case 502 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.8 ->  Wu = 10 We = 80
+Case 503 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.8 ->  Wu = 5 We = 80
+Case 504 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.8 ->  Wu = 1 We = 80
+Case 505 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.8 ->  Wu = 100 We = 40
+Case 506 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.8 ->  Wu = 80 We = 40
+Case 507 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.8 ->  Wu = 40 We = 40
+Case 508 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.8 ->  Wu = 20 We = 40
+Case 509 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.8 ->  Wu = 10 We = 40
+Case 510 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.8 ->  Wu = 5 We = 40
+Case 511 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.8 ->  Wu = 1 We = 40
+Case 512 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.8 ->  Wu = 100 We = 20
+Case 513 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.8 ->  Wu = 80 We = 20
+Case 514 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.8 ->  Wu = 40 We = 20
+Case 515 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.8 ->  Wu = 20 We = 20
+Case 516 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.8 ->  Wu = 10 We = 20
+Case 517 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.8 ->  Wu = 5 We = 20
+Case 518 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.8 ->  Wu = 1 We = 20
+Case 519 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.8 ->  Wu = 100 We = 10
+Case 520 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.8 ->  Wu = 80 We = 10
+Case 521 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.8 ->  Wu = 40 We = 10
+Case 522 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.8 ->  Wu = 20 We = 10
+Case 523 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.8 ->  Wu = 10 We = 10
+Case 524 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.8 ->  Wu = 5 We = 10
+Case 525 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.8 ->  Wu = 1 We = 10
+Case 526 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.8 ->  Wu = 100 We = 5
+Case 527 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.8 ->  Wu = 80 We = 5
+Case 528 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.8 ->  Wu = 40 We = 5
+Case 529 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.8 ->  Wu = 20 We = 5
+Case 530 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.8 ->  Wu = 10 We = 5
+Case 531 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.8 ->  Wu = 5 We = 5
+Case 532 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.8 ->  Wu = 1 We = 5
+Case 533 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.8 ->  Wu = 100 We = 1
+Case 534 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.8 ->  Wu = 80 We = 1
+Case 535 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.8 ->  Wu = 40 We = 1
+Case 536 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.8 ->  Wu = 20 We = 1
+Case 537 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.8 ->  Wu = 10 We = 1
+Case 538 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.8 ->  Wu = 5 We = 1
+Case 539 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.8 ->  Wu = 1 We = 1
+Case 540 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.8 ->  Wu = 100 We = 100
+Case 541 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.8 ->  Wu = 80 We = 100
+Case 542 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.8 ->  Wu = 40 We = 100
+Case 543 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.8 ->  Wu = 20 We = 100
+Case 544 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.8 ->  Wu = 10 We = 100
+Case 545 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.8 ->  Wu = 5 We = 100
+Case 546 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.8 ->  Wu = 1 We = 100
+Case 547 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.8 ->  Wu = 100 We = 80
+Case 548 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.8 ->  Wu = 80 We = 80
+Case 549 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.8 ->  Wu = 40 We = 80
+Case 550 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.8 ->  Wu = 20 We = 80
+Case 551 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.8 ->  Wu = 10 We = 80
+Case 552 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.8 ->  Wu = 5 We = 80
+Case 553 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.8 ->  Wu = 1 We = 80
+Case 554 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.8 ->  Wu = 100 We = 40
+Case 555 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.8 ->  Wu = 80 We = 40
+Case 556 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.8 ->  Wu = 40 We = 40
+Case 557 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.8 ->  Wu = 20 We = 40
+Case 558 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.8 ->  Wu = 10 We = 40
+Case 559 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.8 ->  Wu = 5 We = 40
+Case 560 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.8 ->  Wu = 1 We = 40
+Case 561 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.8 ->  Wu = 100 We = 20
+Case 562 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.8 ->  Wu = 80 We = 20
+Case 563 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.8 ->  Wu = 40 We = 20
+Case 564 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.8 ->  Wu = 20 We = 20
+Case 565 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.8 ->  Wu = 10 We = 20
+Case 566 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.8 ->  Wu = 5 We = 20
+Case 567 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.8 ->  Wu = 1 We = 20
+Case 568 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.8 ->  Wu = 100 We = 10
+Case 569 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.8 ->  Wu = 80 We = 10
+Case 570 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.8 ->  Wu = 40 We = 10
+Case 571 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.8 ->  Wu = 20 We = 10
+Case 572 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.8 ->  Wu = 10 We = 10
+Case 573 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.8 ->  Wu = 5 We = 10
+Case 574 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.8 ->  Wu = 1 We = 10
+Case 575 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.8 ->  Wu = 100 We = 5
+Case 576 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.8 ->  Wu = 80 We = 5
+Case 577 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.8 ->  Wu = 40 We = 5
+Case 578 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.8 ->  Wu = 20 We = 5
+Case 579 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.8 ->  Wu = 10 We = 5
+Case 580 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.8 ->  Wu = 5 We = 5
+Case 581 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.8 ->  Wu = 1 We = 5
+Case 582 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.8 ->  Wu = 100 We = 1
+Case 583 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.8 ->  Wu = 80 We = 1
+Case 584 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.8 ->  Wu = 40 We = 1
+Case 585 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.8 ->  Wu = 20 We = 1
+Case 586 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.8 ->  Wu = 10 We = 1
+Case 587 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.8 ->  Wu = 5 We = 1
+Case 588 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.8 ->  Wu = 1 We = 1
+Case 589 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.8 ->  Wu = 100 We = 100
+Case 590 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.8 ->  Wu = 80 We = 100
+Case 591 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.8 ->  Wu = 40 We = 100
+Case 592 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.8 ->  Wu = 20 We = 100
+Case 593 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.8 ->  Wu = 10 We = 100
+Case 594 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.8 ->  Wu = 5 We = 100
+Case 595 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.8 ->  Wu = 1 We = 100
+Case 596 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.8 ->  Wu = 100 We = 80
+Case 597 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.8 ->  Wu = 80 We = 80
+Case 598 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.8 ->  Wu = 40 We = 80
+Case 599 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.8 ->  Wu = 20 We = 80
+Case 600 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.8 ->  Wu = 10 We = 80
+Case 601 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.8 ->  Wu = 5 We = 80
+Case 602 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.8 ->  Wu = 1 We = 80
+Case 603 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.8 ->  Wu = 100 We = 40
+Case 604 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.8 ->  Wu = 80 We = 40
+Case 605 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.8 ->  Wu = 40 We = 40
+Case 606 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.8 ->  Wu = 20 We = 40
+Case 607 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.8 ->  Wu = 10 We = 40
+Case 608 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.8 ->  Wu = 5 We = 40
+Case 609 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.8 ->  Wu = 1 We = 40
+Case 610 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.8 ->  Wu = 100 We = 20
+Case 611 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.8 ->  Wu = 80 We = 20
+Case 612 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.8 ->  Wu = 40 We = 20
+Case 613 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.8 ->  Wu = 20 We = 20
+Case 614 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.8 ->  Wu = 10 We = 20
+Case 615 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.8 ->  Wu = 5 We = 20
+Case 616 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.8 ->  Wu = 1 We = 20
+Case 617 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.8 ->  Wu = 100 We = 10
+Case 618 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.8 ->  Wu = 80 We = 10
+Case 619 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.8 ->  Wu = 40 We = 10
+Case 620 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.8 ->  Wu = 20 We = 10
+Case 621 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.8 ->  Wu = 10 We = 10
+Case 622 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.8 ->  Wu = 5 We = 10
+Case 623 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.8 ->  Wu = 1 We = 10
+Case 624 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.8 ->  Wu = 100 We = 5
+Case 625 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.8 ->  Wu = 80 We = 5
+Case 626 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.8 ->  Wu = 40 We = 5
+Case 627 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.8 ->  Wu = 20 We = 5
+Case 628 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.8 ->  Wu = 10 We = 5
+Case 629 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.8 ->  Wu = 5 We = 5
+Case 630 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.8 ->  Wu = 1 We = 5
+Case 631 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.8 ->  Wu = 100 We = 1
+Case 632 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.8 ->  Wu = 80 We = 1
+Case 633 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.8 ->  Wu = 40 We = 1
+Case 634 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.8 ->  Wu = 20 We = 1
+Case 635 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.8 ->  Wu = 10 We = 1
+Case 636 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.8 ->  Wu = 5 We = 1
+Case 637 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.8 ->  Wu = 1 We = 1
+Case 638 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.8 ->  Wu = 100 We = 100
+Case 639 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.8 ->  Wu = 80 We = 100
+Case 640 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.8 ->  Wu = 40 We = 100
+Case 641 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.8 ->  Wu = 20 We = 100
+Case 642 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.8 ->  Wu = 10 We = 100
+Case 643 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.8 ->  Wu = 5 We = 100
+Case 644 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.8 ->  Wu = 1 We = 100
+Case 645 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.8 ->  Wu = 100 We = 80
+Case 646 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.8 ->  Wu = 80 We = 80
+Case 647 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.8 ->  Wu = 40 We = 80
+Case 648 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.8 ->  Wu = 20 We = 80
+Case 649 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.8 ->  Wu = 10 We = 80
+Case 650 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.8 ->  Wu = 5 We = 80
+Case 651 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.8 ->  Wu = 1 We = 80
+Case 652 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.8 ->  Wu = 100 We = 40
+Case 653 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.8 ->  Wu = 80 We = 40
+Case 654 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.8 ->  Wu = 40 We = 40
+Case 655 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.8 ->  Wu = 20 We = 40
+Case 656 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.8 ->  Wu = 10 We = 40
+Case 657 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.8 ->  Wu = 5 We = 40
+Case 658 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.8 ->  Wu = 1 We = 40
+Case 659 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.8 ->  Wu = 100 We = 20
+Case 660 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.8 ->  Wu = 80 We = 20
+Case 661 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.8 ->  Wu = 40 We = 20
+Case 662 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.8 ->  Wu = 20 We = 20
+Case 663 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.8 ->  Wu = 10 We = 20
+Case 664 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.8 ->  Wu = 5 We = 20
+Case 665 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.8 ->  Wu = 1 We = 20
+Case 666 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.8 ->  Wu = 100 We = 10
+Case 667 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.8 ->  Wu = 80 We = 10
+Case 668 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.8 ->  Wu = 40 We = 10
+Case 669 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.8 ->  Wu = 20 We = 10
+Case 670 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.8 ->  Wu = 10 We = 10
+Case 671 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.8 ->  Wu = 5 We = 10
+Case 672 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.8 ->  Wu = 1 We = 10
+Case 673 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.8 ->  Wu = 100 We = 5
+Case 674 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.8 ->  Wu = 80 We = 5
+Case 675 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.8 ->  Wu = 40 We = 5
+Case 676 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.8 ->  Wu = 20 We = 5
+Case 677 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.8 ->  Wu = 10 We = 5
+Case 678 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.8 ->  Wu = 5 We = 5
+Case 679 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.8 ->  Wu = 1 We = 5
+Case 680 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.8 ->  Wu = 100 We = 1
+Case 681 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.8 ->  Wu = 80 We = 1
+Case 682 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.8 ->  Wu = 40 We = 1
+Case 683 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.8 ->  Wu = 20 We = 1
+Case 684 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.8 ->  Wu = 10 We = 1
+Case 685 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.8 ->  Wu = 5 We = 1
+Case 686 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.8 ->  Wu = 1 We = 1
+Case 687 Wind Speed 12.000000
+ W1 = 1 W2 = 0.4 ->  Wu = 100 We = 100
+Case 688 Wind Speed 12.000000
+ W1 = 1 W2 = 0.4 ->  Wu = 80 We = 100
+Case 689 Wind Speed 12.000000
+ W1 = 1 W2 = 0.4 ->  Wu = 40 We = 100
+Case 690 Wind Speed 12.000000
+ W1 = 1 W2 = 0.4 ->  Wu = 20 We = 100
+Case 691 Wind Speed 12.000000
+ W1 = 1 W2 = 0.4 ->  Wu = 10 We = 100
+Case 692 Wind Speed 12.000000
+ W1 = 1 W2 = 0.4 ->  Wu = 5 We = 100
+Case 693 Wind Speed 12.000000
+ W1 = 1 W2 = 0.4 ->  Wu = 1 We = 100
+Case 694 Wind Speed 12.000000
+ W1 = 1 W2 = 0.4 ->  Wu = 100 We = 80
+Case 695 Wind Speed 12.000000
+ W1 = 1 W2 = 0.4 ->  Wu = 80 We = 80
+Case 696 Wind Speed 12.000000
+ W1 = 1 W2 = 0.4 ->  Wu = 40 We = 80
+Case 697 Wind Speed 12.000000
+ W1 = 1 W2 = 0.4 ->  Wu = 20 We = 80
+Case 698 Wind Speed 12.000000
+ W1 = 1 W2 = 0.4 ->  Wu = 10 We = 80
+Case 699 Wind Speed 12.000000
+ W1 = 1 W2 = 0.4 ->  Wu = 5 We = 80
+Case 700 Wind Speed 12.000000
+ W1 = 1 W2 = 0.4 ->  Wu = 1 We = 80
+Case 701 Wind Speed 12.000000
+ W1 = 1 W2 = 0.4 ->  Wu = 100 We = 40
+Case 702 Wind Speed 12.000000
+ W1 = 1 W2 = 0.4 ->  Wu = 80 We = 40
+Case 703 Wind Speed 12.000000
+ W1 = 1 W2 = 0.4 ->  Wu = 40 We = 40
+Case 704 Wind Speed 12.000000
+ W1 = 1 W2 = 0.4 ->  Wu = 20 We = 40
+Case 705 Wind Speed 12.000000
+ W1 = 1 W2 = 0.4 ->  Wu = 10 We = 40
+Case 706 Wind Speed 12.000000
+ W1 = 1 W2 = 0.4 ->  Wu = 5 We = 40
+Case 707 Wind Speed 12.000000
+ W1 = 1 W2 = 0.4 ->  Wu = 1 We = 40
+Case 708 Wind Speed 12.000000
+ W1 = 1 W2 = 0.4 ->  Wu = 100 We = 20
+Case 709 Wind Speed 12.000000
+ W1 = 1 W2 = 0.4 ->  Wu = 80 We = 20
+Case 710 Wind Speed 12.000000
+ W1 = 1 W2 = 0.4 ->  Wu = 40 We = 20
+Case 711 Wind Speed 12.000000
+ W1 = 1 W2 = 0.4 ->  Wu = 20 We = 20
+Case 712 Wind Speed 12.000000
+ W1 = 1 W2 = 0.4 ->  Wu = 10 We = 20
+Case 713 Wind Speed 12.000000
+ W1 = 1 W2 = 0.4 ->  Wu = 5 We = 20
+Case 714 Wind Speed 12.000000
+ W1 = 1 W2 = 0.4 ->  Wu = 1 We = 20
+Case 715 Wind Speed 12.000000
+ W1 = 1 W2 = 0.4 ->  Wu = 100 We = 10
+Case 716 Wind Speed 12.000000
+ W1 = 1 W2 = 0.4 ->  Wu = 80 We = 10
+Case 717 Wind Speed 12.000000
+ W1 = 1 W2 = 0.4 ->  Wu = 40 We = 10
+Case 718 Wind Speed 12.000000
+ W1 = 1 W2 = 0.4 ->  Wu = 20 We = 10
+Case 719 Wind Speed 12.000000
+ W1 = 1 W2 = 0.4 ->  Wu = 10 We = 10
+Case 720 Wind Speed 12.000000
+ W1 = 1 W2 = 0.4 ->  Wu = 5 We = 10
+Case 721 Wind Speed 12.000000
+ W1 = 1 W2 = 0.4 ->  Wu = 1 We = 10
+Case 722 Wind Speed 12.000000
+ W1 = 1 W2 = 0.4 ->  Wu = 100 We = 5
+Case 723 Wind Speed 12.000000
+ W1 = 1 W2 = 0.4 ->  Wu = 80 We = 5
+Case 724 Wind Speed 12.000000
+ W1 = 1 W2 = 0.4 ->  Wu = 40 We = 5
+Case 725 Wind Speed 12.000000
+ W1 = 1 W2 = 0.4 ->  Wu = 20 We = 5
+Case 726 Wind Speed 12.000000
+ W1 = 1 W2 = 0.4 ->  Wu = 10 We = 5
+Case 727 Wind Speed 12.000000
+ W1 = 1 W2 = 0.4 ->  Wu = 5 We = 5
+Case 728 Wind Speed 12.000000
+ W1 = 1 W2 = 0.4 ->  Wu = 1 We = 5
+Case 729 Wind Speed 12.000000
+ W1 = 1 W2 = 0.4 ->  Wu = 100 We = 1
+Case 730 Wind Speed 12.000000
+ W1 = 1 W2 = 0.4 ->  Wu = 80 We = 1
+Case 731 Wind Speed 12.000000
+ W1 = 1 W2 = 0.4 ->  Wu = 40 We = 1
+Case 732 Wind Speed 12.000000
+ W1 = 1 W2 = 0.4 ->  Wu = 20 We = 1
+Case 733 Wind Speed 12.000000
+ W1 = 1 W2 = 0.4 ->  Wu = 10 We = 1
+Case 734 Wind Speed 12.000000
+ W1 = 1 W2 = 0.4 ->  Wu = 5 We = 1
+Case 735 Wind Speed 12.000000
+ W1 = 1 W2 = 0.4 ->  Wu = 1 We = 1
+Case 736 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.4 ->  Wu = 100 We = 100
+Case 737 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.4 ->  Wu = 80 We = 100
+Case 738 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.4 ->  Wu = 40 We = 100
+Case 739 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.4 ->  Wu = 20 We = 100
+Case 740 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.4 ->  Wu = 10 We = 100
+Case 741 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.4 ->  Wu = 5 We = 100
+Case 742 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.4 ->  Wu = 1 We = 100
+Case 743 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.4 ->  Wu = 100 We = 80
+Case 744 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.4 ->  Wu = 80 We = 80
+Case 745 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.4 ->  Wu = 40 We = 80
+Case 746 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.4 ->  Wu = 20 We = 80
+Case 747 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.4 ->  Wu = 10 We = 80
+Case 748 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.4 ->  Wu = 5 We = 80
+Case 749 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.4 ->  Wu = 1 We = 80
+Case 750 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.4 ->  Wu = 100 We = 40
+Case 751 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.4 ->  Wu = 80 We = 40
+Case 752 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.4 ->  Wu = 40 We = 40
+Case 753 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.4 ->  Wu = 20 We = 40
+Case 754 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.4 ->  Wu = 10 We = 40
+Case 755 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.4 ->  Wu = 5 We = 40
+Case 756 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.4 ->  Wu = 1 We = 40
+Case 757 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.4 ->  Wu = 100 We = 20
+Case 758 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.4 ->  Wu = 80 We = 20
+Case 759 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.4 ->  Wu = 40 We = 20
+Case 760 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.4 ->  Wu = 20 We = 20
+Case 761 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.4 ->  Wu = 10 We = 20
+Case 762 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.4 ->  Wu = 5 We = 20
+Case 763 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.4 ->  Wu = 1 We = 20
+Case 764 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.4 ->  Wu = 100 We = 10
+Case 765 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.4 ->  Wu = 80 We = 10
+Case 766 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.4 ->  Wu = 40 We = 10
+Case 767 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.4 ->  Wu = 20 We = 10
+Case 768 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.4 ->  Wu = 10 We = 10
+Case 769 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.4 ->  Wu = 5 We = 10
+Case 770 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.4 ->  Wu = 1 We = 10
+Case 771 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.4 ->  Wu = 100 We = 5
+Case 772 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.4 ->  Wu = 80 We = 5
+Case 773 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.4 ->  Wu = 40 We = 5
+Case 774 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.4 ->  Wu = 20 We = 5
+Case 775 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.4 ->  Wu = 10 We = 5
+Case 776 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.4 ->  Wu = 5 We = 5
+Case 777 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.4 ->  Wu = 1 We = 5
+Case 778 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.4 ->  Wu = 100 We = 1
+Case 779 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.4 ->  Wu = 80 We = 1
+Case 780 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.4 ->  Wu = 40 We = 1
+Case 781 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.4 ->  Wu = 20 We = 1
+Case 782 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.4 ->  Wu = 10 We = 1
+Case 783 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.4 ->  Wu = 5 We = 1
+Case 784 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.4 ->  Wu = 1 We = 1
+Case 785 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.4 ->  Wu = 100 We = 100
+Case 786 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.4 ->  Wu = 80 We = 100
+Case 787 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.4 ->  Wu = 40 We = 100
+Case 788 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.4 ->  Wu = 20 We = 100
+Case 789 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.4 ->  Wu = 10 We = 100
+Case 790 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.4 ->  Wu = 5 We = 100
+Case 791 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.4 ->  Wu = 1 We = 100
+Case 792 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.4 ->  Wu = 100 We = 80
+Case 793 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.4 ->  Wu = 80 We = 80
+Case 794 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.4 ->  Wu = 40 We = 80
+Case 795 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.4 ->  Wu = 20 We = 80
+Case 796 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.4 ->  Wu = 10 We = 80
+Case 797 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.4 ->  Wu = 5 We = 80
+Case 798 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.4 ->  Wu = 1 We = 80
+Case 799 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.4 ->  Wu = 100 We = 40
+Case 800 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.4 ->  Wu = 80 We = 40
+Case 801 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.4 ->  Wu = 40 We = 40
+Case 802 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.4 ->  Wu = 20 We = 40
+Case 803 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.4 ->  Wu = 10 We = 40
+Case 804 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.4 ->  Wu = 5 We = 40
+Case 805 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.4 ->  Wu = 1 We = 40
+Case 806 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.4 ->  Wu = 100 We = 20
+Case 807 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.4 ->  Wu = 80 We = 20
+Case 808 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.4 ->  Wu = 40 We = 20
+Case 809 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.4 ->  Wu = 20 We = 20
+Case 810 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.4 ->  Wu = 10 We = 20
+Case 811 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.4 ->  Wu = 5 We = 20
+Case 812 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.4 ->  Wu = 1 We = 20
+Case 813 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.4 ->  Wu = 100 We = 10
+Case 814 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.4 ->  Wu = 80 We = 10
+Case 815 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.4 ->  Wu = 40 We = 10
+Case 816 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.4 ->  Wu = 20 We = 10
+Case 817 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.4 ->  Wu = 10 We = 10
+Case 818 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.4 ->  Wu = 5 We = 10
+Case 819 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.4 ->  Wu = 1 We = 10
+Case 820 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.4 ->  Wu = 100 We = 5
+Case 821 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.4 ->  Wu = 80 We = 5
+Case 822 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.4 ->  Wu = 40 We = 5
+Case 823 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.4 ->  Wu = 20 We = 5
+Case 824 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.4 ->  Wu = 10 We = 5
+Case 825 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.4 ->  Wu = 5 We = 5
+Case 826 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.4 ->  Wu = 1 We = 5
+Case 827 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.4 ->  Wu = 100 We = 1
+Case 828 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.4 ->  Wu = 80 We = 1
+Case 829 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.4 ->  Wu = 40 We = 1
+Case 830 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.4 ->  Wu = 20 We = 1
+Case 831 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.4 ->  Wu = 10 We = 1
+Case 832 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.4 ->  Wu = 5 We = 1
+Case 833 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.4 ->  Wu = 1 We = 1
+Case 834 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.4 ->  Wu = 100 We = 100
+Case 835 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.4 ->  Wu = 80 We = 100
+Case 836 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.4 ->  Wu = 40 We = 100
+Case 837 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.4 ->  Wu = 20 We = 100
+Case 838 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.4 ->  Wu = 10 We = 100
+Case 839 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.4 ->  Wu = 5 We = 100
+Case 840 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.4 ->  Wu = 1 We = 100
+Case 841 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.4 ->  Wu = 100 We = 80
+Case 842 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.4 ->  Wu = 80 We = 80
+Case 843 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.4 ->  Wu = 40 We = 80
+Case 844 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.4 ->  Wu = 20 We = 80
+Case 845 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.4 ->  Wu = 10 We = 80
+Case 846 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.4 ->  Wu = 5 We = 80
+Case 847 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.4 ->  Wu = 1 We = 80
+Case 848 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.4 ->  Wu = 100 We = 40
+Case 849 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.4 ->  Wu = 80 We = 40
+Case 850 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.4 ->  Wu = 40 We = 40
+Case 851 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.4 ->  Wu = 20 We = 40
+Case 852 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.4 ->  Wu = 10 We = 40
+Case 853 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.4 ->  Wu = 5 We = 40
+Case 854 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.4 ->  Wu = 1 We = 40
+Case 855 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.4 ->  Wu = 100 We = 20
+Case 856 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.4 ->  Wu = 80 We = 20
+Case 857 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.4 ->  Wu = 40 We = 20
+Case 858 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.4 ->  Wu = 20 We = 20
+Case 859 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.4 ->  Wu = 10 We = 20
+Case 860 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.4 ->  Wu = 5 We = 20
+Case 861 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.4 ->  Wu = 1 We = 20
+Case 862 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.4 ->  Wu = 100 We = 10
+Case 863 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.4 ->  Wu = 80 We = 10
+Case 864 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.4 ->  Wu = 40 We = 10
+Case 865 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.4 ->  Wu = 20 We = 10
+Case 866 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.4 ->  Wu = 10 We = 10
+Case 867 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.4 ->  Wu = 5 We = 10
+Case 868 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.4 ->  Wu = 1 We = 10
+Case 869 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.4 ->  Wu = 100 We = 5
+Case 870 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.4 ->  Wu = 80 We = 5
+Case 871 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.4 ->  Wu = 40 We = 5
+Case 872 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.4 ->  Wu = 20 We = 5
+Case 873 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.4 ->  Wu = 10 We = 5
+Case 874 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.4 ->  Wu = 5 We = 5
+Case 875 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.4 ->  Wu = 1 We = 5
+Case 876 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.4 ->  Wu = 100 We = 1
+Case 877 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.4 ->  Wu = 80 We = 1
+Case 878 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.4 ->  Wu = 40 We = 1
+Case 879 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.4 ->  Wu = 20 We = 1
+Case 880 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.4 ->  Wu = 10 We = 1
+Case 881 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.4 ->  Wu = 5 We = 1
+Case 882 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.4 ->  Wu = 1 We = 1
+Case 883 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.4 ->  Wu = 100 We = 100
+Case 884 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.4 ->  Wu = 80 We = 100
+Case 885 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.4 ->  Wu = 40 We = 100
+Case 886 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.4 ->  Wu = 20 We = 100
+Case 887 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.4 ->  Wu = 10 We = 100
+Case 888 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.4 ->  Wu = 5 We = 100
+Case 889 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.4 ->  Wu = 1 We = 100
+Case 890 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.4 ->  Wu = 100 We = 80
+Case 891 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.4 ->  Wu = 80 We = 80
+Case 892 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.4 ->  Wu = 40 We = 80
+Case 893 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.4 ->  Wu = 20 We = 80
+Case 894 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.4 ->  Wu = 10 We = 80
+Case 895 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.4 ->  Wu = 5 We = 80
+Case 896 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.4 ->  Wu = 1 We = 80
+Case 897 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.4 ->  Wu = 100 We = 40
+Case 898 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.4 ->  Wu = 80 We = 40
+Case 899 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.4 ->  Wu = 40 We = 40
+Case 900 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.4 ->  Wu = 20 We = 40
+Case 901 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.4 ->  Wu = 10 We = 40
+Case 902 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.4 ->  Wu = 5 We = 40
+Case 903 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.4 ->  Wu = 1 We = 40
+Case 904 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.4 ->  Wu = 100 We = 20
+Case 905 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.4 ->  Wu = 80 We = 20
+Case 906 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.4 ->  Wu = 40 We = 20
+Case 907 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.4 ->  Wu = 20 We = 20
+Case 908 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.4 ->  Wu = 10 We = 20
+Case 909 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.4 ->  Wu = 5 We = 20
+Case 910 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.4 ->  Wu = 1 We = 20
+Case 911 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.4 ->  Wu = 100 We = 10
+Case 912 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.4 ->  Wu = 80 We = 10
+Case 913 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.4 ->  Wu = 40 We = 10
+Case 914 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.4 ->  Wu = 20 We = 10
+Case 915 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.4 ->  Wu = 10 We = 10
+Case 916 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.4 ->  Wu = 5 We = 10
+Case 917 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.4 ->  Wu = 1 We = 10
+Case 918 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.4 ->  Wu = 100 We = 5
+Case 919 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.4 ->  Wu = 80 We = 5
+Case 920 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.4 ->  Wu = 40 We = 5
+Case 921 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.4 ->  Wu = 20 We = 5
+Case 922 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.4 ->  Wu = 10 We = 5
+Case 923 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.4 ->  Wu = 5 We = 5
+Case 924 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.4 ->  Wu = 1 We = 5
+Case 925 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.4 ->  Wu = 100 We = 1
+Case 926 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.4 ->  Wu = 80 We = 1
+Case 927 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.4 ->  Wu = 40 We = 1
+Case 928 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.4 ->  Wu = 20 We = 1
+Case 929 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.4 ->  Wu = 10 We = 1
+Case 930 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.4 ->  Wu = 5 We = 1
+Case 931 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.4 ->  Wu = 1 We = 1
+Case 932 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.4 ->  Wu = 100 We = 100
+Case 933 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.4 ->  Wu = 80 We = 100
+Case 934 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.4 ->  Wu = 40 We = 100
+Case 935 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.4 ->  Wu = 20 We = 100
+Case 936 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.4 ->  Wu = 10 We = 100
+Case 937 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.4 ->  Wu = 5 We = 100
+Case 938 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.4 ->  Wu = 1 We = 100
+Case 939 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.4 ->  Wu = 100 We = 80
+Case 940 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.4 ->  Wu = 80 We = 80
+Case 941 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.4 ->  Wu = 40 We = 80
+Case 942 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.4 ->  Wu = 20 We = 80
+Case 943 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.4 ->  Wu = 10 We = 80
+Case 944 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.4 ->  Wu = 5 We = 80
+Case 945 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.4 ->  Wu = 1 We = 80
+Case 946 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.4 ->  Wu = 100 We = 40
+Case 947 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.4 ->  Wu = 80 We = 40
+Case 948 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.4 ->  Wu = 40 We = 40
+Case 949 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.4 ->  Wu = 20 We = 40
+Case 950 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.4 ->  Wu = 10 We = 40
+Case 951 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.4 ->  Wu = 5 We = 40
+Case 952 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.4 ->  Wu = 1 We = 40
+Case 953 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.4 ->  Wu = 100 We = 20
+Case 954 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.4 ->  Wu = 80 We = 20
+Case 955 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.4 ->  Wu = 40 We = 20
+Case 956 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.4 ->  Wu = 20 We = 20
+Case 957 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.4 ->  Wu = 10 We = 20
+Case 958 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.4 ->  Wu = 5 We = 20
+Case 959 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.4 ->  Wu = 1 We = 20
+Case 960 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.4 ->  Wu = 100 We = 10
+Case 961 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.4 ->  Wu = 80 We = 10
+Case 962 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.4 ->  Wu = 40 We = 10
+Case 963 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.4 ->  Wu = 20 We = 10
+Case 964 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.4 ->  Wu = 10 We = 10
+Case 965 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.4 ->  Wu = 5 We = 10
+Case 966 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.4 ->  Wu = 1 We = 10
+Case 967 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.4 ->  Wu = 100 We = 5
+Case 968 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.4 ->  Wu = 80 We = 5
+Case 969 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.4 ->  Wu = 40 We = 5
+Case 970 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.4 ->  Wu = 20 We = 5
+Case 971 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.4 ->  Wu = 10 We = 5
+Case 972 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.4 ->  Wu = 5 We = 5
+Case 973 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.4 ->  Wu = 1 We = 5
+Case 974 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.4 ->  Wu = 100 We = 1
+Case 975 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.4 ->  Wu = 80 We = 1
+Case 976 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.4 ->  Wu = 40 We = 1
+Case 977 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.4 ->  Wu = 20 We = 1
+Case 978 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.4 ->  Wu = 10 We = 1
+Case 979 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.4 ->  Wu = 5 We = 1
+Case 980 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.4 ->  Wu = 1 We = 1
+Case 981 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.4 ->  Wu = 100 We = 100
+Case 982 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.4 ->  Wu = 80 We = 100
+Case 983 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.4 ->  Wu = 40 We = 100
+Case 984 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.4 ->  Wu = 20 We = 100
+Case 985 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.4 ->  Wu = 10 We = 100
+Case 986 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.4 ->  Wu = 5 We = 100
+Case 987 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.4 ->  Wu = 1 We = 100
+Case 988 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.4 ->  Wu = 100 We = 80
+Case 989 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.4 ->  Wu = 80 We = 80
+Case 990 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.4 ->  Wu = 40 We = 80
+Case 991 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.4 ->  Wu = 20 We = 80
+Case 992 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.4 ->  Wu = 10 We = 80
+Case 993 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.4 ->  Wu = 5 We = 80
+Case 994 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.4 ->  Wu = 1 We = 80
+Case 995 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.4 ->  Wu = 100 We = 40
+Case 996 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.4 ->  Wu = 80 We = 40
+Case 997 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.4 ->  Wu = 40 We = 40
+Case 998 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.4 ->  Wu = 20 We = 40
+Case 999 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.4 ->  Wu = 10 We = 40
+Case 1000 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.4 ->  Wu = 5 We = 40
+Case 1001 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.4 ->  Wu = 1 We = 40
+Case 1002 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.4 ->  Wu = 100 We = 20
+Case 1003 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.4 ->  Wu = 80 We = 20
+Case 1004 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.4 ->  Wu = 40 We = 20
+Case 1005 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.4 ->  Wu = 20 We = 20
+Case 1006 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.4 ->  Wu = 10 We = 20
+Case 1007 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.4 ->  Wu = 5 We = 20
+Case 1008 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.4 ->  Wu = 1 We = 20
+Case 1009 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.4 ->  Wu = 100 We = 10
+Case 1010 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.4 ->  Wu = 80 We = 10
+Case 1011 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.4 ->  Wu = 40 We = 10
+Case 1012 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.4 ->  Wu = 20 We = 10
+Case 1013 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.4 ->  Wu = 10 We = 10
+Case 1014 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.4 ->  Wu = 5 We = 10
+Case 1015 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.4 ->  Wu = 1 We = 10
+Case 1016 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.4 ->  Wu = 100 We = 5
+Case 1017 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.4 ->  Wu = 80 We = 5
+Case 1018 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.4 ->  Wu = 40 We = 5
+Case 1019 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.4 ->  Wu = 20 We = 5
+Case 1020 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.4 ->  Wu = 10 We = 5
+Case 1021 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.4 ->  Wu = 5 We = 5
+Case 1022 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.4 ->  Wu = 1 We = 5
+Case 1023 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.4 ->  Wu = 100 We = 1
+Case 1024 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.4 ->  Wu = 80 We = 1
+Case 1025 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.4 ->  Wu = 40 We = 1
+Case 1026 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.4 ->  Wu = 20 We = 1
+Case 1027 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.4 ->  Wu = 10 We = 1
+Case 1028 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.4 ->  Wu = 5 We = 1
+Case 1029 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.4 ->  Wu = 1 We = 1
+Case 1030 Wind Speed 12.000000
+ W1 = 1 W2 = 0.2 ->  Wu = 100 We = 100
+Case 1031 Wind Speed 12.000000
+ W1 = 1 W2 = 0.2 ->  Wu = 80 We = 100
+Case 1032 Wind Speed 12.000000
+ W1 = 1 W2 = 0.2 ->  Wu = 40 We = 100
+Case 1033 Wind Speed 12.000000
+ W1 = 1 W2 = 0.2 ->  Wu = 20 We = 100
+Case 1034 Wind Speed 12.000000
+ W1 = 1 W2 = 0.2 ->  Wu = 10 We = 100
+Case 1035 Wind Speed 12.000000
+ W1 = 1 W2 = 0.2 ->  Wu = 5 We = 100
+Case 1036 Wind Speed 12.000000
+ W1 = 1 W2 = 0.2 ->  Wu = 1 We = 100
+Case 1037 Wind Speed 12.000000
+ W1 = 1 W2 = 0.2 ->  Wu = 100 We = 80
+Case 1038 Wind Speed 12.000000
+ W1 = 1 W2 = 0.2 ->  Wu = 80 We = 80
+Case 1039 Wind Speed 12.000000
+ W1 = 1 W2 = 0.2 ->  Wu = 40 We = 80
+Case 1040 Wind Speed 12.000000
+ W1 = 1 W2 = 0.2 ->  Wu = 20 We = 80
+Case 1041 Wind Speed 12.000000
+ W1 = 1 W2 = 0.2 ->  Wu = 10 We = 80
+Case 1042 Wind Speed 12.000000
+ W1 = 1 W2 = 0.2 ->  Wu = 5 We = 80
+Case 1043 Wind Speed 12.000000
+ W1 = 1 W2 = 0.2 ->  Wu = 1 We = 80
+Case 1044 Wind Speed 12.000000
+ W1 = 1 W2 = 0.2 ->  Wu = 100 We = 40
+Case 1045 Wind Speed 12.000000
+ W1 = 1 W2 = 0.2 ->  Wu = 80 We = 40
+Case 1046 Wind Speed 12.000000
+ W1 = 1 W2 = 0.2 ->  Wu = 40 We = 40
+Case 1047 Wind Speed 12.000000
+ W1 = 1 W2 = 0.2 ->  Wu = 20 We = 40
+Case 1048 Wind Speed 12.000000
+ W1 = 1 W2 = 0.2 ->  Wu = 10 We = 40
+Case 1049 Wind Speed 12.000000
+ W1 = 1 W2 = 0.2 ->  Wu = 5 We = 40
+Case 1050 Wind Speed 12.000000
+ W1 = 1 W2 = 0.2 ->  Wu = 1 We = 40
+Case 1051 Wind Speed 12.000000
+ W1 = 1 W2 = 0.2 ->  Wu = 100 We = 20
+Case 1052 Wind Speed 12.000000
+ W1 = 1 W2 = 0.2 ->  Wu = 80 We = 20
+Case 1053 Wind Speed 12.000000
+ W1 = 1 W2 = 0.2 ->  Wu = 40 We = 20
+Case 1054 Wind Speed 12.000000
+ W1 = 1 W2 = 0.2 ->  Wu = 20 We = 20
+Case 1055 Wind Speed 12.000000
+ W1 = 1 W2 = 0.2 ->  Wu = 10 We = 20
+Case 1056 Wind Speed 12.000000
+ W1 = 1 W2 = 0.2 ->  Wu = 5 We = 20
+Case 1057 Wind Speed 12.000000
+ W1 = 1 W2 = 0.2 ->  Wu = 1 We = 20
+Case 1058 Wind Speed 12.000000
+ W1 = 1 W2 = 0.2 ->  Wu = 100 We = 10
+Case 1059 Wind Speed 12.000000
+ W1 = 1 W2 = 0.2 ->  Wu = 80 We = 10
+Case 1060 Wind Speed 12.000000
+ W1 = 1 W2 = 0.2 ->  Wu = 40 We = 10
+Case 1061 Wind Speed 12.000000
+ W1 = 1 W2 = 0.2 ->  Wu = 20 We = 10
+Case 1062 Wind Speed 12.000000
+ W1 = 1 W2 = 0.2 ->  Wu = 10 We = 10
+Case 1063 Wind Speed 12.000000
+ W1 = 1 W2 = 0.2 ->  Wu = 5 We = 10
+Case 1064 Wind Speed 12.000000
+ W1 = 1 W2 = 0.2 ->  Wu = 1 We = 10
+Case 1065 Wind Speed 12.000000
+ W1 = 1 W2 = 0.2 ->  Wu = 100 We = 5
+Case 1066 Wind Speed 12.000000
+ W1 = 1 W2 = 0.2 ->  Wu = 80 We = 5
+Case 1067 Wind Speed 12.000000
+ W1 = 1 W2 = 0.2 ->  Wu = 40 We = 5
+Case 1068 Wind Speed 12.000000
+ W1 = 1 W2 = 0.2 ->  Wu = 20 We = 5
+Case 1069 Wind Speed 12.000000
+ W1 = 1 W2 = 0.2 ->  Wu = 10 We = 5
+Case 1070 Wind Speed 12.000000
+ W1 = 1 W2 = 0.2 ->  Wu = 5 We = 5
+Case 1071 Wind Speed 12.000000
+ W1 = 1 W2 = 0.2 ->  Wu = 1 We = 5
+Case 1072 Wind Speed 12.000000
+ W1 = 1 W2 = 0.2 ->  Wu = 100 We = 1
+Case 1073 Wind Speed 12.000000
+ W1 = 1 W2 = 0.2 ->  Wu = 80 We = 1
+Case 1074 Wind Speed 12.000000
+ W1 = 1 W2 = 0.2 ->  Wu = 40 We = 1
+Case 1075 Wind Speed 12.000000
+ W1 = 1 W2 = 0.2 ->  Wu = 20 We = 1
+Case 1076 Wind Speed 12.000000
+ W1 = 1 W2 = 0.2 ->  Wu = 10 We = 1
+Case 1077 Wind Speed 12.000000
+ W1 = 1 W2 = 0.2 ->  Wu = 5 We = 1
+Case 1078 Wind Speed 12.000000
+ W1 = 1 W2 = 0.2 ->  Wu = 1 We = 1
+Case 1079 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.2 ->  Wu = 100 We = 100
+Case 1080 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.2 ->  Wu = 80 We = 100
+Case 1081 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.2 ->  Wu = 40 We = 100
+Case 1082 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.2 ->  Wu = 20 We = 100
+Case 1083 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.2 ->  Wu = 10 We = 100
+Case 1084 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.2 ->  Wu = 5 We = 100
+Case 1085 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.2 ->  Wu = 1 We = 100
+Case 1086 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.2 ->  Wu = 100 We = 80
+Case 1087 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.2 ->  Wu = 80 We = 80
+Case 1088 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.2 ->  Wu = 40 We = 80
+Case 1089 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.2 ->  Wu = 20 We = 80
+Case 1090 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.2 ->  Wu = 10 We = 80
+Case 1091 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.2 ->  Wu = 5 We = 80
+Case 1092 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.2 ->  Wu = 1 We = 80
+Case 1093 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.2 ->  Wu = 100 We = 40
+Case 1094 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.2 ->  Wu = 80 We = 40
+Case 1095 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.2 ->  Wu = 40 We = 40
+Case 1096 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.2 ->  Wu = 20 We = 40
+Case 1097 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.2 ->  Wu = 10 We = 40
+Case 1098 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.2 ->  Wu = 5 We = 40
+Case 1099 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.2 ->  Wu = 1 We = 40
+Case 1100 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.2 ->  Wu = 100 We = 20
+Case 1101 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.2 ->  Wu = 80 We = 20
+Case 1102 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.2 ->  Wu = 40 We = 20
+Case 1103 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.2 ->  Wu = 20 We = 20
+Case 1104 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.2 ->  Wu = 10 We = 20
+Case 1105 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.2 ->  Wu = 5 We = 20
+Case 1106 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.2 ->  Wu = 1 We = 20
+Case 1107 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.2 ->  Wu = 100 We = 10
+Case 1108 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.2 ->  Wu = 80 We = 10
+Case 1109 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.2 ->  Wu = 40 We = 10
+Case 1110 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.2 ->  Wu = 20 We = 10
+Case 1111 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.2 ->  Wu = 10 We = 10
+Case 1112 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.2 ->  Wu = 5 We = 10
+Case 1113 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.2 ->  Wu = 1 We = 10
+Case 1114 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.2 ->  Wu = 100 We = 5
+Case 1115 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.2 ->  Wu = 80 We = 5
+Case 1116 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.2 ->  Wu = 40 We = 5
+Case 1117 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.2 ->  Wu = 20 We = 5
+Case 1118 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.2 ->  Wu = 10 We = 5
+Case 1119 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.2 ->  Wu = 5 We = 5
+Case 1120 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.2 ->  Wu = 1 We = 5
+Case 1121 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.2 ->  Wu = 100 We = 1
+Case 1122 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.2 ->  Wu = 80 We = 1
+Case 1123 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.2 ->  Wu = 40 We = 1
+Case 1124 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.2 ->  Wu = 20 We = 1
+Case 1125 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.2 ->  Wu = 10 We = 1
+Case 1126 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.2 ->  Wu = 5 We = 1
+Case 1127 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.2 ->  Wu = 1 We = 1
+Case 1128 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.2 ->  Wu = 100 We = 100
+Case 1129 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.2 ->  Wu = 80 We = 100
+Case 1130 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.2 ->  Wu = 40 We = 100
+Case 1131 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.2 ->  Wu = 20 We = 100
+Case 1132 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.2 ->  Wu = 10 We = 100
+Case 1133 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.2 ->  Wu = 5 We = 100
+Case 1134 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.2 ->  Wu = 1 We = 100
+Case 1135 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.2 ->  Wu = 100 We = 80
+Case 1136 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.2 ->  Wu = 80 We = 80
+Case 1137 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.2 ->  Wu = 40 We = 80
+Case 1138 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.2 ->  Wu = 20 We = 80
+Case 1139 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.2 ->  Wu = 10 We = 80
+Case 1140 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.2 ->  Wu = 5 We = 80
+Case 1141 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.2 ->  Wu = 1 We = 80
+Case 1142 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.2 ->  Wu = 100 We = 40
+Case 1143 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.2 ->  Wu = 80 We = 40
+Case 1144 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.2 ->  Wu = 40 We = 40
+Case 1145 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.2 ->  Wu = 20 We = 40
+Case 1146 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.2 ->  Wu = 10 We = 40
+Case 1147 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.2 ->  Wu = 5 We = 40
+Case 1148 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.2 ->  Wu = 1 We = 40
+Case 1149 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.2 ->  Wu = 100 We = 20
+Case 1150 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.2 ->  Wu = 80 We = 20
+Case 1151 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.2 ->  Wu = 40 We = 20
+Case 1152 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.2 ->  Wu = 20 We = 20
+Case 1153 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.2 ->  Wu = 10 We = 20
+Case 1154 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.2 ->  Wu = 5 We = 20
+Case 1155 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.2 ->  Wu = 1 We = 20
+Case 1156 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.2 ->  Wu = 100 We = 10
+Case 1157 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.2 ->  Wu = 80 We = 10
+Case 1158 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.2 ->  Wu = 40 We = 10
+Case 1159 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.2 ->  Wu = 20 We = 10
+Case 1160 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.2 ->  Wu = 10 We = 10
+Case 1161 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.2 ->  Wu = 5 We = 10
+Case 1162 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.2 ->  Wu = 1 We = 10
+Case 1163 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.2 ->  Wu = 100 We = 5
+Case 1164 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.2 ->  Wu = 80 We = 5
+Case 1165 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.2 ->  Wu = 40 We = 5
+Case 1166 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.2 ->  Wu = 20 We = 5
+Case 1167 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.2 ->  Wu = 10 We = 5
+Case 1168 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.2 ->  Wu = 5 We = 5
+Case 1169 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.2 ->  Wu = 1 We = 5
+Case 1170 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.2 ->  Wu = 100 We = 1
+Case 1171 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.2 ->  Wu = 80 We = 1
+Case 1172 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.2 ->  Wu = 40 We = 1
+Case 1173 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.2 ->  Wu = 20 We = 1
+Case 1174 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.2 ->  Wu = 10 We = 1
+Case 1175 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.2 ->  Wu = 5 We = 1
+Case 1176 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.2 ->  Wu = 1 We = 1
+Case 1177 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.2 ->  Wu = 100 We = 100
+Case 1178 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.2 ->  Wu = 80 We = 100
+Case 1179 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.2 ->  Wu = 40 We = 100
+Case 1180 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.2 ->  Wu = 20 We = 100
+Case 1181 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.2 ->  Wu = 10 We = 100
+Case 1182 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.2 ->  Wu = 5 We = 100
+Case 1183 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.2 ->  Wu = 1 We = 100
+Case 1184 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.2 ->  Wu = 100 We = 80
+Case 1185 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.2 ->  Wu = 80 We = 80
+Case 1186 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.2 ->  Wu = 40 We = 80
+Case 1187 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.2 ->  Wu = 20 We = 80
+Case 1188 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.2 ->  Wu = 10 We = 80
+Case 1189 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.2 ->  Wu = 5 We = 80
+Case 1190 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.2 ->  Wu = 1 We = 80
+Case 1191 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.2 ->  Wu = 100 We = 40
+Case 1192 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.2 ->  Wu = 80 We = 40
+Case 1193 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.2 ->  Wu = 40 We = 40
+Case 1194 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.2 ->  Wu = 20 We = 40
+Case 1195 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.2 ->  Wu = 10 We = 40
+Case 1196 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.2 ->  Wu = 5 We = 40
+Case 1197 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.2 ->  Wu = 1 We = 40
+Case 1198 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.2 ->  Wu = 100 We = 20
+Case 1199 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.2 ->  Wu = 80 We = 20
+Case 1200 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.2 ->  Wu = 40 We = 20
+Case 1201 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.2 ->  Wu = 20 We = 20
+Case 1202 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.2 ->  Wu = 10 We = 20
+Case 1203 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.2 ->  Wu = 5 We = 20
+Case 1204 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.2 ->  Wu = 1 We = 20
+Case 1205 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.2 ->  Wu = 100 We = 10
+Case 1206 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.2 ->  Wu = 80 We = 10
+Case 1207 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.2 ->  Wu = 40 We = 10
+Case 1208 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.2 ->  Wu = 20 We = 10
+Case 1209 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.2 ->  Wu = 10 We = 10
+Case 1210 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.2 ->  Wu = 5 We = 10
+Case 1211 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.2 ->  Wu = 1 We = 10
+Case 1212 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.2 ->  Wu = 100 We = 5
+Case 1213 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.2 ->  Wu = 80 We = 5
+Case 1214 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.2 ->  Wu = 40 We = 5
+Case 1215 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.2 ->  Wu = 20 We = 5
+Case 1216 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.2 ->  Wu = 10 We = 5
+Case 1217 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.2 ->  Wu = 5 We = 5
+Case 1218 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.2 ->  Wu = 1 We = 5
+Case 1219 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.2 ->  Wu = 100 We = 1
+Case 1220 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.2 ->  Wu = 80 We = 1
+Case 1221 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.2 ->  Wu = 40 We = 1
+Case 1222 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.2 ->  Wu = 20 We = 1
+Case 1223 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.2 ->  Wu = 10 We = 1
+Case 1224 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.2 ->  Wu = 5 We = 1
+Case 1225 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.2 ->  Wu = 1 We = 1
+Case 1226 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.2 ->  Wu = 100 We = 100
+Case 1227 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.2 ->  Wu = 80 We = 100
+Case 1228 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.2 ->  Wu = 40 We = 100
+Case 1229 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.2 ->  Wu = 20 We = 100
+Case 1230 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.2 ->  Wu = 10 We = 100
+Case 1231 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.2 ->  Wu = 5 We = 100
+Case 1232 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.2 ->  Wu = 1 We = 100
+Case 1233 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.2 ->  Wu = 100 We = 80
+Case 1234 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.2 ->  Wu = 80 We = 80
+Case 1235 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.2 ->  Wu = 40 We = 80
+Case 1236 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.2 ->  Wu = 20 We = 80
+Case 1237 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.2 ->  Wu = 10 We = 80
+Case 1238 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.2 ->  Wu = 5 We = 80
+Case 1239 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.2 ->  Wu = 1 We = 80
+Case 1240 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.2 ->  Wu = 100 We = 40
+Case 1241 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.2 ->  Wu = 80 We = 40
+Case 1242 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.2 ->  Wu = 40 We = 40
+Case 1243 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.2 ->  Wu = 20 We = 40
+Case 1244 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.2 ->  Wu = 10 We = 40
+Case 1245 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.2 ->  Wu = 5 We = 40
+Case 1246 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.2 ->  Wu = 1 We = 40
+Case 1247 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.2 ->  Wu = 100 We = 20
+Case 1248 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.2 ->  Wu = 80 We = 20
+Case 1249 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.2 ->  Wu = 40 We = 20
+Case 1250 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.2 ->  Wu = 20 We = 20
+Case 1251 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.2 ->  Wu = 10 We = 20
+Case 1252 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.2 ->  Wu = 5 We = 20
+Case 1253 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.2 ->  Wu = 1 We = 20
+Case 1254 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.2 ->  Wu = 100 We = 10
+Case 1255 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.2 ->  Wu = 80 We = 10
+Case 1256 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.2 ->  Wu = 40 We = 10
+Case 1257 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.2 ->  Wu = 20 We = 10
+Case 1258 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.2 ->  Wu = 10 We = 10
+Case 1259 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.2 ->  Wu = 5 We = 10
+Case 1260 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.2 ->  Wu = 1 We = 10
+Case 1261 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.2 ->  Wu = 100 We = 5
+Case 1262 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.2 ->  Wu = 80 We = 5
+Case 1263 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.2 ->  Wu = 40 We = 5
+Case 1264 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.2 ->  Wu = 20 We = 5
+Case 1265 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.2 ->  Wu = 10 We = 5
+Case 1266 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.2 ->  Wu = 5 We = 5
+Case 1267 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.2 ->  Wu = 1 We = 5
+Case 1268 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.2 ->  Wu = 100 We = 1
+Case 1269 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.2 ->  Wu = 80 We = 1
+Case 1270 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.2 ->  Wu = 40 We = 1
+Case 1271 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.2 ->  Wu = 20 We = 1
+Case 1272 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.2 ->  Wu = 10 We = 1
+Case 1273 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.2 ->  Wu = 5 We = 1
+Case 1274 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.2 ->  Wu = 1 We = 1
+Case 1275 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.2 ->  Wu = 100 We = 100
+Case 1276 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.2 ->  Wu = 80 We = 100
+Case 1277 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.2 ->  Wu = 40 We = 100
+Case 1278 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.2 ->  Wu = 20 We = 100
+Case 1279 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.2 ->  Wu = 10 We = 100
+Case 1280 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.2 ->  Wu = 5 We = 100
+Case 1281 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.2 ->  Wu = 1 We = 100
+Case 1282 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.2 ->  Wu = 100 We = 80
+Case 1283 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.2 ->  Wu = 80 We = 80
+Case 1284 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.2 ->  Wu = 40 We = 80
+Case 1285 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.2 ->  Wu = 20 We = 80
+Case 1286 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.2 ->  Wu = 10 We = 80
+Case 1287 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.2 ->  Wu = 5 We = 80
+Case 1288 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.2 ->  Wu = 1 We = 80
+Case 1289 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.2 ->  Wu = 100 We = 40
+Case 1290 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.2 ->  Wu = 80 We = 40
+Case 1291 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.2 ->  Wu = 40 We = 40
+Case 1292 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.2 ->  Wu = 20 We = 40
+Case 1293 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.2 ->  Wu = 10 We = 40
+Case 1294 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.2 ->  Wu = 5 We = 40
+Case 1295 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.2 ->  Wu = 1 We = 40
+Case 1296 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.2 ->  Wu = 100 We = 20
+Case 1297 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.2 ->  Wu = 80 We = 20
+Case 1298 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.2 ->  Wu = 40 We = 20
+Case 1299 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.2 ->  Wu = 20 We = 20
+Case 1300 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.2 ->  Wu = 10 We = 20
+Case 1301 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.2 ->  Wu = 5 We = 20
+Case 1302 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.2 ->  Wu = 1 We = 20
+Case 1303 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.2 ->  Wu = 100 We = 10
+Case 1304 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.2 ->  Wu = 80 We = 10
+Case 1305 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.2 ->  Wu = 40 We = 10
+Case 1306 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.2 ->  Wu = 20 We = 10
+Case 1307 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.2 ->  Wu = 10 We = 10
+Case 1308 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.2 ->  Wu = 5 We = 10
+Case 1309 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.2 ->  Wu = 1 We = 10
+Case 1310 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.2 ->  Wu = 100 We = 5
+Case 1311 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.2 ->  Wu = 80 We = 5
+Case 1312 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.2 ->  Wu = 40 We = 5
+Case 1313 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.2 ->  Wu = 20 We = 5
+Case 1314 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.2 ->  Wu = 10 We = 5
+Case 1315 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.2 ->  Wu = 5 We = 5
+Case 1316 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.2 ->  Wu = 1 We = 5
+Case 1317 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.2 ->  Wu = 100 We = 1
+Case 1318 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.2 ->  Wu = 80 We = 1
+Case 1319 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.2 ->  Wu = 40 We = 1
+Case 1320 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.2 ->  Wu = 20 We = 1
+Case 1321 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.2 ->  Wu = 10 We = 1
+Case 1322 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.2 ->  Wu = 5 We = 1
+Case 1323 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.2 ->  Wu = 1 We = 1
+Case 1324 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.2 ->  Wu = 100 We = 100
+Case 1325 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.2 ->  Wu = 80 We = 100
+Case 1326 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.2 ->  Wu = 40 We = 100
+Case 1327 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.2 ->  Wu = 20 We = 100
+Case 1328 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.2 ->  Wu = 10 We = 100
+Case 1329 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.2 ->  Wu = 5 We = 100
+Case 1330 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.2 ->  Wu = 1 We = 100
+Case 1331 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.2 ->  Wu = 100 We = 80
+Case 1332 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.2 ->  Wu = 80 We = 80
+Case 1333 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.2 ->  Wu = 40 We = 80
+Case 1334 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.2 ->  Wu = 20 We = 80
+Case 1335 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.2 ->  Wu = 10 We = 80
+Case 1336 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.2 ->  Wu = 5 We = 80
+Case 1337 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.2 ->  Wu = 1 We = 80
+Case 1338 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.2 ->  Wu = 100 We = 40
+Case 1339 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.2 ->  Wu = 80 We = 40
+Case 1340 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.2 ->  Wu = 40 We = 40
+Case 1341 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.2 ->  Wu = 20 We = 40
+Case 1342 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.2 ->  Wu = 10 We = 40
+Case 1343 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.2 ->  Wu = 5 We = 40
+Case 1344 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.2 ->  Wu = 1 We = 40
+Case 1345 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.2 ->  Wu = 100 We = 20
+Case 1346 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.2 ->  Wu = 80 We = 20
+Case 1347 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.2 ->  Wu = 40 We = 20
+Case 1348 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.2 ->  Wu = 20 We = 20
+Case 1349 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.2 ->  Wu = 10 We = 20
+Case 1350 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.2 ->  Wu = 5 We = 20
+Case 1351 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.2 ->  Wu = 1 We = 20
+Case 1352 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.2 ->  Wu = 100 We = 10
+Case 1353 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.2 ->  Wu = 80 We = 10
+Case 1354 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.2 ->  Wu = 40 We = 10
+Case 1355 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.2 ->  Wu = 20 We = 10
+Case 1356 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.2 ->  Wu = 10 We = 10
+Case 1357 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.2 ->  Wu = 5 We = 10
+Case 1358 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.2 ->  Wu = 1 We = 10
+Case 1359 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.2 ->  Wu = 100 We = 5
+Case 1360 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.2 ->  Wu = 80 We = 5
+Case 1361 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.2 ->  Wu = 40 We = 5
+Case 1362 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.2 ->  Wu = 20 We = 5
+Case 1363 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.2 ->  Wu = 10 We = 5
+Case 1364 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.2 ->  Wu = 5 We = 5
+Case 1365 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.2 ->  Wu = 1 We = 5
+Case 1366 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.2 ->  Wu = 100 We = 1
+Case 1367 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.2 ->  Wu = 80 We = 1
+Case 1368 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.2 ->  Wu = 40 We = 1
+Case 1369 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.2 ->  Wu = 20 We = 1
+Case 1370 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.2 ->  Wu = 10 We = 1
+Case 1371 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.2 ->  Wu = 5 We = 1
+Case 1372 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.2 ->  Wu = 1 We = 1
+Case 1373 Wind Speed 12.000000
+ W1 = 1 W2 = 0.1 ->  Wu = 100 We = 100
+Case 1374 Wind Speed 12.000000
+ W1 = 1 W2 = 0.1 ->  Wu = 80 We = 100
+Case 1375 Wind Speed 12.000000
+ W1 = 1 W2 = 0.1 ->  Wu = 40 We = 100
+Case 1376 Wind Speed 12.000000
+ W1 = 1 W2 = 0.1 ->  Wu = 20 We = 100
+Case 1377 Wind Speed 12.000000
+ W1 = 1 W2 = 0.1 ->  Wu = 10 We = 100
+Case 1378 Wind Speed 12.000000
+ W1 = 1 W2 = 0.1 ->  Wu = 5 We = 100
+Case 1379 Wind Speed 12.000000
+ W1 = 1 W2 = 0.1 ->  Wu = 1 We = 100
+Case 1380 Wind Speed 12.000000
+ W1 = 1 W2 = 0.1 ->  Wu = 100 We = 80
+Case 1381 Wind Speed 12.000000
+ W1 = 1 W2 = 0.1 ->  Wu = 80 We = 80
+Case 1382 Wind Speed 12.000000
+ W1 = 1 W2 = 0.1 ->  Wu = 40 We = 80
+Case 1383 Wind Speed 12.000000
+ W1 = 1 W2 = 0.1 ->  Wu = 20 We = 80
+Case 1384 Wind Speed 12.000000
+ W1 = 1 W2 = 0.1 ->  Wu = 10 We = 80
+Case 1385 Wind Speed 12.000000
+ W1 = 1 W2 = 0.1 ->  Wu = 5 We = 80
+Case 1386 Wind Speed 12.000000
+ W1 = 1 W2 = 0.1 ->  Wu = 1 We = 80
+Case 1387 Wind Speed 12.000000
+ W1 = 1 W2 = 0.1 ->  Wu = 100 We = 40
+Case 1388 Wind Speed 12.000000
+ W1 = 1 W2 = 0.1 ->  Wu = 80 We = 40
+Case 1389 Wind Speed 12.000000
+ W1 = 1 W2 = 0.1 ->  Wu = 40 We = 40
+Case 1390 Wind Speed 12.000000
+ W1 = 1 W2 = 0.1 ->  Wu = 20 We = 40
+Case 1391 Wind Speed 12.000000
+ W1 = 1 W2 = 0.1 ->  Wu = 10 We = 40
+Case 1392 Wind Speed 12.000000
+ W1 = 1 W2 = 0.1 ->  Wu = 5 We = 40
+Case 1393 Wind Speed 12.000000
+ W1 = 1 W2 = 0.1 ->  Wu = 1 We = 40
+Case 1394 Wind Speed 12.000000
+ W1 = 1 W2 = 0.1 ->  Wu = 100 We = 20
+Case 1395 Wind Speed 12.000000
+ W1 = 1 W2 = 0.1 ->  Wu = 80 We = 20
+Case 1396 Wind Speed 12.000000
+ W1 = 1 W2 = 0.1 ->  Wu = 40 We = 20
+Case 1397 Wind Speed 12.000000
+ W1 = 1 W2 = 0.1 ->  Wu = 20 We = 20
+Case 1398 Wind Speed 12.000000
+ W1 = 1 W2 = 0.1 ->  Wu = 10 We = 20
+Case 1399 Wind Speed 12.000000
+ W1 = 1 W2 = 0.1 ->  Wu = 5 We = 20
+Case 1400 Wind Speed 12.000000
+ W1 = 1 W2 = 0.1 ->  Wu = 1 We = 20
+Case 1401 Wind Speed 12.000000
+ W1 = 1 W2 = 0.1 ->  Wu = 100 We = 10
+Case 1402 Wind Speed 12.000000
+ W1 = 1 W2 = 0.1 ->  Wu = 80 We = 10
+Case 1403 Wind Speed 12.000000
+ W1 = 1 W2 = 0.1 ->  Wu = 40 We = 10
+Case 1404 Wind Speed 12.000000
+ W1 = 1 W2 = 0.1 ->  Wu = 20 We = 10
+Case 1405 Wind Speed 12.000000
+ W1 = 1 W2 = 0.1 ->  Wu = 10 We = 10
+Case 1406 Wind Speed 12.000000
+ W1 = 1 W2 = 0.1 ->  Wu = 5 We = 10
+Case 1407 Wind Speed 12.000000
+ W1 = 1 W2 = 0.1 ->  Wu = 1 We = 10
+Case 1408 Wind Speed 12.000000
+ W1 = 1 W2 = 0.1 ->  Wu = 100 We = 5
+Case 1409 Wind Speed 12.000000
+ W1 = 1 W2 = 0.1 ->  Wu = 80 We = 5
+Case 1410 Wind Speed 12.000000
+ W1 = 1 W2 = 0.1 ->  Wu = 40 We = 5
+Case 1411 Wind Speed 12.000000
+ W1 = 1 W2 = 0.1 ->  Wu = 20 We = 5
+Case 1412 Wind Speed 12.000000
+ W1 = 1 W2 = 0.1 ->  Wu = 10 We = 5
+Case 1413 Wind Speed 12.000000
+ W1 = 1 W2 = 0.1 ->  Wu = 5 We = 5
+Case 1414 Wind Speed 12.000000
+ W1 = 1 W2 = 0.1 ->  Wu = 1 We = 5
+Case 1415 Wind Speed 12.000000
+ W1 = 1 W2 = 0.1 ->  Wu = 100 We = 1
+Case 1416 Wind Speed 12.000000
+ W1 = 1 W2 = 0.1 ->  Wu = 80 We = 1
+Case 1417 Wind Speed 12.000000
+ W1 = 1 W2 = 0.1 ->  Wu = 40 We = 1
+Case 1418 Wind Speed 12.000000
+ W1 = 1 W2 = 0.1 ->  Wu = 20 We = 1
+Case 1419 Wind Speed 12.000000
+ W1 = 1 W2 = 0.1 ->  Wu = 10 We = 1
+Case 1420 Wind Speed 12.000000
+ W1 = 1 W2 = 0.1 ->  Wu = 5 We = 1
+Case 1421 Wind Speed 12.000000
+ W1 = 1 W2 = 0.1 ->  Wu = 1 We = 1
+Case 1422 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.1 ->  Wu = 100 We = 100
+Case 1423 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.1 ->  Wu = 80 We = 100
+Case 1424 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.1 ->  Wu = 40 We = 100
+Case 1425 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.1 ->  Wu = 20 We = 100
+Case 1426 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.1 ->  Wu = 10 We = 100
+Case 1427 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.1 ->  Wu = 5 We = 100
+Case 1428 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.1 ->  Wu = 1 We = 100
+Case 1429 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.1 ->  Wu = 100 We = 80
+Case 1430 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.1 ->  Wu = 80 We = 80
+Case 1431 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.1 ->  Wu = 40 We = 80
+Case 1432 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.1 ->  Wu = 20 We = 80
+Case 1433 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.1 ->  Wu = 10 We = 80
+Case 1434 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.1 ->  Wu = 5 We = 80
+Case 1435 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.1 ->  Wu = 1 We = 80
+Case 1436 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.1 ->  Wu = 100 We = 40
+Case 1437 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.1 ->  Wu = 80 We = 40
+Case 1438 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.1 ->  Wu = 40 We = 40
+Case 1439 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.1 ->  Wu = 20 We = 40
+Case 1440 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.1 ->  Wu = 10 We = 40
+Case 1441 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.1 ->  Wu = 5 We = 40
+Case 1442 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.1 ->  Wu = 1 We = 40
+Case 1443 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.1 ->  Wu = 100 We = 20
+Case 1444 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.1 ->  Wu = 80 We = 20
+Case 1445 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.1 ->  Wu = 40 We = 20
+Case 1446 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.1 ->  Wu = 20 We = 20
+Case 1447 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.1 ->  Wu = 10 We = 20
+Case 1448 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.1 ->  Wu = 5 We = 20
+Case 1449 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.1 ->  Wu = 1 We = 20
+Case 1450 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.1 ->  Wu = 100 We = 10
+Case 1451 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.1 ->  Wu = 80 We = 10
+Case 1452 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.1 ->  Wu = 40 We = 10
+Case 1453 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.1 ->  Wu = 20 We = 10
+Case 1454 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.1 ->  Wu = 10 We = 10
+Case 1455 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.1 ->  Wu = 5 We = 10
+Case 1456 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.1 ->  Wu = 1 We = 10
+Case 1457 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.1 ->  Wu = 100 We = 5
+Case 1458 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.1 ->  Wu = 80 We = 5
+Case 1459 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.1 ->  Wu = 40 We = 5
+Case 1460 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.1 ->  Wu = 20 We = 5
+Case 1461 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.1 ->  Wu = 10 We = 5
+Case 1462 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.1 ->  Wu = 5 We = 5
+Case 1463 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.1 ->  Wu = 1 We = 5
+Case 1464 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.1 ->  Wu = 100 We = 1
+Case 1465 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.1 ->  Wu = 80 We = 1
+Case 1466 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.1 ->  Wu = 40 We = 1
+Case 1467 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.1 ->  Wu = 20 We = 1
+Case 1468 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.1 ->  Wu = 10 We = 1
+Case 1469 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.1 ->  Wu = 5 We = 1
+Case 1470 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.1 ->  Wu = 1 We = 1
+Case 1471 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.1 ->  Wu = 100 We = 100
+Case 1472 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.1 ->  Wu = 80 We = 100
+Case 1473 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.1 ->  Wu = 40 We = 100
+Case 1474 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.1 ->  Wu = 20 We = 100
+Case 1475 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.1 ->  Wu = 10 We = 100
+Case 1476 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.1 ->  Wu = 5 We = 100
+Case 1477 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.1 ->  Wu = 1 We = 100
+Case 1478 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.1 ->  Wu = 100 We = 80
+Case 1479 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.1 ->  Wu = 80 We = 80
+Case 1480 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.1 ->  Wu = 40 We = 80
+Case 1481 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.1 ->  Wu = 20 We = 80
+Case 1482 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.1 ->  Wu = 10 We = 80
+Case 1483 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.1 ->  Wu = 5 We = 80
+Case 1484 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.1 ->  Wu = 1 We = 80
+Case 1485 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.1 ->  Wu = 100 We = 40
+Case 1486 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.1 ->  Wu = 80 We = 40
+Case 1487 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.1 ->  Wu = 40 We = 40
+Case 1488 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.1 ->  Wu = 20 We = 40
+Case 1489 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.1 ->  Wu = 10 We = 40
+Case 1490 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.1 ->  Wu = 5 We = 40
+Case 1491 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.1 ->  Wu = 1 We = 40
+Case 1492 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.1 ->  Wu = 100 We = 20
+Case 1493 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.1 ->  Wu = 80 We = 20
+Case 1494 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.1 ->  Wu = 40 We = 20
+Case 1495 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.1 ->  Wu = 20 We = 20
+Case 1496 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.1 ->  Wu = 10 We = 20
+Case 1497 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.1 ->  Wu = 5 We = 20
+Case 1498 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.1 ->  Wu = 1 We = 20
+Case 1499 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.1 ->  Wu = 100 We = 10
+Case 1500 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.1 ->  Wu = 80 We = 10
+Case 1501 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.1 ->  Wu = 40 We = 10
+Case 1502 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.1 ->  Wu = 20 We = 10
+Case 1503 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.1 ->  Wu = 10 We = 10
+Case 1504 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.1 ->  Wu = 5 We = 10
+Case 1505 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.1 ->  Wu = 1 We = 10
+Case 1506 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.1 ->  Wu = 100 We = 5
+Case 1507 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.1 ->  Wu = 80 We = 5
+Case 1508 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.1 ->  Wu = 40 We = 5
+Case 1509 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.1 ->  Wu = 20 We = 5
+Case 1510 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.1 ->  Wu = 10 We = 5
+Case 1511 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.1 ->  Wu = 5 We = 5
+Case 1512 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.1 ->  Wu = 1 We = 5
+Case 1513 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.1 ->  Wu = 100 We = 1
+Case 1514 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.1 ->  Wu = 80 We = 1
+Case 1515 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.1 ->  Wu = 40 We = 1
+Case 1516 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.1 ->  Wu = 20 We = 1
+Case 1517 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.1 ->  Wu = 10 We = 1
+Case 1518 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.1 ->  Wu = 5 We = 1
+Case 1519 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.1 ->  Wu = 1 We = 1
+Case 1520 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.1 ->  Wu = 100 We = 100
+Case 1521 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.1 ->  Wu = 80 We = 100
+Case 1522 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.1 ->  Wu = 40 We = 100
+Case 1523 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.1 ->  Wu = 20 We = 100
+Case 1524 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.1 ->  Wu = 10 We = 100
+Case 1525 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.1 ->  Wu = 5 We = 100
+Case 1526 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.1 ->  Wu = 1 We = 100
+Case 1527 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.1 ->  Wu = 100 We = 80
+Case 1528 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.1 ->  Wu = 80 We = 80
+Case 1529 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.1 ->  Wu = 40 We = 80
+Case 1530 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.1 ->  Wu = 20 We = 80
+Case 1531 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.1 ->  Wu = 10 We = 80
+Case 1532 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.1 ->  Wu = 5 We = 80
+Case 1533 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.1 ->  Wu = 1 We = 80
+Case 1534 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.1 ->  Wu = 100 We = 40
+Case 1535 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.1 ->  Wu = 80 We = 40
+Case 1536 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.1 ->  Wu = 40 We = 40
+Case 1537 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.1 ->  Wu = 20 We = 40
+Case 1538 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.1 ->  Wu = 10 We = 40
+Case 1539 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.1 ->  Wu = 5 We = 40
+Case 1540 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.1 ->  Wu = 1 We = 40
+Case 1541 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.1 ->  Wu = 100 We = 20
+Case 1542 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.1 ->  Wu = 80 We = 20
+Case 1543 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.1 ->  Wu = 40 We = 20
+Case 1544 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.1 ->  Wu = 20 We = 20
+Case 1545 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.1 ->  Wu = 10 We = 20
+Case 1546 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.1 ->  Wu = 5 We = 20
+Case 1547 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.1 ->  Wu = 1 We = 20
+Case 1548 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.1 ->  Wu = 100 We = 10
+Case 1549 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.1 ->  Wu = 80 We = 10
+Case 1550 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.1 ->  Wu = 40 We = 10
+Case 1551 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.1 ->  Wu = 20 We = 10
+Case 1552 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.1 ->  Wu = 10 We = 10
+Case 1553 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.1 ->  Wu = 5 We = 10
+Case 1554 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.1 ->  Wu = 1 We = 10
+Case 1555 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.1 ->  Wu = 100 We = 5
+Case 1556 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.1 ->  Wu = 80 We = 5
+Case 1557 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.1 ->  Wu = 40 We = 5
+Case 1558 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.1 ->  Wu = 20 We = 5
+Case 1559 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.1 ->  Wu = 10 We = 5
+Case 1560 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.1 ->  Wu = 5 We = 5
+Case 1561 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.1 ->  Wu = 1 We = 5
+Case 1562 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.1 ->  Wu = 100 We = 1
+Case 1563 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.1 ->  Wu = 80 We = 1
+Case 1564 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.1 ->  Wu = 40 We = 1
+Case 1565 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.1 ->  Wu = 20 We = 1
+Case 1566 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.1 ->  Wu = 10 We = 1
+Case 1567 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.1 ->  Wu = 5 We = 1
+Case 1568 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.1 ->  Wu = 1 We = 1
+Case 1569 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.1 ->  Wu = 100 We = 100
+Case 1570 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.1 ->  Wu = 80 We = 100
+Case 1571 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.1 ->  Wu = 40 We = 100
+Case 1572 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.1 ->  Wu = 20 We = 100
+Case 1573 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.1 ->  Wu = 10 We = 100
+Case 1574 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.1 ->  Wu = 5 We = 100
+Case 1575 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.1 ->  Wu = 1 We = 100
+Case 1576 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.1 ->  Wu = 100 We = 80
+Case 1577 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.1 ->  Wu = 80 We = 80
+Case 1578 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.1 ->  Wu = 40 We = 80
+Case 1579 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.1 ->  Wu = 20 We = 80
+Case 1580 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.1 ->  Wu = 10 We = 80
+Case 1581 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.1 ->  Wu = 5 We = 80
+Case 1582 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.1 ->  Wu = 1 We = 80
+Case 1583 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.1 ->  Wu = 100 We = 40
+Case 1584 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.1 ->  Wu = 80 We = 40
+Case 1585 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.1 ->  Wu = 40 We = 40
+Case 1586 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.1 ->  Wu = 20 We = 40
+Case 1587 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.1 ->  Wu = 10 We = 40
+Case 1588 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.1 ->  Wu = 5 We = 40
+Case 1589 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.1 ->  Wu = 1 We = 40
+Case 1590 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.1 ->  Wu = 100 We = 20
+Case 1591 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.1 ->  Wu = 80 We = 20
+Case 1592 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.1 ->  Wu = 40 We = 20
+Case 1593 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.1 ->  Wu = 20 We = 20
+Case 1594 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.1 ->  Wu = 10 We = 20
+Case 1595 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.1 ->  Wu = 5 We = 20
+Case 1596 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.1 ->  Wu = 1 We = 20
+Case 1597 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.1 ->  Wu = 100 We = 10
+Case 1598 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.1 ->  Wu = 80 We = 10
+Case 1599 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.1 ->  Wu = 40 We = 10
+Case 1600 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.1 ->  Wu = 20 We = 10
+Case 1601 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.1 ->  Wu = 10 We = 10
+Case 1602 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.1 ->  Wu = 5 We = 10
+Case 1603 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.1 ->  Wu = 1 We = 10
+Case 1604 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.1 ->  Wu = 100 We = 5
+Case 1605 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.1 ->  Wu = 80 We = 5
+Case 1606 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.1 ->  Wu = 40 We = 5
+Case 1607 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.1 ->  Wu = 20 We = 5
+Case 1608 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.1 ->  Wu = 10 We = 5
+Case 1609 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.1 ->  Wu = 5 We = 5
+Case 1610 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.1 ->  Wu = 1 We = 5
+Case 1611 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.1 ->  Wu = 100 We = 1
+Case 1612 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.1 ->  Wu = 80 We = 1
+Case 1613 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.1 ->  Wu = 40 We = 1
+Case 1614 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.1 ->  Wu = 20 We = 1
+Case 1615 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.1 ->  Wu = 10 We = 1
+Case 1616 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.1 ->  Wu = 5 We = 1
+Case 1617 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.1 ->  Wu = 1 We = 1
+Case 1618 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.1 ->  Wu = 100 We = 100
+Case 1619 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.1 ->  Wu = 80 We = 100
+Case 1620 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.1 ->  Wu = 40 We = 100
+Case 1621 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.1 ->  Wu = 20 We = 100
+Case 1622 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.1 ->  Wu = 10 We = 100
+Case 1623 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.1 ->  Wu = 5 We = 100
+Case 1624 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.1 ->  Wu = 1 We = 100
+Case 1625 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.1 ->  Wu = 100 We = 80
+Case 1626 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.1 ->  Wu = 80 We = 80
+Case 1627 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.1 ->  Wu = 40 We = 80
+Case 1628 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.1 ->  Wu = 20 We = 80
+Case 1629 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.1 ->  Wu = 10 We = 80
+Case 1630 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.1 ->  Wu = 5 We = 80
+Case 1631 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.1 ->  Wu = 1 We = 80
+Case 1632 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.1 ->  Wu = 100 We = 40
+Case 1633 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.1 ->  Wu = 80 We = 40
+Case 1634 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.1 ->  Wu = 40 We = 40
+Case 1635 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.1 ->  Wu = 20 We = 40
+Case 1636 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.1 ->  Wu = 10 We = 40
+Case 1637 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.1 ->  Wu = 5 We = 40
+Case 1638 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.1 ->  Wu = 1 We = 40
+Case 1639 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.1 ->  Wu = 100 We = 20
+Case 1640 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.1 ->  Wu = 80 We = 20
+Case 1641 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.1 ->  Wu = 40 We = 20
+Case 1642 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.1 ->  Wu = 20 We = 20
+Case 1643 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.1 ->  Wu = 10 We = 20
+Case 1644 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.1 ->  Wu = 5 We = 20
+Case 1645 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.1 ->  Wu = 1 We = 20
+Case 1646 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.1 ->  Wu = 100 We = 10
+Case 1647 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.1 ->  Wu = 80 We = 10
+Case 1648 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.1 ->  Wu = 40 We = 10
+Case 1649 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.1 ->  Wu = 20 We = 10
+Case 1650 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.1 ->  Wu = 10 We = 10
+Case 1651 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.1 ->  Wu = 5 We = 10
+Case 1652 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.1 ->  Wu = 1 We = 10
+Case 1653 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.1 ->  Wu = 100 We = 5
+Case 1654 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.1 ->  Wu = 80 We = 5
+Case 1655 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.1 ->  Wu = 40 We = 5
+Case 1656 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.1 ->  Wu = 20 We = 5
+Case 1657 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.1 ->  Wu = 10 We = 5
+Case 1658 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.1 ->  Wu = 5 We = 5
+Case 1659 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.1 ->  Wu = 1 We = 5
+Case 1660 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.1 ->  Wu = 100 We = 1
+Case 1661 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.1 ->  Wu = 80 We = 1
+Case 1662 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.1 ->  Wu = 40 We = 1
+Case 1663 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.1 ->  Wu = 20 We = 1
+Case 1664 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.1 ->  Wu = 10 We = 1
+Case 1665 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.1 ->  Wu = 5 We = 1
+Case 1666 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.1 ->  Wu = 1 We = 1
+Case 1667 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.1 ->  Wu = 100 We = 100
+Case 1668 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.1 ->  Wu = 80 We = 100
+Case 1669 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.1 ->  Wu = 40 We = 100
+Case 1670 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.1 ->  Wu = 20 We = 100
+Case 1671 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.1 ->  Wu = 10 We = 100
+Case 1672 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.1 ->  Wu = 5 We = 100
+Case 1673 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.1 ->  Wu = 1 We = 100
+Case 1674 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.1 ->  Wu = 100 We = 80
+Case 1675 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.1 ->  Wu = 80 We = 80
+Case 1676 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.1 ->  Wu = 40 We = 80
+Case 1677 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.1 ->  Wu = 20 We = 80
+Case 1678 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.1 ->  Wu = 10 We = 80
+Case 1679 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.1 ->  Wu = 5 We = 80
+Case 1680 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.1 ->  Wu = 1 We = 80
+Case 1681 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.1 ->  Wu = 100 We = 40
+Case 1682 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.1 ->  Wu = 80 We = 40
+Case 1683 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.1 ->  Wu = 40 We = 40
+Case 1684 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.1 ->  Wu = 20 We = 40
+Case 1685 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.1 ->  Wu = 10 We = 40
+Case 1686 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.1 ->  Wu = 5 We = 40
+Case 1687 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.1 ->  Wu = 1 We = 40
+Case 1688 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.1 ->  Wu = 100 We = 20
+Case 1689 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.1 ->  Wu = 80 We = 20
+Case 1690 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.1 ->  Wu = 40 We = 20
+Case 1691 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.1 ->  Wu = 20 We = 20
+Case 1692 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.1 ->  Wu = 10 We = 20
+Case 1693 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.1 ->  Wu = 5 We = 20
+Case 1694 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.1 ->  Wu = 1 We = 20
+Case 1695 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.1 ->  Wu = 100 We = 10
+Case 1696 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.1 ->  Wu = 80 We = 10
+Case 1697 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.1 ->  Wu = 40 We = 10
+Case 1698 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.1 ->  Wu = 20 We = 10
+Case 1699 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.1 ->  Wu = 10 We = 10
+Case 1700 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.1 ->  Wu = 5 We = 10
+Case 1701 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.1 ->  Wu = 1 We = 10
+Case 1702 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.1 ->  Wu = 100 We = 5
+Case 1703 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.1 ->  Wu = 80 We = 5
+Case 1704 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.1 ->  Wu = 40 We = 5
+Case 1705 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.1 ->  Wu = 20 We = 5
+Case 1706 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.1 ->  Wu = 10 We = 5
+Case 1707 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.1 ->  Wu = 5 We = 5
+Case 1708 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.1 ->  Wu = 1 We = 5
+Case 1709 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.1 ->  Wu = 100 We = 1
+Case 1710 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.1 ->  Wu = 80 We = 1
+Case 1711 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.1 ->  Wu = 40 We = 1
+Case 1712 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.1 ->  Wu = 20 We = 1
+Case 1713 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.1 ->  Wu = 10 We = 1
+Case 1714 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.1 ->  Wu = 5 We = 1
+Case 1715 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.1 ->  Wu = 1 We = 1
+Case 1716 Wind Speed 12.000000
+ W1 = 1 W2 = 0.05 ->  Wu = 100 We = 100
+Case 1717 Wind Speed 12.000000
+ W1 = 1 W2 = 0.05 ->  Wu = 80 We = 100
+Case 1718 Wind Speed 12.000000
+ W1 = 1 W2 = 0.05 ->  Wu = 40 We = 100
+Case 1719 Wind Speed 12.000000
+ W1 = 1 W2 = 0.05 ->  Wu = 20 We = 100
+Case 1720 Wind Speed 12.000000
+ W1 = 1 W2 = 0.05 ->  Wu = 10 We = 100
+Case 1721 Wind Speed 12.000000
+ W1 = 1 W2 = 0.05 ->  Wu = 5 We = 100
+Case 1722 Wind Speed 12.000000
+ W1 = 1 W2 = 0.05 ->  Wu = 1 We = 100
+Case 1723 Wind Speed 12.000000
+ W1 = 1 W2 = 0.05 ->  Wu = 100 We = 80
+Case 1724 Wind Speed 12.000000
+ W1 = 1 W2 = 0.05 ->  Wu = 80 We = 80
+Case 1725 Wind Speed 12.000000
+ W1 = 1 W2 = 0.05 ->  Wu = 40 We = 80
+Case 1726 Wind Speed 12.000000
+ W1 = 1 W2 = 0.05 ->  Wu = 20 We = 80
+Case 1727 Wind Speed 12.000000
+ W1 = 1 W2 = 0.05 ->  Wu = 10 We = 80
+Case 1728 Wind Speed 12.000000
+ W1 = 1 W2 = 0.05 ->  Wu = 5 We = 80
+Case 1729 Wind Speed 12.000000
+ W1 = 1 W2 = 0.05 ->  Wu = 1 We = 80
+Case 1730 Wind Speed 12.000000
+ W1 = 1 W2 = 0.05 ->  Wu = 100 We = 40
+Case 1731 Wind Speed 12.000000
+ W1 = 1 W2 = 0.05 ->  Wu = 80 We = 40
+Case 1732 Wind Speed 12.000000
+ W1 = 1 W2 = 0.05 ->  Wu = 40 We = 40
+Case 1733 Wind Speed 12.000000
+ W1 = 1 W2 = 0.05 ->  Wu = 20 We = 40
+Case 1734 Wind Speed 12.000000
+ W1 = 1 W2 = 0.05 ->  Wu = 10 We = 40
+Case 1735 Wind Speed 12.000000
+ W1 = 1 W2 = 0.05 ->  Wu = 5 We = 40
+Case 1736 Wind Speed 12.000000
+ W1 = 1 W2 = 0.05 ->  Wu = 1 We = 40
+Case 1737 Wind Speed 12.000000
+ W1 = 1 W2 = 0.05 ->  Wu = 100 We = 20
+Case 1738 Wind Speed 12.000000
+ W1 = 1 W2 = 0.05 ->  Wu = 80 We = 20
+Case 1739 Wind Speed 12.000000
+ W1 = 1 W2 = 0.05 ->  Wu = 40 We = 20
+Case 1740 Wind Speed 12.000000
+ W1 = 1 W2 = 0.05 ->  Wu = 20 We = 20
+Case 1741 Wind Speed 12.000000
+ W1 = 1 W2 = 0.05 ->  Wu = 10 We = 20
+Case 1742 Wind Speed 12.000000
+ W1 = 1 W2 = 0.05 ->  Wu = 5 We = 20
+Case 1743 Wind Speed 12.000000
+ W1 = 1 W2 = 0.05 ->  Wu = 1 We = 20
+Case 1744 Wind Speed 12.000000
+ W1 = 1 W2 = 0.05 ->  Wu = 100 We = 10
+Case 1745 Wind Speed 12.000000
+ W1 = 1 W2 = 0.05 ->  Wu = 80 We = 10
+Case 1746 Wind Speed 12.000000
+ W1 = 1 W2 = 0.05 ->  Wu = 40 We = 10
+Case 1747 Wind Speed 12.000000
+ W1 = 1 W2 = 0.05 ->  Wu = 20 We = 10
+Case 1748 Wind Speed 12.000000
+ W1 = 1 W2 = 0.05 ->  Wu = 10 We = 10
+Case 1749 Wind Speed 12.000000
+ W1 = 1 W2 = 0.05 ->  Wu = 5 We = 10
+Case 1750 Wind Speed 12.000000
+ W1 = 1 W2 = 0.05 ->  Wu = 1 We = 10
+Case 1751 Wind Speed 12.000000
+ W1 = 1 W2 = 0.05 ->  Wu = 100 We = 5
+Case 1752 Wind Speed 12.000000
+ W1 = 1 W2 = 0.05 ->  Wu = 80 We = 5
+Case 1753 Wind Speed 12.000000
+ W1 = 1 W2 = 0.05 ->  Wu = 40 We = 5
+Case 1754 Wind Speed 12.000000
+ W1 = 1 W2 = 0.05 ->  Wu = 20 We = 5
+Case 1755 Wind Speed 12.000000
+ W1 = 1 W2 = 0.05 ->  Wu = 10 We = 5
+Case 1756 Wind Speed 12.000000
+ W1 = 1 W2 = 0.05 ->  Wu = 5 We = 5
+Case 1757 Wind Speed 12.000000
+ W1 = 1 W2 = 0.05 ->  Wu = 1 We = 5
+Case 1758 Wind Speed 12.000000
+ W1 = 1 W2 = 0.05 ->  Wu = 100 We = 1
+Case 1759 Wind Speed 12.000000
+ W1 = 1 W2 = 0.05 ->  Wu = 80 We = 1
+Case 1760 Wind Speed 12.000000
+ W1 = 1 W2 = 0.05 ->  Wu = 40 We = 1
+Case 1761 Wind Speed 12.000000
+ W1 = 1 W2 = 0.05 ->  Wu = 20 We = 1
+Case 1762 Wind Speed 12.000000
+ W1 = 1 W2 = 0.05 ->  Wu = 10 We = 1
+Case 1763 Wind Speed 12.000000
+ W1 = 1 W2 = 0.05 ->  Wu = 5 We = 1
+Case 1764 Wind Speed 12.000000
+ W1 = 1 W2 = 0.05 ->  Wu = 1 We = 1
+Case 1765 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.05 ->  Wu = 100 We = 100
+Case 1766 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.05 ->  Wu = 80 We = 100
+Case 1767 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.05 ->  Wu = 40 We = 100
+Case 1768 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.05 ->  Wu = 20 We = 100
+Case 1769 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.05 ->  Wu = 10 We = 100
+Case 1770 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.05 ->  Wu = 5 We = 100
+Case 1771 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.05 ->  Wu = 1 We = 100
+Case 1772 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.05 ->  Wu = 100 We = 80
+Case 1773 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.05 ->  Wu = 80 We = 80
+Case 1774 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.05 ->  Wu = 40 We = 80
+Case 1775 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.05 ->  Wu = 20 We = 80
+Case 1776 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.05 ->  Wu = 10 We = 80
+Case 1777 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.05 ->  Wu = 5 We = 80
+Case 1778 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.05 ->  Wu = 1 We = 80
+Case 1779 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.05 ->  Wu = 100 We = 40
+Case 1780 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.05 ->  Wu = 80 We = 40
+Case 1781 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.05 ->  Wu = 40 We = 40
+Case 1782 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.05 ->  Wu = 20 We = 40
+Case 1783 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.05 ->  Wu = 10 We = 40
+Case 1784 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.05 ->  Wu = 5 We = 40
+Case 1785 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.05 ->  Wu = 1 We = 40
+Case 1786 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.05 ->  Wu = 100 We = 20
+Case 1787 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.05 ->  Wu = 80 We = 20
+Case 1788 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.05 ->  Wu = 40 We = 20
+Case 1789 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.05 ->  Wu = 20 We = 20
+Case 1790 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.05 ->  Wu = 10 We = 20
+Case 1791 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.05 ->  Wu = 5 We = 20
+Case 1792 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.05 ->  Wu = 1 We = 20
+Case 1793 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.05 ->  Wu = 100 We = 10
+Case 1794 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.05 ->  Wu = 80 We = 10
+Case 1795 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.05 ->  Wu = 40 We = 10
+Case 1796 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.05 ->  Wu = 20 We = 10
+Case 1797 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.05 ->  Wu = 10 We = 10
+Case 1798 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.05 ->  Wu = 5 We = 10
+Case 1799 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.05 ->  Wu = 1 We = 10
+Case 1800 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.05 ->  Wu = 100 We = 5
+Case 1801 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.05 ->  Wu = 80 We = 5
+Case 1802 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.05 ->  Wu = 40 We = 5
+Case 1803 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.05 ->  Wu = 20 We = 5
+Case 1804 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.05 ->  Wu = 10 We = 5
+Case 1805 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.05 ->  Wu = 5 We = 5
+Case 1806 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.05 ->  Wu = 1 We = 5
+Case 1807 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.05 ->  Wu = 100 We = 1
+Case 1808 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.05 ->  Wu = 80 We = 1
+Case 1809 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.05 ->  Wu = 40 We = 1
+Case 1810 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.05 ->  Wu = 20 We = 1
+Case 1811 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.05 ->  Wu = 10 We = 1
+Case 1812 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.05 ->  Wu = 5 We = 1
+Case 1813 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.05 ->  Wu = 1 We = 1
+Case 1814 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.05 ->  Wu = 100 We = 100
+Case 1815 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.05 ->  Wu = 80 We = 100
+Case 1816 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.05 ->  Wu = 40 We = 100
+Case 1817 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.05 ->  Wu = 20 We = 100
+Case 1818 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.05 ->  Wu = 10 We = 100
+Case 1819 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.05 ->  Wu = 5 We = 100
+Case 1820 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.05 ->  Wu = 1 We = 100
+Case 1821 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.05 ->  Wu = 100 We = 80
+Case 1822 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.05 ->  Wu = 80 We = 80
+Case 1823 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.05 ->  Wu = 40 We = 80
+Case 1824 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.05 ->  Wu = 20 We = 80
+Case 1825 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.05 ->  Wu = 10 We = 80
+Case 1826 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.05 ->  Wu = 5 We = 80
+Case 1827 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.05 ->  Wu = 1 We = 80
+Case 1828 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.05 ->  Wu = 100 We = 40
+Case 1829 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.05 ->  Wu = 80 We = 40
+Case 1830 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.05 ->  Wu = 40 We = 40
+Case 1831 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.05 ->  Wu = 20 We = 40
+Case 1832 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.05 ->  Wu = 10 We = 40
+Case 1833 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.05 ->  Wu = 5 We = 40
+Case 1834 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.05 ->  Wu = 1 We = 40
+Case 1835 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.05 ->  Wu = 100 We = 20
+Case 1836 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.05 ->  Wu = 80 We = 20
+Case 1837 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.05 ->  Wu = 40 We = 20
+Case 1838 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.05 ->  Wu = 20 We = 20
+Case 1839 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.05 ->  Wu = 10 We = 20
+Case 1840 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.05 ->  Wu = 5 We = 20
+Case 1841 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.05 ->  Wu = 1 We = 20
+Case 1842 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.05 ->  Wu = 100 We = 10
+Case 1843 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.05 ->  Wu = 80 We = 10
+Case 1844 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.05 ->  Wu = 40 We = 10
+Case 1845 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.05 ->  Wu = 20 We = 10
+Case 1846 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.05 ->  Wu = 10 We = 10
+Case 1847 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.05 ->  Wu = 5 We = 10
+Case 1848 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.05 ->  Wu = 1 We = 10
+Case 1849 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.05 ->  Wu = 100 We = 5
+Case 1850 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.05 ->  Wu = 80 We = 5
+Case 1851 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.05 ->  Wu = 40 We = 5
+Case 1852 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.05 ->  Wu = 20 We = 5
+Case 1853 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.05 ->  Wu = 10 We = 5
+Case 1854 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.05 ->  Wu = 5 We = 5
+Case 1855 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.05 ->  Wu = 1 We = 5
+Case 1856 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.05 ->  Wu = 100 We = 1
+Case 1857 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.05 ->  Wu = 80 We = 1
+Case 1858 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.05 ->  Wu = 40 We = 1
+Case 1859 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.05 ->  Wu = 20 We = 1
+Case 1860 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.05 ->  Wu = 10 We = 1
+Case 1861 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.05 ->  Wu = 5 We = 1
+Case 1862 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.05 ->  Wu = 1 We = 1
+Case 1863 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.05 ->  Wu = 100 We = 100
+Case 1864 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.05 ->  Wu = 80 We = 100
+Case 1865 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.05 ->  Wu = 40 We = 100
+Case 1866 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.05 ->  Wu = 20 We = 100
+Case 1867 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.05 ->  Wu = 10 We = 100
+Case 1868 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.05 ->  Wu = 5 We = 100
+Case 1869 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.05 ->  Wu = 1 We = 100
+Case 1870 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.05 ->  Wu = 100 We = 80
+Case 1871 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.05 ->  Wu = 80 We = 80
+Case 1872 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.05 ->  Wu = 40 We = 80
+Case 1873 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.05 ->  Wu = 20 We = 80
+Case 1874 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.05 ->  Wu = 10 We = 80
+Case 1875 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.05 ->  Wu = 5 We = 80
+Case 1876 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.05 ->  Wu = 1 We = 80
+Case 1877 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.05 ->  Wu = 100 We = 40
+Case 1878 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.05 ->  Wu = 80 We = 40
+Case 1879 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.05 ->  Wu = 40 We = 40
+Case 1880 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.05 ->  Wu = 20 We = 40
+Case 1881 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.05 ->  Wu = 10 We = 40
+Case 1882 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.05 ->  Wu = 5 We = 40
+Case 1883 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.05 ->  Wu = 1 We = 40
+Case 1884 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.05 ->  Wu = 100 We = 20
+Case 1885 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.05 ->  Wu = 80 We = 20
+Case 1886 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.05 ->  Wu = 40 We = 20
+Case 1887 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.05 ->  Wu = 20 We = 20
+Case 1888 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.05 ->  Wu = 10 We = 20
+Case 1889 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.05 ->  Wu = 5 We = 20
+Case 1890 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.05 ->  Wu = 1 We = 20
+Case 1891 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.05 ->  Wu = 100 We = 10
+Case 1892 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.05 ->  Wu = 80 We = 10
+Case 1893 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.05 ->  Wu = 40 We = 10
+Case 1894 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.05 ->  Wu = 20 We = 10
+Case 1895 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.05 ->  Wu = 10 We = 10
+Case 1896 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.05 ->  Wu = 5 We = 10
+Case 1897 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.05 ->  Wu = 1 We = 10
+Case 1898 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.05 ->  Wu = 100 We = 5
+Case 1899 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.05 ->  Wu = 80 We = 5
+Case 1900 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.05 ->  Wu = 40 We = 5
+Case 1901 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.05 ->  Wu = 20 We = 5
+Case 1902 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.05 ->  Wu = 10 We = 5
+Case 1903 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.05 ->  Wu = 5 We = 5
+Case 1904 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.05 ->  Wu = 1 We = 5
+Case 1905 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.05 ->  Wu = 100 We = 1
+Case 1906 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.05 ->  Wu = 80 We = 1
+Case 1907 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.05 ->  Wu = 40 We = 1
+Case 1908 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.05 ->  Wu = 20 We = 1
+Case 1909 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.05 ->  Wu = 10 We = 1
+Case 1910 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.05 ->  Wu = 5 We = 1
+Case 1911 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.05 ->  Wu = 1 We = 1
+Case 1912 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.05 ->  Wu = 100 We = 100
+Case 1913 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.05 ->  Wu = 80 We = 100
+Case 1914 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.05 ->  Wu = 40 We = 100
+Case 1915 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.05 ->  Wu = 20 We = 100
+Case 1916 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.05 ->  Wu = 10 We = 100
+Case 1917 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.05 ->  Wu = 5 We = 100
+Case 1918 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.05 ->  Wu = 1 We = 100
+Case 1919 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.05 ->  Wu = 100 We = 80
+Case 1920 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.05 ->  Wu = 80 We = 80
+Case 1921 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.05 ->  Wu = 40 We = 80
+Case 1922 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.05 ->  Wu = 20 We = 80
+Case 1923 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.05 ->  Wu = 10 We = 80
+Case 1924 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.05 ->  Wu = 5 We = 80
+Case 1925 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.05 ->  Wu = 1 We = 80
+Case 1926 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.05 ->  Wu = 100 We = 40
+Case 1927 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.05 ->  Wu = 80 We = 40
+Case 1928 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.05 ->  Wu = 40 We = 40
+Case 1929 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.05 ->  Wu = 20 We = 40
+Case 1930 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.05 ->  Wu = 10 We = 40
+Case 1931 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.05 ->  Wu = 5 We = 40
+Case 1932 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.05 ->  Wu = 1 We = 40
+Case 1933 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.05 ->  Wu = 100 We = 20
+Case 1934 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.05 ->  Wu = 80 We = 20
+Case 1935 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.05 ->  Wu = 40 We = 20
+Case 1936 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.05 ->  Wu = 20 We = 20
+Case 1937 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.05 ->  Wu = 10 We = 20
+Case 1938 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.05 ->  Wu = 5 We = 20
+Case 1939 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.05 ->  Wu = 1 We = 20
+Case 1940 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.05 ->  Wu = 100 We = 10
+Case 1941 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.05 ->  Wu = 80 We = 10
+Case 1942 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.05 ->  Wu = 40 We = 10
+Case 1943 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.05 ->  Wu = 20 We = 10
+Case 1944 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.05 ->  Wu = 10 We = 10
+Case 1945 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.05 ->  Wu = 5 We = 10
+Case 1946 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.05 ->  Wu = 1 We = 10
+Case 1947 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.05 ->  Wu = 100 We = 5
+Case 1948 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.05 ->  Wu = 80 We = 5
+Case 1949 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.05 ->  Wu = 40 We = 5
+Case 1950 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.05 ->  Wu = 20 We = 5
+Case 1951 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.05 ->  Wu = 10 We = 5
+Case 1952 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.05 ->  Wu = 5 We = 5
+Case 1953 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.05 ->  Wu = 1 We = 5
+Case 1954 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.05 ->  Wu = 100 We = 1
+Case 1955 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.05 ->  Wu = 80 We = 1
+Case 1956 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.05 ->  Wu = 40 We = 1
+Case 1957 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.05 ->  Wu = 20 We = 1
+Case 1958 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.05 ->  Wu = 10 We = 1
+Case 1959 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.05 ->  Wu = 5 We = 1
+Case 1960 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.05 ->  Wu = 1 We = 1
+Case 1961 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.05 ->  Wu = 100 We = 100
+Case 1962 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.05 ->  Wu = 80 We = 100
+Case 1963 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.05 ->  Wu = 40 We = 100
+Case 1964 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.05 ->  Wu = 20 We = 100
+Case 1965 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.05 ->  Wu = 10 We = 100
+Case 1966 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.05 ->  Wu = 5 We = 100
+Case 1967 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.05 ->  Wu = 1 We = 100
+Case 1968 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.05 ->  Wu = 100 We = 80
+Case 1969 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.05 ->  Wu = 80 We = 80
+Case 1970 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.05 ->  Wu = 40 We = 80
+Case 1971 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.05 ->  Wu = 20 We = 80
+Case 1972 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.05 ->  Wu = 10 We = 80
+Case 1973 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.05 ->  Wu = 5 We = 80
+Case 1974 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.05 ->  Wu = 1 We = 80
+Case 1975 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.05 ->  Wu = 100 We = 40
+Case 1976 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.05 ->  Wu = 80 We = 40
+Case 1977 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.05 ->  Wu = 40 We = 40
+Case 1978 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.05 ->  Wu = 20 We = 40
+Case 1979 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.05 ->  Wu = 10 We = 40
+Case 1980 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.05 ->  Wu = 5 We = 40
+Case 1981 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.05 ->  Wu = 1 We = 40
+Case 1982 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.05 ->  Wu = 100 We = 20
+Case 1983 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.05 ->  Wu = 80 We = 20
+Case 1984 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.05 ->  Wu = 40 We = 20
+Case 1985 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.05 ->  Wu = 20 We = 20
+Case 1986 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.05 ->  Wu = 10 We = 20
+Case 1987 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.05 ->  Wu = 5 We = 20
+Case 1988 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.05 ->  Wu = 1 We = 20
+Case 1989 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.05 ->  Wu = 100 We = 10
+Case 1990 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.05 ->  Wu = 80 We = 10
+Case 1991 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.05 ->  Wu = 40 We = 10
+Case 1992 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.05 ->  Wu = 20 We = 10
+Case 1993 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.05 ->  Wu = 10 We = 10
+Case 1994 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.05 ->  Wu = 5 We = 10
+Case 1995 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.05 ->  Wu = 1 We = 10
+Case 1996 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.05 ->  Wu = 100 We = 5
+Case 1997 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.05 ->  Wu = 80 We = 5
+Case 1998 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.05 ->  Wu = 40 We = 5
+Case 1999 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.05 ->  Wu = 20 We = 5
+Case 2000 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.05 ->  Wu = 10 We = 5
+Case 2001 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.05 ->  Wu = 5 We = 5
+Case 2002 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.05 ->  Wu = 1 We = 5
+Case 2003 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.05 ->  Wu = 100 We = 1
+Case 2004 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.05 ->  Wu = 80 We = 1
+Case 2005 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.05 ->  Wu = 40 We = 1
+Case 2006 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.05 ->  Wu = 20 We = 1
+Case 2007 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.05 ->  Wu = 10 We = 1
+Case 2008 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.05 ->  Wu = 5 We = 1
+Case 2009 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.05 ->  Wu = 1 We = 1
+Case 2010 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.05 ->  Wu = 100 We = 100
+Case 2011 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.05 ->  Wu = 80 We = 100
+Case 2012 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.05 ->  Wu = 40 We = 100
+Case 2013 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.05 ->  Wu = 20 We = 100
+Case 2014 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.05 ->  Wu = 10 We = 100
+Case 2015 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.05 ->  Wu = 5 We = 100
+Case 2016 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.05 ->  Wu = 1 We = 100
+Case 2017 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.05 ->  Wu = 100 We = 80
+Case 2018 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.05 ->  Wu = 80 We = 80
+Case 2019 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.05 ->  Wu = 40 We = 80
+Case 2020 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.05 ->  Wu = 20 We = 80
+Case 2021 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.05 ->  Wu = 10 We = 80
+Case 2022 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.05 ->  Wu = 5 We = 80
+Case 2023 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.05 ->  Wu = 1 We = 80
+Case 2024 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.05 ->  Wu = 100 We = 40
+Case 2025 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.05 ->  Wu = 80 We = 40
+Case 2026 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.05 ->  Wu = 40 We = 40
+Case 2027 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.05 ->  Wu = 20 We = 40
+Case 2028 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.05 ->  Wu = 10 We = 40
+Case 2029 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.05 ->  Wu = 5 We = 40
+Case 2030 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.05 ->  Wu = 1 We = 40
+Case 2031 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.05 ->  Wu = 100 We = 20
+Case 2032 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.05 ->  Wu = 80 We = 20
+Case 2033 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.05 ->  Wu = 40 We = 20
+Case 2034 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.05 ->  Wu = 20 We = 20
+Case 2035 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.05 ->  Wu = 10 We = 20
+Case 2036 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.05 ->  Wu = 5 We = 20
+Case 2037 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.05 ->  Wu = 1 We = 20
+Case 2038 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.05 ->  Wu = 100 We = 10
+Case 2039 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.05 ->  Wu = 80 We = 10
+Case 2040 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.05 ->  Wu = 40 We = 10
+Case 2041 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.05 ->  Wu = 20 We = 10
+Case 2042 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.05 ->  Wu = 10 We = 10
+Case 2043 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.05 ->  Wu = 5 We = 10
+Case 2044 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.05 ->  Wu = 1 We = 10
+Case 2045 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.05 ->  Wu = 100 We = 5
+Case 2046 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.05 ->  Wu = 80 We = 5
+Case 2047 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.05 ->  Wu = 40 We = 5
+Case 2048 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.05 ->  Wu = 20 We = 5
+Case 2049 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.05 ->  Wu = 10 We = 5
+Case 2050 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.05 ->  Wu = 5 We = 5
+Case 2051 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.05 ->  Wu = 1 We = 5
+Case 2052 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.05 ->  Wu = 100 We = 1
+Case 2053 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.05 ->  Wu = 80 We = 1
+Case 2054 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.05 ->  Wu = 40 We = 1
+Case 2055 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.05 ->  Wu = 20 We = 1
+Case 2056 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.05 ->  Wu = 10 We = 1
+Case 2057 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.05 ->  Wu = 5 We = 1
+Case 2058 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.05 ->  Wu = 1 We = 1
+Case 2059 Wind Speed 12.000000
+ W1 = 1 W2 = 0.01 ->  Wu = 100 We = 100
+Case 2060 Wind Speed 12.000000
+ W1 = 1 W2 = 0.01 ->  Wu = 80 We = 100
+Case 2061 Wind Speed 12.000000
+ W1 = 1 W2 = 0.01 ->  Wu = 40 We = 100
+Case 2062 Wind Speed 12.000000
+ W1 = 1 W2 = 0.01 ->  Wu = 20 We = 100
+Case 2063 Wind Speed 12.000000
+ W1 = 1 W2 = 0.01 ->  Wu = 10 We = 100
+Case 2064 Wind Speed 12.000000
+ W1 = 1 W2 = 0.01 ->  Wu = 5 We = 100
+Case 2065 Wind Speed 12.000000
+ W1 = 1 W2 = 0.01 ->  Wu = 1 We = 100
+Case 2066 Wind Speed 12.000000
+ W1 = 1 W2 = 0.01 ->  Wu = 100 We = 80
+Case 2067 Wind Speed 12.000000
+ W1 = 1 W2 = 0.01 ->  Wu = 80 We = 80
+Case 2068 Wind Speed 12.000000
+ W1 = 1 W2 = 0.01 ->  Wu = 40 We = 80
+Case 2069 Wind Speed 12.000000
+ W1 = 1 W2 = 0.01 ->  Wu = 20 We = 80
+Case 2070 Wind Speed 12.000000
+ W1 = 1 W2 = 0.01 ->  Wu = 10 We = 80
+Case 2071 Wind Speed 12.000000
+ W1 = 1 W2 = 0.01 ->  Wu = 5 We = 80
+Case 2072 Wind Speed 12.000000
+ W1 = 1 W2 = 0.01 ->  Wu = 1 We = 80
+Case 2073 Wind Speed 12.000000
+ W1 = 1 W2 = 0.01 ->  Wu = 100 We = 40
+Case 2074 Wind Speed 12.000000
+ W1 = 1 W2 = 0.01 ->  Wu = 80 We = 40
+Case 2075 Wind Speed 12.000000
+ W1 = 1 W2 = 0.01 ->  Wu = 40 We = 40
+Case 2076 Wind Speed 12.000000
+ W1 = 1 W2 = 0.01 ->  Wu = 20 We = 40
+Case 2077 Wind Speed 12.000000
+ W1 = 1 W2 = 0.01 ->  Wu = 10 We = 40
+Case 2078 Wind Speed 12.000000
+ W1 = 1 W2 = 0.01 ->  Wu = 5 We = 40
+Case 2079 Wind Speed 12.000000
+ W1 = 1 W2 = 0.01 ->  Wu = 1 We = 40
+Case 2080 Wind Speed 12.000000
+ W1 = 1 W2 = 0.01 ->  Wu = 100 We = 20
+Case 2081 Wind Speed 12.000000
+ W1 = 1 W2 = 0.01 ->  Wu = 80 We = 20
+Case 2082 Wind Speed 12.000000
+ W1 = 1 W2 = 0.01 ->  Wu = 40 We = 20
+Case 2083 Wind Speed 12.000000
+ W1 = 1 W2 = 0.01 ->  Wu = 20 We = 20
+Case 2084 Wind Speed 12.000000
+ W1 = 1 W2 = 0.01 ->  Wu = 10 We = 20
+Case 2085 Wind Speed 12.000000
+ W1 = 1 W2 = 0.01 ->  Wu = 5 We = 20
+Case 2086 Wind Speed 12.000000
+ W1 = 1 W2 = 0.01 ->  Wu = 1 We = 20
+Case 2087 Wind Speed 12.000000
+ W1 = 1 W2 = 0.01 ->  Wu = 100 We = 10
+Case 2088 Wind Speed 12.000000
+ W1 = 1 W2 = 0.01 ->  Wu = 80 We = 10
+Case 2089 Wind Speed 12.000000
+ W1 = 1 W2 = 0.01 ->  Wu = 40 We = 10
+Case 2090 Wind Speed 12.000000
+ W1 = 1 W2 = 0.01 ->  Wu = 20 We = 10
+Case 2091 Wind Speed 12.000000
+ W1 = 1 W2 = 0.01 ->  Wu = 10 We = 10
+Case 2092 Wind Speed 12.000000
+ W1 = 1 W2 = 0.01 ->  Wu = 5 We = 10
+Case 2093 Wind Speed 12.000000
+ W1 = 1 W2 = 0.01 ->  Wu = 1 We = 10
+Case 2094 Wind Speed 12.000000
+ W1 = 1 W2 = 0.01 ->  Wu = 100 We = 5
+Case 2095 Wind Speed 12.000000
+ W1 = 1 W2 = 0.01 ->  Wu = 80 We = 5
+Case 2096 Wind Speed 12.000000
+ W1 = 1 W2 = 0.01 ->  Wu = 40 We = 5
+Case 2097 Wind Speed 12.000000
+ W1 = 1 W2 = 0.01 ->  Wu = 20 We = 5
+Case 2098 Wind Speed 12.000000
+ W1 = 1 W2 = 0.01 ->  Wu = 10 We = 5
+Case 2099 Wind Speed 12.000000
+ W1 = 1 W2 = 0.01 ->  Wu = 5 We = 5
+Case 2100 Wind Speed 12.000000
+ W1 = 1 W2 = 0.01 ->  Wu = 1 We = 5
+Case 2101 Wind Speed 12.000000
+ W1 = 1 W2 = 0.01 ->  Wu = 100 We = 1
+Case 2102 Wind Speed 12.000000
+ W1 = 1 W2 = 0.01 ->  Wu = 80 We = 1
+Case 2103 Wind Speed 12.000000
+ W1 = 1 W2 = 0.01 ->  Wu = 40 We = 1
+Case 2104 Wind Speed 12.000000
+ W1 = 1 W2 = 0.01 ->  Wu = 20 We = 1
+Case 2105 Wind Speed 12.000000
+ W1 = 1 W2 = 0.01 ->  Wu = 10 We = 1
+Case 2106 Wind Speed 12.000000
+ W1 = 1 W2 = 0.01 ->  Wu = 5 We = 1
+Case 2107 Wind Speed 12.000000
+ W1 = 1 W2 = 0.01 ->  Wu = 1 We = 1
+Case 2108 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.01 ->  Wu = 100 We = 100
+Case 2109 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.01 ->  Wu = 80 We = 100
+Case 2110 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.01 ->  Wu = 40 We = 100
+Case 2111 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.01 ->  Wu = 20 We = 100
+Case 2112 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.01 ->  Wu = 10 We = 100
+Case 2113 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.01 ->  Wu = 5 We = 100
+Case 2114 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.01 ->  Wu = 1 We = 100
+Case 2115 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.01 ->  Wu = 100 We = 80
+Case 2116 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.01 ->  Wu = 80 We = 80
+Case 2117 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.01 ->  Wu = 40 We = 80
+Case 2118 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.01 ->  Wu = 20 We = 80
+Case 2119 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.01 ->  Wu = 10 We = 80
+Case 2120 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.01 ->  Wu = 5 We = 80
+Case 2121 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.01 ->  Wu = 1 We = 80
+Case 2122 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.01 ->  Wu = 100 We = 40
+Case 2123 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.01 ->  Wu = 80 We = 40
+Case 2124 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.01 ->  Wu = 40 We = 40
+Case 2125 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.01 ->  Wu = 20 We = 40
+Case 2126 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.01 ->  Wu = 10 We = 40
+Case 2127 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.01 ->  Wu = 5 We = 40
+Case 2128 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.01 ->  Wu = 1 We = 40
+Case 2129 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.01 ->  Wu = 100 We = 20
+Case 2130 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.01 ->  Wu = 80 We = 20
+Case 2131 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.01 ->  Wu = 40 We = 20
+Case 2132 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.01 ->  Wu = 20 We = 20
+Case 2133 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.01 ->  Wu = 10 We = 20
+Case 2134 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.01 ->  Wu = 5 We = 20
+Case 2135 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.01 ->  Wu = 1 We = 20
+Case 2136 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.01 ->  Wu = 100 We = 10
+Case 2137 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.01 ->  Wu = 80 We = 10
+Case 2138 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.01 ->  Wu = 40 We = 10
+Case 2139 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.01 ->  Wu = 20 We = 10
+Case 2140 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.01 ->  Wu = 10 We = 10
+Case 2141 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.01 ->  Wu = 5 We = 10
+Case 2142 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.01 ->  Wu = 1 We = 10
+Case 2143 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.01 ->  Wu = 100 We = 5
+Case 2144 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.01 ->  Wu = 80 We = 5
+Case 2145 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.01 ->  Wu = 40 We = 5
+Case 2146 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.01 ->  Wu = 20 We = 5
+Case 2147 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.01 ->  Wu = 10 We = 5
+Case 2148 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.01 ->  Wu = 5 We = 5
+Case 2149 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.01 ->  Wu = 1 We = 5
+Case 2150 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.01 ->  Wu = 100 We = 1
+Case 2151 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.01 ->  Wu = 80 We = 1
+Case 2152 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.01 ->  Wu = 40 We = 1
+Case 2153 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.01 ->  Wu = 20 We = 1
+Case 2154 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.01 ->  Wu = 10 We = 1
+Case 2155 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.01 ->  Wu = 5 We = 1
+Case 2156 Wind Speed 12.000000
+ W1 = 0.8 W2 = 0.01 ->  Wu = 1 We = 1
+Case 2157 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.01 ->  Wu = 100 We = 100
+Case 2158 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.01 ->  Wu = 80 We = 100
+Case 2159 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.01 ->  Wu = 40 We = 100
+Case 2160 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.01 ->  Wu = 20 We = 100
+Case 2161 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.01 ->  Wu = 10 We = 100
+Case 2162 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.01 ->  Wu = 5 We = 100
+Case 2163 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.01 ->  Wu = 1 We = 100
+Case 2164 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.01 ->  Wu = 100 We = 80
+Case 2165 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.01 ->  Wu = 80 We = 80
+Case 2166 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.01 ->  Wu = 40 We = 80
+Case 2167 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.01 ->  Wu = 20 We = 80
+Case 2168 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.01 ->  Wu = 10 We = 80
+Case 2169 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.01 ->  Wu = 5 We = 80
+Case 2170 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.01 ->  Wu = 1 We = 80
+Case 2171 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.01 ->  Wu = 100 We = 40
+Case 2172 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.01 ->  Wu = 80 We = 40
+Case 2173 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.01 ->  Wu = 40 We = 40
+Case 2174 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.01 ->  Wu = 20 We = 40
+Case 2175 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.01 ->  Wu = 10 We = 40
+Case 2176 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.01 ->  Wu = 5 We = 40
+Case 2177 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.01 ->  Wu = 1 We = 40
+Case 2178 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.01 ->  Wu = 100 We = 20
+Case 2179 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.01 ->  Wu = 80 We = 20
+Case 2180 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.01 ->  Wu = 40 We = 20
+Case 2181 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.01 ->  Wu = 20 We = 20
+Case 2182 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.01 ->  Wu = 10 We = 20
+Case 2183 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.01 ->  Wu = 5 We = 20
+Case 2184 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.01 ->  Wu = 1 We = 20
+Case 2185 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.01 ->  Wu = 100 We = 10
+Case 2186 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.01 ->  Wu = 80 We = 10
+Case 2187 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.01 ->  Wu = 40 We = 10
+Case 2188 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.01 ->  Wu = 20 We = 10
+Case 2189 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.01 ->  Wu = 10 We = 10
+Case 2190 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.01 ->  Wu = 5 We = 10
+Case 2191 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.01 ->  Wu = 1 We = 10
+Case 2192 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.01 ->  Wu = 100 We = 5
+Case 2193 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.01 ->  Wu = 80 We = 5
+Case 2194 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.01 ->  Wu = 40 We = 5
+Case 2195 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.01 ->  Wu = 20 We = 5
+Case 2196 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.01 ->  Wu = 10 We = 5
+Case 2197 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.01 ->  Wu = 5 We = 5
+Case 2198 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.01 ->  Wu = 1 We = 5
+Case 2199 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.01 ->  Wu = 100 We = 1
+Case 2200 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.01 ->  Wu = 80 We = 1
+Case 2201 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.01 ->  Wu = 40 We = 1
+Case 2202 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.01 ->  Wu = 20 We = 1
+Case 2203 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.01 ->  Wu = 10 We = 1
+Case 2204 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.01 ->  Wu = 5 We = 1
+Case 2205 Wind Speed 12.000000
+ W1 = 0.4 W2 = 0.01 ->  Wu = 1 We = 1
+Case 2206 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.01 ->  Wu = 100 We = 100
+Case 2207 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.01 ->  Wu = 80 We = 100
+Case 2208 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.01 ->  Wu = 40 We = 100
+Case 2209 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.01 ->  Wu = 20 We = 100
+Case 2210 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.01 ->  Wu = 10 We = 100
+Case 2211 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.01 ->  Wu = 5 We = 100
+Case 2212 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.01 ->  Wu = 1 We = 100
+Case 2213 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.01 ->  Wu = 100 We = 80
+Case 2214 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.01 ->  Wu = 80 We = 80
+Case 2215 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.01 ->  Wu = 40 We = 80
+Case 2216 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.01 ->  Wu = 20 We = 80
+Case 2217 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.01 ->  Wu = 10 We = 80
+Case 2218 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.01 ->  Wu = 5 We = 80
+Case 2219 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.01 ->  Wu = 1 We = 80
+Case 2220 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.01 ->  Wu = 100 We = 40
+Case 2221 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.01 ->  Wu = 80 We = 40
+Case 2222 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.01 ->  Wu = 40 We = 40
+Case 2223 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.01 ->  Wu = 20 We = 40
+Case 2224 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.01 ->  Wu = 10 We = 40
+Case 2225 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.01 ->  Wu = 5 We = 40
+Case 2226 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.01 ->  Wu = 1 We = 40
+Case 2227 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.01 ->  Wu = 100 We = 20
+Case 2228 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.01 ->  Wu = 80 We = 20
+Case 2229 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.01 ->  Wu = 40 We = 20
+Case 2230 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.01 ->  Wu = 20 We = 20
+Case 2231 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.01 ->  Wu = 10 We = 20
+Case 2232 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.01 ->  Wu = 5 We = 20
+Case 2233 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.01 ->  Wu = 1 We = 20
+Case 2234 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.01 ->  Wu = 100 We = 10
+Case 2235 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.01 ->  Wu = 80 We = 10
+Case 2236 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.01 ->  Wu = 40 We = 10
+Case 2237 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.01 ->  Wu = 20 We = 10
+Case 2238 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.01 ->  Wu = 10 We = 10
+Case 2239 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.01 ->  Wu = 5 We = 10
+Case 2240 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.01 ->  Wu = 1 We = 10
+Case 2241 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.01 ->  Wu = 100 We = 5
+Case 2242 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.01 ->  Wu = 80 We = 5
+Case 2243 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.01 ->  Wu = 40 We = 5
+Case 2244 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.01 ->  Wu = 20 We = 5
+Case 2245 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.01 ->  Wu = 10 We = 5
+Case 2246 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.01 ->  Wu = 5 We = 5
+Case 2247 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.01 ->  Wu = 1 We = 5
+Case 2248 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.01 ->  Wu = 100 We = 1
+Case 2249 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.01 ->  Wu = 80 We = 1
+Case 2250 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.01 ->  Wu = 40 We = 1
+Case 2251 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.01 ->  Wu = 20 We = 1
+Case 2252 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.01 ->  Wu = 10 We = 1
+Case 2253 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.01 ->  Wu = 5 We = 1
+Case 2254 Wind Speed 12.000000
+ W1 = 0.2 W2 = 0.01 ->  Wu = 1 We = 1
+Case 2255 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.01 ->  Wu = 100 We = 100
+Case 2256 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.01 ->  Wu = 80 We = 100
+Case 2257 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.01 ->  Wu = 40 We = 100
+Case 2258 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.01 ->  Wu = 20 We = 100
+Case 2259 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.01 ->  Wu = 10 We = 100
+Case 2260 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.01 ->  Wu = 5 We = 100
+Case 2261 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.01 ->  Wu = 1 We = 100
+Case 2262 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.01 ->  Wu = 100 We = 80
+Case 2263 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.01 ->  Wu = 80 We = 80
+Case 2264 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.01 ->  Wu = 40 We = 80
+Case 2265 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.01 ->  Wu = 20 We = 80
+Case 2266 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.01 ->  Wu = 10 We = 80
+Case 2267 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.01 ->  Wu = 5 We = 80
+Case 2268 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.01 ->  Wu = 1 We = 80
+Case 2269 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.01 ->  Wu = 100 We = 40
+Case 2270 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.01 ->  Wu = 80 We = 40
+Case 2271 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.01 ->  Wu = 40 We = 40
+Case 2272 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.01 ->  Wu = 20 We = 40
+Case 2273 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.01 ->  Wu = 10 We = 40
+Case 2274 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.01 ->  Wu = 5 We = 40
+Case 2275 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.01 ->  Wu = 1 We = 40
+Case 2276 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.01 ->  Wu = 100 We = 20
+Case 2277 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.01 ->  Wu = 80 We = 20
+Case 2278 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.01 ->  Wu = 40 We = 20
+Case 2279 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.01 ->  Wu = 20 We = 20
+Case 2280 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.01 ->  Wu = 10 We = 20
+Case 2281 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.01 ->  Wu = 5 We = 20
+Case 2282 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.01 ->  Wu = 1 We = 20
+Case 2283 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.01 ->  Wu = 100 We = 10
+Case 2284 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.01 ->  Wu = 80 We = 10
+Case 2285 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.01 ->  Wu = 40 We = 10
+Case 2286 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.01 ->  Wu = 20 We = 10
+Case 2287 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.01 ->  Wu = 10 We = 10
+Case 2288 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.01 ->  Wu = 5 We = 10
+Case 2289 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.01 ->  Wu = 1 We = 10
+Case 2290 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.01 ->  Wu = 100 We = 5
+Case 2291 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.01 ->  Wu = 80 We = 5
+Case 2292 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.01 ->  Wu = 40 We = 5
+Case 2293 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.01 ->  Wu = 20 We = 5
+Case 2294 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.01 ->  Wu = 10 We = 5
+Case 2295 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.01 ->  Wu = 5 We = 5
+Case 2296 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.01 ->  Wu = 1 We = 5
+Case 2297 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.01 ->  Wu = 100 We = 1
+Case 2298 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.01 ->  Wu = 80 We = 1
+Case 2299 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.01 ->  Wu = 40 We = 1
+Case 2300 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.01 ->  Wu = 20 We = 1
+Case 2301 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.01 ->  Wu = 10 We = 1
+Case 2302 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.01 ->  Wu = 5 We = 1
+Case 2303 Wind Speed 12.000000
+ W1 = 0.1 W2 = 0.01 ->  Wu = 1 We = 1
+Case 2304 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.01 ->  Wu = 100 We = 100
+Case 2305 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.01 ->  Wu = 80 We = 100
+Case 2306 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.01 ->  Wu = 40 We = 100
+Case 2307 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.01 ->  Wu = 20 We = 100
+Case 2308 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.01 ->  Wu = 10 We = 100
+Case 2309 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.01 ->  Wu = 5 We = 100
+Case 2310 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.01 ->  Wu = 1 We = 100
+Case 2311 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.01 ->  Wu = 100 We = 80
+Case 2312 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.01 ->  Wu = 80 We = 80
+Case 2313 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.01 ->  Wu = 40 We = 80
+Case 2314 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.01 ->  Wu = 20 We = 80
+Case 2315 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.01 ->  Wu = 10 We = 80
+Case 2316 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.01 ->  Wu = 5 We = 80
+Case 2317 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.01 ->  Wu = 1 We = 80
+Case 2318 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.01 ->  Wu = 100 We = 40
+Case 2319 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.01 ->  Wu = 80 We = 40
+Case 2320 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.01 ->  Wu = 40 We = 40
+Case 2321 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.01 ->  Wu = 20 We = 40
+Case 2322 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.01 ->  Wu = 10 We = 40
+Case 2323 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.01 ->  Wu = 5 We = 40
+Case 2324 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.01 ->  Wu = 1 We = 40
+Case 2325 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.01 ->  Wu = 100 We = 20
+Case 2326 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.01 ->  Wu = 80 We = 20
+Case 2327 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.01 ->  Wu = 40 We = 20
+Case 2328 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.01 ->  Wu = 20 We = 20
+Case 2329 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.01 ->  Wu = 10 We = 20
+Case 2330 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.01 ->  Wu = 5 We = 20
+Case 2331 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.01 ->  Wu = 1 We = 20
+Case 2332 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.01 ->  Wu = 100 We = 10
+Case 2333 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.01 ->  Wu = 80 We = 10
+Case 2334 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.01 ->  Wu = 40 We = 10
+Case 2335 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.01 ->  Wu = 20 We = 10
+Case 2336 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.01 ->  Wu = 10 We = 10
+Case 2337 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.01 ->  Wu = 5 We = 10
+Case 2338 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.01 ->  Wu = 1 We = 10
+Case 2339 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.01 ->  Wu = 100 We = 5
+Case 2340 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.01 ->  Wu = 80 We = 5
+Case 2341 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.01 ->  Wu = 40 We = 5
+Case 2342 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.01 ->  Wu = 20 We = 5
+Case 2343 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.01 ->  Wu = 10 We = 5
+Case 2344 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.01 ->  Wu = 5 We = 5
+Case 2345 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.01 ->  Wu = 1 We = 5
+Case 2346 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.01 ->  Wu = 100 We = 1
+Case 2347 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.01 ->  Wu = 80 We = 1
+Case 2348 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.01 ->  Wu = 40 We = 1
+Case 2349 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.01 ->  Wu = 20 We = 1
+Case 2350 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.01 ->  Wu = 10 We = 1
+Case 2351 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.01 ->  Wu = 5 We = 1
+Case 2352 Wind Speed 12.000000
+ W1 = 0.05 W2 = 0.01 ->  Wu = 1 We = 1
+Case 2353 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.01 ->  Wu = 100 We = 100
+Case 2354 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.01 ->  Wu = 80 We = 100
+Case 2355 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.01 ->  Wu = 40 We = 100
+Case 2356 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.01 ->  Wu = 20 We = 100
+Case 2357 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.01 ->  Wu = 10 We = 100
+Case 2358 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.01 ->  Wu = 5 We = 100
+Case 2359 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.01 ->  Wu = 1 We = 100
+Case 2360 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.01 ->  Wu = 100 We = 80
+Case 2361 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.01 ->  Wu = 80 We = 80
+Case 2362 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.01 ->  Wu = 40 We = 80
+Case 2363 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.01 ->  Wu = 20 We = 80
+Case 2364 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.01 ->  Wu = 10 We = 80
+Case 2365 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.01 ->  Wu = 5 We = 80
+Case 2366 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.01 ->  Wu = 1 We = 80
+Case 2367 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.01 ->  Wu = 100 We = 40
+Case 2368 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.01 ->  Wu = 80 We = 40
+Case 2369 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.01 ->  Wu = 40 We = 40
+Case 2370 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.01 ->  Wu = 20 We = 40
+Case 2371 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.01 ->  Wu = 10 We = 40
+Case 2372 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.01 ->  Wu = 5 We = 40
+Case 2373 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.01 ->  Wu = 1 We = 40
+Case 2374 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.01 ->  Wu = 100 We = 20
+Case 2375 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.01 ->  Wu = 80 We = 20
+Case 2376 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.01 ->  Wu = 40 We = 20
+Case 2377 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.01 ->  Wu = 20 We = 20
+Case 2378 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.01 ->  Wu = 10 We = 20
+Case 2379 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.01 ->  Wu = 5 We = 20
+Case 2380 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.01 ->  Wu = 1 We = 20
+Case 2381 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.01 ->  Wu = 100 We = 10
+Case 2382 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.01 ->  Wu = 80 We = 10
+Case 2383 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.01 ->  Wu = 40 We = 10
+Case 2384 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.01 ->  Wu = 20 We = 10
+Case 2385 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.01 ->  Wu = 10 We = 10
+Case 2386 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.01 ->  Wu = 5 We = 10
+Case 2387 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.01 ->  Wu = 1 We = 10
+Case 2388 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.01 ->  Wu = 100 We = 5
+Case 2389 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.01 ->  Wu = 80 We = 5
+Case 2390 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.01 ->  Wu = 40 We = 5
+Case 2391 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.01 ->  Wu = 20 We = 5
+Case 2392 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.01 ->  Wu = 10 We = 5
+Case 2393 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.01 ->  Wu = 5 We = 5
+Case 2394 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.01 ->  Wu = 1 We = 5
+Case 2395 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.01 ->  Wu = 100 We = 1
+Case 2396 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.01 ->  Wu = 80 We = 1
+Case 2397 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.01 ->  Wu = 40 We = 1
+Case 2398 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.01 ->  Wu = 20 We = 1
+Case 2399 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.01 ->  Wu = 10 We = 1
+Case 2400 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.01 ->  Wu = 5 We = 1
+Case 2401 Wind Speed 12.000000
+ W1 = 0.01 W2 = 0.01 ->  Wu = 1 We = 1

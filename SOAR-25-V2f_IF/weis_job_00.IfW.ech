@@ -1,0 +1,63 @@
+Echo file for InflowWind input file: /Users/aoifework/Documents/Research/ipc_tuning/SOAR-25-V2f_IF/weis_job_00_InflowFile.dat
+------- InflowWind v3.01.* INPUT FILE -------------------------------------------------------------------------                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+Generated with AeroElasticSE FAST driver                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+---------------------------------------------------------------------------------------------------------------                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+ True            = Echo                
+ 1               = WindType            
+ 0.0             = PropagationDir      
+ 0               = VFlowAng            
+ 0               = VFlowAng            
+ False           = VelInterpCubic      
+ 1               = NWindVel            
+0.0                    WindVxiList - List of coordinates in the inertial X direction (m)
+0.0                    WindVyiList - List of coordinates in the inertial Y direction (m)
+193.287                WindVziList - List of coordinates in the inertial Z direction (m)
+ 16.0            = HWindSpeed          
+ 193.287         = RefHt               
+ 0.2             = PLexp               
+ /Users/njohnso1 = Filename_Uni        
+ 198.9           = RefHt_Uni           
+ 343.5           = RefLength           
+ /Users/njohnso1 = FileName_BTS        
+ none            = FilenameRoot        
+ False           = TowerFile           
+ none            = FileName_u          
+ none            = FileName_v          
+ none            = FileName_w          
+ 2               = nx                  
+ 2               = ny                  
+ 2               = nz                  
+ 10              = dx                  
+ 10              = dy                  
+ 10              = dz                  
+ 0.0             = RefHt_Hawc          
+ 0               = ScaleMethod         
+ 1.0             = SFx                 
+ 1.0             = SFy                 
+ 1.0             = SFz                 
+ 1.0             = SigmaFx             
+ 1.0             = SigmaFy             
+ 1.0             = SigmaFz             
+ 0.0             = URef                
+ 0               = WindProfile         
+ 0.0             = PLExp_Hawc          
+ 0.0             = Z0                  
+ 0               = XOffset             
+ 0               = XOffset             
+ 0               = SensorType          
+ 0               = NumPulseGate        
+ 30              = PulseSpacing        
+ 0               = NumBeam             
+-200   FocalDistanceX      - Focal distance co-ordinates of the lidar beam in the x direction (relative to hub height) (only first coordinate used for SensorType 2 and 3) (m)
+0   FocalDistanceY      - Focal distance co-ordinates of the lidar beam in the y direction (relative to hub height) (only first coordinate used for SensorType 2 and 3) (m)
+0   FocalDistanceZ      - Focal distance co-ordinates of the lidar beam in the z direction (relative to hub height) (only first coordinate used for SensorType 2 and 3) (m)
+0.0 0.0 0.0   RotorApexOffsetPos  - Offset of the lidar from hub height (m)
+ 17              = URefLid             
+ 0.25            = MeasurementInterval 
+ False           = LidRadialVel        
+ 1               = ConsiderHubMotion   
+ False           = SumPrint            
+"Wind1VelX"
+"Wind1VelY"
+"Wind1VelZ"
+END of input file (the word "END" must appear in the first 3 columns of this last OutList line)

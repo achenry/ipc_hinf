@@ -93,7 +93,7 @@ if BASELINE_K
                                   Sweep.Vary.Ki_diag, Sweep.Vary.Ki_offdiag, ...
                                   Sweep.Vary.gbar_diag, Sweep.Vary.zeta_diag, ...
                                   Sweep.Vary.WindSpeedIdx);
-    if 1
+    if 0
         case_idx = 1;
         K_tmp1 = PI_Notch;
         K_tmp1.Blocks.Kp_diag.Value = K_grid(case_idx, 1).Variables;
@@ -231,26 +231,23 @@ if REPROCESS_SWEEP
         x = getGainCrossover(inv(SF_tmp.So), 1);
         PI_ParameterSweep(case_idx).wc = x(1);
 
-
-        % dc = abs(dcgain(PI_ParameterSweep(case_idx).Controller));
-        % if dc(1, 1) > 0
-        % PI_ParameterSweep(case_idx).wc = getGainCrossover(...
-        %     PI_ParameterSweep(case_idx).Controller, ...
-        %     min(dc(1, 1), [], 'all') / sqrt(2));
-        % else
-        %     PI_ParameterSweep(case_idx).wc = nan;
-        % end
-        
-        % K_tmp = ip_scaling(:, :, c_ws_idx) * K_tmp * inv(op_scaling(:, :, c_ws_idx));
-        % PI_ParameterSweep(case_idx).Controller_scaled = K_tmp;
         
         PI_ParameterSweep(case_idx).SF = SF_tmp;
-
+        
+        PI_ParameterSweep(case_idx).Scheduling = case_basis.Scheduling;
         PI_ParameterSweep(case_idx).Reference = case_basis.Reference;
         PI_ParameterSweep(case_idx).Saturation = case_basis.Saturation;
+
+        if sum(K_grid(case_idx, :)) == 0
+            PI_ParameterSweep(case_idx).CaseDesc = "noipc";
+        elseif BASELINE_K
+            PI_ParameterSweep(case_idx).CaseDesc = "baseline_controller";
+        else
+            PI_ParameterSweep(case_idx).CaseDesc = "struct_sweep";
+        end
     
     end
-    
+
     % restructure sweep controller cases per gains
     % combination for each wind speed
     % v_in_stable = 1;
@@ -343,11 +340,6 @@ if REPROCESS_SWEEP
                 PI_ParameterSweepControllers(weighting_case_idx).MMio(:, c_ws_idx) = ...
                     MMio_tmp(weighting_case_idx, c_ws_idx, :);
                 
-                % PI_ParameterSweep.n_wc(w_idx, j) = 
-                % 
-                % if PI_ParameterSweep.n_wc(w_idx, j) == 0
-                %     PI_ParameterSweep.wc(w_idx, j) = -1;
-                % else
                 wc_tmp(weighting_case_idx) = PI_ParameterSweep(case_idx).wc(1);
                 PI_ParameterSweepControllers(weighting_case_idx).wc = wc_tmp(weighting_case_idx);
                 
@@ -357,7 +349,9 @@ if REPROCESS_SWEEP
                     PI_ParameterSweep(case_idx).SF.Stable;
                 PI_ParameterSweepControllers(weighting_case_idx).SF.Stable(c_ws_idx) = ...
                     Stable_tmp(weighting_case_idx, c_ws_idx);
-
+                
+                PI_ParameterSweepControllers(weighting_case_idx).Scheduling = ...
+                    PI_ParameterSweep(case_idx).Scheduling;
                 PI_ParameterSweepControllers(weighting_case_idx).Reference = ...
                     PI_ParameterSweep(case_idx).Reference;
                 PI_ParameterSweepControllers(weighting_case_idx).Saturation = ...
@@ -501,18 +495,6 @@ if 1
         % PI_ParameterSweep_redtable = sortrows(PI_ParameterSweep_table(stable_idx & robust_idx, :), 'Mean DM', 'ascend'); % last one (with gre
         % approx 1 for Ti, To; 1.2 for Si, So, 1.4 for DM values
         PI_ParameterSweep_redtable = sortrows(PI_ParameterSweep_table(stable_idx & robust_idx, :), 'Mean DM', 'ascend');
-        % unity_idx = ones(length(nnan_idx), 1)
-        % sortrows(PI_ParameterSweep_table, 'DMoD', 'descend')
-        % PI_ParameterSweep_redtable = PI_ParameterSweep_redtable(1:10, :); %...
-            % PI_ParameterSweep_redtable(end-5:end, :)];
-        
-        % plot To
-        % QUESTION How to choose best controllers
-        % based on linear metrics?
-        % QUESTION off_diag components look odd... should they be positive...
-        % bodemag(PI_ParameterSweep.SF.To(:, :, PI_ParameterSweep_redtable(:, "Case No.").Variables))
-        % xline(PI_ParameterSweep_redtable(1, "wco").Variables);
-
         robust_idx = PI_ParameterSweep_redtable.('Case No.');
     
     end
@@ -551,7 +533,8 @@ if 1
             PI_ParameterSweep_case_list(vv).Kp_offdiag = PI_ParameterSweepControllers(v).Gains(2);
             PI_ParameterSweep_case_list(vv).Ki_diag = PI_ParameterSweepControllers(v).Gains(3);
             PI_ParameterSweep_case_list(vv).Ki_offdiag = PI_ParameterSweepControllers(v).Gains(4);
-
+            
+            PI_ParameterSweep_case_list(vv).Scheduling = PI_ParameterSweepControllers(v).Scheduling;
             PI_ParameterSweep_case_list(vv).Reference = PI_ParameterSweepControllers(v).Reference;
             PI_ParameterSweep_case_list(vv).Saturation = PI_ParameterSweepControllers(v).Saturation;
         % end
@@ -580,14 +563,6 @@ end
 
 if 0
 % Plot loop gain for particular controller
-% K_tmp = PI;
-% K_tmp.Blocks.Kp_diag.Value = PI_ParameterSweep_redtable(1, "Kp_diag").Variables;
-% K_tmp.Blocks.Kp_offdiag.Value = PI_ParameterSweep_redtable(1, "Kp_offdiag").Variables;
-% K_tmp.Blocks.Ki_diag.Value = PI_ParameterSweep_redtable(1, "Ki_diag").Variables;
-% K_tmp.Blocks.Ki_offdiag.Value = PI_ParameterSweep_redtable(1, "Ki_offdiag").Variables;
-% K_tmp = ip_scaling(:, :, c_ws_idx) * K_tmp * inv(op_scaling(:, :, c_ws_idx));
-% bodeplot(series(K_tmp, Plant(:, :, C_WS_IDX)))
-% bodeplot(feedback(series(K_tmp, Plant(:, :, C_WS_IDX)), eye(2), -1))
 
 figure;
 for c_ws_idx = unique(PI_ParameterSweep(1).Gains(:, 'WindSpeedIdx'))

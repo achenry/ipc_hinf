@@ -1,11 +1,7 @@
 %% Generate Simulation Cases
 
 % Generate Turbsim Cases
-
-% ux_mean = 11.4;
 class = 'A'; % class A
-
-% uxs = NONLPV_CONTROLLER_WIND_SPEEDS;
 
 if sum([RUN_OL_DQ, RUN_OL_BLADE, RUN_CL]) == 1
     CaseGen.dir_matrix = FAST_runDirectory;
@@ -184,8 +180,13 @@ elseif EXTREME_K_COLLECTION
                 end
             end
             for fn1 = fieldnames(Controllers_case_list(c_idx))'
-                case_list(case_idx).(fn1{1}) = Controllers_case_list(c_idx).(fn1{1});
+                % if isfield(Controllers_case_list(c_idx).(fn1{1}), 'x')
+                %     case_list(case_idx).(fn1{1}) = Controllers_case_list(c_idx).(fn1{1}).('x');
+                % else
+                    case_list(case_idx).(fn1{1}) = Controllers_case_list(c_idx).(fn1{1});
+                % end
             end
+
             if strcmp(WIND_TYPE, 'turbsim')
                 [~,x,~] = fileparts(case_list(case_idx).InflowWind.FileName_BTS);
                 x = split(x, '_');

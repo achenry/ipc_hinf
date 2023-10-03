@@ -1,23 +1,8 @@
 %% Run nonlinear simulations for different controllers in Simulink
-%   compute power spectra of different loads
-%   compute ADC of blade-pitch
 
-% compute power spectra of different rotating and non-rotating loads for
-% different controllers
-% compute ADC for different controllers
-% plot Beta, BetaDot, BetaDDdot for different controllers
-
-% run a parfor loop to simulate 10 minutes of a turbsim wind field for each
-% controller type with IPC on
 init_hinf_controller;
 
-RUN_SIMS_PAR = 1;
-RUN_SIMS_SINGLE = 0;
-RUN_TURSIM = 0;
-GENERATE_CASES = 0;
-GENERATE_FASTINPUT_FILES = 0;
-
-single_run_case_idx = 100;
+single_run_case_idx = 10;
 
 %% Generate Turbsim Files
 if RUN_TURSIM
@@ -60,12 +45,6 @@ end
 Parameters.Control.IPCDQ.Enable = USE_IPC;
 % TODO include single seed for extreme controllers, five seeds for optimal
 % controllers
-
-if true || EXTREME_K_COLLECTION 
-    n_seeds = 1;
-else
-    n_seeds = 5;
-end
 
 if GENERATE_CASES
     generate_simulation_cases;
@@ -173,32 +152,6 @@ end
 % Af_EditADriver;
 end
 
-if RUN_SIMS_SINGLE || RUN_SIMS_PAR
-    if RUN_OL_DQ
-        sim_type = 'ol_dq';
-    elseif RUN_OL_BLADE
-        sim_type = 'ol_blade';
-    elseif RUN_CL && strcmp(WIND_TYPE, 'turbsim')
-        if STRUCT_PARAM_SWEEP
-            sim_type = 'pi_param_sweep_turbsim';
-        elseif OPTIMAL_K_COLLECTION
-            if VARY_WU
-                sim_type = 'optimal_k_cases_turbsim_wu';
-            elseif VARY_REFERENCE
-                sim_type = 'optimal_k_cases_turbsim_ref';
-            elseif VARY_SATURATION
-                sim_type = 'optimal_k_cases_turbsim_sat';
-            end
-        elseif EXTREME_K_COLLECTION
-            sim_type = 'extreme_k_cases_turbsim';
-        elseif BASELINE_K
-            sim_type = 'baseline_k_turbsim';
-        elseif ~USE_IPC
-            sim_type = 'noipc_turbsim';
-        end
-    end
-end
-
 if RUN_SIMS_PAR
     cd(project_dir);
     % sim_inputs = repmat(struct(), n_cases, 1 );
@@ -209,9 +162,6 @@ if RUN_SIMS_PAR
         
         % Populate thread parameters
         if STRUCT_PARAM_SWEEP
-            % SL_model_name = 'AD_SOAR_c7_V2f_c73_MIMOPIControllerTest';
-            % K_IPC = c2d(tf(case_list(case_idx).Controller_scaled(:, :, ...
-            % LPV_CONTROLLER_WIND_SPEEDS == NONLPV_CONTROLLER_WIND_SPEED)), DT);
             
             SL_model_name = 'AD_SOAR_c7_V2f_c73_Clean_FullOrderControllerTest_old';
             K_IPC = c2d(case_list(case_idx).Controller, DT);
@@ -219,40 +169,21 @@ if RUN_SIMS_PAR
             sim_inputs(case_idx) = sim_inputs(case_idx).setVariable('K_IPC', K_IPC);
         elseif EXTREME_K_COLLECTION
             
-            if strcmp(case_list(case_idx).Structure.x, 'Full-Order')
-                SL_model_name = 'AD_SOAR_c7_V2f_c73_Clean_FullOrderControllerTest_old';
-            elseif strcmp(case_list(case_idx).Structure.x, 'Structured')
-                SL_model_name = 'AD_SOAR_c7_V2f_c73_Clean_StructuredControllerTest';
-            end
+            SL_model_name = 'AD_SOAR_c7_V2f_c73_Clean_FullOrderControllerTest_old';
             sim_inputs(case_idx) = Simulink.SimulationInput(SL_model_name);
             
-            K_IPC = c2d(case_list(case_idx).Controller_scaled, DT); % Note, this is the scaled controller
-            if 0
-                bode(K_IPC, bode_plot_opt);
-            end
+            K_IPC = c2d(case_list(case_idx).Controller_scaled.x, DT); % Note, this is the scaled controller
             sim_inputs(case_idx) = sim_inputs(case_idx).setVariable('K_IPC', K_IPC);
         elseif OPTIMAL_K_COLLECTION
             
-            if strcmp(case_list(case_idx).Structure.x, 'Full-Order')
-                SL_model_name = 'AD_SOAR_c7_V2f_c73_Clean_FullOrderControllerTest_old';
-            elseif strcmp(case_list(case_idx).Structure.x, 'Structured')
-                SL_model_name = 'AD_SOAR_c7_V2f_c73_Clean_StructuredControllerTest';
-            end
+            SL_model_name = 'AD_SOAR_c7_V2f_c73_Clean_FullOrderControllerTest_old';
             sim_inputs(case_idx) = Simulink.SimulationInput(SL_model_name);
             
             K_IPC = c2d(case_list(case_idx).Controller_scaled, DT); % Note, this is the scaled controller
-            if 0
-                bode(K_IPC, bode_plot_opt);
-            end
             sim_inputs(case_idx) = sim_inputs(case_idx).setVariable('K_IPC', K_IPC);
         elseif BASELINE_K
-            % sim_inputs(case_idx) = Simulink.SimulationInput('AD_SOAR_c7_V2f_c73_Clean_StructuredControllerTest');
-            % K_IPC = case_list(case_idx).Controller; % Note, this is NOT the scaled controller
-            % sim_inputs(case_idx) = sim_inputs(case_idx).setVariable('K_IPC', K_IPC);
-            % SL_model_name = 'AD_SOAR_c7_V2f_c73_Clean';
             SL_model_name = 'AD_SOAR_c7_V2f_c73_Clean_FullOrderControllerTest_old';
             K_IPC = c2d(case_list(case_idx).Controller, DT);
-            bode(K_IPC, bode_plot_opt);
             sim_inputs(case_idx) = Simulink.SimulationInput(SL_model_name);
             sim_inputs(case_idx) = sim_inputs(case_idx).setVariable('K_IPC', K_IPC);
         % elseif ~USE_IPC
@@ -274,7 +205,8 @@ if RUN_SIMS_PAR
             [SL_model_name, ...
             '/Baseline Controller/Cyclic Pitch controller/1P Cyclic Pitch Controller1', ...
             '/To File'], 'Filename', blpitch_save_fn);
-
+        
+        sim_inputs(case_idx) = sim_inputs(case_idx).setVariable('FAST_InputFileName', case_list(case_idx).FAST_InputFileName);
         sim_inputs(case_idx) = sim_inputs(case_idx).setVariable('TMax', TMax);
         sim_inputs(case_idx) = sim_inputs(case_idx).setVariable('DT', Simulation.DT);
         sim_inputs(case_idx) = sim_inputs(case_idx).setVariable('HWindSpeed', case_list(case_idx).InflowWind.HWindSpeed);
@@ -291,7 +223,13 @@ if RUN_SIMS_PAR
                    'RunInBackground', 'off', ...
                    'ShowProgress',  'on', ...
                    'ShowSimulationManager', 'off');
+
     for case_idx = 1:n_cases
+        % if case_list(case_idx).Kp_diag == 0
+        %     case_list(case_idx).CaseDesc = "noipc";
+        % else
+        %     case_list(case_idx).CaseDesc = "baseline_controller";
+        % end
         sim_out_list(case_idx).CaseDesc = case_list(case_idx).CaseDesc;
         sim_out_list(case_idx).InflowWind = case_list(case_idx).InflowWind;
         sim_out_list(case_idx).outdata_save_fn = case_list(case_idx).outdata_save_fn;
@@ -314,19 +252,14 @@ elseif RUN_SIMS_SINGLE
         % save_fn = strrep(FAST_InputFileName, '.fst', '');
         
         if STRUCT_PARAM_SWEEP
-            % SL_model_name = 'AD_SOAR_c7_V2f_c73_MIMOPIControllerTest';
              SL_model_name = 'AD_SOAR_c7_V2f_c73_Clean_FullOrderControllerTest_old';
-            % K_IPC = c2d(tf(case_list(case_idx).Controller_scaled(:, :, ...
-            %     LPV_CONTROLLER_WIND_SPEEDS == NONLPV_CONTROLLER_WIND_SPEED)), DT);
             K_IPC = c2d(case_list(case_idx).Controller, DT);
-            % K_IPC(2, 2).Numerator(2) / K_IPC(2, 2).Denominator(1) 
-        elseif OPTIMAL_K_COLLECTION || EXTREME_K_COLLECTION
-            if strcmp(case_list(case_idx).Structure.x, 'Full-Order')
-                SL_model_name = 'AD_SOAR_c7_V2f_c73_Clean_FullOrderControllerTest_old';
-            elseif strcmp(case_list(case_idx).Structure.x, 'Structured')
-                SL_model_name = 'AD_SOAR_c7_V2f_c73_Clean_StructuredControllerTest';
-            end
+        elseif OPTIMAL_K_COLLECTION
+            SL_model_name = 'AD_SOAR_c7_V2f_c73_Clean_FullOrderControllerTest_old';
             K_IPC = c2d(case_list(case_idx).Controller_scaled, DT); % Note, this is the scaled controller
+        elseif EXTREME_K_COLLECTION
+            SL_model_name = 'AD_SOAR_c7_V2f_c73_Clean_FullOrderControllerTest_old';
+            K_IPC = c2d(case_list(case_idx).Controller_scaled.x, DT);
         elseif BASELINE_K
             SL_model_name = 'AD_SOAR_c7_V2f_c73_Clean_FullOrderControllerTest_old';
             K_IPC = c2d(case_list(case_idx).Controller, DT);
@@ -347,6 +280,12 @@ elseif RUN_SIMS_SINGLE
 
         sim(fullfile(FAST_SimulinkModel_dir, ...
                 SL_model_name), [0, TMax]);
+
+        if case_list(case_idx).Kp_diag == 0
+            case_list(case_idx).CaseDesc = "noipc";
+        else
+            case_list(case_idx).CaseDesc = "baseline_controller";
+        end
         
         sim_out_list(case_idx).CaseDesc = case_list(case_idx).CaseDesc;
         sim_out_list(case_idx).outdata_save_fn = outdata_save_fn;
@@ -354,6 +293,15 @@ elseif RUN_SIMS_SINGLE
         sim_out_list(case_idx).InflowWind = case_list(case_idx).InflowWind;
         sim_out_list(case_idx).FAST_InputFileName = FAST_InputFileName;
     end
+end
+
+if 0
+    idx = 7;
+    vals = load([sim_out_list(idx).outdata_save_fn, '_', num2str(idx)]);
+    vals = vals.OutData';
+    vals = vals(:, 2:end);
+    getData(vals, OutList, 'Wind1VelX')
+    
 end
 
 %% Save Simulation Data
