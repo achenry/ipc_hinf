@@ -9,6 +9,8 @@ from pCrunch import LoadsAnalysis, PowerProduction, FatigueParams
 from pCrunch.io import load_FAST_out
 from pCrunch.utility import save_yaml, get_windspeeds, convert_summary_stats
 
+# "RootMyc1", "YawBrMyp", "YawBrMzp"
+
 # TODO read in simulation source from command line
 # TODO export DELs to .mat
 
@@ -29,7 +31,8 @@ def valid_op_file(fp, sim_types):
     # return any([fnmatch(fp, ext) for ext in ["*.outb", "*.out"]])
     # pattern = sim_type + '_[0-9]*.mat'
     # return fnmatch(fp, pattern)
-    if '.mat' in fp and any(sim_type in fp for sim_type in sim_types) and 'outdata' in fp:
+    case_idx = fp.split('_')[1]
+    if '.mat' in fp and any(sim_type in fp for sim_type in sim_types) and 'outdata' in fp and (fp.count(case_idx) == 2):
         return True
 
 if __name__ == '__main__':
@@ -51,8 +54,9 @@ if __name__ == '__main__':
     ## parse simulation type arguments
     arg_parser = argparse.ArgumentParser()
     arg_parser.add_argument("-st", "--sim_type", help="Simulation Type", nargs='+',
-                            choices=["extreme_k_cases_turbsim", "optimal_k_cases_turbsim", "ol_dq", "ol_blade",
-                                     "baseline_k_turbsim", "noipc_turbsim", "pi_param_sweep_turbsim"])
+                            choices=["extreme_k_cases_turbsim", "optimal_k_cases_turbsim_wu",
+                                     "optimal_k_cases_turbsim_ref", "optimal_k_cases_turbsim_sat", "ol_dq", "ol_blade",
+                                     "baseline_k_turbsim", "noipc_turbsim", "pi_param_sweep_turbsim", "optimal_k_cases_turbsim_sched"])
     args = arg_parser.parse_args()
     
     outfiles = [
@@ -99,6 +103,7 @@ if __name__ == '__main__':
         "RootMc1": ["RootMxc1", "RootMyc1", "RootMzc1"],
         "RootMc2": ["RootMxc2", "RootMyc2", "RootMzc2"],
         "RootMc3": ["RootMxc3", "RootMyc3", "RootMzc3"],
+        "TwrBs": ['TwrBsMxt', 'TwrBsMyt', 'TwrBsMzt']
     }
     
     # Define channels (and their fatigue slopes) in a dict:
@@ -106,6 +111,7 @@ if __name__ == '__main__':
     fp_tower = FatigueParams(lifetime=25.0, slope=4.0)
     fp_blades = FatigueParams(lifetime=25.0, slope=10.0)
     
+    # "RootMyc1", "YawBrMyp", "YawBrMzp"
     raw_outputs = ['OoPDefl1', 'IPDefl1', 'TwstDefl1', 'RotThrust',
                    'TTDspFA', 'TTDspSS', 'TTDspTwst', # Tower-top / yaw bearing fore-aft/side-to-side/angular torsion deflection
                    'RootMxb1', 'RootMyb1', # Blade 1 edgewise/flapwise moment
@@ -118,13 +124,16 @@ if __name__ == '__main__':
     fatigue_channels = \
         {
             key: fp_blades for key in
-            ['RootMc1', 'OoPDefl1', 'IPDefl1', 'TwstDefl1', 'RootMxb1', 'RootMyb1', 'RootMyc1', 'RootMzc1']
+            ['RootMyc1']
+            # ['RootMc1', 'OoPDefl1', 'IPDefl1', 'RootMxb1', 'RootMyb1', 'RootMyc1', 'RootMzc1']
          } | {
             key: fp_tower for key in
-            ['TTDspFA', 'TTDspSS', 'TTDspTwst', 'TwrBsMxt', 'TwrBsMyt', 'TwrBsMzt']
+            []
+            # ['TTDspFA', 'TTDspSS', 'TTDspTwst', 'TwrBsMxt', 'TwrBsMyt', 'TwrBsMzt', 'TwrBs']
         } | {
             key: fp_nacelle for key in
-            ['RotThrust', 'YawBrMxp', 'YawBrMyp', 'YawBrMzp']
+            ['YawBrMyp', 'YawBrMzp']
+            # ['RotThrust', 'YawBrMxp', 'YawBrMyp', 'YawBrMzp']
         }
     
     # Define channels to save extreme data in a list:
@@ -141,7 +150,7 @@ if __name__ == '__main__':
     
     # The API has changed and is in more of an object oriented framework.
     la = LoadsAnalysis(
-        outputs={k:v for i, (k, v) in enumerate(outputs.items()) if i < 5},  # The primary input is a list of output files
+        outputs={k:v for i, (k, v) in enumerate(outputs.items())},  # The primary input is a list of output files
         magnitude_channels=magnitude_channels,  # All of the following inputs are optional
         fatigue_channels=fatigue_channels,  #
         extreme_channels=channel_extremes,  #
@@ -167,4 +176,4 @@ if __name__ == '__main__':
     la.extreme_events
     
     ## Export data
-    la.DELs.to_csv(os.path.join(RESULTS_DIR, f'DELs.csv'))
+    la.DELs.to_csv(os.path.join(RESULTS_DIR, f'{args.sim_type[0]}_DELs.csv'))

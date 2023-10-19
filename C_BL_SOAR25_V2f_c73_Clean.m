@@ -292,9 +292,12 @@ PitchControlParams.theta_fine   = Parameters.Turbine.fine_pitch;
 % Increase minimum pitch angle using low pass filtered wind speed
 Parameters.Control.DTU_PS.Enable    = 0;
 
-Parameters.Control.DTU_PS.TB_LPF = Af_LPF(2*pi*.025,.707,Control.DT);
-[dLPF_windspeed, ~] = Af_LPF(2*pi*.025,.707,Control.DT);
+Parameters.Control.DTU_PS.TB_LPF = Af_LPF(2*pi*0.25,.707,Control.DT);
+[dLPF_windspeed, ~] = Af_LPF(2*pi*0.01,.707,Control.DT);
 dLPF_windspeed = ss(dLPF_windspeed);
+if false
+    bodemag(dLPF_windspeed)
+    end
 
 % init
 iWS = 1; Parameters.Control.DTU_PS.UU = 0;      Parameters.Control.DTU_PS.PP = 0;  %init

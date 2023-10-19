@@ -1,11 +1,15 @@
+%% config; VARY_REFERENCE = 1; fullorder_hinf_controller; nonlinear_simulations; nonlinear_analysis; config; VARY_SATURATION = 1; fullorder_hinf_controller; nonlinear_simulations; nonlinear_analysis;
+
 %% Initialize workspace and add paths
 username = char(java.lang.System.getProperty('user.name'));
-if strcmp(username, 'aoifework')
+if strcmp(username, 'aoifework') && false
     config;
 end
 
 if RUN_SIMS_SINGLE || RUN_SIMS_PAR
-    if RUN_OL_DQ
+    if DEBUG
+        sim_type = 'debug';
+    elseif RUN_OL_DQ
         sim_type = 'ol_dq';
     elseif RUN_OL_BLADE
         sim_type = 'ol_blade';
@@ -19,6 +23,8 @@ if RUN_SIMS_SINGLE || RUN_SIMS_PAR
                 sim_type = 'optimal_k_cases_turbsim_ref';
             elseif VARY_SATURATION
                 sim_type = 'optimal_k_cases_turbsim_sat';
+            elseif SCHEDULING
+                sim_type = 'optimal_k_cases_turbsim_sched';
             end
         elseif EXTREME_K_COLLECTION
             sim_type = 'extreme_k_cases_turbsim';
@@ -171,7 +177,6 @@ Parameters.Turbine.ConeAngle = 3.6;%2.5;% deg
 Parameters.Turbine.ShaftTilt = 8.4;%7.0; % deg
 Parameters.Tower.Height  = 193.287;  % meters
 
-
 FAST_directory = fullfile(project_dir, [Parameters.Turbine.String '_IF']);
 FAST_InputFileName = fullfile(FAST_directory, [fastRunner.FAST_InputFile '.fst']);
 CpCtCqFile = fullfile(FAST_directory, 'weis_job_00_Cp_Ct_Cq.txt');
@@ -210,14 +215,17 @@ for op_label = OutList'
 end
 save(fullfile(project_dir, 'dqOutList.mat'), 'dqOutList');
 
+BIG_FONT_SIZE = 25;
+SMALL_FONT_SIZE = 22;
+
 sigma_plot_opt = sigmaoptions;
-sigma_plot_opt.Title.FontSize = 25;
+sigma_plot_opt.Title.FontSize = BIG_FONT_SIZE;
 sigma_plot_opt.Title.String = '';
-sigma_plot_opt.InputLabels.FontSize = 25;
-sigma_plot_opt.OutputLabels.FontSize = 25;
-sigma_plot_opt.XLabel.FontSize = 25;
-sigma_plot_opt.YLabel.FontSize = 25;
-sigma_plot_opt.TickLabel.FontSize = 22;
+sigma_plot_opt.InputLabels.FontSize = BIG_FONT_SIZE;
+sigma_plot_opt.OutputLabels.FontSize = BIG_FONT_SIZE;
+sigma_plot_opt.XLabel.FontSize = BIG_FONT_SIZE;
+sigma_plot_opt.YLabel.FontSize = BIG_FONT_SIZE;
+sigma_plot_opt.TickLabel.FontSize = SMALL_FONT_SIZE;
 sigma_plot_opt.Grid = 'on';
 sigma_plot_opt.Title.Interpreter = 'latex';
 sigma_plot_opt.InputLabels.Interpreter = 'latex';
@@ -225,14 +233,16 @@ sigma_plot_opt.OutputLabels.Interpreter = 'latex';
 sigma_plot_opt.XLabel.Interpreter = 'latex';
 sigma_plot_opt.YLabel.Interpreter = 'latex';
 
+SUBPLOT_BIG_FONT_SIZE = 30;
+SUBPLOT_SMALL_FONT_SIZE = 27;
 bode_plot_opt = bodeoptions;
-bode_plot_opt.Title.FontSize = 25;
+bode_plot_opt.Title.FontSize = SUBPLOT_BIG_FONT_SIZE;
 bode_plot_opt.Title.String = '';
-bode_plot_opt.InputLabels.FontSize = 25;
-bode_plot_opt.OutputLabels.FontSize = 25;
-bode_plot_opt.XLabel.FontSize = 25;
-bode_plot_opt.YLabel.FontSize = 25;
-bode_plot_opt.TickLabel.FontSize = 22;
+bode_plot_opt.InputLabels.FontSize = SUBPLOT_BIG_FONT_SIZE;
+bode_plot_opt.OutputLabels.FontSize = SUBPLOT_BIG_FONT_SIZE;
+bode_plot_opt.XLabel.FontSize = SUBPLOT_BIG_FONT_SIZE;
+bode_plot_opt.YLabel.FontSize = SUBPLOT_BIG_FONT_SIZE;
+bode_plot_opt.TickLabel.FontSize = SUBPLOT_SMALL_FONT_SIZE;
 bode_plot_opt.PhaseMatching = 'on';
 bode_plot_opt.Grid = 'on';
 bode_plot_opt.PhaseMatchingFreq = 0;
@@ -247,13 +257,13 @@ bode_plot_opt.YLabel.Interpreter = 'latex';
 % bode_plot_opt.XLimMode = 'manual';
 
 time_plot_opt = timeoptions;
-time_plot_opt.Title.FontSize = 25;
+time_plot_opt.Title.FontSize = BIG_FONT_SIZE;
 time_plot_opt.Title.String = '';
-time_plot_opt.InputLabels.FontSize = 25;
-time_plot_opt.OutputLabels.FontSize = 25;
-time_plot_opt.XLabel.FontSize = 25;
-time_plot_opt.YLabel.FontSize = 25;
-time_plot_opt.TickLabel.FontSize = 22;
+time_plot_opt.InputLabels.FontSize = BIG_FONT_SIZE;
+time_plot_opt.OutputLabels.FontSize = BIG_FONT_SIZE;
+time_plot_opt.XLabel.FontSize = BIG_FONT_SIZE;
+time_plot_opt.YLabel.FontSize = BIG_FONT_SIZE;
+time_plot_opt.TickLabel.FontSize = SMALL_FONT_SIZE;
 time_plot_opt.Grid = 'on';
 time_plot_opt.Title.Interpreter = 'latex';
 time_plot_opt.InputLabels.Interpreter = 'latex';
@@ -264,15 +274,19 @@ time_plot_opt.YLabel.Interpreter = 'latex';
 
 pz_plot_opt = pzoptions;
 % pz_plot_opt.Grid = 'on';
-pz_plot_opt.Title.FontSize = 25;
+pz_plot_opt.Title.FontSize = BIG_FONT_SIZE;
 pz_plot_opt.Title.String = '';
-pz_plot_opt.InputLabels.FontSize = 25;
-pz_plot_opt.OutputLabels.FontSize = 25;
-pz_plot_opt.XLabel.FontSize = 25;
-pz_plot_opt.YLabel.FontSize = 25;
-pz_plot_opt.TickLabel.FontSize = 22;
+pz_plot_opt.InputLabels.FontSize = BIG_FONT_SIZE;
+pz_plot_opt.OutputLabels.FontSize = BIG_FONT_SIZE;
+pz_plot_opt.XLabel.FontSize = BIG_FONT_SIZE;
+pz_plot_opt.YLabel.FontSize = BIG_FONT_SIZE;
+pz_plot_opt.TickLabel.FontSize = SMALL_FONT_SIZE;
 pz_plot_opt.Title.Interpreter = 'latex';
 pz_plot_opt.InputLabels.Interpreter = 'latex';
 pz_plot_opt.OutputLabels.Interpreter = 'latex';
 pz_plot_opt.XLabel.Interpreter = 'latex';
 pz_plot_opt.YLabel.Interpreter = 'latex';
+
+set(groot,'defaulttextinterpreter','latex');
+set(groot,'defaultLegendInterpreter','latex');
+set(groot,'defaultAxesTickLabelInterpreter','latex');  

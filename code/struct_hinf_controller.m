@@ -93,42 +93,21 @@ if BASELINE_K
                                   Sweep.Vary.Ki_diag, Sweep.Vary.Ki_offdiag, ...
                                   Sweep.Vary.gbar_diag, Sweep.Vary.zeta_diag, ...
                                   Sweep.Vary.WindSpeedIdx);
-    if 0
-        case_idx = 1;
-        K_tmp1 = PI_Notch;
-        K_tmp1.Blocks.Kp_diag.Value = K_grid(case_idx, 1).Variables;
-        K_tmp1.Blocks.Kp_offdiag.Value = K_grid(case_idx, 2).Variables;
-        K_tmp1.Blocks.Ki_diag.Value = K_grid(case_idx, 3).Variables;
-        K_tmp1.Blocks.Ki_offdiag.Value = K_grid(case_idx, 4).Variables;
-        K_tmp1.Blocks.gbar_diag.Value = K_grid(case_idx, 5).Variables;
-        K_tmp1.Blocks.zeta_diag.Value = K_grid(case_idx, 6).Variables;
-        K_tmp1 = ss(K_tmp1);
 
-        % Plot baseline OUTPLOT
-        figure;
-        x = K_tmp1;
-        x.OutputName = {'$\beta_d$ Control Input', '$\beta_q$ Control Input'};
-        x.InputName = {'$M_d$ Tracking Error', '$M_q$ Tracking Error'};
-        bodeplot(x, bode_plot_opt);
-    
-        axh = findall(gcf, 'type', 'axes');
-        xline(axh(3), omega_1P_rad * HARMONICS, 'k--', 'LineWidth', 2);
-        % xline(axh(5), omega_1P_rad * HARMONICS, 'k--', 'LineWidth', 2);
-        % xline(axh(7), omega_1P_rad * HARMONICS, 'k--', 'LineWidth', 2);
-        xline(axh(9), omega_1P_rad * HARMONICS, 'k--', 'LineWidth', 2);
-    
-        obj = findobj(gcf,'Type','hggroup');
-        for idx = 1:numel(obj)
-            for jdx = 1:numel(obj(idx).Children)
-                obj(idx).Children(jdx).LineWidth = 2;
-            end
-        end
-    
-        set(gcf, 'Position', [0 0 1500 900]);
-        hold off;
-    
-        savefig(gcf, fullfile(fig_dir, 'BaselineController_bodemag.fig'));
-        saveas(gcf, fullfile(fig_dir, 'BaselineController_bodemag.png'));
+    case_idx = 1;
+    K0 = PI_Notch;
+    K0.Blocks.Kp_diag.Value = K_grid(case_idx, 1).Variables;
+    K0.Blocks.Kp_offdiag.Value = K_grid(case_idx, 2).Variables;
+    K0.Blocks.Ki_diag.Value = K_grid(case_idx, 3).Variables;
+    K0.Blocks.Ki_offdiag.Value = K_grid(case_idx, 4).Variables;
+    K0.Blocks.gbar_diag.Value = K_grid(case_idx, 5).Variables;
+    K0.Blocks.zeta_diag.Value = K_grid(case_idx, 6).Variables;
+    K0 = ss(K0);
+    save(fullfile(mat_save_dir, 'K0'), 'K0');
+
+    if 0
+        
+        
 
         % K_tmp2 = PI;
         % K_tmp2.Blocks.Kp_diag.Value = K_grid(case_idx, 1).Variables;
@@ -228,8 +207,12 @@ if REPROCESS_SWEEP
         PI_ParameterSweep(case_idx).MMio = MMio_tmp;
         
         % PI_ParameterSweep(case_idx).wc = getGainCrossover(SF_tmp.Lo, 1);
-        x = getGainCrossover(inv(SF_tmp.So), 1);
-        PI_ParameterSweep(case_idx).wc = x(1);
+        x = getGainCrossover(SF_tmp.Lo, 1);
+        if length(x) >= 1
+            PI_ParameterSweep(case_idx).wc = x(1);
+        else
+            PI_ParameterSweep(case_idx).wc = 0;
+        end
 
         
         PI_ParameterSweep(case_idx).SF = SF_tmp;
@@ -238,7 +221,7 @@ if REPROCESS_SWEEP
         PI_ParameterSweep(case_idx).Reference = case_basis.Reference;
         PI_ParameterSweep(case_idx).Saturation = case_basis.Saturation;
 
-        if sum(K_grid(case_idx, :)) == 0
+        if sum(K_grid(case_idx, {'Kp_diag', 'Kp_offdiag', 'Ki_diag', 'Ki_offdiag'}).Variables) == 0
             PI_ParameterSweep(case_idx).CaseDesc = "noipc";
         elseif BASELINE_K
             PI_ParameterSweep(case_idx).CaseDesc = "baseline_controller";
@@ -356,6 +339,8 @@ if REPROCESS_SWEEP
                     PI_ParameterSweep(case_idx).Reference;
                 PI_ParameterSweepControllers(weighting_case_idx).Saturation = ...
                     PI_ParameterSweep(case_idx).Saturation;
+                PI_ParameterSweepControllers(weighting_case_idx).CaseDesc = ...
+                    PI_ParameterSweep(case_idx).CaseDesc;
 
                 weighting_case_idx = weighting_case_idx + 1;
             end
@@ -449,26 +434,6 @@ if REPROCESS_SWEEP
         "SingleDiskOutput_PMD", "SingleDiskOutput_PMQ"]).Variables;
     PI_ParameterSweep_table.("WorstCase_SingleDisk_PM") = x(I.Variables);
     
-    
-    if BASELINE_K
-        save(fullfile(mat_save_dir, 'PI_BaselineParameters.mat'), "PI_ParameterSweep");
-        save(fullfile(mat_save_dir, 'PI_BaselineParameters_table.mat'), "PI_ParameterSweep_table");
-    elseif STRUCT_PARAM_SWEEP
-        save(fullfile(mat_save_dir, 'PI_ParameterSweep.mat'), "PI_ParameterSweep");
-        save(fullfile(mat_save_dir, 'PI_ParameterSweep_table.mat'), "PI_ParameterSweep_table");
-    end
-
-else
-    if BASELINE_K
-        load(fullfile(mat_save_dir, 'PI_BaselineParameters.mat'));
-        load(fullfile(mat_save_dir, 'PI_BaselineParameters_table.mat'));
-    elseif STRUCT_PARAM_SWEEP
-        load(fullfile(mat_save_dir, 'PI_ParameterSweep.mat'));
-        load(fullfile(mat_save_dir, 'PI_ParameterSweep_table.mat'));
-    end
-end
-
-if 1
     if BASELINE_K
         robust_idx = PI_ParameterSweep_table.('Case No.') == PI_ParameterSweep_table.('Case No.');
         PI_ParameterSweep_redtable = PI_ParameterSweep_table(robust_idx, :);
@@ -537,28 +502,17 @@ if 1
             PI_ParameterSweep_case_list(vv).Scheduling = PI_ParameterSweepControllers(v).Scheduling;
             PI_ParameterSweep_case_list(vv).Reference = PI_ParameterSweepControllers(v).Reference;
             PI_ParameterSweep_case_list(vv).Saturation = PI_ParameterSweepControllers(v).Saturation;
+            PI_ParameterSweep_case_list(vv).CaseDesc = PI_ParameterSweepControllers(v).CaseDesc;
         % end
     
         vv = vv + 1;
     end
     
-    % PI_ParameterSweep_redtable = [num2cell(zeros(1, size(PI_ParameterSweep_redtable, 2))); PI_ParameterSweep_redtable]; % NoIPC case
-
-    if BASELINE_K % first structure is noipc case, second is baseline case
-        save(fullfile(mat_save_dir, 'PI_BaselineParameters_case_list.mat'), "PI_ParameterSweep_case_list");
-        save(fullfile(mat_save_dir, 'PI_BaselineParameters_redtable.mat'), "PI_ParameterSweep_redtable");
-    elseif STRUCT_PARAM_SWEEP
-        save(fullfile(mat_save_dir, 'PI_ParameterSweep_case_list.mat'), "PI_ParameterSweep_case_list");
-        save(fullfile(mat_save_dir, 'PI_ParameterSweep_redtable.mat'), "PI_ParameterSweep_redtable");
-    end
+    save(fullfile(mat_save_dir, [sim_type, '_Controllers_case_list.mat']), "PI_ParameterSweep_case_list");
+    save(fullfile(mat_save_dir, [sim_type, '_Controllers_case_table.mat']), "PI_ParameterSweep_redtable");
 else
-    if BASELINE_K
-        load(fullfile(mat_save_dir, 'PI_BaselineParameters_case_list.mat'));
-        load(fullfile(mat_save_dir, 'PI_BaselineParameters_redtable.mat'));        
-    elseif STRUCT_PARAM_SWEEP
-        load(fullfile(mat_save_dir, 'PI_ParameterSweep_case_list.mat'));
-        load(fullfile(mat_save_dir, 'PI_ParameterSweep_redtable.mat'));
-    end
+    load(fullfile(mat_save_dir, [sim_type, '_Controllers_case_list.mat']));
+    load(fullfile(mat_save_dir, [sim_type, '_Controllers_case_table.mat']));
 end
 
 if 0

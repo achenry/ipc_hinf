@@ -5,15 +5,15 @@ clc;
 initialize;
 
 %% Compute maximum absolute values from steady-state simulations (with IPC off) to normalize transfer functions later
-if ~exist(fullfile(FAST_directory, 'op_absmax.mat'), 'file') | ~exist(fullfile(FAST_directory, 'ss_vals.mat'), 'file')
-    load(fullfile(project_dir, 'ss_simulations', 'sim_out_list_ss.mat'));
-    [ss_vals, op_absmax] = compute_ss_vals(sim_out_list, OutList, dqOutList, Parameters);
-    save(fullfile(mat_save_dir, 'ss_vals.mat'), 'ss_vals');
-    save(fullfile(mat_save_dir, 'op_absmax.mat'), 'op_absmax');
-else
-    load(fullfile(mat_save_dir, 'ss_vals.mat'));
-    load(fullfile(mat_save_dir, 'op_absmax.mat'));
-end
+% if ~exist(fullfile(FAST_directory, 'op_absmax.mat'), 'file') | ~exist(fullfile(FAST_directory, 'ss_vals.mat'), 'file')
+%     load(fullfile(project_dir, 'ss_simulations', 'sim_out_list_ss.mat'));
+%     [ss_vals, op_absmax] = compute_ss_vals(sim_out_list, OutList, dqOutList, Parameters);
+%     save(fullfile(mat_save_dir, 'ss_vals.mat'), 'ss_vals');
+%     save(fullfile(mat_save_dir, 'op_absmax.mat'), 'op_absmax');
+% else
+%     load(fullfile(mat_save_dir, 'ss_vals.mat'));
+%     load(fullfile(mat_save_dir, 'op_absmax.mat'));
+% end
 
 %% Investigate Sensitivity of Outputs to Individual BldPitch1 Variation for Linear model
 
