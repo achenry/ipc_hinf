@@ -22,3 +22,5 @@ code/matfiles/*.mat
 SOAR-25-V2f_IF/linearization
 sl_metadata
 nonlin_simulations
+postprocessing_results
+slprj
