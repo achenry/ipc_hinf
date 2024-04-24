@@ -1,5 +1,18 @@
 %% Run nonlinear simulations for different controllers in Simulink
 
+% TODO, compute blade-pitch saturation as percentage of peak values in IPC
+% from first rotation of wind turbine after transients have settled OR
+% compute reference beta_sat values based on singel AWu=7,5
+% TODO compute reference Md_ref values based on singel AWu=7.5
+% TODO run varying_wu case for higher range of AWu
+% TODO when plotting change in ADC, make sure to choose case that also
+% reduces loads
+% TODO compare results of controllers tuned for different wind speeds
+% TODO test results over Region 2.5 where greatest loads occur
+% TODO run all of this on desktop with 96 cores
+% TODO plot Beta_ipc signals for baseline and different tuning methods with
+% ADC, tracking error attenuation values
+
 init_hinf_controller;
 
 single_run_case_idx = 45;
@@ -195,10 +208,13 @@ if RUN_SIMS_PAR
         sim_inputs(case_idx) = setBlockParameter(sim_inputs(case_idx), ...
             [SL_model_name, ...
             '/To File'], 'Filename', outdata_save_fn);
+        % sim_inputs(case_idx) = setBlockParameter(sim_inputs(case_idx), ...
+        %     [SL_model_name, ...
+        %     '/Baseline Controller/Cyclic Pitch controller/1P Cyclic Pitch Controller1', ...
+        %     '/To File'], 'Filename', blpitch_save_fn);
         sim_inputs(case_idx) = setBlockParameter(sim_inputs(case_idx), ...
             [SL_model_name, ...
-            '/Baseline Controller/Cyclic Pitch controller/1P Cyclic Pitch Controller1', ...
-            '/To File'], 'Filename', blpitch_save_fn);
+            '/Baseline Controller/To File'], 'Filename', blpitch_save_fn);
         sim_inputs(case_idx) = setBlockParameter(sim_inputs(case_idx), ...
             [SL_model_name, ...
             '/Baseline Controller/Cyclic Pitch controller/1P Cyclic Pitch Controller1', ...
@@ -220,9 +236,10 @@ if RUN_SIMS_PAR
         end
 
         if VARY_SATURATION
-            sim_inputs(case_idx) = sim_inputs(case_idx).setVariable('BldPitch_sat', case_list(case_idx).Saturation * Beta_dq_saturation);
+            % sim_inputs(case_idx) = sim_inputs(case_idx).setVariable('BldPitch_sat', case_list(case_idx).Saturation * Beta_dq_saturation);
+            sim_inputs(case_idx) = sim_inputs(case_idx).setVariable('BldPitch_sat', case_list(case_idx).Saturation * Beta_ipc_blade_saturation);
         else
-            sim_inputs(case_idx) = sim_inputs(case_idx).setVariable('BldPitch_sat', [Inf, Inf]);
+            sim_inputs(case_idx) = sim_inputs(case_idx).setVariable('BldPitch_sat', Inf);
         end
         
     end
@@ -273,9 +290,10 @@ elseif RUN_SIMS_SINGLE
         end
         
         if VARY_SATURATION
-            BldPitch_sat = case_list(case_idx).Saturation * Beta_dq_saturation;
+            % BldPitch_sat = case_list(case_idx).Saturation * Beta_dq_saturation;
+            BldPitch_sat = case_list(case_idx).Saturation * Beta_ipc_blade_saturation;
         else
-            BldPitch_sat = [Inf, Inf];
+            BldPitch_sat = Inf;
         end
 
         SL_model_name = 'AD_SOAR_c7_V2f_c73_Clean_FullOrderControllerTest_old';
@@ -295,9 +313,11 @@ elseif RUN_SIMS_SINGLE
         rootmyc_save_fn = fullfile(sl_save_dir, [name, '_', sim_type, '_rootmyc']);
         
         set_param([SL_model_name, '/To File'], 'Filename', outdata_save_fn);
-        set_param([SL_model_name, ...
-            '/Baseline Controller/Cyclic Pitch controller/1P Cyclic Pitch Controller1', ...
-            '/To File'], 'Filename', blpitch_save_fn);
+        set_param([SL_model_name, '/Baseline Controller/To File'], ...
+            'Filename', blpitch_save_fn);
+        % set_param([SL_model_name, ...
+        %     '/Baseline Controller/Cyclic Pitch controller/1P Cyclic Pitch Controller1', ...
+        %     '/To File'], 'Filename', blpitch_save_fn);
         set_param([SL_model_name, ...
             '/Baseline Controller/Cyclic Pitch controller/1P Cyclic Pitch Controller1', ...
             '/To File1'], 'Filename', rootmyc_save_fn);
@@ -342,17 +362,25 @@ if 0
     figure(3); subplot(2, 1, 1); plot(t, RootMycDQ(:, 1)); hold on;
     subplot(2, 1, 2); plot(t, RootMycDQ(:, 2)); hold on;
 
-    idx = 41;
+    idx = 50;
+    infw_fn = 'A_16_1';
+    baseline_sim_out_list = load(fullfile(sl_metadata_save_dir, ['sim_out_list_', 'baseline_k_turbsim', '.mat'])).sim_out_list;
+    infw_filenames = cell(length(baseline_sim_out_list), 1);
+    [infw_filenames{:}] = baseline_sim_out_list.InflowWind.FileName_BTS;
+    baseline_types = cell(length(baseline_sim_out_list), 1);
+    [baseline_types{:}] = baseline_sim_out_list.CaseDesc;
+    % find(contains(infw_filenames, infw_fn) & strcmp(baseline_types{:}, "baseline_controller"))
+    %   2.8785e+04, 0.1485
     baseline_vals = load(fullfile(sl_save_dir, ['case_', num2str(idx), '_baseline_k_turbsim_outdata_', num2str(idx)]));
     baseline_vals = baseline_vals.OutData';
     baseline_vals = baseline_vals(floor(cut_transients / DT):end, 2:end);
     t = getData(baseline_vals, OutList, 'Time');
     RootMyc1 = getData(baseline_vals, OutList, 'RootMyc1');
-    rmse = sqrt((1 / length(RootMyc1)) * sum(RootMyc1.^2))
+    rmse.baseline = sqrt((1 / length(RootMyc1)) * sum(RootMyc1.^2))
     beta_dot_norm = @(beta_dot) ((beta_dot >= 0) * 5) + ((beta_dot < 0) * (-4));
     BldPitch1 = getData(baseline_vals, OutList, 'BldPitch1');
     dBldPitch1dt = diff(BldPitch1) / DT;
-    adc = (1 / length(dBldPitch1dt)) * sum((dBldPitch1dt ./ beta_dot_norm(dBldPitch1dt)))
+    adc.baseline = (1 / length(dBldPitch1dt)) * sum((dBldPitch1dt ./ beta_dot_norm(dBldPitch1dt)))
     figure(2);
     baseline_case_list = load(fullfile(mat_save_dir, ['baseline_k_turbsim', '_Controllers_nonlinear_simulation_case_list.mat']));
     baseline_case_list = baseline_case_list.case_list;
@@ -368,9 +396,18 @@ if 0
     figure(2);
     bodeplot(baseline_case_list(idx).Controller(:,:,3), bode_plot_opt); hold on;
 
+    for idx = [3, 6, 9, 12, 15]
+        case_list(idx).CaseDesc
+    end
+    % sim_out_list = sim_out_list.controller;
     for idx = 1:length(sim_out_list)
+        % if strcmp(sim_out_list(idx).CaseDesc, 'adc W1 = 1 W2 = 0.01 ->  Wu = 7.5 We = 0.1 Beta_dq_sat = [0.2, 0.2]') || ...
+        %         strcmp(sim_out_list(idx).InflowWind.FileName_BTS, 'A_16_1')
+        %     continue;
+        % end
+
     % for idx  = [46, 48, 136, 138]
-        % idx = 2;
+        % idx = 45;
         vals = load([sim_out_list(idx).outdata_save_fn, '_', num2str(idx)]);
         % vals = load(sim_out_list(idx).outdata_save_fn);
         vals = vals.OutData';
@@ -389,12 +426,18 @@ if 0
         %vals = load([sim_out_list(idx).blpitch_save_fn]);
         vals = vals.BlPitch';
         vals = vals(floor(cut_transients / DT):end, 2:end);
-        BldPitchDQ = vals(:, 1:2);
-        BldPitchDQ_sat = vals(:, 3:4);
-        if any(BldPitchDQ_sat)
-            sim_out_list(idx).CaseDesc
-            sim_out_list(idx).InflowWind.FileName_BTS
+        BldPitch_ipc = vals(:, 1:3);
+        BldPitch_ipc_sat = vals(:, 4:6);
+
+
+        if sum(BldPitch_ipc) == 0
+            continue;
         end
+        sim_out_list(idx).CaseDesc
+        % if any(sim_out_list)
+        %       sim_out_list(idx).CaseDesc
+        %     sim_out_list(idx).InflowWind.FileName_BTS
+        % end
         % if any(vals(:, 3:4))
 
         vals = load([sim_out_list(idx).rootmyc_save_fn, '_', num2str(idx)]);
@@ -404,16 +447,18 @@ if 0
         RootMycDQ = vals(:, 1:2);
         
         rmse = sqrt((1 / length(RootMyc1)) * sum(RootMyc1.^2));
-        % if rmse < 2.9*1e4
-        %     idx
-        %     rmse
-        %     adc = (1 / length(dBldPitch1dt)) * sum((dBldPitch1dt ./ beta_dot_norm(dBldPitch1dt)))
-        % end
-        % figure(3); subplot(2, 1, 1); plot(t, RootMycDQ(:, 1)); hold on;
+        if contains(sim_out_list(case_idx).InflowWind.FileName_BTS, 'A_16_1') % && (rmse < 3*1e4)
+            idx
+            rmse
+            adc = (1 / length(dBldPitch1dt)) * sum((dBldPitch1dt ./ beta_dot_norm(dBldPitch1dt)))
+        end
+        figure(3); 
+        % subplot(2, 1, 1); plot(t, RootMycDQ(:, 1)); hold on;
         % subplot(2, 1, 2); plot(t, RootMycDQ(:, 2)); hold on;
         % subplot(2, 1, 1); subtitle('D'); xlim([100, TMax])
         % subplot(2, 1, 2); subtitle('Q'); xlim([100, TMax])
         % legend('Open-Loop', 'Baseline PI', 'Tuned Full-Order');
+        plot(t, BldPitch_ipc);
         
         
         % figure(1);
@@ -441,8 +486,13 @@ if 0
 end
 
 %% Compute DELs
-if BASELINE_K || OPTIMAL_K_COLLECTION
+if n_seeds == 5 && (BASELINE_K || OPTIMAL_K_COLLECTION)
+    % sim_type = 'optimal_k_cases_turbsim_wu';
     status = system(['/Users/aoifework/miniconda3/envs/weis_dev/bin/python3 ', fullfile(project_dir, 'postprocessing', 'main.py'), ' -st ', sim_type]);
+    % sim_type = 'optimal_k_cases_turbsim_ref';
+    % status = system(['/Users/aoifework/miniconda3/envs/weis_dev/bin/python3 ', fullfile(project_dir, 'postprocessing', 'main.py'), ' -st ', sim_type]);
+    % sim_type = 'optimal_k_cases_turbsim_sat';
+    % status = system(['/Users/aoifework/miniconda3/envs/weis_dev/bin/python3 ', fullfile(project_dir, 'postprocessing', 'main.py'), ' -st ', sim_type]);
 end
 
 %% Save Simulation Data

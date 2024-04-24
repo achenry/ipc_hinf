@@ -1,61 +1,61 @@
 
 Case 1 Wind Speed 12.000000
- W1 = 1 W2 = 0.1 ->  Wu = 5 We = 10 M_dq_ref = [0.1, 0.1]
+ W1 = 1 W2 = 0.1 ->  Wu = 10 We = 10
 Case 1 Wind Speed 14.000000
- W1 = 1 W2 = 0.1 ->  Wu = 5 We = 10 M_dq_ref = [0.1, 0.1]
+ W1 = 1 W2 = 0.1 ->  Wu = 10 We = 10
 Case 1 Wind Speed 16.000000
- W1 = 1 W2 = 0.1 ->  Wu = 5 We = 10 M_dq_ref = [0.1, 0.1]
+ W1 = 1 W2 = 0.1 ->  Wu = 10 We = 10
 Case 1 Wind Speed 18.000000
- W1 = 1 W2 = 0.1 ->  Wu = 5 We = 10 M_dq_ref = [0.1, 0.1]
+ W1 = 1 W2 = 0.1 ->  Wu = 10 We = 10
 Case 1 Wind Speed 20.000000
- W1 = 1 W2 = 0.1 ->  Wu = 5 We = 10 M_dq_ref = [0.1, 0.1]
+ W1 = 1 W2 = 0.1 ->  Wu = 10 We = 10
 Case 1 Wind Speed 22.000000
- W1 = 1 W2 = 0.1 ->  Wu = 5 We = 10 M_dq_ref = [0.1, 0.1]
+ W1 = 1 W2 = 0.1 ->  Wu = 10 We = 10
 Case 2 Wind Speed 12.000000
- W1 = 1 W2 = 0.1 ->  Wu = 5 We = 10 M_dq_ref = [0.05, 0.05]
+ W1 = 1 W2 = 0.1 ->  Wu = 7.5 We = 10
 Case 2 Wind Speed 14.000000
- W1 = 1 W2 = 0.1 ->  Wu = 5 We = 10 M_dq_ref = [0.05, 0.05]
+ W1 = 1 W2 = 0.1 ->  Wu = 7.5 We = 10
 Case 2 Wind Speed 16.000000
- W1 = 1 W2 = 0.1 ->  Wu = 5 We = 10 M_dq_ref = [0.05, 0.05]
+ W1 = 1 W2 = 0.1 ->  Wu = 7.5 We = 10
 Case 2 Wind Speed 18.000000
- W1 = 1 W2 = 0.1 ->  Wu = 5 We = 10 M_dq_ref = [0.05, 0.05]
+ W1 = 1 W2 = 0.1 ->  Wu = 7.5 We = 10
 Case 2 Wind Speed 20.000000
- W1 = 1 W2 = 0.1 ->  Wu = 5 We = 10 M_dq_ref = [0.05, 0.05]
+ W1 = 1 W2 = 0.1 ->  Wu = 7.5 We = 10
 Case 2 Wind Speed 22.000000
- W1 = 1 W2 = 0.1 ->  Wu = 5 We = 10 M_dq_ref = [0.05, 0.05]
+ W1 = 1 W2 = 0.1 ->  Wu = 7.5 We = 10
 Case 3 Wind Speed 12.000000
- W1 = 1 W2 = 0.1 ->  Wu = 5 We = 10 M_dq_ref = [0.025, 0.025]
+ W1 = 1 W2 = 0.1 ->  Wu = 5 We = 10
 Case 3 Wind Speed 14.000000
- W1 = 1 W2 = 0.1 ->  Wu = 5 We = 10 M_dq_ref = [0.025, 0.025]
+ W1 = 1 W2 = 0.1 ->  Wu = 5 We = 10
 Case 3 Wind Speed 16.000000
- W1 = 1 W2 = 0.1 ->  Wu = 5 We = 10 M_dq_ref = [0.025, 0.025]
+ W1 = 1 W2 = 0.1 ->  Wu = 5 We = 10
 Case 3 Wind Speed 18.000000
- W1 = 1 W2 = 0.1 ->  Wu = 5 We = 10 M_dq_ref = [0.025, 0.025]
+ W1 = 1 W2 = 0.1 ->  Wu = 5 We = 10
 Case 3 Wind Speed 20.000000
- W1 = 1 W2 = 0.1 ->  Wu = 5 We = 10 M_dq_ref = [0.025, 0.025]
+ W1 = 1 W2 = 0.1 ->  Wu = 5 We = 10
 Case 3 Wind Speed 22.000000
- W1 = 1 W2 = 0.1 ->  Wu = 5 We = 10 M_dq_ref = [0.025, 0.025]
+ W1 = 1 W2 = 0.1 ->  Wu = 5 We = 10
 Case 4 Wind Speed 12.000000
- W1 = 1 W2 = 0.1 ->  Wu = 5 We = 10 M_dq_ref = [0.01, 0.01]
+ W1 = 1 W2 = 0.1 ->  Wu = 2.5 We = 10
 Case 4 Wind Speed 14.000000
- W1 = 1 W2 = 0.1 ->  Wu = 5 We = 10 M_dq_ref = [0.01, 0.01]
+ W1 = 1 W2 = 0.1 ->  Wu = 2.5 We = 10
 Case 4 Wind Speed 16.000000
- W1 = 1 W2 = 0.1 ->  Wu = 5 We = 10 M_dq_ref = [0.01, 0.01]
+ W1 = 1 W2 = 0.1 ->  Wu = 2.5 We = 10
 Case 4 Wind Speed 18.000000
- W1 = 1 W2 = 0.1 ->  Wu = 5 We = 10 M_dq_ref = [0.01, 0.01]
+ W1 = 1 W2 = 0.1 ->  Wu = 2.5 We = 10
 Case 4 Wind Speed 20.000000
- W1 = 1 W2 = 0.1 ->  Wu = 5 We = 10 M_dq_ref = [0.01, 0.01]
+ W1 = 1 W2 = 0.1 ->  Wu = 2.5 We = 10
 Case 4 Wind Speed 22.000000
- W1 = 1 W2 = 0.1 ->  Wu = 5 We = 10 M_dq_ref = [0.01, 0.01]
+ W1 = 1 W2 = 0.1 ->  Wu = 2.5 We = 10
 Case 5 Wind Speed 12.000000
- W1 = 1 W2 = 0.1 ->  Wu = 5 We = 10 M_dq_ref = [0.005, 0.005]
+ W1 = 1 W2 = 0.1 ->  Wu = 1 We = 10
 Case 5 Wind Speed 14.000000
- W1 = 1 W2 = 0.1 ->  Wu = 5 We = 10 M_dq_ref = [0.005, 0.005]
+ W1 = 1 W2 = 0.1 ->  Wu = 1 We = 10
 Case 5 Wind Speed 16.000000
- W1 = 1 W2 = 0.1 ->  Wu = 5 We = 10 M_dq_ref = [0.005, 0.005]
+ W1 = 1 W2 = 0.1 ->  Wu = 1 We = 10
 Case 5 Wind Speed 18.000000
- W1 = 1 W2 = 0.1 ->  Wu = 5 We = 10 M_dq_ref = [0.005, 0.005]
+ W1 = 1 W2 = 0.1 ->  Wu = 1 We = 10
 Case 5 Wind Speed 20.000000
- W1 = 1 W2 = 0.1 ->  Wu = 5 We = 10 M_dq_ref = [0.005, 0.005]
+ W1 = 1 W2 = 0.1 ->  Wu = 1 We = 10
 Case 5 Wind Speed 22.000000
- W1 = 1 W2 = 0.1 ->  Wu = 5 We = 10 M_dq_ref = [0.005, 0.005]
+ W1 = 1 W2 = 0.1 ->  Wu = 1 We = 10

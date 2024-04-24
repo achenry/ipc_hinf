@@ -1,8 +1,6 @@
 %% Setup workspace
 initialize;
 
-% TODO run extreme controller sweep for constant Wu=10 and greater range of
-% others (whatever was limited for most robust, lowest adc)
 % TODO set up gain-scheduled controller and compare performance for
 % turbulent wind fields vs single-tuned controller
 
@@ -107,8 +105,10 @@ lpf_e = (1 / M_e) * (s + M_e*omega_e) / (s + eps_e*omega_e);
 % design notch weighting filter as per Ossman to limit singular
     % value of disturbance sensitivity on the diagonal bc we don't need to
     % penalize weighted sum of Md and Mq
-zeta = 0.01; % damping, greater value leads to greater width
-gbar = 15; % gain at notch frequency
+% zeta = 0.01; % damping, greater value leads to greater width
+% gbar = 15; % gain at notch frequency
+zeta = 1.; % damping, greater value leads to greater width
+gbar = 10; % gain at notch frequency
 notch_3P_diag = tf([1 2*gbar*zeta*omega_3P_rad omega_3P_rad^2], ...
     [1 2*zeta*omega_3P_rad omega_3P_rad^2]);
 notch = notch_3P_diag * eye(2);
@@ -141,7 +141,6 @@ end
 % for debugging
 if DEBUG
     n_seeds = 1;
-    uxs = [NONLPV_CONTROLLER_WIND_SPEED];
 
     case_basis.WindSpeedIndex.x = find(LPV_CONTROLLER_WIND_SPEEDS == NONLPV_CONTROLLER_WIND_SPEED);
     % case_basis.Scheduling.x = [0]; %, 'No'};
@@ -198,8 +197,6 @@ elseif EXTREME_K_COLLECTION
     case_basis.Structure.x = {'Full-Order'}; %, 'Structured'};
     case_basis.Reference.x = [0];
     case_basis.Saturation.x = [0];
-
-    uxs = [NONLPV_CONTROLLER_WIND_SPEED];
 
     IP_HIGH_GAIN = 10;
     WU_HIGH_GAIN = 10; % multiplied by initial gain of (1 / eps_u)=100
@@ -271,7 +268,6 @@ elseif OPTIMAL_K_COLLECTION
     case_basis.WindSpeedIndex.x = 1:length(LPV_CONTROLLER_WIND_SPEEDS);
     % case_basis.Scheduling.x = [0]; %, 'No'};
     case_basis.Structure.x = {'Full-Order'}; %, 'Structured'};
-    uxs = LPV_CONTROLLER_WIND_SPEEDS;
 
     if VARY_REFERENCE
         % TODO Choose % of Open Loop mean value. Only use d reference
@@ -290,17 +286,11 @@ elseif OPTIMAL_K_COLLECTION
     end
 
     if VARY_SATURATION
-        load(fullfile(mat_save_dir, 'Beta_dq_saturation.mat'));
+        % load(fullfile(mat_save_dir, 'Beta_dq_saturation.mat'));
+        load(fullfile(mat_save_dir, 'Beta_ipc_blade_saturation.mat'));
 
         case_basis.Saturation.x = 1:length(VARY_SATURATION_BASIS);
 
-        % case_basis.Saturation.d = [];
-        % case_basis.Saturation.q = [];
-        % load(fullfile(mat_save_dir, 'Beta_dq_saturation.mat'));
-        % for sat = VARY_SATURATION_BASIS
-        %     case_basis.Saturation.d(end + 1) = sat * Beta_dq_saturation(1);
-        %     case_basis.Saturation.q(end + 1) = sat * Beta_dq_saturation(2);
-        % end
     else
         case_basis.Saturation.x = [0];
     end
@@ -311,17 +301,17 @@ elseif OPTIMAL_K_COLLECTION
             case_basis.WuGain.x{end+1} = tf(wu * eye(2));
         end
     else
-        case_basis.WuGain.x = {tf(VARY_WU_BASIS(3) * eye(2))};
+        case_basis.WuGain.x = {tf(VARY_WU_BASIS(4) * eye(2))};
     end
 
     % most_robust_table(1, 'Case Desc.') % W1 = 1 W2 = 0.01 ->  Wu = 10 We = 0.1
     % for high robustness controller
-    case_basis.W1Gain.rob = ...
-        {tf(1 * eye(2))};
-    case_basis.W2Gain.rob = ...
-        {tf(0.01 * eye(2))};
-    case_basis.WeGain.rob = ...
-        {tf(0.1 * eye(2))};
+    % case_basis.W1Gain.rob = ...
+    %     {tf(1 * eye(2))};
+    % case_basis.W2Gain.rob = ...
+    %     {tf(0.01 * eye(2))};
+    % case_basis.WeGain.rob = ...
+    %     {tf(0.1 * eye(2))};
 
 
     % lowest_adc_table(1, 'Case Desc.') % W1 = 1 W2 = 0.01 ->  Wu = 10 We = 0.1
@@ -350,13 +340,13 @@ elseif BASELINE_K
     % case_basis.Scheduling.x = [0];
     case_basis.Reference.x = [0];
     case_basis.Saturation.x = [Inf];
-
-    uxs = LPV_CONTROLLER_WIND_SPEEDS;
+    % case_basis.Scheduling.x = [Inf];
+    
 elseif STRUCT_PARAM_SWEEP
     case_basis.Reference.x = [0];
     case_basis.Saturation.x = [Inf];
 
-    uxs = [NONLPV_CONTROLLER_WIND_SPEED];
+   
 end
 
 %% Synthesize Continuous-Time Generalized Plant P from plant Plant and weighting filters W

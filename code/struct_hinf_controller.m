@@ -1,3 +1,5 @@
+%% README - Run this file to setup structured or baseline controller 
+
 %% TODO
 % MIMO wind-up: check if blade-pitch actuation is saturating, check signal after saturator
 % Check GenPlant derivation, signs in SL models
@@ -29,8 +31,8 @@ gbar_diag = realp('gbar_diag', gbar); % gain at notch frequency
 gbar_offdiag = realp('gbar_offdiag', gbar);
 
 % TODO test variations of structured controller with/without 2p off diag,
-% 2p bandstop
-Notch_3P_diag = tf([1 2*zeta_diag*gbar_diag*omega_3P_rad omega_3P_rad^2], ...
+% 2p bandstop, gbar_diag < 1 for notch filter
+Notch_3P_diag = tf([1 2*zeta_diag*omega_3P_rad*gbar_diag omega_3P_rad^2], ...
     [1 2*zeta_diag*omega_3P_rad omega_3P_rad^2]);
 
 % Notch_2P_offdiag = tf([1 2*gbar_offdiag*zeta_offdiag*omega_2P_rad omega_2P_rad^2], ...
@@ -45,7 +47,7 @@ PI_Notch = [PI(1,1)*Notch(1,1), PI(1,2)*Notch(1,2);
 % MIMO tunable low-pass filter => not tunable TODO above 3P, fix Wu
 % roll-off keep low-freq magnitude tunable (static gain) QUESTION is this
 % too high for a bp frequency?
-LPF = 1 / (s + w1_u) * eye(2);
+LPF = 1 / (s + omega_3P_rad) * eye(2);
 
 % Full MIMO Structured Controller
 % LPF to remove all higher frequencies but still allow us to
@@ -95,7 +97,10 @@ if BASELINE_K
                                   Sweep.Vary.WindSpeedIdx);
 
     case_idx = 1;
-    K0 = PI_Notch;
+    K0 = PI * Notch * LPF;
+    K0.InputName = {'Measured RootMycD Tracking Error', 'Measured RootMycQ Tracking Error'};
+    K0.OutputName = {'BldPitchD Control Input', 'BldPitchQ Control Input'};
+
     K0.Blocks.Kp_diag.Value = K_grid(case_idx, 1).Variables;
     K0.Blocks.Kp_offdiag.Value = K_grid(case_idx, 2).Variables;
     K0.Blocks.Ki_diag.Value = K_grid(case_idx, 3).Variables;
@@ -103,6 +108,13 @@ if BASELINE_K
     K0.Blocks.gbar_diag.Value = K_grid(case_idx, 5).Variables;
     K0.Blocks.zeta_diag.Value = K_grid(case_idx, 6).Variables;
     K0 = ss(K0);
+    
+    % Notch.Blocks.gbar_diag.value = K_grid(case_idx, 5).Variables;
+    % Notch.Blocks.zeta_diag.value = K_grid(case_idx, 6).Variables;
+    % figure(1);
+    % bodeplot(x, Notch);
+    % xline(omega_3P_rad);
+
     save(fullfile(mat_save_dir, 'K0'), 'K0');
 
     if 0
@@ -217,7 +229,7 @@ if REPROCESS_SWEEP
         
         PI_ParameterSweep(case_idx).SF = SF_tmp;
         
-        PI_ParameterSweep(case_idx).Scheduling = case_basis.Scheduling;
+        % PI_ParameterSweep(case_idx).Scheduling = case_basis.Scheduling;
         PI_ParameterSweep(case_idx).Reference = case_basis.Reference;
         PI_ParameterSweep(case_idx).Saturation = case_basis.Saturation;
 
@@ -333,8 +345,8 @@ if REPROCESS_SWEEP
                 PI_ParameterSweepControllers(weighting_case_idx).SF.Stable(c_ws_idx) = ...
                     Stable_tmp(weighting_case_idx, c_ws_idx);
                 
-                PI_ParameterSweepControllers(weighting_case_idx).Scheduling = ...
-                    PI_ParameterSweep(case_idx).Scheduling;
+                % PI_ParameterSweepControllers(weighting_case_idx).Scheduling = ...
+                %     PI_ParameterSweep(case_idx).Scheduling;
                 PI_ParameterSweepControllers(weighting_case_idx).Reference = ...
                     PI_ParameterSweep(case_idx).Reference;
                 PI_ParameterSweepControllers(weighting_case_idx).Saturation = ...
@@ -499,7 +511,7 @@ if REPROCESS_SWEEP
             PI_ParameterSweep_case_list(vv).Ki_diag = PI_ParameterSweepControllers(v).Gains(3);
             PI_ParameterSweep_case_list(vv).Ki_offdiag = PI_ParameterSweepControllers(v).Gains(4);
             
-            PI_ParameterSweep_case_list(vv).Scheduling = PI_ParameterSweepControllers(v).Scheduling;
+            % PI_ParameterSweep_case_list(vv).Scheduling = PI_ParameterSweepControllers(v).Scheduling;
             PI_ParameterSweep_case_list(vv).Reference = PI_ParameterSweepControllers(v).Reference;
             PI_ParameterSweep_case_list(vv).Saturation = PI_ParameterSweepControllers(v).Saturation;
             PI_ParameterSweep_case_list(vv).CaseDesc = PI_ParameterSweepControllers(v).CaseDesc;
@@ -829,10 +841,12 @@ for c_idx = 1:Controllers_n_cases
         continue;
     end
     % Add LPV controller to Controller_list
-    if Controllers_case_list(c_idx).Scheduling.x
-        Controllers_case_list(c_idx).Controller = K_struct_tuned;
-    % Add nonLPV controller to Controller_list
-    elseif ~Controllers_case_list(c_idx).Scheduling.x
+    % if Controllers_case_list(c_idx).Scheduling.x
+    if SCHEDULING
+         Controllers_case_list(c_idx).Controller = K_struct_tuned;
+    % % Add nonLPV controller to Controller_list
+    % elseif ~Controllers_case_list(c_idx).Scheduling.x
+    else
         Controllers_case_list(c_idx).Controller = K_struct_tuned(:, :, LPV_CONTROLLER_WIND_SPEEDS == NONLPV_CONTROLLER_WIND_SPEED);
     end
 end

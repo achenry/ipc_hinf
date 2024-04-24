@@ -1,8 +1,16 @@
-%% config; VARY_REFERENCE = 1; fullorder_hinf_controller; nonlinear_simulations; nonlinear_analysis; config; VARY_SATURATION = 1; fullorder_hinf_controller; nonlinear_simulations; nonlinear_analysis;
+% config; VARY_REFERENCE = 1; n_seeds = 1; uxs = [NONLPV_CONTROLLER_WIND_SPEED]; fullorder_hinf_controller; nonlinear_simulations; config; VARY_REFERENCE = 1; nonlinear_analysis; config; VARY_SATURATION = 1; n_seeds = 1; uxs = [NONLPV_CONTROLLER_WIND_SPEED]; fullorder_hinf_controller; nonlinear_simulations; config; VARY_SATURATION = 1; nonlinear_analysis;
+
+% config; VARY_REFERENCE = 1; fullorder_hinf_controller; nonlinear_simulations; config; VARY_REFERENCE = 1; nonlinear_analysis; config; VARY_SATURATION = 1; fullorder_hinf_controller; nonlinear_simulations; config; VARY_SATURATION = 1; nonlinear_analysis; config; VARY_WU = 1; fullorder_hinf_controller; nonlinear_simulations; config; VARY_WU = 1; nonlinear_analysis;
+
+% config; VARY_REFERENCE = 1; fullorder_hinf_controller; nonlinear_simulations; config; VARY_SATURATION = 1; fullorder_hinf_controller; nonlinear_simulations;  config; VARY_WU = 1; fullorder_hinf_controller; nonlinear_simulations;
+
+
+% config; VARY_WU = 1; nonlinear_analysis; config; VARY_REFERENCE = 1; nonlinear_analysis; config; VARY_SATURATION = 1; nonlinear_analysis;
+
 
 %% Initialize workspace and add paths
 username = char(java.lang.System.getProperty('user.name'));
-if strcmp(username, 'aoifework') && false
+if strcmp(username, 'aoifework') && true
     config;
 end
 

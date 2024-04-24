@@ -9,8 +9,8 @@
 
 % run a parfor loop to simulate 10 minutes of a turbsim wind field for each
 % controller type with IPC on
-config;
-VARY_REFERENCE = 1;
+% config;
+% VARY_WU = 1;
 initialize;
 single_run_case_idx = 100;
 
@@ -23,7 +23,8 @@ single_run_case_idx = 100;
 %           'YawBrMxp', 'YawBrMyp', 'YawBrMzp', ... % Nonrotating tower-top / yaw bearing roll/pitch/yaw moment
 %           'TwrBsMxt', 'TwrBsMyt', 'TwrBsMzt' ... % Tower base roll (or side-to-side)/pitching (or fore-aft)/yaw moment 
 %           };
-blade_op_arr = {'BldPitch1', 'RootMyc1', 'YawBrMyp', 'YawBrMzp'};
+% blade_op_arr = {'BldPitch1', 'RootMyc1', 'RootMxb1', 'YawBrMyp', 'YawBrMzp'};
+blade_op_arr = {'BldPitch1', 'RootMyc1'};
 % 'LSSTipMys', 'LSSTipMzs'
 
 % exc_dq_fields = {'BldPitchD', 'BldPitchQ'};
@@ -85,6 +86,8 @@ end
 clear untuned_sim_out_list untuned_case_list
 
 %% Analysis of Untuned Blade-Pitch Actuation and Loads in Time-Domain
+% TODO look at power, other loads (blade edge-wise, tower side-to-side
+% loads)
 beta_dot_norm = @(beta_dot) ((beta_dot >= 0) * 5) + ((beta_dot < 0) * (-4));
 if 0
     % want to compare all cases for the same wind field mean speed and
@@ -184,11 +187,11 @@ if 0
 
             sim_out_list.(untuned_type{1})(untuned_case_idx).beta_ipc = struct;
             sim_out_list.(untuned_type{1})(untuned_case_idx).beta_ipc.dq = ...
-                ipc_values(:, 1:2); % in degrees
+                ipc_values(:, 1:3); % in degrees
 
             sim_out_list.(untuned_type{1})(untuned_case_idx).beta_ipc_sat = struct;
             sim_out_list.(untuned_type{1})(untuned_case_idx).beta_ipc_sat.dq = ...
-                ipc_values(:, 3:4);
+                ipc_values(:, 4:6);
 
             % sim_out_list.(untuned_type{1})(untuned_case_idx).beta_dot = struct;
             % sim_out_list.(untuned_type{1})(untuned_case_idx).beta_dot.blade = ...
@@ -329,6 +332,7 @@ if 0
     % clear UntunedControllers_simulation_case_table;
     save(fullfile(mat_save_dir, 'untuned_k_turbsim_simulation_case_table.mat'), 'UntunedControllers_simulation_case_table');
     save(fullfile(mat_save_dir, 'untuned_k_turbsim_simulation_case_agg_table.mat'), 'UntunedControllers_simulation_case_agg_table');
+
 else
     load(fullfile(mat_save_dir, 'untuned_k_turbsim_simulation_case_table.mat'));
     load(fullfile(mat_save_dir, 'untuned_k_turbsim_simulation_case_agg_table.mat'));
@@ -336,6 +340,8 @@ else
 end
 
 %% Analysis of Tuned Blade-Pitch Actuation and Loads in Time-Domain
+% TODO look at power, other loads (blade edge-wise, tower side-to-side
+% loads)
 if 1
         
     n_ctlr_cases = length(sim_out_list.controller);
@@ -385,12 +391,16 @@ if 1
         %     getData(dqValues, dqOutList, 'BldPitchQ')]; % in degrees
 
         sim_out_list_tmp(ctlr_case_idx).beta_ipc = struct;
-        sim_out_list_tmp(ctlr_case_idx).beta_ipc.dq = ...
-                    ipc_values(:, 1:2); % in degrees
+        % sim_out_list_tmp(ctlr_case_idx).beta_ipc.dq = ...
+        %             ipc_values(:, 1:2); % in degrees
+        sim_out_list_tmp(ctlr_case_idx).beta_ipc.blade = ...
+                    ipc_values(:, 1:3);
 
         sim_out_list_tmp(ctlr_case_idx).beta_ipc_sat = struct;
-        sim_out_list_tmp(ctlr_case_idx).beta_ipc_sat.dq = ...
-                    ipc_values(:, 3:4);
+        % sim_out_list_tmp(ctlr_case_idx).beta_ipc_sat.dq = ...
+        %             ipc_values(:, 3:4);
+        sim_out_list_tmp(ctlr_case_idx).beta_ipc_sat.blade = ...
+                    ipc_values(:, 4:6);
 
         % sim_out_list_tmp(ctlr_case_idx).beta_dot = struct;
         % sim_out_list_tmp(ctlr_case_idx).beta_dot.blade = ...
@@ -467,7 +477,8 @@ if 1
     % sim_out_list.controller(ctlr_case_idx).(f{1}).beta_ipc.dq over all 
     % simulataions to compute varying saturation values from
     % max_beta_dq = struct;
-    mean_beta_dq = [];
+    % mean_beta_dq = [];
+    absmax_beta_ipc = [];
     load(fullfile(mat_save_dir, [sim_type, '_full_controller_cases']));
 
     lin_cols = Controllers_case_table.Properties.VariableNames;
@@ -532,15 +543,21 @@ if 1
 
         % if (Controllers_simulation_case_table(ctlr_case_idx, 'WindMean').Variables == NONLPV_CONTROLLER_WIND_SPEED) ...
         %         && 
-        if (case_list(ctlr_case_idx).WuGain.Numerator{1,1} == case_basis.WuGain.x{end}.Numerator{1,1})
-            mean_beta_dq = [mean_beta_dq; mean((sim_out_list_tmp(ctlr_case_idx).beta_ipc.dq), 1)];
+        if VARY_WU && (case_list(ctlr_case_idx).WuGain.Numerator{1,1} == case_basis.WuGain.x{end-1}.Numerator{1,1})
+            % mean_beta_dq = [mean_beta_dq; mean((sim_out_list_tmp(ctlr_case_idx).beta_ipc.dq), 1)];
+            absmax_beta_ipc = [absmax_beta_ipc; max(abs(sim_out_list_tmp(ctlr_case_idx).beta_ipc.blade), [], 1)];
         end
 
     end
     clear sim_out_list_tmp;
 
-    Beta_dq_saturation = round(mean(mean_beta_dq, 1), 4);
-    save(fullfile(mat_save_dir, 'Beta_dq_saturation.mat'), "Beta_dq_saturation");
+    % Beta_dq_saturation = round(mean(mean_beta_dq, 1), 4);
+    % save(fullfile(mat_save_dir, 'Beta_dq_saturation.mat'), "Beta_dq_saturation");
+    if VARY_WU
+        Beta_ipc_blade_saturation = round(mean(absmax_beta_ipc, 1), 4);
+        Beta_ipc_blade_saturation = max(Beta_ipc_blade_saturation);
+        save(fullfile(mat_save_dir, 'Beta_ipc_blade_saturation.mat'), "Beta_ipc_blade_saturation");
+    end
     
     % Controllers_simulation_case_table = sortrows(Controllers_simulation_case_table, 'Case Desc.');
     
@@ -690,6 +707,7 @@ if OPTIMAL_K_COLLECTION
     %     load(fullfile(mat_save_dir, 'baseline_k_turbsim_del_data.mat'));
     % end
 
+    % TODO recompute after rerunning baseline
     del_data_untuned = sortrows(readtable(fullfile(postprocessing_save_dir, 'baseline_k_turbsim_DELs.csv'), 'Delimiter', ','), "Var1");
         
     
@@ -703,6 +721,7 @@ if OPTIMAL_K_COLLECTION
     
     new_cols = ["Case Desc.", "TunedWindSpeed", "WindMean", "WindTurbulence", "ADC"];
     
+    % controller, not to minimum ADC controller
     new_cols(end + 1) = gain_col;
 
     for case_idx = 1:length(sim_out_list.controller)
@@ -721,6 +740,9 @@ if OPTIMAL_K_COLLECTION
         {'Var1', 'Case Desc.', 'TunedWindSpeed', 'WindMean', 'WindTurbulence', ...
         gain_col})) = [];
     
+% groupsummary(del_data_tuned, ...
+%             ["Case Desc.", "TunedWindSpeed", "WindMean", gain_col])
+
     del_data_tuned = sortrows(groupsummary(del_data_tuned, ...
             ["Case Desc.", "TunedWindSpeed", "WindMean", "WindTurbulence", gain_col], ...
             "mean", agg_cols), ["Case Desc.", "WindMean", gain_col])
