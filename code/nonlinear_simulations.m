@@ -15,7 +15,7 @@
 
 init_hinf_controller;
 
-single_run_case_idx = 45;
+single_run_case_idx = [2:2:60, 241:2:299];
 
 %% Generate Turbsim Files
 if RUN_TURBSIM
@@ -72,6 +72,7 @@ else
     load(fullfile(mat_save_dir, [sim_type, '_Controllers_nonlinear_simulation_case_list.mat']));
     n_cases = length(case_list);
 end
+case_list
 
 % for jdx = 1:length(case_list)
 %     for idx = 1:length(case_basis.WeGain.x)
@@ -102,7 +103,8 @@ copyfile(fullfile(FAST_directory, '*.fst'), FAST_runDirectory);
 
 if RUN_SIMS_PAR
     % load(fullfile(fastRunner.FAST_directory, 'ss_vals'));
-    for case_idx=1:n_cases
+    % for case_idx=1:n_cases
+    for case_idx = single_run_case_idx
 
         new_fst_name = fullfile(FAST_runDirectory, ...
             case_name_list{case_idx});
@@ -132,7 +134,7 @@ if RUN_SIMS_PAR
         Af_EditInflow(infw_lines, infw_edits, new_infw_name, def_infw_file, template_infw_dir, input_mode);
     end
 elseif RUN_SIMS_SINGLE
-    for case_idx = single_run_case_idx:single_run_case_idx
+    for case_idx = single_run_case_idx
         new_fst_name = fullfile(FAST_runDirectory, ...
             case_name_list{case_idx});
         new_infw_name = fullfile(FAST_runDirectory, ...
@@ -175,7 +177,9 @@ end
 if RUN_SIMS_PAR
     cd(project_dir);
     % sim_inputs = repmat(struct(), n_cases, 1 );
-    for case_idx = 1:n_cases
+    % for case_idx = 1:n_cases
+    idx = 1;
+    for case_idx = single_run_case_idx
         % for case_idx = [46, 48, 136, 138]
         case_list(case_idx).FAST_InputFileName = fullfile(FAST_runDirectory, ...
             [case_name_list{case_idx}, '.fst']);
@@ -189,12 +193,12 @@ if RUN_SIMS_PAR
             K_IPC = c2d(case_list(case_idx).Controller_scaled, DT);
         end
 
-        sim_inputs(case_idx) = Simulink.SimulationInput(SL_model_name);
-        sim_inputs(case_idx) = sim_inputs(case_idx).setVariable('K_IPC', K_IPC);
+        sim_inputs(idx) = Simulink.SimulationInput(SL_model_name);
+        sim_inputs(idx) = sim_inputs(idx).setVariable('K_IPC', K_IPC);
 
         [~, x, ~] = fileparts(case_list(case_idx).InflowWind.FileName_BTS);
         x = split(x, '_');
-        sim_inputs(case_idx) = sim_inputs(case_idx).setVariable('WindMean', str2double(x{2}));
+        sim_inputs(idx) = sim_inputs(idx).setVariable('WindMean', str2double(x{2}));
         
         [filepath, name, ext] = fileparts(strrep(case_list(case_idx).FAST_InputFileName, '.fst', ''));
         outdata_save_fn = fullfile(sl_save_dir, [name, '_', sim_type, '_outdata']);
@@ -205,43 +209,43 @@ if RUN_SIMS_PAR
         case_list(case_idx).blpitch_save_fn = blpitch_save_fn;
         case_list(case_idx).rootmyc_save_fn = rootmyc_save_fn;
 
-        sim_inputs(case_idx) = setBlockParameter(sim_inputs(case_idx), ...
+        sim_inputs(idx) = setBlockParameter(sim_inputs(idx), ...
             [SL_model_name, ...
             '/To File'], 'Filename', outdata_save_fn);
         % sim_inputs(case_idx) = setBlockParameter(sim_inputs(case_idx), ...
         %     [SL_model_name, ...
         %     '/Baseline Controller/Cyclic Pitch controller/1P Cyclic Pitch Controller1', ...
         %     '/To File'], 'Filename', blpitch_save_fn);
-        sim_inputs(case_idx) = setBlockParameter(sim_inputs(case_idx), ...
+        sim_inputs(idx) = setBlockParameter(sim_inputs(idx), ...
             [SL_model_name, ...
             '/Baseline Controller/To File'], 'Filename', blpitch_save_fn);
-        sim_inputs(case_idx) = setBlockParameter(sim_inputs(case_idx), ...
+        sim_inputs(idx) = setBlockParameter(sim_inputs(idx), ...
             [SL_model_name, ...
             '/Baseline Controller/Cyclic Pitch controller/1P Cyclic Pitch Controller1', ...
             '/To File1'], 'Filename', rootmyc_save_fn);
         
-        sim_inputs(case_idx) = sim_inputs(case_idx).setVariable('FAST_InputFileName', case_list(case_idx).FAST_InputFileName);
-        sim_inputs(case_idx) = sim_inputs(case_idx).setVariable('TMax', TMax);
-        sim_inputs(case_idx) = sim_inputs(case_idx).setVariable('DT', Simulation.DT);
-        sim_inputs(case_idx) = sim_inputs(case_idx).setVariable('HWindSpeed', case_list(case_idx).InflowWind.HWindSpeed);
+        sim_inputs(idx) = sim_inputs(idx).setVariable('FAST_InputFileName', case_list(case_idx).FAST_InputFileName);
+        sim_inputs(idx) = sim_inputs(idx).setVariable('TMax', TMax);
+        sim_inputs(idx) = sim_inputs(idx).setVariable('DT', Simulation.DT);
+        sim_inputs(idx) = sim_inputs(idx).setVariable('HWindSpeed', case_list(case_idx).InflowWind.HWindSpeed);
         % sim_inputs(case_idx) = sim_inputs(case_idx).setVariable('Scheduling', case_list(case_idx).Scheduling);
-        sim_inputs(case_idx) = sim_inputs(case_idx).setVariable('Scheduling', SCHEDULING);
+        sim_inputs(idx) = sim_inputs(idx).setVariable('Scheduling', SCHEDULING);
 
         % sim_inputs(case_idx) = sim_inputs(case_idx).setVariable('RootMyc_ref', [case_list(case_idx).Reference.d case_list(case_idx).Reference.q]);
         % sim_inputs(case_idx) = sim_inputs(case_idx).setVariable('BldPitch_sat', [case_list(case_idx).Saturation.d case_list(case_idx).Saturation.q]);
         if VARY_REFERENCE
-            sim_inputs(case_idx) = sim_inputs(case_idx).setVariable('RootMyc_ref', case_list(case_idx).Reference * M_dq_reference);
+            sim_inputs(idx) = sim_inputs(idx).setVariable('RootMyc_ref', case_list(case_idx).Reference * M_dq_reference);
         else
-            sim_inputs(case_idx) = sim_inputs(case_idx).setVariable('RootMyc_ref', [0, 0]);
+            sim_inputs(idx) = sim_inputs(idx).setVariable('RootMyc_ref', [0, 0]);
         end
 
         if VARY_SATURATION
             % sim_inputs(case_idx) = sim_inputs(case_idx).setVariable('BldPitch_sat', case_list(case_idx).Saturation * Beta_dq_saturation);
-            sim_inputs(case_idx) = sim_inputs(case_idx).setVariable('BldPitch_sat', case_list(case_idx).Saturation * Beta_ipc_blade_saturation);
+            sim_inputs(idx) = sim_inputs(idx).setVariable('BldPitch_sat', case_list(case_idx).Saturation * Beta_ipc_blade_saturation);
         else
-            sim_inputs(case_idx) = sim_inputs(case_idx).setVariable('BldPitch_sat', Inf);
+            sim_inputs(idx) = sim_inputs(idx).setVariable('BldPitch_sat', Inf);
         end
-        
+        idx = idx + 1;
     end
 
     %% Run simulations in multiple parallel threads
@@ -252,32 +256,36 @@ if RUN_SIMS_PAR
                    'ShowProgress',  'on', ...
                    'ShowSimulationManager', 'off');
 
-    for case_idx = 1:n_cases
+    % for case_idx = 1:n_cases
+    idx = 1;
+    for case_idx = single_run_case_idx
     % for case_idx = [46, 48, 136, 138]
         % if case_list(case_idx).Kp_diag == 0
         %     case_list(case_idx).CaseDesc = "noipc";
         % else
         %     case_list(case_idx).CaseDesc = "baseline_controller";
         % end
-        sim_out_list(case_idx).CaseDesc = case_list(case_idx).CaseDesc;
-        sim_out_list(case_idx).InflowWind = case_list(case_idx).InflowWind;
-        sim_out_list(case_idx).outdata_save_fn = case_list(case_idx).outdata_save_fn;
-        sim_out_list(case_idx).blpitch_save_fn = case_list(case_idx).blpitch_save_fn;
-        sim_out_list(case_idx).rootmyc_save_fn = case_list(case_idx).rootmyc_save_fn;
-        sim_out_list(case_idx).FAST_InputFileName = case_list(case_idx).FAST_InputFileName;
+        sim_out_list(idx).CaseDesc = case_list(case_idx).CaseDesc;
+        sim_out_list(idx).InflowWind = case_list(case_idx).InflowWind;
+        sim_out_list(idx).outdata_save_fn = case_list(case_idx).outdata_save_fn;
+        sim_out_list(idx).blpitch_save_fn = case_list(case_idx).blpitch_save_fn;
+        sim_out_list(idx).rootmyc_save_fn = case_list(case_idx).rootmyc_save_fn;
+        sim_out_list(idx).FAST_InputFileName = case_list(case_idx).FAST_InputFileName;
+
+        idx = idx + 1;
     end
     
 elseif RUN_SIMS_SINGLE
     % run single case
     
-    for case_idx = single_run_case_idx:single_run_case_idx
+    for case_idx = single_run_case_idx
     % for case_idx = [46, 48, 136, 138]
         FAST_InputFileName = fullfile(FAST_runDirectory, ...
             [case_name_list{case_idx}, '.fst']);
         [~, x, ~] = fileparts(case_list(case_idx).InflowWind.FileName_BTS);
         x = split(x, '_');
         WindMean = str2double(x{2});
-
+        case_list(case_idx).gamma(3), case_list(case_idx).CaseDesc
         DT = Simulation.DT;
         HWindSpeed = case_list(case_idx).InflowWind.HWindSpeed;
         % Scheduling = case_list(case_idx).Scheduling;
@@ -312,6 +320,10 @@ elseif RUN_SIMS_SINGLE
         blpitch_save_fn = fullfile(sl_save_dir, [name, '_', sim_type, '_blpitch']);
         rootmyc_save_fn = fullfile(sl_save_dir, [name, '_', sim_type, '_rootmyc']);
         
+        % setBlockParameter(sim_inputs(case_idx), ...
+        %     [SL_model_name, ...
+        %     '/To File'], 'Filename', outdata_save_fn);
+
         set_param([SL_model_name, '/To File'], 'Filename', outdata_save_fn);
         set_param([SL_model_name, '/Baseline Controller/To File'], ...
             'Filename', blpitch_save_fn);
@@ -339,7 +351,8 @@ elseif RUN_SIMS_SINGLE
         sim_out_list(case_idx).FAST_InputFileName = FAST_InputFileName;
     end
 end
-
+% TODO rename all outdata_save_fn, blpitch_save_fn, rootmyc_save_fn to
+% remove last index
 if 0
     
     idx = 11;
@@ -489,6 +502,7 @@ end
 if n_seeds == 5 && (BASELINE_K || OPTIMAL_K_COLLECTION)
     % sim_type = 'optimal_k_cases_turbsim_wu';
     status = system(['/Users/aoifework/miniconda3/envs/weis_dev/bin/python3 ', fullfile(project_dir, 'postprocessing', 'main.py'), ' -st ', sim_type]);
+    % status = system(['/Users/aoifework/miniconda3/envs/weis_dev/bin/python3 ', fullfile(project_dir, 'postprocessing', 'main.py'), ' -st ', [sim_type, '_debug']]);
     % sim_type = 'optimal_k_cases_turbsim_ref';
     % status = system(['/Users/aoifework/miniconda3/envs/weis_dev/bin/python3 ', fullfile(project_dir, 'postprocessing', 'main.py'), ' -st ', sim_type]);
     % sim_type = 'optimal_k_cases_turbsim_sat';
@@ -498,6 +512,14 @@ end
 %% Save Simulation Data
 
 if RUN_SIMS_PAR || RUN_SIMS_SINGLE
+    % save(fullfile(sl_metadata_save_dir, ['sim_out_list_', sim_type, '.mat']), 'sim_out_list', '-v7.3');
+    x = load(fullfile(sl_metadata_save_dir, ['sim_out_list_', sim_type, '.mat']));
+    idx = 1;
+    for case_idx = single_run_case_idx
+        x.sim_out_list(case_idx) = sim_out_list(idx);
+        idx = idx + 1;
+    end
+    sim_out_list = x.sim_out_list;
     save(fullfile(sl_metadata_save_dir, ['sim_out_list_', sim_type, '.mat']), 'sim_out_list', '-v7.3');
 end
 

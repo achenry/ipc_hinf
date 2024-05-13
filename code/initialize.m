@@ -14,33 +14,31 @@ if strcmp(username, 'aoifework') && true
     config;
 end
 
-if RUN_SIMS_SINGLE || RUN_SIMS_PAR
-    if DEBUG
-        sim_type = 'debug';
-    elseif RUN_OL_DQ
-        sim_type = 'ol_dq';
-    elseif RUN_OL_BLADE
-        sim_type = 'ol_blade';
-    elseif RUN_CL && strcmp(WIND_TYPE, 'turbsim')
-        if STRUCT_PARAM_SWEEP
-            sim_type = 'pi_param_sweep_turbsim';
-        elseif OPTIMAL_K_COLLECTION
-            if VARY_WU
-                sim_type = 'optimal_k_cases_turbsim_wu';
-            elseif VARY_REFERENCE
-                sim_type = 'optimal_k_cases_turbsim_ref';
-            elseif VARY_SATURATION
-                sim_type = 'optimal_k_cases_turbsim_sat';
-            elseif SCHEDULING
-                sim_type = 'optimal_k_cases_turbsim_sched';
-            end
-        elseif EXTREME_K_COLLECTION
-            sim_type = 'extreme_k_cases_turbsim';
-        elseif BASELINE_K
-            sim_type = 'baseline_k_turbsim';
-        elseif ~USE_IPC
-            sim_type = 'noipc_turbsim';
+if DEBUG
+    sim_type = 'debug';
+elseif RUN_OL_DQ
+    sim_type = 'ol_dq';
+elseif RUN_OL_BLADE
+    sim_type = 'ol_blade';
+elseif RUN_CL && strcmp(WIND_TYPE, 'turbsim')
+    if STRUCT_PARAM_SWEEP
+        sim_type = 'pi_param_sweep_turbsim';
+    elseif OPTIMAL_K_COLLECTION
+        if VARY_WU
+            sim_type = 'optimal_k_cases_turbsim_wu';
+        elseif VARY_REFERENCE
+            sim_type = 'optimal_k_cases_turbsim_ref';
+        elseif VARY_SATURATION
+            sim_type = 'optimal_k_cases_turbsim_sat';
+        elseif SCHEDULING
+            sim_type = 'optimal_k_cases_turbsim_sched';
         end
+    elseif EXTREME_K_COLLECTION
+        sim_type = 'extreme_k_cases_turbsim';
+    elseif BASELINE_K
+        sim_type = 'baseline_k_turbsim';
+    elseif ~USE_IPC
+        sim_type = 'noipc_turbsim';
     end
 end
 
@@ -198,6 +196,13 @@ lin_models_dir = fullfile(FAST_directory, 'linearization', 'steady_wind-CL', 'li
 omega_1P_rad = Parameters.Turbine.wr_rated * 2*pi/60;
 omega_2P_rad = Parameters.Turbine.wr_rated * (2*pi/60) * 2;
 omega_3P_rad = Parameters.Turbine.wr_rated * (2*pi/60) * 3;
+
+Nf = 50;
+Fpass = 0.15;
+Fstop = 0.2;
+drvt_filt = designfilt("differentiatorfir", "FilterOrder", Nf, ...
+    "PassbandFrequency", Fpass, "StopbandFrequency", Fstop, ...
+    "SampleRate", 1 / DT);
 
 %% OutLists
 if false || ~exist(fullfile(project_dir, 'OutList.mat'))

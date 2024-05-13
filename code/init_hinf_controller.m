@@ -105,10 +105,10 @@ lpf_e = (1 / M_e) * (s + M_e*omega_e) / (s + eps_e*omega_e);
 % design notch weighting filter as per Ossman to limit singular
     % value of disturbance sensitivity on the diagonal bc we don't need to
     % penalize weighted sum of Md and Mq
-% zeta = 0.01; % damping, greater value leads to greater width
-% gbar = 15; % gain at notch frequency
-zeta = 1.; % damping, greater value leads to greater width
-gbar = 10; % gain at notch frequency
+zeta = 0.01; % damping, greater value leads to greater width
+gbar = 15; % gain at notch frequency
+% zeta = 1.; % damping, greater value leads to greater width
+% gbar = 10; % gain at notch frequency
 notch_3P_diag = tf([1 2*gbar*zeta*omega_3P_rad omega_3P_rad^2], ...
     [1 2*zeta*omega_3P_rad omega_3P_rad^2]);
 notch = notch_3P_diag * eye(2);

@@ -25,6 +25,7 @@ PI = PI_diag + PI_offdiag;
 % tune height of peak and width of inverse notch filter/bandpass (more
 % intuitive but can use coefficients).
 % Compare with (MIMO) and without (SISO) off-diagonal
+
 zeta_diag = realp('zeta_diag', zeta); % damping, greater value leads to greater width
 zeta_offdiag = realp('zeta_offdiag', zeta);
 gbar_diag = realp('gbar_diag', gbar); % gain at notch frequency
@@ -86,8 +87,10 @@ if BASELINE_K
     x = d2c(x);
 
     % CT Notch gains
-    Sweep.Vary.gbar_diag = [x.Numerator{1}(2)/x.Denominator{1}(2)];
-    Sweep.Vary.zeta_diag = [x.Denominator{1}(2) / (2 * omega_3P_rad)];
+    % Sweep.Vary.gbar_diag = [x.Numerator{1}(2)/x.Denominator{1}(2)];
+    % Sweep.Vary.zeta_diag = [x.Denominator{1}(2) / (2 * omega_3P_rad)];
+    Sweep.Vary.gbar_diag = 1 / gbar;
+    Sweep.Vary.zeta_diag = zeta;
     
     Sweep.Vary.WindSpeedIdx = [find(C_WS_IDX)];
     

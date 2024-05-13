@@ -152,6 +152,11 @@ elseif OPTIMAL_K_COLLECTION || EXTREME_K_COLLECTION || DEBUG
     end
     % n_cases = case_idx - 1;
     n_cases = length(case_list);
+    % for c = 1:n_cases
+    %     if strcmp(case_list(c).CaseDesc, 'adc W1 = 1 W2 = 0.01 ->  Wu = 1 We = 0.1') || strcmp(case_list(c).CaseDesc, 'y_mse W1 = 1 W2 = 0.1 ->  Wu = 10 We = 10')
+    %         disp([case_list(c).CaseDesc, num2str(c)])
+    %     end
+    % end
     case_name_list = arrayfun(@(n) ['case_', num2str(n)], 1:n_cases, 'UniformOutput', false);
     
     if MAX_SIMULATIONS > -1

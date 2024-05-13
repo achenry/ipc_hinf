@@ -27,7 +27,7 @@ function plotSpectra(ax, fft_vals, fft_label, plot_type, DT, harmonics)
 
     xline(ax, harmonics, 'k--', 'LineWidth', 2);
     xlim(ax, [0, harmonics(end) * 1.25])
-    xlabel(ax, ['$\omega$', ' (rad/s)'], 'Interpreter', 'latex')
+    xlabel(ax, ['$\omega$'], 'Interpreter', 'latex')
         
     % ax2 = subplot(2, 1, 2);
     % L = size(dqValues, 1);

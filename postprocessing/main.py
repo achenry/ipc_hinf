@@ -124,11 +124,11 @@ if __name__ == '__main__':
     fatigue_channels = \
         {
             key: fp_blades for key in
-            ['RootMyc1']
+            ['RootMyc1', 'RootMxb1', 'RootMyb1']
             # ['RootMc1', 'OoPDefl1', 'IPDefl1', 'RootMxb1', 'RootMyb1', 'RootMyc1', 'RootMzc1']
          } | {
             key: fp_tower for key in
-            []
+            ['TTDspFA', 'TTDspSS']
             # ['TTDspFA', 'TTDspSS', 'TTDspTwst', 'TwrBsMxt', 'TwrBsMyt', 'TwrBsMzt', 'TwrBs']
         } | {
             key: fp_nacelle for key in

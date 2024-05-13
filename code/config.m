@@ -23,7 +23,7 @@ uxs = LPV_CONTROLLER_WIND_SPEEDS;
 
 SCHEDULING = 0;
 
-VARY_WU = 0;
+VARY_WU = 1;
 VARY_WU_BASIS = [1, 2.5, 5, 7.5, 10];
 
 VARY_REFERENCE = 0;
@@ -35,7 +35,7 @@ COMPUTE_FFT = 0;
 HARMONICS = [2, 3, 6];
 
 RUN_SIMS_PAR = 1;
-RUN_SIMS_SINGLE = 0;
+RUN_SIMS_SINGLE = 1;
 RUN_TURBSIM = 0;
 GENERATE_CASES = 1;
 GENERATE_FASTINPUT_FILES = 1;
@@ -44,9 +44,9 @@ USE_IPC = 1;
 
 DEBUG = 0;
 STRUCT_PARAM_SWEEP = 0; % conduct nonlinear simulations for parameter sweep over MIMO PI Gains
-OPTIMAL_K_COLLECTION = 0; % conduct nonlinear simulations for collection of Hinf-synthesized controllers
+OPTIMAL_K_COLLECTION = 1; % conduct nonlinear simulations for collection of Hinf-synthesized controllers
 EXTREME_K_COLLECTION = 0;
-BASELINE_K = 1; % conduct nonlinear simulations for baseline structured controller AND no ipc casd
+BASELINE_K = 0; % conduct nonlinear simulations for baseline structured controller AND no ipc casd
 
 % if OPTIMAL_K_COLLECTION
 %     if VARY_WU + VARY_SATURATION + VARY_REFERENCE + SCHEDULING ~= 1

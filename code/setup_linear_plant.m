@@ -18,13 +18,9 @@ initialize;
 %% Investigate Sensitivity of Outputs to Individual BldPitch1 Variation for Linear model
 
 % Import and MBC-transform linear models
+REGENERATE = 0;
 
-if false && exist('sys_arr.mat', 'file') && exist('sys_red_arr.mat', 'file') && exist('xop_arr.mat', 'file') && exist('xop_red_arr.mat', 'file')
-    load('xop_arr.mat')
-    load('xop_red_arr.mat')
-    load('sys_arr.mat')
-    load('sys_red_arr.mat')
-else
+if REGENERATE
     
     all_linfiles = dir(lin_models_dir);
     
@@ -182,16 +178,25 @@ else
     % save(fullfile(mat_save_dir, 'xop_red_arr'), 'xop_red_arr');
     save(fullfile(mat_save_dir, 'Plant'), 'Plant');
     save(fullfile(mat_save_dir, 'Plant_red'), 'Plant_red');
+else
+    % if false && exist('sys_arr.mat', 'file') && exist('sys_red_arr.mat', 'file') && exist('xop_arr.mat', 'file') && exist('xop_red_arr.mat', 'file')
+    load(fullfile(mat_save_dir, 'Plant'));
+    load(fullfile(mat_save_dir, 'Plant_red'));
+    % load('xop_arr.mat')
+    % load('xop_red_arr.mat')
+
+    load('sys_arr.mat')
+    load('sys_red_arr.mat')
 end
 
 %% PLOTTING LINEAR MODELS
 PLOTTING = 0;
-plotting_idx = find(LPV_CONTROLLER_WIND_SPEEDS == NONLPV_CONTROLLER_WIND_SPEED);
+ws_idx = find(LPV_CONTROLLER_WIND_SPEEDS == NONLPV_CONTROLLER_WIND_SPEED);
 
 if PLOTTING
     figure;
-    bodeplot(sys_arr(:, :, plotting_idx), sys_red_arr(:, :, plotting_idx));
+    bodeplot(Plant(:, :, ws_idx), Plant_red(:, :, ws_idx));
     legend('w/ second-order bending modes', 'wo/ second-order bending modes');
-    
 
 end
+

@@ -6,6 +6,134 @@ red_color = [0.8500, 0.3250, 0.0980];
 yellow_color = [0.9290, 0.6940, 0.1250];
 purple_color = [0.4940, 0.1840, 0.5560];
 
+%% Check change in A matrix with MBC averaging
+if 0
+    all_linfiles = dir(lin_models_dir);
+    
+    input_arr = {'Blade D pitch command', ...
+            'Blade Q pitch command'};
+    load(fullfile(mat_save_dir, 'Plant'));
+    load(fullfile(mat_save_dir, 'Plant_red'));
+
+    ws_idx = find(LPV_CONTROLLER_WIND_SPEEDS == NONLPV_CONTROLLER_WIND_SPEED);
+    
+    linfile_prefix = ['lin_' num2str(ws_idx - 1, '%02u') '.'];
+    linfiles = {};
+    linfile_idx = 1;
+    for f_idx = 1:length(all_linfiles)
+        filepath = fullfile(lin_models_dir, all_linfiles(f_idx).name);
+        if any(strfind(all_linfiles(f_idx).name, linfile_prefix)) && isfile(filepath)
+            linfiles{linfile_idx} = filepath;
+            linfile_idx = linfile_idx + 1;
+        end
+    end
+    
+    % 1,2,3 -> c(0), d(cos), q(sin)
+    [MBC, matData, FAST_linData, VTK] = fx_mbc3(linfiles);
+
+    % Rename labels
+    MBC.DescStates = transformLabels(MBC.DescStates);
+    matData.DescCntrlInpt = transformLabels(matData.DescCntrlInpt);
+    matData.DescOutput = transformLabels(matData.DescOutput);
+
+    % Plot maximum eigenvalues of A, B'*B, C'*C, D'*D matrix
+    A_singvals = [];
+    B_singvals = [];
+    C_singvals = [];
+    D_singvals = [];
+    az = matData.Azimuth;
+    [az, az_I] = sort(az);
+    az_I = az_I';
+    for a = az_I
+        % S = svds(matData.A(:, :, a), 1);
+        % S = max(abs(eig(matData.A(:, :, a))));
+        % S = abs(eig(matData.A(:, :, a)))';
+        % S = diag(matData.A(:, :, a));
+        % S = S(15:17)';
+        S = matData.A(20:end, 1, a);
+        A_singvals = [A_singvals; S'];
+    end
+    % for a = az_I
+    %     S = svds(matData.B(:, :, a), 1);
+    %     B_singvals = [B_singvals; S];
+    % end
+    % for a = az_I
+    %     S = svds(matData.C(:, :, a), 1);
+    %     C_singvals = [C_singvals; S];
+    % end
+    % for a = az_I
+    %     S = svds(matData.D(:, :, a), 1);
+    %     D_singvals = [D_singvals; S];
+    % end
+
+    % plot(az, squeeze(matData.A(15, 15, :))); hold on;
+    % plot(az, matData.AvgA(15, 15) * ones(length(az), 1));
+    
+    figure(1);
+    bcol = copper(size(A_singvals, 2));
+    % A_singvals = sort(A_singvals, 2, "descend");
+    % A_singvals = A_singvals(:, 1);
+    % S = A_singvals ./ mean(A_singvals, 1); % normalize
+    S = A_singvals;
+    plot(az, S, "LineStyle", "-", "LineWidth", 2); hold on;
+    blineHandle = findobj(gcf,'Type','line');
+    for l = 1:length(blineHandle)
+        set(blineHandle(l),'Color', bcol(l,:));
+    end
+
+    
+    % S = abs(eig(matData.AvgA));
+    % S = sort(S, "descend");
+    % S = S(1);
+    % S = diag(matData.AvgA);
+    S = matData.AvgA(20:end, 1)';
+    % S = S ./ mean(A_singvals, 1); % normalize
+    plot(az, repmat(S, length(az), 1), "LineStyle", "--", "LineWidth", 2);
+    blineHandle = findobj(gcf,'Type','line','-and','LineStyle','--');
+    for l = 1:length(blineHandle)
+        set(blineHandle(l),'Color', bcol(l,:));
+    end
+
+    xlabel("$\theta$ [deg]", 'Interpreter', 'latex', 'FontSize', BIG_FONT_SIZE);
+    ylabel("values", 'Interpreter', 'latex', 'FontSize', BIG_FONT_SIZE);
+    title("Normalized Elements of $A(\theta)$ vs. Averaged $A$", 'Interpreter', 'latex', 'FontSize', BIG_FONT_SIZE);
+
+    legend({"$A_{20, 1}(\theta)$", "$A_{21, 1}(\theta)$", "$A_{22, 1}(\theta)$", ...
+            "$A_{23, 1}(\theta)$", "$A_{24, 1}(\theta)$", "$A_{25, 1}(\theta)$", ...
+            "$A_{26, 1}(\theta)$", ...
+            "$A_{20, 1}$", "$A_{21, 1}$", "$A_{22, 1}$", ...
+            "$A_{23, 1}$", "$A_{24, 1}$", "$A_{25, 1}$", ...
+            "$A_{26, 1}$"}, ...
+        'Interpreter', 'latex', 'FontSize', SUBPLOT_BIG_FONT_SIZE, ...
+        'NumColumns', 2, ...
+        'Position', [0.719333333333333 0.618828932261768 0.174333333333332 0.297282249822475]);
+
+    ax = gca;
+    ax.XAxis.FontSize = SMALL_FONT_SIZE;
+    ax.YAxis.FontSize = SMALL_FONT_SIZE;
+    set(gcf, 'Position', [0 0 1500 900]);
+
+    % figure(1);
+    % bcol = winter(4);
+    % S = svds(matData.AvgA, 1);
+    % S = max(abs(eig(matData.AvgA)));
+    % semilogy(az, A_singvals, "LineStyle", "-", "Color", bcol(1, :)); hold on;
+    % semilogy(az, S * ones(length(az), 1), "LineStyle", "--", "Color", bcol(1, :));
+    % S = svds(matData.AvgB, 1);
+    % semilogy(az, B_singvals, "-", az, S * ones(length(az), 1), "--");
+    % S = svds(matData.AvgC, 1);
+    % semilogy(az, C_singvals, "-", az, S * ones(length(az), 1), "--");
+    % S = svds(matData.AvgD, 1);
+    % semilogy(az, D_singvals, "-", az, S * ones(length(az), 1), "--");
+    % legend("$A(\theta)$", "$A$", "$B(\theta)$", "$B$", "$C(\theta)$", "$C$", "$D(\theta)$", "$D$");
+    % xlabel("$\theta$ [deg]");
+    % ylabel("values");
+    % title("Maximum Eigenvalue of $A(\theta)$ / Singular Values of $B(\theta)$, $C(\theta)$, and $D(\theta)$")
+
+    savefig(gcf, fullfile(fig_dir, 'Plant_Vs_theta.fig'));
+    saveas(gcf, fullfile(fig_dir, 'Plant_Vs_theta.png'));
+end
+
 %% Plot scaled Plant OUTPLOT Figure 1
 if 0
     % TODO make sure xaxes are linked
@@ -515,7 +643,8 @@ if 0
 
     blue_color = [0, 0.4470, 0.7410];
     red_color = [0.8500, 0.3250, 0.0980];
-
+    
+    
     load(fullfile(mat_save_dir, ['optimal_k_cases_turbsim_wu', '_full_controller_cases']));
     load(fullfile(mat_save_dir, ['optimal_k_cases_turbsim_wu', '_Controllers_case_list.mat']));
     
@@ -628,71 +757,107 @@ if 0
 end
 
 %% Figure 9 Plot transfer functions and weighting functions for full-order controller
-if 0
-
+if 1
+    
+    load(fullfile(mat_save_dir, ['baseline_k_turbsim', '_full_controller_cases']));
+    load(fullfile(mat_save_dir, ['baseline_k_turbsim', '_Controllers_case_list.mat']));
     load(fullfile(mat_save_dir, ['optimal_k_cases_turbsim_wu', '_full_controller_cases']));
     load(fullfile(mat_save_dir, ['optimal_k_cases_turbsim_wu', '_Controllers_case_list.mat']));
 
     cc = find(case_basis.WindSpeedIndex.x == find(LPV_CONTROLLER_WIND_SPEEDS == NONLPV_CONTROLLER_WIND_SPEED));
     n_weighting_cases = length(case_basis.WuGain.x);
-
+    
     % find best performing weighting case for adc and ymse
+    sim_processed_data_untuned = load(fullfile(mat_save_dir, ['untuned_k_turbsim', '_simulation_case_agg_table.mat'])).UntunedControllers_simulation_case_agg_table;
     sim_processed_data_wu = load(fullfile(mat_save_dir, ['optimal_k_cases_turbsim_wu', '_simulation_case_agg_table.mat'])).Controllers_simulation_case_agg_table;
 
     % get cases for WindMean 16m/s, lowest adc for wu
     infw_mean = 16;
+    sim_processed_data_untuned_red = ...
+        sim_processed_data_untuned((sim_processed_data_untuned.("WindMean") == infw_mean), :);
+        % ~strcmp(sim_processed_data_wu.("Case Desc."), "noipc"), :);
+
     sim_processed_data_wu_red = ...
-        sim_processed_data_wu((sim_processed_data_wu.("WindMean") == infw_mean) & ...
-        ~strcmp(sim_processed_data_wu.("Case Desc."), "noipc"), :);
-    tmp = sortrows(sim_processed_data_wu_red, "mean_ADC");
-    low_adc_wu_case = tmp(1, "Case Desc.").Variables;
-    tmp = sortrows(sim_processed_data_wu_red, "mean_RootMycBlade1 RMSE");
-    low_ymse_wu_case = tmp(1, "Case Desc.").Variables;
-    
+        sim_processed_data_wu((sim_processed_data_wu.("WindMean") == infw_mean), :);
+
+    % get del data to find controller cases for which mean del of
+    % flapwise blade-root bending moment is less than baseline case
+    del_wu = load(fullfile(mat_save_dir, ['optimal_k_cases_turbsim_wu', '_del_table'])).del_out_table;
+
+    metric_cols = arrayfun(@num2str, LPV_CONTROLLER_WIND_SPEEDS, 'UniformOutput', 0);
+
+    % for each load type, get the mean over all wind speeds
+    del_wu.("Mean") = mean(del_wu(:, metric_cols), 2).Variables;
+    del_wu_loads = del_wu(contains(del_wu.("Load"), "RootMyc1"), :);
+    del_wu_adc = del_wu(contains(del_wu.("Load"), "ADC"), :);
+
+    wu_reduced_load_cases = del_wu_loads(table2array(del_wu_loads(:, "Mean") < del_wu_loads(contains(del_wu_loads.('Case Desc.'), "baseline_controller"), "Mean")) , ["Case Desc.", "A_Wu", "Mean"]);
+    wu_reduced_load_cond = zeros(height(sim_processed_data_wu_red), 1);
+    for i = 1:height(wu_reduced_load_cases)
+        wu_reduced_load_cond = wu_reduced_load_cond | ...    
+            (contains(sim_processed_data_wu_red.("Case Desc."), wu_reduced_load_cases(i, :).("Case Desc.")) & (sim_processed_data_wu_red.("A_Wu") == wu_reduced_load_cases(i, :).("A_Wu")));
+    end
+
+    del_wu_loads(:, ["Case Desc.", "A_Wu"])
+    untuned_case = sim_processed_data_untuned_red(:, ["Case Desc.", "mean_ADC", "mean_RootMycBlade1 RMSE"]);
+    reduced_load_sim_processed_data_wu_red = sim_processed_data_wu_red(wu_reduced_load_cond, ["Case Desc.", "A_Wu", "mean_ADC", "mean_RootMycBlade1 RMSE"]);
+    low_adc_wu_case = sortrows(reduced_load_sim_processed_data_wu_red, "mean_ADC");
+    low_adc_wu_case = low_adc_wu_case(1, "Case Desc.").Variables;
+    low_ymse_wu_case = sortrows(reduced_load_sim_processed_data_wu_red, "mean_RootMycBlade1 RMSE");
+    low_ymse_wu_case = low_ymse_wu_case(1, "Case Desc.").Variables;
+
     % Plot (1,1) channel of transfer functions of KSo, Ti; So, GSi vs f for single wind speed on
     % for open-loop vs closed-loop with weightings OUTPLOT
     % for each controller type: robustness, adc, y_mse
   
-    
-    
     ax_KSo_del_idx = []; ax_Ti_del_idx = []; 
     ax_So_del_idx = []; ax_GSi_del_idx = [];
     Wu_gains = [];
     
-    for f = fieldnames(case_basis.W1Gain)'
+    for f = fieldnames(case_basis.W1Gain)' % check adc and err controllers
         for w_idx = 1:n_weighting_cases % for each value of A_Wu
             % only plot baseline value of A_Wu
             % if Controllers_case_list(w_idx).WuGain.(f{1}).Numerator{1,1}(1) ~= VARY_WU_BASIS(length(VARY_WU_BASIS) - 1)
             %     continue;
             % end
             if ~(strcmp(f{1}, 'adc') && strcmp(Controllers_case_list(w_idx).CaseDesc.(f{1}){1}, low_adc_wu_case{1})) ...
-                && ~(strcmp(f{1}, 'y_mse') && strcmp(Controllers_case_list(w_idx).CaseDesc.(f{1}){1}, low_ymse_wu_case{1}))
+                && ~(strcmp(f{1}, 'y_mse') && strcmp(Controllers_case_list(w_idx).CaseDesc.(f{1}){1}, 'y_mse W1 = 1 W2 = 0.1 ->  Wu = 1 We = 10')) ... %low_ymse_wu_case{1}))
                 continue;
             end
+            % if ~(strcmp(f{1}, 'adc'))
+            %     continue;
+            % end
 
             f{1}
             Controllers_case_list(w_idx).CaseDesc.(f{1})
-
+            % W1_tmp1 = Controllers_case_list(w_idx).Win.(f{1})(1:2, 1:2, cc)
+            % W2_tmp1 = Controllers_case_list(w_idx).Win.(f{1})(3:4, 3:4, cc)
+            % Wu_tmp1 = Controllers_case_list(w_idx).Wout.(f{1})(1:2, 1:2, cc)
+            % We_tmp1 = Controllers_case_list(w_idx).Wout.(f{1})(3:4, 3:4, cc)
             Wu_tmp = Controllers_case_list(w_idx).WuGain.(f{1}) * Wu;
             We_tmp = Controllers_case_list(w_idx).WeGain.(f{1}) * We;
             W1_tmp = Controllers_case_list(w_idx).W1Gain.(f{1}) * W1;
             W2_tmp = Controllers_case_list(w_idx).W2Gain.(f{1}) * W2;
-    
+            % SF_1 = Controllers_case_list(w_idx).SF.(f{1})(cc)
             SF = loopsens(-Plant(:, :, cc), ...
                 -Controllers_case_list(w_idx).Controller_scaled.(f{1})(:, :, cc));
-    
+
+            % bodemag(SF_1.PSi, SF.PSi)
+            gamma_tmp = Controllers_case_list(w_idx).gamma.(f{1})(cc);
             sys_KSo.(f{1}) = SF.CSo * W2_tmp;
-            bound_KSo.(f{1}) = inv(Wu_tmp) * Controllers_case_list(w_idx).gamma.(f{1})(cc);
+            bound_KSo.(f{1}) = inv(Wu_tmp) * gamma_tmp;
 
             sys_Ti.(f{1}) = SF.Ti * W1_tmp;
-            bound_Ti.(f{1}) = inv(Wu_tmp) * Controllers_case_list(w_idx).gamma.(f{1})(cc);
+            bound_Ti.(f{1}) = inv(Wu_tmp) * gamma_tmp;
             
             sys_So.(f{1}) = SF.So * W2_tmp;
-            bound_So.(f{1}) = inv(We_tmp) * Controllers_case_list(w_idx).gamma.(f{1})(cc);
+            bound_So.(f{1}) = inv(We_tmp) * gamma_tmp;
             ol_So.(f{1}) = eye(2) * W2_tmp;
 
+            % bodemag(sys_So.(f{1}), bound_So.(f{1}))
+
             sys_GSi.(f{1}) = SF.PSi * W1_tmp;
-            bound_GSi.(f{1}) = inv(We_tmp) * Controllers_case_list(w_idx).gamma.(f{1})(cc);
+            bound_GSi.(f{1}) = inv(We_tmp) * gamma_tmp;
             ol_GSi.(f{1}) = Plant(:, :, cc) * W1_tmp;
         end
     end
@@ -708,90 +873,72 @@ if 0
     omega = logspace(-2, 2, 200);
     % bodeplot(ax_KSo, sys_KSo.rob(1, 1), 'b', sys_KSo.adc(1, 1), 'b', ...
     %     sys_KSo.y_mse(1, 1), 'b', omega, bode_plot_opt); hold on;
+    input_idx = 1;
+    output_idx = 1;
     figure(2);
     ax_KSo = gca;
-    bodeplot(ax_KSo, sys_KSo.adc(1, 1),  'b', ...
-        sys_KSo.y_mse(1, 1), 'b', omega, bode_plot_opt); hold on;
+    bodeplot(ax_KSo, sys_KSo.adc(output_idx, input_idx),  'b', ...
+                     sys_KSo.y_mse(output_idx, input_idx), 'r', omega, bode_plot_opt); hold on;
     a = findobj(ax_KSo,'Type','line','-and','Color','b');
-    set(a(1), 'Color', blue_color); set(a(1), 'LineStyle', '-', 'LineWidth', 2);
-    set(a(2), 'Color', red_color); set(a(2), 'LineStyle', '-', 'LineWidth', 2);
-    % set(a(2), 'Color', yellow_color); set(a(2), 'LineStyle', '-', 'LineWidth', 2);
+    set(a, 'Color', blue_color); set(a, 'LineStyle', '-', 'LineWidth', 2);
+    a = findobj(ax_KSo,'Type','line','-and','Color','r');
+    set(a, 'Color', red_color); set(a, 'LineStyle', '-', 'LineWidth', 2);
 
-    % bodeplot(ax_KSo, bound_KSo.rob(1, 1), 'b', bound_KSo.adc(1, 1), 'b', ...
-    %     bound_KSo.y_mse(1, 1), 'b', omega, bode_plot_opt); hold off;
-    bodeplot(ax_KSo, bound_KSo.adc(1, 1), 'b', ...
-        bound_KSo.y_mse(1, 1), 'b', omega, bode_plot_opt); hold off;
+    bodeplot(ax_KSo, bound_KSo.adc(output_idx, input_idx), 'b', ...
+                     bound_KSo.y_mse(output_idx, input_idx), 'r', omega, bode_plot_opt); hold off;
     
     a = findobj(ax_KSo,'Type','line','-and','Color','b');
-    set(a(1), 'Color', blue_color); set(a(1), 'LineStyle', '--', 'LineWidth', 2);
-    set(a(2), 'Color', red_color); set(a(2), 'LineStyle', '--', 'LineWidth', 2);
-    % set(a(2), 'Color', yellow_color); set(a(2), 'LineStyle', '--', 'LineWidth', 2);
+    set(a, 'Color', blue_color); set(a, 'LineStyle', '--', 'LineWidth', 2);
+    a = findobj(ax_KSo,'Type','line','-and','Color','r');
+    set(a, 'Color', red_color); set(a, 'LineStyle', '--', 'LineWidth', 2);
 
-    % ax_KSo_del_idx = [ax_KSo_del_idx, length(ax_KSo_del_idx) + 2:2];
-    % legend(ax_KSi, ['Wu = ', num2str(Wu_gains(end))], 'Bound', 'Location', 'westoutside');
-    % subtitle(ax_KSo, '$(KS_oW_2)^{(1,1)}$', 'Interpreter','latex');
-    % subtitle(ax_KSo, '$KS_o^{(1,1)} = \frac{z_{u, d}}{d_{2, d}}$', ...
-    %      'Interpreter','latex', 'FontSize', SUBPLOT_BIG_FONT_SIZE);
     ax_KSo.Title.String = '';
 
-    % [s, w] = sigma(sys_Ti);
-    % sigmaplot(ax_Ti, sys_Ti, sigma_plot_opt); hold on;
-    % bodeplot(ax_Ti, sys_Ti.rob(1, 1), 'b', sys_Ti.adc(1, 1), 'b', ...
-    %     sys_Ti.y_mse(1, 1), 'b', omega, bode_plot_opt); hold on;
     figure(1);
     ax_Ti = gca;
-    bodeplot(ax_Ti, sys_Ti.adc(1, 1), 'b', ...
-        sys_Ti.y_mse(1, 1), 'b', omega, bode_plot_opt); hold on;
+    bodeplot(ax_Ti, sys_Ti.adc(output_idx, input_idx), 'b', ...
+                    sys_Ti.y_mse(output_idx, input_idx), 'r', omega, bode_plot_opt); hold on;
     a = findobj(ax_Ti,'Type','line','-and','Color','b');
-    set(a(1), 'Color', blue_color); set(a(1), 'LineStyle', '-', 'LineWidth', 2);
-    set(a(2), 'Color', red_color); set(a(2), 'LineStyle', '-', 'LineWidth', 2);
-    % set(a(2), 'Color', yellow_color); set(a(2), 'LineStyle', '-', 'LineWidth', 2);
+    set(a, 'Color', blue_color); set(a, 'LineStyle', '-', 'LineWidth', 2);
+    a = findobj(ax_Ti,'Type','line','-and','Color','r');
+    set(a, 'Color', red_color); set(a, 'LineStyle', '-', 'LineWidth', 2);
 
-    % bodeplot(ax_Ti, bound_Ti.rob(1, 1), 'b', bound_Ti.adc(1, 1), 'b', ...
-    %     bound_Ti.y_mse(1, 1), 'b', omega, bode_plot_opt); hold off;
-    bodeplot(ax_Ti, bound_Ti.adc(1, 1), 'b', ...
-        bound_Ti.y_mse(1, 1), 'b', omega, bode_plot_opt); hold off;
+    bodeplot(ax_Ti, bound_Ti.adc(output_idx, input_idx), 'b', ...
+            bound_Ti.y_mse(output_idx, input_idx), 'r', omega, bode_plot_opt); hold off;
 
     a = findobj(ax_Ti,'Type','line','-and','Color','b');
-    set(a(1), 'Color', blue_color); set(a(1), 'LineStyle', '--', 'LineWidth', 2);
-    set(a(2), 'Color', red_color); set(a(2), 'LineStyle', '--', 'LineWidth', 2);
-    % set(a(2), 'Color', yellow_color); set(a(2), 'LineStyle', '--', 'LineWidth', 2);
+    set(a, 'Color', blue_color); set(a, 'LineStyle', '--', 'LineWidth', 2);
+    a = findobj(ax_Ti,'Type','line','-and','Color','r');
+    set(a, 'Color', red_color); set(a, 'LineStyle', '--', 'LineWidth', 2);
 
-    % ax_Ti_del_idx = [ax_Ti_del_idx, length(ax_Ti_del_idx) + 2:2];
-    
-    % legend(['Wu = ', num2str(Wu_gains(end))], 'Bound');
-    % subtitle(ax_Ti, '$(T_iW_1)^{(1,1)}$', 'Interpreter','latex');
-    % subtitle(ax_Ti, '$T_i^{(1,1)} = \frac{z_{u, d}}{d_{1, d}}$', ...
-    %     'Interpreter', 'latex', 'FontSize', SUBPLOT_BIG_FONT_SIZE);
     ax_Ti.Title.String = '';
-    
-    % sigmaplot(ax_So, sys_So, sigma_plot_opt); hold on;
-    % bodeplot(ax_So, sys_So.rob(1, 1), 'b', ...
-    %     sys_So.adc(1, 1), 'b', sys_So.y_mse(1, 1), 'b', ...
-    %     omega, bode_plot_opt); hold on;
+
     figure(4);
     ax_So = gca;
-    bodeplot(ax_So, sys_So.adc(1, 1), 'b', sys_So.y_mse(1, 1), 'b', ...
+    bodeplot(ax_So, sys_So.adc(output_idx, input_idx), 'b', ...
+                    sys_So.y_mse(output_idx, input_idx), 'r', ...
         omega, bode_plot_opt); hold on;
     a = findobj(ax_So,'Type','line','-and','Color','b');
-    set(a(1), 'Color', blue_color); set(a(1), 'LineStyle', '-', 'LineWidth', 2);
-    set(a(2), 'Color', red_color); set(a(2), 'LineStyle', '-', 'LineWidth', 2);
-    % set(a(2), 'Color', yellow_color); set(a(2), 'LineStyle', '-', 'LineWidth', 2);
+    set(a, 'Color', blue_color); set(a, 'LineStyle', '-', 'LineWidth', 2);
+    a = findobj(ax_So,'Type','line','-and','Color','r');
+    set(a, 'Color', red_color); set(a, 'LineStyle', '-', 'LineWidth', 2);
 
-    % bodeplot(ax_So, bound_So.rob(1, 1), 'b', bound_So.adc(1, 1), 'b', ...
-    %     bound_So.y_mse(1, 1), 'b', omega, bode_plot_opt); hold on;
-    bodeplot(ax_So, bound_So.adc(1, 1), 'b', ...
-        bound_So.y_mse(1, 1), 'b', omega, bode_plot_opt); hold on;
-
+    bodeplot(ax_So, bound_So.adc(output_idx, input_idx), 'b', ...
+        bound_So.y_mse(output_idx, input_idx), 'r', omega, bode_plot_opt); hold on;
     a = findobj(ax_So,'Type','line','-and','Color','b');
-    set(a(1), 'Color', blue_color); set(a(1), 'LineStyle', '--', 'LineWidth', 2);
-    set(a(2), 'Color', red_color); set(a(2), 'LineStyle', '--', 'LineWidth', 2);
-    % set(a(2), 'Color', yellow_color); set(a(2), 'LineStyle', '--', 'LineWidth', 2);
+    set(a, 'Color', blue_color); set(a, 'LineStyle', '--', 'LineWidth', 2);
+    a = findobj(ax_So,'Type','line','-and','Color','r');
+    set(a, 'Color', red_color); set(a, 'LineStyle', '--', 'LineWidth', 2);
+
     
-    bodeplot(ax_So, ol_So.adc(1, 1), 'b', omega, bode_plot_opt); hold on;
+    if 1
+    bodeplot(ax_So, ol_So.adc(output_idx, input_idx), 'b', omega, bode_plot_opt); hold on;
     a = findobj(ax_So,'Type','line','-and','Color','b');
-    set(a(1), 'Color', 'k'); set(a(1), 'LineStyle', ':', 'LineWidth', 2);
-
+    set(a, 'Color', blue_color); set(a, 'LineStyle', ':', 'LineWidth', 2);
+    bodeplot(ax_So, ol_So.y_mse(output_idx, input_idx), 'r', omega, bode_plot_opt);
+    a = findobj(ax_So,'Type','line','-and','Color','r');
+    set(a, 'Color', red_color); set(a, 'LineStyle', ':', 'LineWidth', 2);
+    end
     % ax_So_del_idx = [ax_So_del_idx, length(ax_So_del_idx) + 2:2];
     
     % legend(['Wu = ', num2str(Wu_gains(end))], 'Bound');
@@ -801,31 +948,36 @@ if 0
     ax_So.Title.String = '';
 
     % sigmaplot(ax_GSi, sys_GSi, sigma_plot_opt); hold on;
-    % bodeplot(ax_GSi, sys_GSi.rob(1, 1), 'b', sys_GSi.adc(1, 1), 'b', ...
-    %     sys_GSi.y_mse(1, 1), 'b', omega, bode_plot_opt); hold on;
+    % bodeplot(ax_GSi, sys_GSi.rob(output_idx, input_idx), 'b', sys_GSi.adc(output_idx, input_idx), 'b', ...
+    %     sys_GSi.y_mse(output_idx, input_idx), 'b', omega, bode_plot_opt); hold on;
     figure(3);
     ax_GSi = gca;
-    bodeplot(ax_GSi, sys_GSi.adc(1, 1), 'b', ...
-        sys_GSi.y_mse(1, 1), 'b', omega, bode_plot_opt); hold on;
+    bodeplot(ax_GSi, sys_GSi.adc(output_idx, input_idx), 'b', ...
+        sys_GSi.y_mse(output_idx, input_idx), 'r', omega, bode_plot_opt); hold on;
     a = findobj(ax_GSi,'Type','line','-and','Color','b');
-    set(a(1), 'Color', blue_color); set(a(1), 'LineStyle', '-', 'LineWidth', 2);
-    set(a(2), 'Color', red_color); set(a(2), 'LineStyle', '-', 'LineWidth', 2);
+    set(a, 'Color', blue_color); set(a, 'LineStyle', '-', 'LineWidth', 2);
+    a = findobj(ax_GSi,'Type','line','-and','Color','r');
+    set(a, 'Color', red_color); set(a, 'LineStyle', '-', 'LineWidth', 2);
     % set(a(2), 'Color', yellow_color); set(a(2), 'LineStyle', '-', 'LineWidth', 2);
 
-    % bodeplot(ax_GSi, bound_GSi.rob(1, 1), 'b', bound_GSi.adc(1, 1), 'b', ...
-    %     bound_GSi.y_mse(1, 1), 'b', omega, bode_plot_opt); hold on;
-    bodeplot(ax_GSi, bound_GSi.adc(1, 1), 'b', ...
-        bound_GSi.y_mse(1, 1), 'b', omega, bode_plot_opt); hold on;
-
+    % bodeplot(ax_GSi, bound_GSi.rob(output_idx, input_idx), 'b', bound_GSi.adc(output_idx, input_idx), 'b', ...
+    %     bound_GSi.y_mse(output_idx, input_idx), 'b', omega, bode_plot_opt); hold on;
+    bodeplot(ax_GSi, bound_GSi.adc(output_idx, input_idx), 'b', ...
+            bound_GSi.y_mse(output_idx, input_idx), 'r', omega, bode_plot_opt); hold on;
     a = findobj(ax_GSi,'Type','line','-and','Color','b');
-    set(a(1), 'Color', blue_color); set(a(1), 'LineStyle', '--', 'LineWidth', 2);
-    set(a(2), 'Color', red_color); set(a(2), 'LineStyle', '--', 'LineWidth', 2);
+    set(a, 'Color', blue_color); set(a, 'LineStyle', '--', 'LineWidth', 2);
+    a = findobj(ax_GSi,'Type','line','-and','Color','r');
+    set(a, 'Color', red_color); set(a, 'LineStyle', '--', 'LineWidth', 2);
     % set(a(2), 'Color', yellow_color); set(a(2), 'LineStyle', '--', 'LineWidth', 2);
     
-    bodeplot(ax_GSi, ol_GSi.adc(1, 1), 'b', omega, bode_plot_opt); hold on;
+    if 1
+    bodeplot(ax_GSi, ol_GSi.adc(output_idx, input_idx), 'b', omega, bode_plot_opt); hold on;
     a = findobj(ax_GSi,'Type','line','-and','Color','b');
-    set(a(1), 'Color', 'k'); set(a(1), 'LineStyle', ':', 'LineWidth', 2);
-
+    set(a, 'Color', blue_color); set(a, 'LineStyle', ':', 'LineWidth', 2);
+    bodeplot(ax_GSi, ol_GSi.y_mse(output_idx, input_idx), 'r', omega, bode_plot_opt);
+    a = findobj(ax_GSi,'Type','line','-and','Color','r');
+    set(a, 'Color', red_color); set(a, 'LineStyle', ':', 'LineWidth', 2);
+    end
     % subtitle(ax_GSi, '$GS_i^{(1,1)} = \frac{z_{e, d}}{d_{1, d}}$', ...
     %     'Interpreter','latex', 'FontSize', SUBPLOT_BIG_FONT_SIZE);
     ax_GSi.Title.String = '';
@@ -847,6 +999,8 @@ if 0
         'Interpreter', 'latex', 'FontSize', SUBPLOT_BIG_FONT_SIZE, ...
         'Location', 'southwest', ...
         'Position',[0.143333333333333 0.343209538983472 0.200697591145833 0.179476875790282]);
+    % ylabel(ax_Ti, 'Magnitude [dB]','FontSize',30);
+    % xlabel(ax_Ti, 'Frequency [rad/s]','FontSize',30);
 
     hold(ax_KSo, 'on');
     plot(ax_KSo, NaN, NaN, 'Color', blue_color, 'LineStyle', '-', 'LineWidth', 2); hold on;
@@ -862,38 +1016,53 @@ if 0
         'Interpreter', 'latex', 'FontSize', SUBPLOT_BIG_FONT_SIZE, ...
         'Location', 'northwest', ...
         'Position',[0.146 0.622978325110639 0.214031819661458 0.179476875790282]);
+    % ylabel(ax_KSo, 'Magnitude [dB]','FontSize',30);
+    % xlabel(ax_KSo, 'Frequency [rad/s]','FontSize',30);
 
     hold(ax_GSi, 'on');
     plot(ax_GSi, NaN, NaN, 'Color', blue_color, 'LineStyle', '-', 'LineWidth', 2); hold on;
     plot(ax_GSi, NaN, NaN, 'Color', red_color, 'LineStyle', '-', 'LineWidth', 2);
     plot(ax_GSi, NaN, NaN, 'Color', blue_color, 'LineStyle', '--', 'LineWidth', 2);
     plot(ax_GSi, NaN, NaN, 'Color', red_color, 'LineStyle', '--', 'LineWidth', 2);
-    plot(ax_GSi, NaN, NaN, 'Color', 'k', 'LineStyle', ':', 'LineWidth', 2);
+    plot(ax_GSi, NaN, NaN, 'Color', blue_color, 'LineStyle', ':', 'LineWidth', 2);
+    plot(ax_GSi, NaN, NaN, 'Color', red_color, 'LineStyle', ':', 'LineWidth', 2);
     legend(ax_GSi, ...
-        '', '', '', '', '', ...
+        '', '', '', '', '', '', ...
         ['$(GS_iW_1)^{(1,1)}$', ' for ', '$K_{adc}$'], ...
         ['$(GS_iW_1)^{(1,1)}$', ' for ', '$K_{err}$'], ...
         ['$(W_e^{-1}\gamma)^{(1,1)}$', ' for ', '$K_{adc}$'], ...
         ['$(W_e^{-1}\gamma)^{(1,1)}$', ' for ', '$K_{err}$'], ...
-        ['$(GW_1)^{(1,1)}$'], 'Interpreter', 'latex', 'FontSize', SUBPLOT_BIG_FONT_SIZE, ...
+        ['$(GW_1)^{(1,1)}$', ' for ', '$K_{adc}$'], ...
+        ['$(GW_1)^{(1,1)}$', ' for ', '$K_{err}$'], ...
+        'Interpreter', 'latex', 'FontSize', SUBPLOT_BIG_FONT_SIZE, ...
         'Location', 'west');
+    % ylabel(ax_GSi, 'Magnitude [dB]','FontSize',30);
+    % xlabel(ax_GSi, 'Frequency [rad/s]','FontSize',30);
+        % 
+        
 
     hold(ax_So, 'on');
     plot(ax_So, NaN, NaN, 'Color', blue_color, 'LineStyle', '-', 'LineWidth', 2); hold on;
     plot(ax_So, NaN, NaN, 'Color', red_color, 'LineStyle', '-', 'LineWidth', 2);
     plot(ax_So, NaN, NaN, 'Color', blue_color, 'LineStyle', '--', 'LineWidth', 2);
     plot(ax_So, NaN, NaN, 'Color', red_color, 'LineStyle', '--', 'LineWidth', 2);
-    plot(ax_So, NaN, NaN, 'Color', 'k', 'LineStyle', ':', 'LineWidth', 2);
+    plot(ax_So, NaN, NaN, 'Color', blue_color, 'LineStyle', ':', 'LineWidth', 2);
+    plot(ax_So, NaN, NaN, 'Color', red_color, 'LineStyle', ':', 'LineWidth', 2);
     ylim(ax_So, [-50, 30]);
     legend(ax_So, ...
-        '', '', '', '', '', ...
+        '', '', '', '', '', '', ...
         ['$(S_oW_2)^{(1,1)}$', ' for ', '$K_{adc}$'], ...
         ['$(S_oW_2)^{(1,1)}$', ' for ', '$K_{err}$'], ...
         ['$(W_e^{-1}\gamma)^{(1,1)}$', ' for ', '$K_{adc}$'], ...
         ['$(W_e^{-1}\gamma)^{(1,1)}$', ' for ', '$K_{err}$'], ...
-        ['$(IW_2)^{(1,1)}$'], 'Interpreter', 'latex', 'FontSize', SUBPLOT_BIG_FONT_SIZE, ...
+        ['$(IW_2)^{(1,1)}$', ' for ', '$K_{adc}$'], ...
+        ['$(IW_2)^{(1,1)}$', ' for ', '$K_{err}$'], ...
+        'Interpreter', 'latex', 'FontSize', SUBPLOT_BIG_FONT_SIZE, ...
         'Location', 'east', ...
         'Position',[0.696666666666667 0.456540825463444 0.200697591145833 0.22333453404421]);
+        % 
+    % ylabel(ax_So, 'Magnitude [dB]','FontSize',30);
+    % xlabel(ax_So, 'Frequency [rad/s]','FontSize',30);
      
     labels = {'Ti', 'KSo', 'GSi', 'So'};
      for i = 1:4
@@ -1140,13 +1309,25 @@ if 0
 end
 
 %% Fig 12, Plot PSD for three different load for best wu, sat, ref controllers
-if 1
+if 0
+    % get del data to find controller cases for which mean del of
+    % flapwise blade-root bending moment is less than baseline case
+    del_wu = load(fullfile(mat_save_dir, ['optimal_k_cases_turbsim_wu', '_del_table'])).del_out_table;
+
+    metric_cols = arrayfun(@num2str, LPV_CONTROLLER_WIND_SPEEDS, 'UniformOutput', 0);
+
+    % for each load type, get the mean over all wind speeds
+    del_wu.("Mean") = mean(del_wu(:, metric_cols), 2).Variables;
+    del_wu_loads = del_wu(contains(del_wu.("Load"), "RootMyc1"), :);
+    wu_reduced_load_cases = del_wu_loads( table2array(del_wu_loads(:, "Mean") < del_wu_loads(contains(del_wu_loads.('Case Desc.'), "baseline_controller"), "Mean")) , ["Case Desc.", "A_Wu"]);
+
+
     loads = {"RootMyc1", "YawBrMyp", "YawBrMzp"};
 
     harmonic_loads = {"RootMyc1_1P", "YawBrMyp_0P", "YawBrMzp_0P", ...
              "RootMyc1_2P",  "YawBrMyp_3P", "YawBrMzp_3P"};
     
-    labels = {'Blade Root Bending Moment', ...
+    labels = {'Out-of-Plane Blade-Root Bending Moment', ...
         'Tower-Top Tilt Bending Moment', ...
         'Tower-Top Yaw Bending Moment'};
     
@@ -1156,13 +1337,20 @@ if 1
     sim_raw_data_wu = load(fullfile(sl_metadata_save_dir, ['sim_out_list_', 'optimal_k_cases_turbsim_wu', '.mat'])).sim_out_list;
     
     psd_data_wu = load(fullfile(mat_save_dir, ['optimal_k_cases_turbsim_wu', '_psd_table'])).psd_out_table;
+    
+    wu_reduced_load_cond = zeros(height(psd_data_wu), 1);
+    for i = 1:height(wu_reduced_load_cases)
+        wu_reduced_load_cond = wu_reduced_load_cond | ...    
+            (contains(psd_data_wu.("Case Desc."), wu_reduced_load_cases(i, :).("Case Desc.")) & (psd_data_wu.("A_Wu") == wu_reduced_load_cases(i, :).("A_Wu")));
+    end
 
     % get cases for 16m/s seed=1, greatest mean decrease in harmonic loads
     harmonic_load_cond = any(cell2mat(cellfun(@(l) strcmp(psd_data_wu.("Load"), l), harmonic_loads, 'UniformOutput', false)), 2);
     metric_cols = arrayfun(@num2str, LPV_CONTROLLER_WIND_SPEEDS, 'UniformOutput', 0);
     infw_fn = 'A_16_5';
     psd_data_wu_red = psd_data_wu(...
-        ~strcmp(psd_data_wu.("Case Desc."), "baseline_controller") ...
+        wu_reduced_load_cond ...
+        & ~strcmp(psd_data_wu.("Case Desc."), "baseline_controller") ...
         & harmonic_load_cond, :);
     psd_data_wu_red.("Mean") = mean(psd_data_wu_red(:, metric_cols).Variables, 2);
     % find Case Desc and A_Wu corresponding to greatest reduction for each
@@ -1246,10 +1434,11 @@ if 1
         ax.Title.FontSize = SUBPLOT_BIG_FONT_SIZE;
     end
     ax = subplot(length(loads), 1, 1);
-    legend(ax, {'Open-Loop', ...
-        '', '', '', '', ['Baseline ', '$K_0$'], ...
-        '', '', '', '', ['Retuning ', '$A_{W_u}$']}, ...
-        'Interpreter', 'latex', 'FontSize', SUBPLOT_BIG_FONT_SIZE);
+    % legend(ax, {'Open-Loop', ...
+    %     '', '', '', '', ['Baseline ', '$K_0$'], ...
+    %     '', '', '', '', ['Retuning ', '$A_{W_u}$']}, ...
+    %     'Position',[0.752108524283138 0.822267805673832 0.150224782307943 0.130635838150289], ...
+    %     'Interpreter', 'latex', 'FontSize', SUBPLOT_BIG_FONT_SIZE);
     for l = 1:length(loads)-1
         ax = subplot(length(loads), 1, l);
         ax.XLabel.String = '';
@@ -1297,57 +1486,124 @@ if 0
     % groupsummary(del_wu, 'Load', 'min', 'Mean');
     % groupsummary(del_sat, 'Load', 'min', 'Mean');
     % groupsummary(del_ref, 'Load', 'min', 'Mean');
-    loads = {'RootMyc1', 'ADC', 'YawBrMyp', 'YawBrMzp'};
-    labels = {'Blade-Root Bending Moment DEL', 'ADC', 'Tower-Top Tilt Bending Moment DEL', 'Tower-Top Yaw Bending Moment DEL'};
 
+    % TODO
+    EXTRA_PLOT = 1;
+
+    loads = {'RootMyc1', 'RootMxb1', 'YawBrMyp', 'YawBrMzp'};
+    labels = {'Out-of-Plane Blade-Root Bending Moment DEL', 'Edgewise Blade-Root Bending Moment DEL', ...
+        'Tower-Top Tilt Bending Moment DEL', 'Tower-Top Yaw Bending Moment DEL'};
     labels_1 = {...
-        ['$\%$', ' Change in Blade-Root Bending Moment DEL'], ...
-        ['$\%$', ' Change in ADC'], ...
+        ['$\%$', ' Change in Out-of-Plane Blade-Root'], ...
+        ['$\%$', ' Change in Edgewise Blade-Root'], ...
         ['$\%$', ' Change in Tower-Top'], ...
         ['$\%$', ' Change in Tower-Top']};
 
-    labels_2 = {'', '', ...
+    labels_2 = {'Bending Moment DEL', ...
+        'Bending Moment DEL', ...
         'Tilt Bending Moment DEL', ...
         'Yaw Bending Moment DEL'};
 
+    if EXTRA_PLOT
+        extra_loads = {'ADC', 'GenPwr Mean', 'TTDspFA', 'TTDspSS'};
+        extra_labels = {'ADC', 'Generator Power [kW]', ...
+            'Tower-Top Fore-Aft Deflection DEL', 'Tower-top Side-to-Side Deflection DEL'};
+    
+        extra_labels_1 = {...
+            ['$\%$', ' Change in ADC'], ...
+            ['$\%$', ' Change in Generator Power']...
+            ['$\%$', ' Change in Tower-Top'], ...
+            ['$\%$', ' Change in Tower-Top']};
+    
+        extra_labels_2 = {'', '', ...
+            'Fore-Aft Deflection DEL', ...
+            'Side-to-Side Deflection DEL'};
+    end
    
     % get best performing from del_wu, del_sat, del_ref
-    % TODO compare change in ADC from baseline to least well-performing
+    % TODO compare change in ADC from baseline to least that has better
+    % tracking error than baseline - add this to paper
     % relative to baseline
     del_wu_red = table();
     del_ref_red = table();
     del_sat_red = table();
+
+    % better_tracking_cond =  del_wu(strcmp(del_wu.("Load"), "RootMyc1") & ~contains(del_wu.('Case Desc.'), "baseline_controller"), "Mean") < del_wu(strcmp(del_wu.('Case Desc.'), "baseline_controller") & strcmp(del_wu.("Load"), "RootMyc1"), "Mean");
+    del_wu_loads = del_wu(contains(del_wu.("Load"), "RootMyc1"), :);
+    wu_reduced_load_cases = del_wu_loads( table2array(del_wu_loads(:, "Mean") < del_wu_loads(contains(del_wu_loads.('Case Desc.'), "baseline_controller"), "Mean")) , ["Case Desc.", "A_Wu"]);
+    wu_reduced_load_cond = zeros(height(del_wu), 1);
+    for i = 1:height(wu_reduced_load_cases)
+        wu_reduced_load_cond = wu_reduced_load_cond | ...    
+            (contains(del_wu.("Case Desc."), wu_reduced_load_cases(i, :).("Case Desc.")) & (del_wu.("A_Wu") == wu_reduced_load_cases(i, :).("A_Wu")));
+    end
+
+    del_ref_loads = del_ref(contains(del_ref.("Load"), "RootMyc1"), :);
+    ref_reduced_load_cases = del_ref_loads( table2array(del_ref_loads(:, "Mean") < del_ref_loads(contains(del_ref_loads.('Case Desc.'), "baseline_controller"), "Mean")) , ["Case Desc.", "Reference"]);
+    ref_reduced_load_cond = zeros(height(del_ref), 1);
+    for i = 1:height(ref_reduced_load_cases)
+        ref_reduced_load_cond = ref_reduced_load_cond | ...    
+            (contains(del_ref.("Case Desc."), ref_reduced_load_cases(i, :).("Case Desc.")) & (del_ref.("Reference") == ref_reduced_load_cases(i, :).("Reference")));
+    end
+
+    del_sat_loads = del_sat(contains(del_sat.("Load"), "RootMyc1"), :);
+    sat_reduced_load_cases = del_sat_loads( table2array(del_sat_loads(:, "Mean") < del_sat_loads(contains(del_sat_loads.('Case Desc.'), "baseline_controller"), "Mean")) , ["Case Desc.", "Saturation"]);
+    sat_reduced_load_cond = zeros(height(del_sat), 1);
+    for i = 1:height(sat_reduced_load_cases)
+        sat_reduced_load_cond = sat_reduced_load_cond | ...    
+            (contains(del_sat.("Case Desc."), sat_reduced_load_cases(i, :).("Case Desc.")) & (del_sat.("Saturation") == sat_reduced_load_cases(i, :).("Saturation")));
+    end
+
+    del_wu(strcmp(del_wu.("Load"), "ADC") ...
+            & ~contains(del_wu.("Case Desc."), 'baseline_controller') ...
+            & wu_reduced_load_cond, :)
+    del_wu(strcmp(del_wu.Load, "ADC") & strcmp(del_wu.('Case Desc.'), "baseline_controller"), :)
+    % TODO switch sort fo generator power
     for load_val = unique(del_wu.("Load"))'
+        if strcmp(load_val{1}, 'GenPwr Mean')
+            order = 'descend';
+        else
+            order = 'ascend';
+        end
+
         tmp = sortrows(del_wu(strcmp(del_wu.("Load"), load_val{1}) ...
-            & ~contains(del_wu.("Case Desc."), 'baseline_controller'), :), "Mean", 'ascend');
+            & ~contains(del_wu.("Case Desc."), 'baseline_controller') ...
+            & wu_reduced_load_cond, :), "Mean", order); 
+
         cond = strcmp(del_wu.("Case Desc."), tmp(1, "Case Desc.").Variables) ...
             & (del_wu.("A_Wu") == tmp(1, "A_Wu").Variables) & strcmp(del_wu.("Load"), load_val{1});
         del_wu_red = [del_wu_red; del_wu(cond, :)];
 
         tmp = sortrows(del_sat(strcmp(del_sat.("Load"), load_val{1}) ...
-            & ~contains(del_sat.("Case Desc."), 'baseline_controller'), :), "Mean", 'ascend');
+            & ~contains(del_sat.("Case Desc."), 'baseline_controller') ...
+            & sat_reduced_load_cond, :), "Mean", order);
+
         cond = strcmp(del_sat.("Case Desc."), tmp(1, "Case Desc.").Variables) ...
             & (del_sat.("Saturation") == tmp(1, "Saturation").Variables) & strcmp(del_sat.("Load"), load_val{1});
         del_sat_red = [del_sat_red; del_sat(cond, :)];
 
         tmp = sortrows(del_ref(strcmp(del_ref.("Load"), load_val{1}) ...
-            & ~contains(del_ref.("Case Desc."), 'baseline_controller'), :), "Mean", 'ascend');
+            & ~contains(del_ref.("Case Desc."), 'baseline_controller') & ...
+            ref_reduced_load_cond, :), "Mean", order);
+
         cond = strcmp(del_ref.("Case Desc."), tmp(1, "Case Desc.").Variables) ...
             & (del_ref.("Reference") == tmp(1, "Reference").Variables) & strcmp(del_ref.("Load"), load_val{1});
         del_ref_red = [del_ref_red; del_ref(cond, :)];
     end
     
-    figure;
+    
+    figure(1);
+
     x = LPV_CONTROLLER_WIND_SPEEDS;
     for l = 1:length(loads)
         ax = subplot(2, 2, l);
+
         y = 100 * [del_wu(strcmp(del_wu.Load, loads{l}) & strcmp(del_wu.('Case Desc.'), "baseline_controller"), metric_cols).Variables; ...
             del_wu_red(strcmp(del_wu_red.Load, loads{l}), metric_cols).Variables; ...
             del_ref_red(strcmp(del_ref_red.Load, loads{l}), metric_cols).Variables; ...
             del_sat_red(strcmp(del_sat_red.Load, loads{l}), metric_cols).Variables];
         
         % if strcmp(loads{l}, 'ADC') || strcmp(loads{l}, 'YawBrMyp') || strcmp(loads{l}, 'YawBrMzp')
-            yyaxis left;
+            % yyaxis left;
             y_tmp = y;
             y_tmp(2:end, :) = NaN;
             bar(ax, x, y_tmp'); hold on;
@@ -1356,7 +1612,7 @@ if 0
             % ax.Children(3).FaceColor = red_color;
             ax.Children(4).FaceColor = blue_color;
 
-            yyaxis right;
+            % yyaxis right;
             y_tmp = y;
             y_tmp(1, :) = NaN;
             bar(ax, x, y_tmp');
@@ -1369,7 +1625,11 @@ if 0
         %     bar(ax, x, y');
         % end
 
-        if l > 2
+        if l == 3
+            yticks([0 25 50 75 100]);
+        end
+
+        if l > 2 && ~EXTRA_PLOT
             xlabel('Mean Wind Speed [m/s]', 'Interpreter', 'latex', 'FontSize', SUBPLOT_SMALL_FONT_SIZE);
         end
 
@@ -1385,24 +1645,89 @@ if 0
         % end
     end
 
-    ax = subplot(2, 2, 1);
-    legend(ax, ['Baseline ', '$K_0$'], ['Retuning ', '$A_{W_u}$'], ...
-            ['Nonzero Reference ', '$M^\star_{d}$'], ...
-            ['Finite Saturation ', '$\overline{\beta}_{1,2,3}$'], ...
-        'Interpreter', 'latex', 'FontSize', SUBPLOT_BIG_FONT_SIZE, ...
-        'Location', 'southwest');
 
-    ax = subplot(2, 2, 3);
-    ax.YAxis(1).Limits = [-20, 40];
-    ax.YAxis(2).Limits = [-10, 20];
+    if EXTRA_PLOT
+        figure(2);
+        x = LPV_CONTROLLER_WIND_SPEEDS;
+
+        for l = 1:length(extra_loads)
+             ax = subplot(2, 2, l);
     
-    ax = subplot(2, 2, 4);
-    ax.YAxis(2).Limits = [-0.25, 0.25];
-    ax.YAxis(1).Limits = [-15, 15];
+            y = 100 * [del_wu(strcmp(del_wu.Load, extra_loads{l}) & strcmp(del_wu.('Case Desc.'), "baseline_controller"), metric_cols).Variables; ...
+                del_wu_red(strcmp(del_wu_red.Load, extra_loads{l}), metric_cols).Variables; ...
+                del_ref_red(strcmp(del_ref_red.Load, extra_loads{l}), metric_cols).Variables; ...
+                del_sat_red(strcmp(del_sat_red.Load, extra_loads{l}), metric_cols).Variables];
+            
+            % if strcmp(loads{l}, 'ADC') || strcmp(loads{l}, 'YawBrMyp') || strcmp(loads{l}, 'YawBrMzp')
+                % yyaxis left;
+                y_tmp = y;
+                y_tmp(2:end, :) = NaN;
+                bar(ax, x, y_tmp'); hold on;
+                % ax.Children(1).FaceColor = purple_color;
+                % ax.Children(2).FaceColor = yellow_color;
+                % ax.Children(3).FaceColor = red_color;
+                ax.Children(4).FaceColor = blue_color;
     
-    set(gcf, 'Position', [0 0 1500 900]);
-    savefig(gcf, fullfile(fig_dir, 'del_change.fig'));
-    saveas(gcf, fullfile(fig_dir, 'del_change.png'));
+                % yyaxis right;
+                y_tmp = y;
+                y_tmp(1, :) = NaN;
+                bar(ax, x, y_tmp');
+    
+                ax.Children(1).FaceColor = purple_color;
+                ax.Children(2).FaceColor = yellow_color;
+                ax.Children(3).FaceColor = red_color;
+                % ax.Children(4).FaceColor = blue_color;
+            % else
+            %     bar(ax, x, y');
+            % end
+
+            if l == 2
+                yticks([-0.1 -0.075 -0.05 -0.025 0]);
+            elseif l == 3
+                yticks([-15 -10 -5 0 5 10]);
+            end
+    
+            if l > 2
+                xlabel('Mean Wind Speed [m/s]', 'Interpreter', 'latex', 'FontSize', SUBPLOT_SMALL_FONT_SIZE);
+            end
+    
+            subtitle({extra_labels_1{l}, extra_labels_2{l}}, 'Interpreter', 'latex', 'FontSize', SUBPLOT_BIG_FONT_SIZE);
+            ax.XAxis.FontSize = SUBPLOT_SMALL_FONT_SIZE;
+    
+            % if strcmp(loads{l}, 'ADC') || strcmp(loads{l}, 'YawBrMyp') || strcmp(loads{l}, 'YawBrMzp')
+                for a = 1:length(ax.YAxis)
+                   ax.YAxis(a).FontSize = SUBPLOT_SMALL_FONT_SIZE; 
+                end
+            % else
+            %     ax.YAxis.FontSize = SUBPLOT_SMALL_FONT_SIZE;
+            % end
+        end
+    end
+
+    % ax = subplot(2, 2, 1);
+    % legend(ax, ['Baseline ', '$K_0$'], ['Retuning ', '$A_{W_u}$'], ...
+    %         ['Nonzero Reference ', '$M^\star_{d}$'], ...
+    %         ['Finite Saturation ', '$\overline{\beta}_{1,2,3}$'], ...
+    %     'Interpreter', 'latex', 'FontSize', SUBPLOT_BIG_FONT_SIZE, ...
+    %     'Location', 'southwest');
+
+    % ax = subplot(2, 2, 3);
+    % ax.YAxis(1).Limits = [-20, 40];
+    % ax.YAxis(2).Limits = [-10, 20];
+    
+    % ax = subplot(2, 2, 4);
+    % ax.YAxis(2).Limits = [-0.25, 0.25];
+    % ax.YAxis(1).Limits = [-15, 15];
+    
+    set(figure(1), 'Position', [0 0 1500 900]);
+    savefig(figure(1), fullfile(fig_dir, 'del_change_1.fig'));
+    saveas(figure(1), fullfile(fig_dir, 'del_change_1.png'));
+
+    if EXTRA_PLOT
+        set(figure(2), 'Position', [0 0 1500 900]);
+        savefig(figure(2), fullfile(fig_dir, 'del_change_2.fig'));
+        saveas(figure(2), fullfile(fig_dir, 'del_change_2.png'));
+    end
 
 end
 
@@ -1410,23 +1735,67 @@ end
 %% Fig 14, Plot Blade-Pitch Actuation, dBetadt and Loads in Time-Domain over a single rotation of Azimuth OUTPLOT
 if 0
 
+    del_wu = load(fullfile(mat_save_dir, ['optimal_k_cases_turbsim_wu', '_del_table'])).del_out_table;
+    del_ref = load(fullfile(mat_save_dir, ['optimal_k_cases_turbsim_ref', '_del_table'])).del_out_table;
+    del_sat = load(fullfile(mat_save_dir, ['optimal_k_cases_turbsim_sat', '_del_table'])).del_out_table;
+
+    metric_cols = arrayfun(@num2str, LPV_CONTROLLER_WIND_SPEEDS, 'UniformOutput', 0);
+
+    % for each load type, get the mean over all wind speeds
+    del_wu.("Mean") = mean(del_wu(:, metric_cols), 2).Variables;
+    del_ref.("Mean") = mean(del_ref(:, metric_cols), 2).Variables;
+    del_sat.("Mean") = mean(del_sat(:, metric_cols), 2).Variables;
+    del_wu_loads = del_wu(contains(del_wu.("Load"), "RootMyc1"), :);
+    wu_reduced_load_cases = del_wu_loads( table2array(del_wu_loads(:, "Mean") < del_wu_loads(contains(del_wu_loads.('Case Desc.'), "baseline_controller"), "Mean")) , ["Case Desc.", "A_Wu"]);
+    
+    del_ref_loads = del_ref(contains(del_ref.("Load"), "RootMyc1"), :);
+    ref_reduced_load_cases = del_ref_loads( table2array(del_ref_loads(:, "Mean") < del_ref_loads(contains(del_ref_loads.('Case Desc.'), "baseline_controller"), "Mean")) , ["Case Desc.", "Reference"]);
+       
+    del_sat_loads = del_sat(contains(del_sat.("Load"), "RootMyc1"), :);
+    sat_reduced_load_cases = del_sat_loads(table2array(del_sat_loads(:, "Mean") < del_sat_loads(contains(del_sat_loads.('Case Desc.'), "baseline_controller"), "Mean")) , ["Case Desc.", "Saturation"]);
+    
+
     sim_processed_data_wu = load(fullfile(mat_save_dir, ['optimal_k_cases_turbsim_wu', '_simulation_case_table.mat'])).Controllers_simulation_case_table;
     sim_processed_data_ref = load(fullfile(mat_save_dir, ['optimal_k_cases_turbsim_ref', '_simulation_case_table.mat'])).Controllers_simulation_case_table;
     sim_processed_data_sat = load(fullfile(mat_save_dir, ['optimal_k_cases_turbsim_sat', '_simulation_case_table.mat'])).Controllers_simulation_case_table;
+    
+    wu_reduced_load_cond = zeros(height(sim_processed_data_wu), 1);
+    ref_reduced_load_cond = zeros(height(sim_processed_data_ref), 1);
+    sat_reduced_load_cond = zeros(height(sim_processed_data_sat), 1);
+
+    for i = 1:height(wu_reduced_load_cases)
+        wu_reduced_load_cond = wu_reduced_load_cond | ...    
+            (contains(sim_processed_data_wu.("Case Desc."), wu_reduced_load_cases(i, :).("Case Desc.")) & (sim_processed_data_wu.("A_Wu") == wu_reduced_load_cases(i, :).("A_Wu")));
+    end
+    
+    for i = 1:height(ref_reduced_load_cases)
+        ref_reduced_load_cond = ref_reduced_load_cond | ...    
+            (contains(sim_processed_data_ref.("Case Desc."), ref_reduced_load_cases(i, :).("Case Desc.")) & (sim_processed_data_ref.("Reference") == ref_reduced_load_cases(i, :).("Reference")));
+    end
+
+    for i = 1:height(sat_reduced_load_cases)
+        sat_reduced_load_cond = sat_reduced_load_cond | ...    
+            (contains(sim_processed_data_sat.("Case Desc."), sat_reduced_load_cases(i, :).("Case Desc.")) & (sim_processed_data_sat.("Saturation") == sat_reduced_load_cases(i, :).("Saturation")));
+    end
+
     
     sim_raw_data_baseline = load(fullfile(sl_metadata_save_dir, ['sim_out_list_', 'baseline_k_turbsim', '.mat'])).sim_out_list;
     sim_raw_data_wu = load(fullfile(sl_metadata_save_dir, ['sim_out_list_', 'optimal_k_cases_turbsim_wu', '.mat'])).sim_out_list;
     sim_raw_data_ref = load(fullfile(sl_metadata_save_dir, ['sim_out_list_', 'optimal_k_cases_turbsim_ref', '.mat'])).sim_out_list;
     sim_raw_data_sat = load(fullfile(sl_metadata_save_dir, ['sim_out_list_', 'optimal_k_cases_turbsim_sat', '.mat'])).sim_out_list;
-    
+
+    % TODO should we be looking at lowest ADC, or lowest ADC with superior tracking to baseline.. 
     % get cases for 16m/s seed=1, lowest adc for wu, ref and sat
     infw_fn = 'A_16_5'; idx = 6;
+
     tmp = sortrows(sim_processed_data_wu(strcmp(sim_processed_data_wu.("WindField"), infw_fn) & ...
         ~strcmp(sim_processed_data_wu.("Case Desc."), "noipc"), :), "ADC");
     best_wu_case = tmp(idx, "Case Desc.").Variables;
+
     tmp = sortrows(sim_processed_data_ref(strcmp(sim_processed_data_ref.("WindField"), infw_fn) & ...
         ~strcmp(sim_processed_data_ref.("Case Desc."), "noipc"), :), "ADC");
     best_ref_case = tmp(idx, "Case Desc.").Variables;
+
     tmp = sortrows(sim_processed_data_sat(strcmp(sim_processed_data_sat.("WindField"), infw_fn) & ...
         ~strcmp(sim_processed_data_sat.("Case Desc."), "noipc"), :), "ADC");
     best_sat_case = tmp(idx-1, "Case Desc.").Variables;
@@ -1446,7 +1815,12 @@ if 0
             time.baseline = values(:, ismember(OutList, 'Time'));
             az.baseline = values(:, ismember(OutList, 'Azimuth'));
             beta.baseline = values(:, ismember(OutList, 'BldPitch1'));
-            beta_dot.baseline = diff(values(:, ismember(OutList, 'BldPitch1'))) / DT;
+
+            % beta_dot.baseline = diff(values(:, ismember(OutList, 'BldPitch1'))) / DT;
+            beta_dot.baseline = filter(drvt_filt, beta.baseline) / DT;
+            delay = mean(grpdelay(drvt_filt));
+            beta_dot.baseline(1:delay) = [];
+            beta_dot.baseline(1:delay) = [];
 
             break;
         end
@@ -1461,7 +1835,13 @@ if 0
             time.wu = values(:, ismember(OutList, 'Time'));
             az.wu = values(:, ismember(OutList, 'Azimuth'));
             beta.wu = values(:, ismember(OutList, 'BldPitch1'));
-            beta_dot.wu = diff(values(:, ismember(OutList, 'BldPitch1'))) / DT;
+            
+            % beta_dot.wu = diff(values(:, ismember(OutList, 'BldPitch1'))) / DT;
+            beta_dot.wu = filter(drvt_filt, beta.wu) / DT;
+            delay = mean(grpdelay(drvt_filt));
+            beta_dot.wu(1:delay) = [];
+            beta_dot.wu(1:delay) = [];
+
             break;
         end
     end
@@ -1474,7 +1854,14 @@ if 0
             time.ref = values(:, ismember(OutList, 'Time'));
             az.ref = values(:, ismember(OutList, 'Azimuth'));
             beta.ref = values(:, ismember(OutList, 'BldPitch1'));
-            beta_dot.ref = diff(values(:, ismember(OutList, 'BldPitch1'))) / DT;
+
+            % beta_dot.ref = diff(values(:, ismember(OutList, 'BldPitch1'))) / DT;
+
+            % beta_dot.ref = diff(values(:, ismember(OutList, 'BldPitch1'))) / DT;
+            beta_dot.ref = filter(drvt_filt, beta.ref) / DT;
+            delay = mean(grpdelay(drvt_filt));
+            beta_dot.ref(1:delay) = [];
+            beta_dot.ref(1:delay) = [];
 
             break;
         end
@@ -1488,7 +1875,14 @@ if 0
             time.sat = values(:, ismember(OutList, 'Time'));
             az.sat = values(:, ismember(OutList, 'Azimuth'));
             beta.sat = values(:, ismember(OutList, 'BldPitch1'));
+            
+            % beta_dot.sat = diff(values(:, ismember(OutList, 'BldPitch1'))) / DT;
+
             beta_dot.sat = diff(values(:, ismember(OutList, 'BldPitch1'))) / DT;
+            beta_dot.sat = filter(drvt_filt, beta.sat) / DT;
+            delay = mean(grpdelay(drvt_filt));
+            beta_dot.sat(1:delay) = [];
+            beta_dot.sat(1:delay) = [];
            
             break;
         end
@@ -1518,10 +1912,10 @@ if 0
     subtitle(['$\beta_1$', ' [deg]'], 'Interpreter', 'latex', 'FontSize', SUBPLOT_BIG_FONT_SIZE);
 
     beta_dot_ax = subplot(3, 1, 3); 
-    plot(beta_dot_ax, time.baseline(1:end-1), beta_dot.baseline, ...
-        time.wu(1:end-1), beta_dot.wu, ...
-        time.ref(1:end-1), beta_dot.ref, ...
-        time.sat(1:end-1), beta_dot.sat, ...
+    plot(beta_dot_ax, time.baseline(delay+1:end-delay), beta_dot.baseline, ...
+        time.wu(delay+1:end-delay), beta_dot.wu, ...
+        time.ref(delay+1:end-delay), beta_dot.ref, ...
+        time.sat(delay+1:end-delay), beta_dot.sat, ...
         'LineWidth', 2); hold on;
     beta_dot_ax.XAxis.FontSize = SUBPLOT_SMALL_FONT_SIZE;
     beta_dot_ax.YAxis.FontSize = SUBPLOT_SMALL_FONT_SIZE;
@@ -1529,7 +1923,7 @@ if 0
         'FontSize', SUBPLOT_BIG_FONT_SIZE); 
     xlabel('Time [s]', 'FontSize', SUBPLOT_SMALL_FONT_SIZE);
     linkaxes([az_ax, beta_ax, beta_dot_ax], 'x');
-    xlim([cut_transients, cut_transients + (2 * pi) / omega_1P_rad]);
+    xlim([cut_transients + delay, cut_transients + delay + (2 * pi) / omega_1P_rad]);
 
     set(gcf, 'Position', [0 0 1500 900]);
     savefig(gcf, fullfile(fig_dir, 'ts.fig'));

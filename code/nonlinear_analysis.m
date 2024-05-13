@@ -1,4 +1,4 @@
-%% Run nonlinear simulations for different controllers in Simulink
+%% README- Run nonlinear simulations for different controllers in Simulink, make sure that sim_type is set to something other than BASELINE_K
 %   compute power spectra of different loads
 %   compute ADC of blade-pitch
 
@@ -23,8 +23,8 @@ single_run_case_idx = 100;
 %           'YawBrMxp', 'YawBrMyp', 'YawBrMzp', ... % Nonrotating tower-top / yaw bearing roll/pitch/yaw moment
 %           'TwrBsMxt', 'TwrBsMyt', 'TwrBsMzt' ... % Tower base roll (or side-to-side)/pitching (or fore-aft)/yaw moment 
 %           };
-% blade_op_arr = {'BldPitch1', 'RootMyc1', 'RootMxb1', 'YawBrMyp', 'YawBrMzp'};
-blade_op_arr = {'BldPitch1', 'RootMyc1'};
+blade_op_arr = {'BldPitch1', 'RootMyc1', 'RootMxb1', 'YawBrMyp', 'YawBrMzp'};
+% blade_op_arr = {'BldPitch1', 'RootMyc1'};
 % 'LSSTipMys', 'LSSTipMzs'
 
 % exc_dq_fields = {'BldPitchD', 'BldPitchQ'};
@@ -86,8 +86,7 @@ end
 clear untuned_sim_out_list untuned_case_list
 
 %% Analysis of Untuned Blade-Pitch Actuation and Loads in Time-Domain
-% TODO look at power, other loads (blade edge-wise, tower side-to-side
-% loads)
+
 beta_dot_norm = @(beta_dot) ((beta_dot >= 0) * 5) + ((beta_dot < 0) * (-4));
 if 0
     % want to compare all cases for the same wind field mean speed and
@@ -99,14 +98,15 @@ if 0
 
     % Controllers_case_table = renamevars(Controllers_case_table, 'RootMycBlade1 MSE', 'RootMycBlade1 RMSE')
     % save(fullfile(mat_save_dir, 'Optimal_Controllers_case_table.mat'), 'Controllers_case_table')
-    lin_cols = Controllers_case_table.Properties.VariableNames;
-    lin_cols(ismember(lin_cols, {'ADC', 'RootMycBlade1 RMSE'})) = [];
     
      % add rows corresponding to ipc and baseline cases
     load(fullfile(mat_save_dir, 'PI_BaselineParameters_table.mat'));
     UntunedControllers_case_table = PI_ParameterSweep_table;
     UntunedControllers_case_table.("Case Desc.") = cell2mat({"noipc"; "baseline_controller"});
     UntunedControllers_case_table.("TunedWindSpeed") = nan * ones(2, 1);
+
+    lin_cols = UntunedControllers_case_table.Properties.VariableNames;
+    lin_cols(ismember(lin_cols, {'ADC', 'RootMycBlade1 RMSE'})) = [];
 
     for untuned_type = {'noipc', 'baseline_controller'}
         for untuned_case_idx = 1:length(sim_out_list.(untuned_type{1}))
@@ -142,19 +142,22 @@ if 0
             ipc_values = ipc_values.BlPitch';
             ipc_values = ipc_values(floor(cut_transients / DT):end, 2:end);
             dqValues = mbcTransformOutData(values, OutList);
+            % dqValues(:, ismember(dqOutList, 'BldPitchD') | ismember(dqOutList, 'BldPitchQ'))
 
             x = fft(values(:, blade_op_indices), size(values, 1), 1);
             % x = fft(dqValues(:, dq_op_indices), size(dqValues, 1), 1);
             sim_out_list.(untuned_type{1})(untuned_case_idx).fft_peaks ...
                 = computeFFTPeaks(x, 'blade', DT, omega_1P_rad / (2 * pi), [0,1,2,3,4]);
             
-            values = [values(:, ismember(OutList, 'RootMyc1')), values(:, ismember(OutList, 'BldPitch1'))];
-            dqValues = [dqValues(:, ismember(dqOutList, 'RootMycD')), dqValues(:, ismember(dqOutList, 'RootMycQ'))];
+            time = values(:, ismember(OutList, 'Time'));
+            az = values(:, ismember(OutList, 'Azimuth'));
+            relValues = [values(:, ismember(OutList, 'RootMyc1')), values(:, ismember(OutList, 'BldPitch1')), values(:, ismember(OutList, 'GenPwr'))];
+            relDqValues = [dqValues(:, ismember(dqOutList, 'RootMycD')), dqValues(:, ismember(dqOutList, 'RootMycQ'))];
 
             if 0
 
                 figure;
-                L = size(dqValues, 1);
+                L = size(relDqValues, 1);
                 f = (1 / (DT * L)) * (0:L/2) * 2 * pi;
                 x = (1 / L) * abs(x);
                 x = x(1:L/2 + 1, :);
@@ -198,9 +201,9 @@ if 0
             %     diff(sim_out_list.(untuned_type{1})(untuned_case_idx).beta.blade) / DT;
             
             sim_out_list.(untuned_type{1})(untuned_case_idx).RootMyc = struct;
-            sim_out_list.(untuned_type{1})(untuned_case_idx).RootMyc.blade = values(:, 1);
+            sim_out_list.(untuned_type{1})(untuned_case_idx).RootMyc.blade = relValues(:, 1);
                 % getData(values, OutList, 'RootMyc1');
-            sim_out_list.(untuned_type{1})(untuned_case_idx).RootMyc.dq = dqValues(:, 1:2);
+            sim_out_list.(untuned_type{1})(untuned_case_idx).RootMyc.dq = relDqValues(:, 1:2);
                 % [getData(dqValues, dqOutList, 'RootMycD'), ...
                 %     getData(dqValues, dqOutList, 'RootMycQ')];
             
@@ -208,22 +211,76 @@ if 0
             
             % x = sim_out_list.(untuned_type{1})(untuned_case_idx).RootMyc.blade;
             % x = getData(values, OutList, 'RootMyc1');
-            x = values(:, 1);
+            x = relValues(:, 1);
             sim_out_list.(untuned_type{1})(untuned_case_idx).RootMycRMSE.blade = ...
                 sqrt((1 / length(x)) * sum(x.^2));
             
             % x = sim_out_list.(untuned_type{1})(untuned_case_idx).RootMyc.dq;
             % x = [getData(dqValues, dqOutList, 'RootMycD'), ...
             %      getData(dqValues, dqOutList, 'RootMycQ')];x
-            x = dqValues(:, 1:2);
+            x = relDqValues(:, 1:2);
             sim_out_list.(untuned_type{1})(untuned_case_idx).RootMycRMSE.dq = ...
                 sqrt((1 / size(x, 1)) * sum(x.^2, 1));
             
             % x = sim_out_list.(untuned_type{1})(untuned_case_idx).beta_dot.blade;
             % x = diff(getData(values, OutList, 'BldPitch1')) / DT;
-            x = diff(values(:, 2)) / DT;
+            % x = diff(values(:, 2)) / DT;
+            x = filter(drvt_filt, relValues(:, 2)) / DT;
+            delay = mean(grpdelay(drvt_filt));
+            x(1:delay) = [];
+            x(1:delay) = [];
+
+            % x2 = gradient(values(:, 2), DT);
             sim_out_list.(untuned_type{1})(untuned_case_idx).ADC = ...
                 (1 / length(x)) * sum((x ./ beta_dot_norm(x)));
+
+            if 1 && untuned_case_idx == 1
+                % n_rotation_steps = ceil(((az * pi / 180) / omega_1P_rad) / DT);
+                
+                figure(find(ismember({'noipc', 'baseline_controller'}, untuned_type)));
+                ax1 = subplot(3, 1, 1);
+                plot(time, az); ylabel('Azimuth [deg]')
+                ax2 = subplot(3, 1, 2);
+                plot(time, relValues(:, 2)); ylabel('BldPitch1 [deg]')
+                ax3 = subplot(3, 1, 3);
+                plot(time(delay+1:end-delay), x); hold on; plot(time(2:end), diff(relValues(:, 2)) / DT); ylabel('dBldPitch1/dt [deg/s]')
+                legend("smoothed diff", "forward difference")
+                linkaxes([ax1, ax2, ax3], 'x')
+                periods =  find(abs(az - az(1)) < 0.2);
+                last_step = periods(2);
+                xlim([time(delay+1), time(delay+1+last_step)]);
+                savefig(gcf, fullfile(fig_dir, [untuned_type{1} '_vals' '.fig']));
+                saveas(gcf, fullfile(fig_dir, [untuned_type{1} '_vals' '.png']));
+
+
+                % ax4 = subplot(4, 1, 4);
+                % ipc_blade_vals = invMbcTransformOutData(ipc_values(:, 1:3), {'BldPitchC', 'BldPitchD', 'BldPitchQ'});
+                % x2 = filter(drvt_filt, ipc_blade_vals) / DT;
+                % delay = mean(grpdelay(drvt_filt));
+                % x2(1:delay) = [];
+                % x2(1:delay) = [];
+                % plot(time(2*delay+1:end), x2); hold on; plot(time(2:end), diff(ipc_blade_vals) / DT);
+                % linkaxes([ax1, ax2, ax3, ax4], 'x')
+            %     % MANUEL - is it okay to filter beta_dot like this... 
+            %     pwelch(values(:, 2), [], [], [], 1 / DT)
+            %     x2 = (values(3:end, 2) - values(1:(end - 2), 2)) / (2 * DT);
+            %     figure(1)
+            %     plot(x); hold on; plot(x2);
+            %     % 1;
+            % 
+            %     x2 = filter(drvt_filt, values(:, 2)) / DT;
+            %     delay = mean(grpdelay(drvt_filt));
+            %     tt = 1:(length(x2)-delay) * DT;
+            %     x2(1:delay) = [];
+            % 
+            %     % x2(1:delay) = [];
+            %     tt(1:delay) = [];
+            %     figure(1)
+            %     plot(x); hold on; plot(x2) % check beta_dot
+            end
+
+            sim_out_list.(untuned_type{1})(untuned_case_idx).GenPwr = relValues(:, 3);
+            sim_out_list.(untuned_type{1})(untuned_case_idx).GenPwrMean = mean(relValues(:, 3));
 
             sim_out_list.(untuned_type{1})(untuned_case_idx).CaseDesc = untuned_type{1};
 
@@ -282,13 +339,14 @@ if 0
             UntunedControllers_fft_case_table(case_idx, 'WindSeed') = {str2double(x{3})};
     
             UntunedControllers_simulation_case_table(case_idx, ...
-                {'ADC', 'RootMycBlade1 RMSE', 'RootMycD RMSE', 'RootMycQ RMSE'}) = ...
+                {'ADC', 'RootMycBlade1 RMSE', 'RootMycD RMSE', 'RootMycQ RMSE', 'GenPwr Mean'}) = ...
                     table(...
                     sim_out_list.(untuned_type{1})(untuned_case_idx).ADC, ...
                     sim_out_list.(untuned_type{1})(untuned_case_idx).RootMycRMSE.blade, ...
                     sim_out_list.(untuned_type{1})(untuned_case_idx).RootMycRMSE.dq(1), ...
                     sim_out_list.(untuned_type{1})(untuned_case_idx).RootMycRMSE.dq(2), ...
-                    'VariableNames', {'ADC', 'RootMycBlade1 RMSE', 'RootMycD RMSE', 'RootMycQ RMSE'});
+                    sim_out_list.(untuned_type{1})(untuned_case_idx).GenPwrMean, ...
+                    'VariableNames', {'ADC', 'RootMycBlade1 RMSE', 'RootMycD RMSE', 'RootMycQ RMSE', 'GenPwr Mean'});
 
             if strcmp(untuned_type, 'noipc')
                 mean_M_dq = [mean_M_dq; mean((sim_out_list.(untuned_type{1})(untuned_case_idx).RootMyc.dq), 1)];
@@ -340,112 +398,139 @@ else
 end
 
 %% Analysis of Tuned Blade-Pitch Actuation and Loads in Time-Domain
-% TODO look at power, other loads (blade edge-wise, tower side-to-side
-% loads)
 if 1
         
-    n_ctlr_cases = length(sim_out_list.controller);
-    sim_out_list_tmp = repmat(struct(), n_ctlr_cases, 1);
-    outdata_filenames = cell(n_ctlr_cases, 1);
+    n_ctrl_cases = length(sim_out_list.controller);
+    sim_out_list_tmp = repmat(struct(), n_ctrl_cases, 1);
+    outdata_filenames = cell(n_ctrl_cases, 1);
     [outdata_filenames{:}] = sim_out_list.controller.outdata_save_fn;
-    blpitch_filenames = cell(n_ctlr_cases, 1);
+    blpitch_filenames = cell(n_ctrl_cases, 1);
     [blpitch_filenames{:}] = sim_out_list.controller.blpitch_save_fn;
-
-    parfor ctlr_case_idx = 1:n_ctlr_cases
-
-        [~, x, ~] = fileparts(outdata_filenames{ctlr_case_idx});
+    single_run_case_idx = [2:2:60, 241:2:299]; % TODO generalize this across nonlinear_simulations.m and here
+    single_run_case_idx = 1:n_ctrl_cases;
+    % parfor ctrl_case_idx = single_run_case_idx
+    % for ctrl_case_idx = single_run_case_idx
+    % sim_out_list_tmp = struct.empty(n_ctrl_cases, 0);
+    parfor case_no = 1:length(single_run_case_idx)
+    % for ctrl_case_idx = 1:n_ctrl_cases
+        ctrl_case_idx = single_run_case_idx(case_no);
+        [~, x, ~] = fileparts(outdata_filenames{ctrl_case_idx});
         x = split(x, '_');
-        case_no = num2str(x{2});
+        % case_no = num2str(x{2});
+        % case_no = num2str(find(ctrl_case_idx == single_run_case_idx));
+        
 
-        if exist([outdata_filenames{ctlr_case_idx} '_' case_no, '.mat'], 'file')
-            values = load([outdata_filenames{ctlr_case_idx} '_' case_no]);
+        if exist([outdata_filenames{ctrl_case_idx} '_' num2str(case_no) '.mat'], 'file')
+            values = load([outdata_filenames{ctrl_case_idx} '_' num2str(case_no)]);
         else
-            values = load(outdata_filenames{ctlr_case_idx});
+            values = load(outdata_filenames{ctrl_case_idx});
         end
 
         values = values.OutData';
         values = values(floor(cut_transients / DT):end, 2:end); % remove extra time column
 
-        if exist([blpitch_filenames{ctlr_case_idx} '_' case_no, '.mat'], 'file')
-            ipc_values = load([blpitch_filenames{ctlr_case_idx} '_' case_no]);
+        if exist([blpitch_filenames{ctrl_case_idx} '_' num2str(case_no), '.mat'], 'file')
+            ipc_values = load([blpitch_filenames{ctrl_case_idx} '_' num2str(case_no)]);
         else
-            ipc_values = load([blpitch_filenames{ctlr_case_idx}]);
+            ipc_values = load([blpitch_filenames{ctrl_case_idx}]);
         end
 
         ipc_values = ipc_values.BlPitch'; % time, beta_dq_sat, is_sat_dq
         ipc_values = ipc_values(floor(cut_transients / DT):end, 2:end);
         % t = getData(values, OutList, 'Time');
         dqValues = mbcTransformOutData(values, OutList);
-
-        values = [values(:, ismember(OutList, 'RootMyc1')), values(:, ismember(OutList, 'BldPitch1'))];
-        dqValues = [dqValues(:, ismember(dqOutList, 'RootMycD')), dqValues(:, ismember(dqOutList, 'RootMycQ'))];
         
-        % sim_out_list_tmp(ctlr_case_idx).ux = ...
+        az = values(:, ismember(OutList, 'Azimuth'));
+        time = values(:, ismember(OutList, 'Time'));
+        relValues = [values(:, ismember(OutList, 'RootMyc1')), values(:, ismember(OutList, 'BldPitch1')), values(:, ismember(OutList, 'GenPwr'))];
+        relDqValues = [dqValues(:, ismember(dqOutList, 'RootMycD')), dqValues(:, ismember(dqOutList, 'RootMycQ'))];
+        
+        % sim_out_list_tmp(ctrl_case_idx).ux = ...
         %     getData(values, OutList, 'Wind1VelX');
         
-        % sim_out_list_tmp(ctlr_case_idx).beta = struct;
-        % sim_out_list_tmp(ctlr_case_idx).beta.blade = ...
+        % sim_out_list_tmp(ctrl_case_idx).beta = struct;
+        % sim_out_list_tmp(ctrl_case_idx).beta.blade = ...
         %     getData(values, OutList, 'BldPitch1'); % in degrees
-        % sim_out_list_tmp(ctlr_case_idx).beta.dq = ...
+        % sim_out_list_tmp(ctrl_case_idx).beta.dq = ...
         %     [getData(dqValues, dqOutList, 'BldPitchD'), ...
         %     getData(dqValues, dqOutList, 'BldPitchQ')]; % in degrees
 
-        sim_out_list_tmp(ctlr_case_idx).beta_ipc = struct;
-        % sim_out_list_tmp(ctlr_case_idx).beta_ipc.dq = ...
+        sim_out_list_tmp(case_no).beta_ipc = struct;
+        % sim_out_list_tmp(ctrl_case_idx).beta_ipc.dq = ...
         %             ipc_values(:, 1:2); % in degrees
-        sim_out_list_tmp(ctlr_case_idx).beta_ipc.blade = ...
+        sim_out_list_tmp(case_no).beta_ipc.blade = ...
                     ipc_values(:, 1:3);
 
-        sim_out_list_tmp(ctlr_case_idx).beta_ipc_sat = struct;
-        % sim_out_list_tmp(ctlr_case_idx).beta_ipc_sat.dq = ...
+        sim_out_list_tmp(case_no).beta_ipc_sat = struct;
+        % sim_out_list_tmp(ctrl_case_idx).beta_ipc_sat.dq = ...
         %             ipc_values(:, 3:4);
-        sim_out_list_tmp(ctlr_case_idx).beta_ipc_sat.blade = ...
+        sim_out_list_tmp(case_no).beta_ipc_sat.blade = ...
                     ipc_values(:, 4:6);
 
-        % sim_out_list_tmp(ctlr_case_idx).beta_dot = struct;
-        % sim_out_list_tmp(ctlr_case_idx).beta_dot.blade = ...
-        %     diff(sim_out_list_tmp(ctlr_case_idx).beta.blade) / DT;
+        % sim_out_list_tmp(ctrl_case_idx).beta_dot = struct;
+        % sim_out_list_tmp(ctrl_case_idx).beta_dot.blade = ...
+        %     diff(sim_out_list_tmp(ctrl_case_idx).beta.blade) / DT;
         
-        sim_out_list_tmp(ctlr_case_idx).RootMyc = struct;
-        sim_out_list_tmp(ctlr_case_idx).RootMyc.blade = values(:, 1);
+        sim_out_list_tmp(case_no).RootMyc = struct;
+        sim_out_list_tmp(case_no).RootMyc.blade = relValues(:, 1);
             % getData(values, OutList, 'RootMyc1');
-        sim_out_list_tmp(ctlr_case_idx).RootMyc.dq = dqValues(:, 1:2);
+        sim_out_list_tmp(case_no).RootMyc.dq = relDqValues(:, 1:2);
             % [getData(dqValues, dqOutList, 'RootMycD'), ...
             % getData(dqValues, dqOutList, 'RootMycQ')];
         
-        sim_out_list_tmp(ctlr_case_idx).RootMycRMSE = struct;
+        sim_out_list_tmp(case_no).RootMycRMSE = struct;
 
-        % x = sim_out_list_tmp(ctlr_case_idx).RootMyc.blade;
+        % x = sim_out_list_tmp(ctrl_case_idx).RootMyc.blade;
         % x = getData(values, OutList, 'RootMyc1');
-        x = values(:, 1);
-        sim_out_list_tmp(ctlr_case_idx).RootMycRMSE.blade = ...
+        x = relValues(:, 1);
+        sim_out_list_tmp(case_no).RootMycRMSE.blade = ...
             sqrt((1 / length(x)) * sum(x.^2));
         
-        % x = sim_out_list_tmp(ctlr_case_idx).RootMyc.dq;
+        % x = sim_out_list_tmp(ctrl_case_idx).RootMyc.dq;
         % x = [getData(dqValues, dqOutList, 'RootMycD'), ...
         %     getData(dqValues, dqOutList, 'RootMycQ')];
-        x = dqValues(:, 1:2);
-        sim_out_list_tmp(ctlr_case_idx).RootMycRMSE.dq = ...
+        x = relDqValues(:, 1:2);
+        sim_out_list_tmp(case_no).RootMycRMSE.dq = ...
             sqrt((1 / size(x, 1)) * sum(x.^2, 1));
         
-        % x = sim_out_list_tmp(ctlr_case_idx).beta_dot.blade;
+        % x = sim_out_list_tmp(ctrl_case_idx).beta_dot.blade;
         % x = diff(getData(values, OutList, 'BldPitch1')) / DT;
-        x = diff(values(:, 2)) / DT;
-        sim_out_list_tmp(ctlr_case_idx).ADC = ...
+        % QUESTION MANUEL is this okay
+        % x = diff(values(:, 2)) / DT;
+        x = filter(drvt_filt, relValues(:, 2)) / DT;
+        delay = mean(grpdelay(drvt_filt));
+        x(1:delay) = [];
+        x(1:delay) = [];
+        sim_out_list_tmp(case_no).ADC = ...
             (1 / length(x)) * sum((x ./ beta_dot_norm(x)));
+
+        if 0 && ctrl_case_idx == 1
+                figure(1);
+                ax1 = subplot(3, 1, 1);
+                plot(time, az);
+                ax2 = subplot(3, 1, 2);
+                plot(time, relValues(:, 2));
+                ax3 = subplot(3, 1, 3);
+                plot(time(delay+1:end-delay), x); hold on; plot(time(2:end), diff(relValues(:, 2)) / DT);
+                linkaxes([ax1, ax2, ax3], 'x')
+        end
+
+        sim_out_list_tmp(case_no).GenPwr = relValues(:, 3);
+        sim_out_list_tmp(case_no).GenPwrMean = mean(relValues(:, 3));
         
     end
 
-    for ctlr_case_idx = 1:n_ctlr_cases
-
-        [~, x, ~] = fileparts(outdata_filenames{ctlr_case_idx});
+    % for ctrl_case_idx = 1:n_ctrl_cases
+    for ctrl_case_idx = single_run_case_idx
+        [~, x, ~] = fileparts(outdata_filenames{ctrl_case_idx});
         x = split(x, '_');
-        case_no = num2str(x{2});
+        % case_no = num2str(x{2});
+        case_no = find(ctrl_case_idx == single_run_case_idx);
 
-        if exist([outdata_filenames{ctlr_case_idx} '_' case_no, '.mat'], 'file')
-            values = load([outdata_filenames{ctlr_case_idx} '_' case_no]);
+        if exist([outdata_filenames{ctrl_case_idx} '_' num2str(case_no), '.mat'], 'file')
+            values = load([outdata_filenames{ctrl_case_idx} '_' num2str(case_no)]);
         else
-            values = load(outdata_filenames{ctlr_case_idx});
+            values = load(outdata_filenames{ctrl_case_idx});
         end
 
         values = values.OutData';
@@ -455,7 +540,7 @@ if 1
 
         % x = fft(dqValues(:, dq_op_indices), size(dqValues, 1), 1);
         x = fft(values(:, blade_op_indices), size(values, 1), 1);
-        sim_out_list_tmp(ctlr_case_idx).fft_peaks = computeFFTPeaks(...
+        sim_out_list_tmp(case_no).fft_peaks = computeFFTPeaks(...
             x, 'blade', DT, omega_1P_rad / (2 * pi), [0,1,2,3,4]);
         
         if 0
@@ -467,14 +552,14 @@ if 1
         end
         
     end
-    clear values dqValues
+    clear values dqValues relValues relDqValues
     
     % find minimum values of
-    % sim_out_list.controller(ctlr_case_idx).(f{1}).RootMyc.dq over all 
+    % sim_out_list.controller(ctrl_case_idx).(f{1}).RootMyc.dq over all 
     % simulataions to compute varying reference values from
     % min_M_dq = struct;
     % find maximum values of
-    % sim_out_list.controller(ctlr_case_idx).(f{1}).beta_ipc.dq over all 
+    % sim_out_list.controller(ctrl_case_idx).(f{1}).beta_ipc.dq over all 
     % simulataions to compute varying saturation values from
     % max_beta_dq = struct;
     % mean_beta_dq = [];
@@ -482,79 +567,84 @@ if 1
     load(fullfile(mat_save_dir, [sim_type, '_full_controller_cases']));
 
     lin_cols = Controllers_case_table.Properties.VariableNames;
-    lin_cols(ismember(lin_cols, {'ADC', 'RootMycBlade1 RMSE'})) = [];
+    lin_cols(ismember(lin_cols, {'ADC', 'RootMycBlade1 RMSE', 'GenPwr Mean'})) = [];
 
     Controllers_simulation_case_table = table();
     Controllers_fft_case_table = table();
 
-    for ctlr_case_idx = 1:n_ctlr_cases
-        % if case_list(ctlr_case_idx).Scheduling
+    % for ctrl_case_idx = 1:n_ctrl_cases
+    for ctrl_case_idx = single_run_case_idx
+        case_no = find(ctrl_case_idx == single_run_case_idx);
+        % if case_list(ctrl_case_idx).Scheduling
         if SCHEDULING
-            [~, x, ~] = fileparts(case_list(ctlr_case_idx).InflowWind.FileName_BTS);
+            [~, x, ~] = fileparts(case_list(ctrl_case_idx).InflowWind.FileName_BTS);
             x = split(x, '_');
             cond = strcmp(Controllers_case_table.("Case Desc."), ...
-                case_list(ctlr_case_idx).CaseDesc{1}) ...
+                case_list(ctrl_case_idx).CaseDesc{1}) ...
                    & (Controllers_case_table.("TunedWindSpeed") == str2double(x{2}));
         else
             cond = strcmp(Controllers_case_table.("Case Desc."), ...
-                case_list(ctlr_case_idx).CaseDesc{1}) ...
+                case_list(ctrl_case_idx).CaseDesc{1}) ...
                     & (Controllers_case_table.("TunedWindSpeed") == NONLPV_CONTROLLER_WIND_SPEED);
         end
         for f = lin_cols
             if sum(ismember(Controllers_case_table.Properties.VariableNames, f{1}))
-                Controllers_simulation_case_table(ctlr_case_idx, f{1}) = {Controllers_case_table(cond, f{1}).Variables};
+                Controllers_simulation_case_table(ctrl_case_idx, f{1}) = {Controllers_case_table(cond, f{1}).Variables};
             end
         end
 
-        Controllers_fft_case_table(ctlr_case_idx, "Case Desc.") = case_list(ctlr_case_idx).CaseDesc;
+        Controllers_fft_case_table(ctrl_case_idx, "Case Desc.") = Controllers_case_table(cond, "Case Desc.").Variables; % case_list(ctrl_case_idx).CaseDesc;
         
-        Controllers_fft_case_table(ctlr_case_idx, ["A_W1", "A_W2", "A_We", "A_Wu", gain_col]) = Controllers_case_table(cond, ["A_W1", "A_W2", "A_We", "A_Wu", gain_col]);
+        Controllers_fft_case_table(ctrl_case_idx, ["A_W1", "A_W2", "A_We", "A_Wu", gain_col]) = Controllers_case_table(cond, ["A_W1", "A_W2", "A_We", "A_Wu", gain_col]);
         for l = 1:length(blade_op_arr)
             load_type = blade_op_arr(l);
-            for h = 1:length(sim_out_list_tmp(ctlr_case_idx).fft_peaks.harmonics)
-                harmonic = sim_out_list_tmp(ctlr_case_idx).fft_peaks.harmonics(h);
-                Controllers_fft_case_table(ctlr_case_idx, [load_type{1}, '_', num2str(harmonic), 'P']) ...
-                    = {sim_out_list_tmp(ctlr_case_idx).fft_peaks.blade(h, l)};
+            for h = 1:length(sim_out_list_tmp(case_no).fft_peaks.harmonics)
+                harmonic = sim_out_list_tmp(case_no).fft_peaks.harmonics(h);
+                Controllers_fft_case_table(ctrl_case_idx, [load_type{1}, '_', num2str(harmonic), 'P']) ...
+                    = {sim_out_list_tmp(case_no).fft_peaks.blade(h, l)};
             end
         end
 
-        [~, x, ~] = fileparts(case_list(ctlr_case_idx).InflowWind.FileName_BTS);
-        Controllers_simulation_case_table(ctlr_case_idx, 'WindField') = {x};
-        Controllers_fft_case_table(ctlr_case_idx, 'WindField') = {x};
+        [~, x, ~] = fileparts(case_list(ctrl_case_idx).InflowWind.FileName_BTS);
+        Controllers_simulation_case_table(ctrl_case_idx, 'WindField') = {x};
+        Controllers_fft_case_table(ctrl_case_idx, 'WindField') = {x};
         x = split(x, '_');
-        Controllers_simulation_case_table(ctlr_case_idx, 'WindTurbulence') = x(1);
-        Controllers_simulation_case_table(ctlr_case_idx, 'WindMean') = {str2double(x(2))};
-        Controllers_simulation_case_table(ctlr_case_idx, 'WindSeed') = {str2double(x(3))};
-        Controllers_fft_case_table(ctlr_case_idx, 'WindTurbulence') = x(1);
-        Controllers_fft_case_table(ctlr_case_idx, 'WindMean') = {str2double(x(2))};
-        Controllers_fft_case_table(ctlr_case_idx, 'WindSeed') = {str2double(x(3))};
+        Controllers_simulation_case_table(ctrl_case_idx, 'WindTurbulence') = x(1);
+        Controllers_simulation_case_table(ctrl_case_idx, 'WindMean') = {str2double(x(2))};
+        Controllers_simulation_case_table(ctrl_case_idx, 'WindSeed') = {str2double(x(3))};
+        Controllers_fft_case_table(ctrl_case_idx, 'WindTurbulence') = x(1);
+        Controllers_fft_case_table(ctrl_case_idx, 'WindMean') = {str2double(x(2))};
+        Controllers_fft_case_table(ctrl_case_idx, 'WindSeed') = {str2double(x(3))};
 
-        Controllers_simulation_case_table(ctlr_case_idx, ...
-            {'ADC', 'RootMycBlade1 RMSE', 'RootMycD RMSE', 'RootMycQ RMSE'}) = ...
-                table(sim_out_list_tmp(ctlr_case_idx).ADC, ...
-                sim_out_list_tmp(ctlr_case_idx).RootMycRMSE.blade, ...
-                sim_out_list_tmp(ctlr_case_idx).RootMycRMSE.dq(1), ...
-                sim_out_list_tmp(ctlr_case_idx).RootMycRMSE.dq(2), ...
-                'VariableNames', {'ADC', 'RootMycBlade1 RMSE', 'RootMycD RMSE', 'RootMycQ RMSE'});
+        Controllers_simulation_case_table(ctrl_case_idx, ...
+            {'ADC', 'RootMycBlade1 RMSE', 'RootMycD RMSE', 'RootMycQ RMSE', 'GenPwr Mean'}) = ...
+            table(sim_out_list_tmp(case_no).ADC, ...
+            sim_out_list_tmp(case_no).RootMycRMSE.blade, ...
+            sim_out_list_tmp(case_no).RootMycRMSE.dq(1), ...
+            sim_out_list_tmp(case_no).RootMycRMSE.dq(2), ...
+            mean(sim_out_list_tmp(case_no).GenPwr), ...
+                'VariableNames', {'ADC', 'RootMycBlade1 RMSE', 'RootMycD RMSE', 'RootMycQ RMSE', 'GenPwr Mean'});
         
-        for f = fieldnames(sim_out_list_tmp(ctlr_case_idx))'
-            sim_out_list.controller(ctlr_case_idx).(f{1}) = sim_out_list_tmp(ctlr_case_idx).(f{1});
+        for f = fieldnames(sim_out_list_tmp(case_no))'
+            sim_out_list.controller(ctrl_case_idx).(f{1}) = sim_out_list_tmp(case_no).(f{1});
         end
 
-        % if (Controllers_simulation_case_table(ctlr_case_idx, 'WindMean').Variables == NONLPV_CONTROLLER_WIND_SPEED) ...
+        % if (Controllers_simulation_case_table(ctrl_case_idx, 'WindMean').Variables == NONLPV_CONTROLLER_WIND_SPEED) ...
         %         && 
-        if VARY_WU && (case_list(ctlr_case_idx).WuGain.Numerator{1,1} == case_basis.WuGain.x{end-1}.Numerator{1,1})
-            % mean_beta_dq = [mean_beta_dq; mean((sim_out_list_tmp(ctlr_case_idx).beta_ipc.dq), 1)];
-            absmax_beta_ipc = [absmax_beta_ipc; max(abs(sim_out_list_tmp(ctlr_case_idx).beta_ipc.blade), [], 1)];
+        if VARY_WU && (case_list(ctrl_case_idx).WuGain.Numerator{1,1} == case_basis.WuGain.x{end-1}.Numerator{1,1})
+            % mean_beta_dq = [mean_beta_dq; mean((sim_out_list_tmp(ctrl_case_idx).beta_ipc.dq), 1)];
+            absmax_beta_ipc = [absmax_beta_ipc; max(abs(sim_out_list_tmp(case_no).beta_ipc.blade), [], 1)];
         end
 
     end
     clear sim_out_list_tmp;
-
+    sortrows(Controllers_simulation_case_table((Controllers_simulation_case_table.("TunedWindSpeed") == 16) & (Controllers_simulation_case_table.("WindMean") == 16), :), "RootMycBlade1 RMSE")
+    sortrows(Controllers_simulation_case_table((Controllers_simulation_case_table.("TunedWindSpeed") == 16) & (Controllers_simulation_case_table.("WindMean") == 16), :), "RootMycD RMSE")
+    sortrows(Controllers_simulation_case_table((Controllers_simulation_case_table.("TunedWindSpeed") == 16) & (Controllers_simulation_case_table.("WindMean") == 16), :), "RootMycQ RMSE")
     % Beta_dq_saturation = round(mean(mean_beta_dq, 1), 4);
     % save(fullfile(mat_save_dir, 'Beta_dq_saturation.mat'), "Beta_dq_saturation");
     if VARY_WU
-        Beta_ipc_blade_saturation = round(mean(absmax_beta_ipc, 1), 4);
+        Beta_ipc_blade_saturation = round(mean(absmax_beta_ipc, 1), 4); % mean over all VARY_WU controller cases for each blade
         Beta_ipc_blade_saturation = max(Beta_ipc_blade_saturation);
         save(fullfile(mat_save_dir, 'Beta_ipc_blade_saturation.mat'), "Beta_ipc_blade_saturation");
     end
@@ -682,10 +772,15 @@ if  OPTIMAL_K_COLLECTION && 1
     %     x = sortrows(psd_out_table(strcmp(psd_out_table.("Load"), l{1}), :), "mean_Change");
     %     red_psd_out_table = [red_psd_out_table; x(1, :)];
     % end
-
+    sortrows(psd_out_table(strcmp(psd_out_table.("Load"), "RootMyc1_1P"), :), "16")
+    sortrows(psd_out_table(strcmp(psd_out_table.("Load"), "RootMyc1_2P"), :), "16")
+    sortrows(psd_out_table(strcmp(psd_out_table.("Load"), "YawBrMyp_0P"), :), "16")
+    sortrows(psd_out_table(strcmp(psd_out_table.("Load"), "YawBrMyp_3P"), :), "16")
+    sortrows(psd_out_table(strcmp(psd_out_table.("Load"), "YawBrMzp_0P"), :), "16")
+    sortrows(psd_out_table(strcmp(psd_out_table.("Load"), "YawBrMzp_3P"), :), "16")
     % writetable(red_psd_out_table, fullfile(fig_dir, [sim_type, '_psd_table.csv']));
     save(fullfile(mat_save_dir, [sim_type, '_psd_table']), 'psd_out_table');
-
+        
     % RootMyc1_1P, RootMyc1_2P, YawBrMyp_0P, YawBrMyp_3P, YawBrMzp_0P, YawBrMzp_3P
 end
 %% Generate DEL data
@@ -698,7 +793,7 @@ if OPTIMAL_K_COLLECTION
     %     load(fullfile(mat_save_dir, [sim_type, '_del_data']));
     % end 
     del_data_tuned = sortrows(readtable(fullfile(postprocessing_save_dir, [sim_type, '_DELs.csv']), 'Delimiter', ','), "Var1");
-      
+    sortrows(del_data_tuned, "RootMyc1")
     % if ~exist(fullfile(postprocessing_save_dir, 'baseline_k_turbsim_DELs.csv'), 'file') || 0
     %     status = system(['/Users/aoifework/miniconda3/envs/weis_dev/bin/python3 ', fullfile(project_dir, 'postprocessing', 'main.py'), ' -st ', 'baseline_k_turbsim']);
     %     del_data_untuned = sortrows(readtable(fullfile(postprocessing_save_dir, 'baseline_k_turbsim_DELs.csv'), 'Delimiter', ','), "Var1");
@@ -707,7 +802,7 @@ if OPTIMAL_K_COLLECTION
     %     load(fullfile(mat_save_dir, 'baseline_k_turbsim_del_data.mat'));
     % end
 
-    % TODO recompute after rerunning baseline
+    
     del_data_untuned = sortrows(readtable(fullfile(postprocessing_save_dir, 'baseline_k_turbsim_DELs.csv'), 'Delimiter', ','), "Var1");
         
     
@@ -719,7 +814,7 @@ if OPTIMAL_K_COLLECTION
     wind_cols = arrayfun(@num2str, LPV_CONTROLLER_WIND_SPEEDS, 'UniformOutput', 0);
     % op_cols = wind_cols;
     
-    new_cols = ["Case Desc.", "TunedWindSpeed", "WindMean", "WindTurbulence", "ADC"];
+    new_cols = ["Case Desc.", "TunedWindSpeed", "WindMean", "WindTurbulence", "ADC", "GenPwr Mean"];
     
     % controller, not to minimum ADC controller
     new_cols(end + 1) = gain_col;
@@ -747,7 +842,7 @@ if OPTIMAL_K_COLLECTION
             ["Case Desc.", "TunedWindSpeed", "WindMean", "WindTurbulence", gain_col], ...
             "mean", agg_cols), ["Case Desc.", "WindMean", gain_col])
     
-    new_cols = ["Case Desc.", "TunedWindSpeed", "WindMean", "WindTurbulence", "ADC"];
+    new_cols = ["Case Desc.", "TunedWindSpeed", "WindMean", "WindTurbulence", "ADC", "GenPwr Mean"];
     for untuned_type = {'noipc', 'baseline_controller'}
         for untuned_case_idx = 1:length(sim_out_list.(untuned_type{1}))
             save_fn = sim_out_list.(untuned_type{1})(untuned_case_idx).outdata_save_fn;
@@ -835,7 +930,8 @@ if OPTIMAL_K_COLLECTION
 
     del_out_table_tmp = del_out_table;
     cond = zeros(height(del_out_table), 1);
-    for op = {"RootMyc1", "YawBrMyp", "YawBrMzp", "ADC"}
+    
+    for op = {"RootMyc1", "RootMxb1", "RootMyb1", "TTDspFA", "TTDspSS", "YawBrMyp", "YawBrMzp", "ADC", "GenPwr Mean"}
         cond = cond | strcmp(del_out_table.("Load"), op{1});
     end
     del_out_table_tmp = del_out_table(cond, :);
